@@ -204,5 +204,13 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult CargaDocumento()
+        {
+
+            return View("CargaDocumento");
+        }
+
+
     }
 }
