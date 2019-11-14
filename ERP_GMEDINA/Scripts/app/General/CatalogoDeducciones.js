@@ -223,33 +223,56 @@ $('#btnCreateRegistroDeduccion').click(function () {
 
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
-    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    $.ajax({
-        url: "/CatalogoDeDeducciones/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-        $("#AgregarCatalogoDeducciones").modal('hide');
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo guardar el registro, contacte al administrador',
-            });
-        }
-        else {
-            cargarGridDeducciones();
-            $("#Crear #cde_DescripcionDeduccion").val('');
-            $("#Crear #cde_PorcentajeColaborador").val('0.00');
-            $("#Crear #cde_PorcentajeEmpresa").val('0.00');
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
-            });
-        }
-    });
+    //CREAMOS VARIABLES PARA VALIDAR QUE NO ESTEN VACIAS
+    var DescripcipnDeduccion = $("#Crear #cde_DescripcionDeduccion").val();
+    var TipodeDedu = $("#Crear #tde_IdTipoDedu").val();
+    var PorcenColaborador = $("#Crear #cde_PorcentajeColaborador").val();
+    var PorcenEmpresa = $("#Crear #cde_PorcentajeEmpresa").val();
+    var ModelState = true;
+    //CONDICIONAMOS
+    if (DescripcipnDeduccion == '' && DescripcipnDeduccion == null && DescripcipnDeduccion == undefined) ModelState = false;
+
+    if ( TipodeDedu != '' && TipodeDedu != null && TipodeDedu != undefined) ModelState =  false;
+
+    if ( PorcenColaborador != '' && PorcenColaborador != null && PorcenColaborador != undefined) ModelState =  false;
+
+    if ( PorcenEmpresa != '' && PorcenEmpresa != null && PorcenEmpresa != undefined) ModelState =  false;
+
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+    if (ModelState = true)
+        {
+        $.ajax({
+            url: "/CatalogoDeDeducciones/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            //CERRAR EL MODAL DE AGREGAR
+            $("#AgregarCatalogoDeducciones").modal('hide');
+            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data == "error") {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo guardar el registro, contacte al administrador',
+                });
+            }
+            else {
+                cargarGridDeducciones();
+                $("#Crear #cde_DescripcionDeduccion").val('');
+                $("#Crear #cde_PorcentajeColaborador").val('0.00');
+                $("#Crear #cde_PorcentajeEmpresa").val('0.00');
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue registrado de forma exitosa!',
+                });
+            }
+        });
+    } else {
+        iziToast.error({
+            title: 'Error',
+            message: 'No puede dejar campos vacios',
+        });
+    }
 });
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
