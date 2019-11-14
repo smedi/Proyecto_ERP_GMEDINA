@@ -160,12 +160,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
+    <Compile Include="Models\cInstitucionesFinancieras.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1265,6 +1267,11 @@
     <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Create.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Delete.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Edit.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
