@@ -17,7 +17,7 @@ namespace PruebaPlanilla.Controllers
         // GET: CatalogoDeDeducciones editado
         public ActionResult Index()
         {
-            var tbCatalogoDeDeducciones = db.tbCatalogoDeDeducciones.Where(d=> d.cde_Activo == true).Include(t => t.tbTipoDeduccion);
+            var tbCatalogoDeDeducciones = db.tbCatalogoDeDeducciones.Where(d=> d.cde_Activo == true).Include(t => t.tbTipoDeduccion).Include( t => t.tbUsuario);
             return View(tbCatalogoDeDeducciones.ToList());
         }
 
@@ -87,6 +87,8 @@ namespace PruebaPlanilla.Controllers
                 response = "error";
             }
             //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
+            ViewBag.cde_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCatalogoDeDeducciones.cde_UsuarioCrea);
+            ViewBag.cde_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbCatalogoDeDeducciones.cde_UsuarioModifica);
             ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -183,8 +185,27 @@ namespace PruebaPlanilla.Controllers
 
         public JsonResult Details(int? ID)
         {
+            var tbCatalogoDeDeduccionesJSON = from tbCatDedu in db.tbCatalogoDeDeducciones
+                                            //join tbUsuCrea in db.tbUsuario on tbCatIngreso.cin_UsuarioCrea equals tbUsuCrea.usu_Id
+                                            //join tbUsuModi in db.tbUsuario on tbCatIngreso.cin_UsuarioModifica equals tbUsuModi.usu_Id
+                                        where tbCatDedu.cde_Activo == true && tbCatDedu.cde_IdDeducciones == ID
+                                        select new
+                                        {
+                                            tbCatDedu.cde_IdDeducciones,
+                                            tbCatDedu.cde_DescripcionDeduccion,
+                                            tbCatDedu.cde_PorcentajeColaborador,
+                                            tbCatDedu.cde_PorcentajeEmpresa,
+                                            tbCatDedu.cde_Activo,
+                                            tbCatDedu.cde_UsuarioCrea,
+                                            UsuCrea = tbCatDedu.tbUsuario.usu_NombreUsuario,
+                                            tbCatDedu.cde_FechaCrea,
+                                            tbCatDedu.cde_UsuarioModifica,
+                                            UsuModifica = tbCatDedu.tbUsuario1.usu_NombreUsuario,
+                                            tbCatDedu.cde_FechaModifica
+                                        };
+
             db.Configuration.ProxyCreationEnabled = false;
-            tbCatalogoDeDeducciones tbCatalogoDeDeduccionesJSON = db.tbCatalogoDeDeducciones.Find(ID);
+            //tbCatalogoDeIngresos tbCatalogoDeIngresosJSON = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Find(ID);
             return Json(tbCatalogoDeDeduccionesJSON, JsonRequestBehavior.AllowGet);
         }
 
@@ -204,11 +225,7 @@ namespace PruebaPlanilla.Controllers
         //}
 
         // GET: CatalogoDeDeducciones/Create
-        public ActionResult Create()
-        {
-            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion");
-            return View();
-        }
+
 
         public JsonResult Inactivar(int? ID)
         {
