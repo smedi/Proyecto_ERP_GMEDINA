@@ -17,18 +17,23 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "ID Bonos")]
         public int cb_Id { get; set; }
 
+        [Required]
         [Display(Name = "ID Colaborador")]
         public int emp_Id { get; set; }
 
+        [Required]
         [Display(Name = "ID Ingreso")]
         public int cin_IdIngreso { get; set; }
 
+        [Required]
         [Display(Name = "Monto")]
         public decimal cb_Monto { get; set; }
 
+        [Required]
         [Display(Name = "Fecha de Registro")]
         public System.DateTime cb_FechaRegistro { get; set; }
 
+        [Required]
         [Display(Name = "Pagado")]
         public bool cb_Pagado { get; set; }
 
