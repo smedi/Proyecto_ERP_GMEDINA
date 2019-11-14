@@ -13179,10 +13179,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="dex_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dex_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbEmpleadoBonos_Inactivar_Result)">
+          <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Inactivar" ReturnType="Collection(String)">
             <Parameter Name="cb_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbEmpleadoBonos_Insert_Result)">
+          <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Insert" ReturnType="Collection(String)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
             <Parameter Name="cb_Monto" Mode="In" Type="Decimal" />
@@ -13191,7 +13191,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="cb_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="cb_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbEmpleadoBonos_Update_Result)">
+          <FunctionImport Name="UDP_Plani_tbEmpleadoBonos_Update" ReturnType="Collection(String)">
             <Parameter Name="cb_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
@@ -13309,15 +13309,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="4000" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbEmpleadoBonos_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbEmpleadoBonos_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbEmpleadoBonos_Inactivar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
@@ -15047,27 +15038,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbEmpleadoBonos_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbEmpleadoBonos_Inactivar" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbEmpleadoBonos_Inactivar_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbEmpleadoBonos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbEmpleadoBonos_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbEmpleadoBonos_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbEmpleadoBonos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbEmpleadoBonos_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbEmpleadoBonos_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbEmpleadoBonos_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbEmpleadoBonos_Inactivar" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbEmpleadoBonos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbEmpleadoBonos_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbEmpleadoBonos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbEmpleadoBonos_Update" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbFormaPago_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbFormaPago_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Update" />
