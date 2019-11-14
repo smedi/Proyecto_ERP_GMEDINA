@@ -248,11 +248,13 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarCatalogoDeducciones").modal('hide');
 });
 
+//------------------------------------------------------------------------------------------
 $(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
     $("#InactivarCatalogoDeducciones").modal();
 });
 
+//------------------------------------------------------------------------------------------
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroDeduccion").click(function () {
 

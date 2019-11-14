@@ -638,16 +638,16 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbDeduccionesExtraordinarias_Update", dex_IdDeduccionesExtraParameter, eqem_IdParameter, dex_MontoInicialParameter, dex_MontoRestanteParameter, dex_ObservacionesComentariosParameter, cde_IdDeduccionesParameter, dex_CuotaParameter, dex_UsuarioModificaParameter, dex_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbEmpleadoBonos_Inactivar(Nullable<int> cb_Id)
+        public virtual ObjectResult<UDP_Plani_tbEmpleadoBonos_Inactivar_Result> UDP_Plani_tbEmpleadoBonos_Inactivar(Nullable<int> cb_Id)
         {
             var cb_IdParameter = cb_Id.HasValue ?
                 new ObjectParameter("cb_Id", cb_Id) :
                 new ObjectParameter("cb_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbEmpleadoBonos_Inactivar", cb_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbEmpleadoBonos_Inactivar_Result>("UDP_Plani_tbEmpleadoBonos_Inactivar", cb_IdParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbEmpleadoBonos_Insert(Nullable<int> emp_Id, Nullable<int> cin_IdIngreso, Nullable<decimal> cb_Monto, Nullable<System.DateTime> cb_FechaRegistro, Nullable<bool> cb_Pagado, Nullable<int> cb_UsuarioCrea, Nullable<System.DateTime> cb_FechaCrea)
+        public virtual ObjectResult<UDP_Plani_tbEmpleadoBonos_Insert_Result> UDP_Plani_tbEmpleadoBonos_Insert(Nullable<int> emp_Id, Nullable<int> cin_IdIngreso, Nullable<decimal> cb_Monto, Nullable<System.DateTime> cb_FechaRegistro, Nullable<bool> cb_Pagado, Nullable<int> cb_UsuarioCrea, Nullable<System.DateTime> cb_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -677,10 +677,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cb_FechaCrea", cb_FechaCrea) :
                 new ObjectParameter("cb_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbEmpleadoBonos_Insert", emp_IdParameter, cin_IdIngresoParameter, cb_MontoParameter, cb_FechaRegistroParameter, cb_PagadoParameter, cb_UsuarioCreaParameter, cb_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbEmpleadoBonos_Insert_Result>("UDP_Plani_tbEmpleadoBonos_Insert", emp_IdParameter, cin_IdIngresoParameter, cb_MontoParameter, cb_FechaRegistroParameter, cb_PagadoParameter, cb_UsuarioCreaParameter, cb_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbEmpleadoBonos_Update(Nullable<int> cb_Id, Nullable<int> emp_Id, Nullable<int> cin_IdIngreso, Nullable<decimal> cb_Monto, Nullable<System.DateTime> cb_FechaRegistro, Nullable<bool> cb_Pagado, Nullable<int> cb_UsuarioModifica, Nullable<System.DateTime> cb_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbEmpleadoBonos_Update_Result> UDP_Plani_tbEmpleadoBonos_Update(Nullable<int> cb_Id, Nullable<int> emp_Id, Nullable<int> cin_IdIngreso, Nullable<decimal> cb_Monto, Nullable<System.DateTime> cb_FechaRegistro, Nullable<bool> cb_Pagado, Nullable<int> cb_UsuarioModifica, Nullable<System.DateTime> cb_FechaModifica)
         {
             var cb_IdParameter = cb_Id.HasValue ?
                 new ObjectParameter("cb_Id", cb_Id) :
@@ -714,7 +714,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("cb_FechaModifica", cb_FechaModifica) :
                 new ObjectParameter("cb_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbEmpleadoBonos_Update", cb_IdParameter, emp_IdParameter, cin_IdIngresoParameter, cb_MontoParameter, cb_FechaRegistroParameter, cb_PagadoParameter, cb_UsuarioModificaParameter, cb_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbEmpleadoBonos_Update_Result>("UDP_Plani_tbEmpleadoBonos_Update", cb_IdParameter, emp_IdParameter, cin_IdIngresoParameter, cb_MontoParameter, cb_FechaRegistroParameter, cb_PagadoParameter, cb_UsuarioModificaParameter, cb_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbFormaPago_Inactivar(Nullable<int> tede_Id)
