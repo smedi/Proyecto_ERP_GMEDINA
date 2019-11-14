@@ -197,7 +197,7 @@ $("#btnUpdateIngresos").click(function () {
         $("#Editar #cin_DescripcionIngreso").focus;
         iziToast.error({
             title: 'Error',
-            message: 'No se pudo guardar el registros vacios',
+            message: 'No se pueden dejar campos vacíos.',
         });
     }
 
@@ -255,7 +255,7 @@ $('#btnCreateRegistroIngresos').click(function () {
         $("#Crear #cin_DescripcionIngreso").focus;
         iziToast.error({
             title: 'Error',
-            message: 'No se pudo guardar el registros vacios',
+            message: 'No se pueden dejar campos vacíos.',
         });
     }
 });
