@@ -159,8 +159,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PruebasController.cs" />
+    <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -740,6 +739,7 @@
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
+    <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
@@ -1243,11 +1243,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Pruebas\Datatable.cshtml" />
-    <Content Include="Views\Pruebas\Index.cshtml" />
-    <Content Include="Views\Pruebas\TemplateCreate.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable2.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -1265,6 +1260,14 @@
     <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\Planilla\Create.cshtml" />
+    <Content Include="Views\Planilla\Delete.cshtml" />
+    <Content Include="Views\Planilla\Details.cshtml" />
+    <Content Include="Views\Planilla\Edit.cshtml" />
+    <Content Include="Views\Planilla\Index.cshtml" />
+    <Content Include="Views\Planilla\_CatalogoDeDeducciones.cshtml" />
+    <Content Include="Views\Planilla\_CreateCatalogoDeducciones.cshtml" />
+    <Content Include="Views\Planilla\_EditCatalogoDeducciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1284,9 +1287,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Project_Readme.html" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Scripts\api\typehead_collection.json" />
