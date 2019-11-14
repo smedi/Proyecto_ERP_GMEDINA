@@ -456,6 +456,15 @@
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Update_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_BonosColaborador.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>

@@ -53,7 +53,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create()
         {
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id");
+            ViewBag.eqem_Id = new SelectList(db.tbPersonas, "eqem_Id", "per_Nombres");
             return View();
         }
 
