@@ -17,7 +17,20 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionesExtraordinarias
         public ActionResult Index()
         {
-            var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEquipoEmpleados);
+            /*var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias
+                .Select(d => new
+                {
+                    per_Nombres = d.tbEquipoEmpleados.tbEmpleados.tbPersonas.per_Nombres,
+                    per_Apellidos = d.tbEquipoEmpleados.tbEmpleados.tbPersonas.per_Apellidos,
+                    dex_MontoInicial = d.dex_MontoInicial,
+                    dex_MontoRestante = d.dex_MontoRestante,
+                    dex_ObservacionesComentarios = d.dex_ObservacionesComentarios,
+                    dex_Cuota = d.dex_Cuota,
+                    cde_DescripcionDeduccion = d.tbCatalogoDeDeducciones.cde_DescripcionDeduccion
+                })
+                .ToList();*/
+
+            var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Where(t => t.dex_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEquipoEmpleados);
             return View(tbDeduccionesExtraordinarias.ToList());
         }
 
@@ -39,10 +52,8 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionesExtraordinarias/Create
         public ActionResult Create()
         {
-            ViewBag.dex_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.dex_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_RazonInactivo");
+            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id");
             return View();
         }
 
@@ -51,20 +62,59 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dex_IdDeduccionesExtra,eqem_Id,dex_MontoInicial,dex_MontoRestante,dex_ObservacionesComentarios,cde_IdDeducciones,dex_Cuota,dex_UsuarioCrea,dex_FechaCrea,dex_UsuarioModifica,dex_FechaModifica,dex_Activo")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
+        public ActionResult Create([Bind(Include = "eqem_Id,dex_MontoInicial,dex_MontoRestante,dex_ObservacionesComentarios,cde_IdDeducciones,dex_Cuota,dex_UsuarioCrea,dex_FechaCrea")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
         {
+            //Para llenar los campos de auditoria
+            tbDeduccionesExtraordinarias.dex_UsuarioCrea = 1;
+            tbDeduccionesExtraordinarias.dex_FechaCrea = DateTime.Now;
+            //Variable para enviarla al lado del Cliente
+            string Response = String.Empty;
+            IEnumerable<object> listDeduccionesExtraordinarias = null;
+            string MensajeError = "";
             if (ModelState.IsValid)
             {
-                db.tbDeduccionesExtraordinarias.Add(tbDeduccionesExtraordinarias);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    //Ejecutar Procedimiento Almacenado
+                    listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Insert(tbDeduccionesExtraordinarias.eqem_Id,
+                                                                                                      tbDeduccionesExtraordinarias.dex_MontoInicial,
+                                                                                                      tbDeduccionesExtraordinarias.dex_MontoRestante,
+                                                                                                      tbDeduccionesExtraordinarias.dex_ObservacionesComentarios,
+                                                                                                      tbDeduccionesExtraordinarias.cde_IdDeducciones,
+                                                                                                      tbDeduccionesExtraordinarias.dex_Cuota,
+                                                                                                      tbDeduccionesExtraordinarias.dex_UsuarioCrea,
+                                                                                                      tbDeduccionesExtraordinarias.dex_FechaCrea);
+                    //El tipo complejo del Procedimiento Almacenado
+                    foreach (UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result Resultado in listDeduccionesExtraordinarias)
+                    {
+                        MensajeError = Resultado.MensajeError;
+                    }
 
-            ViewBag.dex_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesExtraordinarias.dex_UsuarioCrea);
-            ViewBag.dex_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesExtraordinarias.dex_UsuarioModifica);
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //En caso de un error igualamos la variable Response a "Error" para validar en el lado del Cliente
+                        ModelState.AddModelError("", "No se pudo Registrar. Contacte al Administrador!");
+                        Response = "Error";
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    Response = Ex.Message.ToString();
+                }
+                //Si llega aqui significa que todo salio correctamente. Solo igualamos Response a "Exito" para validar en el lado del Cliente
+                Response = "Exito";
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                //Si el modelo no es valido. Igualamos Response a "Error" para validar en el lado del Cliente
+                Response = "Error";
+            }
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_RazonInactivo", tbDeduccionesExtraordinarias.eqem_Id);
-            return View(tbDeduccionesExtraordinarias);
+            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id", tbDeduccionesExtraordinarias.eqem_Id);
+            return Json(Response, JsonRequestBehavior.AllowGet);
+
         }
 
         // GET: DeduccionesExtraordinarias/Edit/5
@@ -79,10 +129,11 @@ namespace ERP_GMEDINA.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.dex_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesExtraordinarias.dex_UsuarioCrea);
-            ViewBag.dex_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesExtraordinarias.dex_UsuarioModifica);
+
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_RazonInactivo", tbDeduccionesExtraordinarias.eqem_Id);
+
+            //Aqui iria la Vista donde trae al empleado según su Id
+            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id", tbDeduccionesExtraordinarias.eqem_Id);
             return View(tbDeduccionesExtraordinarias);
         }
 
@@ -91,19 +142,124 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dex_IdDeduccionesExtra,eqem_Id,dex_MontoInicial,dex_MontoRestante,dex_ObservacionesComentarios,cde_IdDeducciones,dex_Cuota,dex_UsuarioCrea,dex_FechaCrea,dex_UsuarioModifica,dex_FechaModifica,dex_Activo")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
+        public ActionResult Edit([Bind(Include = "dex_IdDeduccionesExtra,eqem_Id,dex_MontoInicial,dex_MontoRestante,dex_ObservacionesComentarios,cde_IdDeducciones,dex_Cuota,dex_UsuarioModifica,dex_FechaModifica")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
         {
+            //Para llenar los campos de auditoria
+            tbDeduccionesExtraordinarias.dex_UsuarioModifica = 1;
+            tbDeduccionesExtraordinarias.dex_FechaModifica = DateTime.Now;
+            //Variable para enviarla al lado del Cliente
+            string Response = String.Empty;
+            IEnumerable<object> listDeduccionesExtraordinarias = null;
+            string MensajeError = "";
             if (ModelState.IsValid)
             {
-                db.Entry(tbDeduccionesExtraordinarias).State = EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    //Ejecutar Procedimiento Almacenado
+                    listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Update(tbDeduccionesExtraordinarias.dex_IdDeduccionesExtra,
+                                                                                                      tbDeduccionesExtraordinarias.eqem_Id,
+                                                                                                      tbDeduccionesExtraordinarias.dex_MontoInicial,
+                                                                                                      tbDeduccionesExtraordinarias.dex_MontoRestante,
+                                                                                                      tbDeduccionesExtraordinarias.dex_ObservacionesComentarios,
+                                                                                                      tbDeduccionesExtraordinarias.cde_IdDeducciones,
+                                                                                                      tbDeduccionesExtraordinarias.dex_Cuota,
+                                                                                                      tbDeduccionesExtraordinarias.dex_UsuarioModifica,
+                                                                                                      tbDeduccionesExtraordinarias.dex_FechaModifica);
+
+                    //El tipo complejo del Procedimiento Almacenado
+                    foreach (UDP_Plani_tbDeduccionesExtraordinarias_Update_Result Resultado in listDeduccionesExtraordinarias)
+                    {
+                        MensajeError = Resultado.MensajeError;
+                    }
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //En caso de un error igualamos la variable Response a "Error" para validar en el lado del Cliente
+                        ModelState.AddModelError("", "No se pudo Actualizar. Contacte al Administrador!");
+                        Response = "Error";
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    Response = Ex.Message.ToString();
+                }
+                //Si llega aqui significa que todo salio correctamente. Solo igualamos Response a "Exito" para validar en el lado del Cliente
+                Response = "Exito";
                 return RedirectToAction("Index");
             }
-            ViewBag.dex_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesExtraordinarias.dex_UsuarioCrea);
-            ViewBag.dex_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionesExtraordinarias.dex_UsuarioModifica);
+            else
+            {
+                //Si el modelo no es valido. Igualamos Response a "Error" para validar en el lado del Cliente
+                Response = "Error";
+            }
+
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_RazonInactivo", tbDeduccionesExtraordinarias.eqem_Id);
-            return View(tbDeduccionesExtraordinarias);
+            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id", tbDeduccionesExtraordinarias.eqem_Id);
+            return Json(Response, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        //GET: DeduccionesExtraordinarias/Inactivar
+        public ActionResult Inactivar(int? ID)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            tbDeduccionesExtraordinarias tbDeduccionesExtraordinariasJSON = db.tbDeduccionesExtraordinarias.Find(ID);
+            return Json(tbDeduccionesExtraordinariasJSON, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //POST: DeduccionesExtraordinarias/Inactivar
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Inactivar([Bind(Include = "dex_IdDeduccionesExtra,dex_UsuarioModifica,dex_FechaModifica")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
+        {
+            //Para llenar los campos de auditoria
+            tbDeduccionesExtraordinarias.dex_UsuarioModifica = 1;
+            tbDeduccionesExtraordinarias.dex_FechaModifica = DateTime.Now;
+            //Variable para enviarla al lado del Cliente
+            string Response = String.Empty;
+            IEnumerable<object> listDeduccionesExtraordinarias = null;
+            string MensajeError = "";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //Ejecutar Procedimiento Almacenado
+                    listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar(tbDeduccionesExtraordinarias.dex_IdDeduccionesExtra,
+                                                                                                         tbDeduccionesExtraordinarias.dex_UsuarioModifica,
+                                                                                                         tbDeduccionesExtraordinarias.dex_FechaModifica);
+
+                    //El tipo complejo del Procedimiento Almacenado
+                    foreach (UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result Resultado in listDeduccionesExtraordinarias)
+                    {
+                        MensajeError = Resultado.MensajeError;
+                    }
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //En caso de un error igualamos la variable Response a "Error" para validar en el lado del Cliente
+                        ModelState.AddModelError("", "No se pudo Inactivar. Contacte al Administrador!");
+                        Response = "Error";
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    Response = Ex.Message.ToString();
+                }
+                //Si llega aqui significa que todo salio correctamente. Solo igualamos Response a "Exito" para validar en el lado del Cliente
+                Response = "Exito";
+            }
+            else
+            {
+                //Si el modelo no es valido. Igualamos Response a "Error" para validar en el lado del Cliente
+                Response = "Error";
+            }
+
+            return Json(Response, JsonRequestBehavior.AllowGet);
+
         }
 
         // GET: DeduccionesExtraordinarias/Delete/5
