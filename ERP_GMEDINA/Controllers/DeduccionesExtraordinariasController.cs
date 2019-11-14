@@ -53,7 +53,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create()
         {
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
-            ViewBag.eqem_Id = new SelectList(db.tbPersonas, "eqem_Id", "per_Nombres");
+            //ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id");
             return View();
         }
 
@@ -112,7 +112,7 @@ namespace ERP_GMEDINA.Controllers
                 Response = "Error";
             }
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id", tbDeduccionesExtraordinarias.eqem_Id);
+            //ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id", tbDeduccionesExtraordinarias.eqem_Id);
             return Json(Response, JsonRequestBehavior.AllowGet);
 
         }
@@ -197,6 +197,19 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id", tbDeduccionesExtraordinarias.eqem_Id);
             return Json(Response, JsonRequestBehavior.AllowGet);
 
+        }
+
+        //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
+        public JsonResult EditGetDDL()
+        {
+            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
+            var DDL =
+            from EqEm in db.tbEquipoEmpleados
+            join Empl in db.tbEmpleados on EqEm.emp_Id equals Empl.emp_Id
+            join Pers in db.tbPersonas on Empl.per_Id equals Pers.per_Id
+            select new { Id = EqEm.eqem_Id , Nombre = Pers.per_Nombres };
+            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
+            return Json(DDL, JsonRequestBehavior.AllowGet);
         }
 
 

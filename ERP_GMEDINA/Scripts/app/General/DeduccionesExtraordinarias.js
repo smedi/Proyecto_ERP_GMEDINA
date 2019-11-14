@@ -123,26 +123,34 @@ $("#btnEditDeduccionesExtraordinarias").click(function () {
         }
     });
 });
+$(document).ready(function () {
+
+//codigo cargar grid
+});
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarDeduccionesExtraordinarias", function () {
+$(document).on("click", "#btnAgregarDeduccionExtraordinaria", function () {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
+    console.log("Hola")
     $.ajax({
-        url: "/CatalogoDeDeducciones/EditGetDDL",
+        url: "/DeduccionesExtraordinarias/EditGetDDL",
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     })
+    console.log("Adios")
+    debugger
+    console.log("Prueba")
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
-            $("#Crear #tde_IdTipoDedu").empty();
-            $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
+            $("#eqem_Id").empty();
+            $("#eqem_Id").append("<option value='0'>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
-                $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                $("#eqem_Id").append("<option value='" + iter.Id + "'>" + iter.Nombre + "</option>");
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarDeduccionesExtraordinarias").modal();
+    //$("#AgregarDeduccionesExtraordinarias").modal();
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
