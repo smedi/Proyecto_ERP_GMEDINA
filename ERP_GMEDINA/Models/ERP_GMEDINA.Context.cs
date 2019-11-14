@@ -796,16 +796,16 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbInstitucionesFinancieras_Update", insf_IdInstitucionFinancieraParameter, insf_DescInstitucionFinancParameter, insf_ContactoParameter, insf_TelefonoParameter, insf_CorreoParameter, insf_UsuarioModificaParameter, insf_FechaModificaParameter, insf_ActivoParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Inactivar(Nullable<int> tede_Id)
+        public virtual ObjectResult<UDP_Plani_tbTechosDeducciones_Inactivar_Result> UDP_Plani_tbTechosDeducciones_Inactivar(Nullable<int> tede_Id)
         {
             var tede_IdParameter = tede_Id.HasValue ?
                 new ObjectParameter("tede_Id", tede_Id) :
                 new ObjectParameter("tede_Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Inactivar", tede_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbTechosDeducciones_Inactivar_Result>("UDP_Plani_tbTechosDeducciones_Inactivar", tede_IdParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Insert(Nullable<decimal> tede_RangoInicial, Nullable<decimal> tede_RangoFinal, Nullable<int> tede_Porcentaje, Nullable<int> cde_IdDeduccion, Nullable<int> tede_UsuarioCrea, Nullable<System.DateTime> tede_FechaCrea)
+        public virtual ObjectResult<UDP_Plani_tbTechosDeducciones_Insert_Result> UDP_Plani_tbTechosDeducciones_Insert(Nullable<decimal> tede_RangoInicial, Nullable<decimal> tede_RangoFinal, Nullable<int> tede_Porcentaje, Nullable<int> cde_IdDeduccion, Nullable<int> tede_UsuarioCrea, Nullable<System.DateTime> tede_FechaCrea)
         {
             var tede_RangoInicialParameter = tede_RangoInicial.HasValue ?
                 new ObjectParameter("tede_RangoInicial", tede_RangoInicial) :
@@ -831,10 +831,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tede_FechaCrea", tede_FechaCrea) :
                 new ObjectParameter("tede_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Insert", tede_RangoInicialParameter, tede_RangoFinalParameter, tede_PorcentajeParameter, cde_IdDeduccionParameter, tede_UsuarioCreaParameter, tede_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbTechosDeducciones_Insert_Result>("UDP_Plani_tbTechosDeducciones_Insert", tede_RangoInicialParameter, tede_RangoFinalParameter, tede_PorcentajeParameter, cde_IdDeduccionParameter, tede_UsuarioCreaParameter, tede_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbTechosDeducciones_Update(Nullable<int> tede_Id, Nullable<decimal> tede_RangoInicial, Nullable<decimal> tede_RangoFinal, Nullable<int> tede_Porcentaje, Nullable<int> cde_IdDeduccion, Nullable<int> tede_UsuarioModifica, Nullable<System.DateTime> tede_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbTechosDeducciones_Update_Result> UDP_Plani_tbTechosDeducciones_Update(Nullable<int> tede_Id, Nullable<decimal> tede_RangoInicial, Nullable<decimal> tede_RangoFinal, Nullable<int> tede_Porcentaje, Nullable<int> cde_IdDeduccion, Nullable<int> tede_UsuarioModifica, Nullable<System.DateTime> tede_FechaModifica)
         {
             var tede_IdParameter = tede_Id.HasValue ?
                 new ObjectParameter("tede_Id", tede_Id) :
@@ -864,7 +864,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("tede_FechaModifica", tede_FechaModifica) :
                 new ObjectParameter("tede_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbTechosDeducciones_Update", tede_IdParameter, tede_RangoInicialParameter, tede_RangoFinalParameter, tede_PorcentajeParameter, cde_IdDeduccionParameter, tede_UsuarioModificaParameter, tede_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbTechosDeducciones_Update_Result>("UDP_Plani_tbTechosDeducciones_Update", tede_IdParameter, tede_RangoInicialParameter, tede_RangoFinalParameter, tede_PorcentajeParameter, cde_IdDeduccionParameter, tede_UsuarioModificaParameter, tede_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbTipoDeduccion_Inactivar(Nullable<int> tde_IdTipoDedu)

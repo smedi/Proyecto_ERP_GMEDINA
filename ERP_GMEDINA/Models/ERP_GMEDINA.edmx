@@ -13223,10 +13223,10 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="insf_FechaModifica" Mode="In" Type="DateTime" />
             <Parameter Name="insf_Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbTechosDeducciones_Inactivar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbTechosDeducciones_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbTechosDeducciones_Inactivar_Result)">
             <Parameter Name="tede_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbTechosDeducciones_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbTechosDeducciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbTechosDeducciones_Insert_Result)">
             <Parameter Name="tede_RangoInicial" Mode="In" Type="Decimal" />
             <Parameter Name="tede_RangoFinal" Mode="In" Type="Decimal" />
             <Parameter Name="tede_Porcentaje" Mode="In" Type="Int32" />
@@ -13234,7 +13234,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <Parameter Name="tede_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tede_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbTechosDeducciones_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbTechosDeducciones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbTechosDeducciones_Update_Result)">
             <Parameter Name="tede_Id" Mode="In" Type="Int32" />
             <Parameter Name="tede_RangoInicial" Mode="In" Type="Decimal" />
             <Parameter Name="tede_RangoFinal" Mode="In" Type="Decimal" />
@@ -13309,6 +13309,15 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="4000" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbTechosDeducciones_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbTechosDeducciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbTechosDeducciones_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
@@ -15044,9 +15053,27 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbFormaPago_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbFormaPago_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionesFinancieras_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbInstitucionesFinancieras_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosDeducciones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosDeducciones_Inactivar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosDeducciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosDeducciones_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosDeducciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosDeducciones_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosDeducciones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosDeducciones_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbTechosDeducciones_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosDeducciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosDeducciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbTechosDeducciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbTechosDeducciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTechosDeducciones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbTechosDeducciones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTipoDeduccion_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTipoDeduccion_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTipoDeduccion_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTipoDeduccion_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbTipoDeduccion_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbTipoDeduccion_Update" />

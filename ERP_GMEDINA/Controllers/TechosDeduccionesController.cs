@@ -20,16 +20,17 @@ namespace ERP_GMEDINA.Controllers
             var tbTechosDeducciones = db.tbTechosDeducciones.Where(d => d.tede_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones);
             return View(tbTechosDeducciones.ToList());
         }
-
+        [HttpGet]
         // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
         public ActionResult GetData()
         {
-            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
-            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
-            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
-             db.tbTechosDeducciones.Where(d => d.tede_Activo == true).ToList();
+            var otbTechosDeducciones = db.tbTechosDeducciones
+                        .Select(c => new { cde_DescripcionDeduccion = c.tbCatalogoDeDeducciones.cde_DescripcionDeduccion, tede_Id = c.tede_Id, tede_RangoInicial = c.tede_RangoInicial, tede_RangoFinal = c.tede_RangoFinal, tede_Porcentaje = c.tede_Porcentaje, tede_Activo = c.tede_Activo }).Where(c => c.tede_Activo == true)
+                        .ToList();
+
+            //List <tbTechosDeducciones> otbTechosDeducciones = db.tbTechosDeducciones.Where(d => d.tede_Activo == true).ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
-            return new JsonResult {JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+            return new JsonResult {Data = otbTechosDeducciones, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
 
         //// GET: TechosDeducciones/Details/5
@@ -93,6 +94,7 @@ namespace ERP_GMEDINA.Controllers
                     foreach (UDP_Plani_tbTechosDeducciones_Insert_Result Resultado in listTechosDeducciones)
                         MensajeError = Resultado.MensajeError;
 
+                    response = "bien";
                     if (MensajeError.StartsWith("-1"))
                     {
                         //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
@@ -107,7 +109,7 @@ namespace ERP_GMEDINA.Controllers
                 }
                 //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
                 //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";            
+                         
         }
             else
             {

@@ -1,14 +1,14 @@
 ﻿////FUNCION GENERICA PARA REUTILIZAR AJAX
-//function _ajax(params, uri, type, callback) {
-//    $.ajax({
-//        url: uri,
-//        type: type,
-//        data: { params },
-//        success: function (data) {
-//            callback(data);
-//        }
-//    });
-//}
+function _ajax(params, uri, type, callback) {
+    $.ajax({
+        url: uri,
+        type: type,
+        data: { params },
+        success: function (data) {
+            callback(data);
+        }
+    });
+}
 
 
 var InactivarID = 0;
@@ -25,10 +25,10 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
 
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridTechosDeducciones() {
-    $.ajax(null,
+    _ajax(null,
         '/TechosDeducciones/GetData',
         'GET',
-        (data) => {
+        (data) => {            
             if (data.length == 0) {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
@@ -98,8 +98,9 @@ $('#btnCreateTechoDeducciones').click(function () {
                 message: 'No se pudo guardar el registro, contacte al administrador',
             });
         }
-        else {
+        else if (data == "bien") {                        
             cargarGridTechosDeducciones();
+            console.log(data);
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',

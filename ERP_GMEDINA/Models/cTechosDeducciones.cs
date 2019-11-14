@@ -11,25 +11,29 @@ namespace ERP_GMEDINA.Models
     {
     }
     public class cTechosDeducciones
-    {
+    {        
         [Display(Name = "ID Techos Deducciones")]
         public int tede_Id { get; set; }
 
+        [Required]
         [Display(Name = "Rango Inicial")]
         public decimal tede_RangoInicial { get; set; }
 
+        [Required]
         [Display(Name = "Rango Final")]
         public decimal tede_RangoFinal { get; set; }
 
+        [Required]
         [Display(Name = "Porcentaje Deducciones")]
         public int tede_Porcentaje { get; set; }
 
+        [Required]
         [Display(Name = "ID Catálogo de Deducciones")]
         public int cde_IdDeducciones { get; set; }
-
+        
         [Display(Name = "Creado por")]
         public int tede_UsuarioCrea { get; set; }
-
+        
         [Display(Name = "Fecha de Creación")]
         public System.DateTime tede_FechaCrea { get; set; }
 
