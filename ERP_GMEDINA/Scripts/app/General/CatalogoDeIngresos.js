@@ -160,32 +160,47 @@ $("#btnInactivarIngresos").click(function () {
 $("#btnUpdateIngresos").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmCatalogoIngresos").serializeArray();
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    $.ajax({
-        url: "/CatalogoDeIngresos/Edit",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo editar el registro, contacte al administrador',
-            });
-        }
-        else {
-            // REFRESCAR UNICAMENTE LA TABLA
-            
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#EditarCatalogoIngresos").modal('hide');
-            cargarGridIngresos();
-            //Mensaje de exito de la edicion
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue editado de forma exitosa!',
-            });
-        }
-    });
+    var descripcionEditar = $("#Editar #cin_DescripcionIngreso").val();
+
+    //VALIDAMOS LOS CAMPOS
+    if (descripcionEditar != '' && descripcionEditar != null && descripcionEditar != undefined) {
+
+        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        $.ajax({
+            url: "/CatalogoDeIngresos/Edit",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            if (data == "error") {
+                //Cuando traiga un error del backend al guardar la edicion
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo editar el registro, contacte al administrador',
+                });
+            }
+            else {
+                // REFRESCAR UNICAMENTE LA TABLA
+
+                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+                $("#EditarCatalogoIngresos").modal('hide');
+                cargarGridIngresos();
+                //Mensaje de exito de la edicion
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue editado de forma exitosa!',
+                });
+            }
+        });
+    }
+
+    else {
+        $("#Editar #cin_DescripcionIngreso").focus;
+        iziToast.error({
+            title: 'Error',
+            message: 'No se pudo guardar el registros vacios',
+        });
+    }
+
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -200,27 +215,22 @@ $('#btnCreateRegistroIngresos').click(function () {
 
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCatalogoIngresosCreate").serializeArray();
-    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    $.ajax({
-        url: "/CatalogoDeIngresos/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-       
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        debugger;
-         //data = ' ';
-        if ("#cin_DescripcionIngreso" == '') {
-           // $("#Crear #cin_DescripcionIngreso").focus;
-            $("#Crear #cin_DescripcionIngreso").focus;
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo guardar el registros vacios',
-            });
-        }
-        else {
+    //Declaramos variable para obtener datos escritos en el TextBox
+    var descripcion = $("#Crear #cin_DescripcionIngreso").val();
+
+    //VALIDAMOS LOS CAMPOS
+    if (descripcion != '' && descripcion != null && descripcion != undefined) {
+
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/CatalogoDeIngresos/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            
             if (data == "error") {
+                //CERRAR EL MODAL DE AGREGAR
                 $("#AgregarCatalogoIngresos").modal('hide');
                 iziToast.error({
                     title: 'Error',
@@ -228,6 +238,7 @@ $('#btnCreateRegistroIngresos').click(function () {
                 });
             }
             else {
+                //CERRAR EL MODAL DE AGREGAR
                 $("#AgregarCatalogoIngresos").modal('hide');
                 cargarGridIngresos();
                 $("#Crear #cin_DescripcionIngreso").val('');
@@ -237,8 +248,16 @@ $('#btnCreateRegistroIngresos').click(function () {
                     message: 'El registro fue registrado de forma exitosa!',
                 });
             }
-        }
-    });
+
+        });
+    }
+    else {
+        $("#Crear #cin_DescripcionIngreso").focus;
+        iziToast.error({
+            title: 'Error',
+            message: 'No se pudo guardar el registros vacios',
+        });
+    }
 });
 
 
