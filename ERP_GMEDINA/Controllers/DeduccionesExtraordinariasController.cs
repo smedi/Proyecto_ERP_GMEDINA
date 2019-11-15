@@ -83,8 +83,9 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionesExtraordinarias/Create
         public ActionResult Create()
         {
+
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id");
+            //ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_Empleados, "per_Nombres");
             return View();
         }
 
@@ -142,8 +143,9 @@ namespace ERP_GMEDINA.Controllers
                 //Si el modelo no es valido. Igualamos Response a "Error" para validar en el lado del Cliente
                 Response = "Error";
             }
+
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id", tbDeduccionesExtraordinarias.eqem_Id);
+            //ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_Empleados, "per_Nombres");
             return Json(Response, JsonRequestBehavior.AllowGet);
 
         }
@@ -164,7 +166,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
 
             //Aqui iria la Vista donde trae al empleado según su Id
-            ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_Empleados);
+            //ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_Empleados, "per_Nombres");
             return View(tbDeduccionesExtraordinarias);
         }
 
@@ -225,7 +227,7 @@ namespace ERP_GMEDINA.Controllers
             }
 
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id", tbDeduccionesExtraordinarias.eqem_Id);
+            //ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "per_Nombres",);
             return Json(Response, JsonRequestBehavior.AllowGet);
 
         }
