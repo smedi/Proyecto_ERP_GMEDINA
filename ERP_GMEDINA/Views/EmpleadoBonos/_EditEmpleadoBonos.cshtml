@@ -10,13 +10,13 @@
             @Html.HiddenFor(model => model.cb_Id)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.emp_Id, "emp_Id", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.emp_Id, "Colaborador", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="display: none">
                 @Html.LabelFor(model => model.tbCatalogoDeIngresos.cin_DescripcionIngreso, "cin_IdIngreso", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control"></select>

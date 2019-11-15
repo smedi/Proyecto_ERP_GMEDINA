@@ -48,8 +48,7 @@ function cargarGridBonos() {
                 }
 
                 template += '<tr data-id = "' + ListaBonos[i].cb_Id + '">' +
-                    '<td>' + ListaBonos[i].per_Nombres + '</td>' +
-                    '<td>' + ListaBonos[i].per_Apellidos + '</td>' +
+                    '<td>' + ListaBonos[i].per_Nombres + ' ' + ListaBonos[i].per_Apellidos + '</td>' +
                     '<td>' + ListaBonos[i].cin_DescripcionIngreso + '</td>' +
                     '<td>' + ListaBonos[i].cb_Monto + '</td>' +
                     '<td>' + FechaRegistro + '</td>' +
@@ -108,7 +107,6 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #emp_IdEmpleado").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Editar #emp_IdEmpleado").append("<option value=0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
                             $("#Editar #emp_IdEmpleado").append("<option" + (iter.Id == SelectedIdEmp ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
@@ -160,6 +158,13 @@ $('#Editar #cb_Pagado').click(function () {
 $("#btnUpdateBonos").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     
+    var Monto = $("#Crear #cb_Monto").val();
+    var FechaRegistro = $("#Crear #cb_FechaRegistro").val();
+
+
+    if (Monto != "" && Monto != null && Monto != undefined && Monto != "0,00" &&
+        FechaRegistro != "" && FechaRegistro != null && FechaRegistro != undefined) {
+    
     var data = $("#frmEmpleadoBonos").serializeArray();
 
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
@@ -187,6 +192,13 @@ $("#btnUpdateBonos").click(function () {
             });
         }
     });
+    } else {
+            $("#Crear #cb_Monto").focus;
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pueden guardar registros vacíos',
+            });
+     }
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -235,6 +247,16 @@ $(document).on("click", "#btnAgregarEmpleadoBonos", function () {
 $('#btnCreateRegistroBonos').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
 
+    var IdEmpleado = $("#Crear #emp_IdEmpleado").val();
+    var IdIngreso = $("#Crear #cin_IdIngreso").val();
+    var Monto = $("#Crear #cb_Monto").val();
+    var FechaRegistro = $("#Crear #cb_FechaRegistro").val();
+    var Pagado = $("#Crear #cb_Pagado").val();
+
+    if (IdEmpleado != 0 &&
+        Monto != "" && Monto != null && Monto != undefined && Monto != "0,00" &&
+        FechaRegistro != "" && FechaRegistro != null && FechaRegistro != undefined) {
+
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmEmpleadoBonosCreate").serializeArray();
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
@@ -245,6 +267,7 @@ $('#btnCreateRegistroBonos').click(function () {
     }).done(function (data) {
         //CERRAR EL MODAL DE AGREGAR
         $("#AgregarEmpleadoBonos").modal('hide');
+        $("#Crear #cb_Monto").val("");
         //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
         if (data == "error") {
             iziToast.error({
@@ -261,6 +284,41 @@ $('#btnCreateRegistroBonos').click(function () {
             });
         }
     });
+
+    }
+    else {
+        if (IdEmpleado == 0) {
+            $("#Crear #emp_IdEmpleado").focus;
+            iziToast.error({
+                title: 'Error',
+                message: 'Ingrese un colaborador válido',
+            });
+        }
+
+        if (Monto == "" || Monto == null || Monto == undefined ) {
+            $("#Crear #cb_Monto").focus;
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pueden guardar montos vacíos',
+            });
+        }
+
+        if (Monto == "0,00") {
+            $("#Crear #cb_Monto").focus;
+            iziToast.error({
+                title: 'Error',
+                message: 'Ingrese un monto válido',
+            });
+        }
+
+        if (FechaRegistro == "" || FechaRegistro == null || FechaRegistro == undefined) {
+            $("#Crear #cb_FechaRegistro").focus;
+            iziToast.error({
+                title: 'Error',
+                message: 'Ingrese una fecha válida',
+            });
+        }
+    }
 });
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES
