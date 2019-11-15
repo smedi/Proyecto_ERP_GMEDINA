@@ -35,8 +35,9 @@ function cargarGridDeducciones() {
                     '<td>' + ListaDeduccionesExtraordinarias[i].tbCatalogoDeDeducciones.cde_DescripcionDeduccion + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].tbEquipoEmpleados.eqem_Id + '</td>' +
                     '<td>' +
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnEditarDeduccionesExtraordinarias">Editar</button>' +
-                    '<button type="button" class="btn btn-default btn-xs" id="btnDetalleDeduccionesExtraordinarias">Detalle</button>' +
+                    '<a href="DeduccionesExtraordinarias/Edit?id='+ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra+' class="btn btn-primary btn-xs" id="btnEditarDeduccionesExtraordinarias">Editar</a>' +
+                    '<a href="DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + ' class="btn btn-default btn-xs" id="btnDetalleDeduccionesExtraordinarias">Detalle</a>' +
+                    '<button IdDeduccionesExtra=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + ' type="button" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias">Inactivar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -125,14 +126,14 @@ $("#btnEditDeduccionesExtraordinarias").click(function () {
 });
 
 
-$(document).ready(function () {
-    //codigo cargar grid
-    /*cargarGridDeducciones();*/
-});
+//$(document).ready(function () {
+//    //codigo cargar grid
+//    /*cargarGridDeducciones();*/
+//});
 
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-/*$(document).on("click", "#btnAgregarDeduccionExtraordinaria", function () {
+$(document).on("click", "#btnAgregarDeduccionExtraordinaria", function () {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL 
     console.log("Adios")
     debugger
@@ -162,9 +163,11 @@ $(document).ready(function () {
                 $("#eqem_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
+
     //MOSTRAR EL MODAL DE AGREGAR
-    //$("#AgregarDeduccionesExtraordinarias").modal();
-});*/
+                $("#AgregarDeduccionesExtraordinarias").modal();
+
+});
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateDeduccionesExtraordinarias').click(function () {
@@ -177,7 +180,8 @@ $('#btnCreateDeduccionesExtraordinarias').click(function () {
         url: "/DeduccionesExtraordinarias/Create",
         method: "POST",
         data: data
-    }).done(function (data) {
+    })
+        .done(function (data) {
         //CERRAR EL MODAL DE AGREGAR
         $("#AgregarDeduccionesExtraordinarias").modal('hide');
         //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
@@ -195,32 +199,33 @@ $('#btnCreateDeduccionesExtraordinarias').click(function () {
                 message: 'El registro fue registrado de forma exitosa!',
             });
         }
-    });
+        });
+
 });
 
 
 
 //Modal de Inactivar
 $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnInactivarDeduccionesExtraordinarias", function () {
-    console.log("Adios")
-    var ID = $(this).closest('tr').data('ID');
+    var ID = $(this).attr('iddeduccionesextra');
     $.ajax({
         url: "/DeduccionesExtraordinarias/Inactivar/" + ID,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
-    })
-
-    //Mostrar el Modal
-    $("#InactivarDeduccionesExtraordinarias").modal();
-
+    }).done(function (data) {
+        $('#dex_IdDeduccionesExtra').val(data.dex_IdDeduccionesExtra);
+        //Mostrar el Modal
+        $("#InactivarDeduccionesExtraordinarias").modal();
+    });
 });
 
 //Funcionamiento del Modal
 $("#btnInactivar").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmDeduccionesExtraordinariasInactivar").serializeArray();
+    console.log(data);
     debugger;
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     console.log(data)
@@ -269,12 +274,3 @@ $("#btnCerrarEdit").click(function () {
 $("#btnCerrarInactivar").click(function () {
     $("#InactivarDeduccionesExtraordinarias").modal('hide');
 });
-
-// PROBANDO LOS IZITOAST
-//$(document).ready(function () {
-//    console.log('cargado JS');
-//    iziToast.show({
-//        title: 'Hola',
-//        message: 'Estoy probando los iziToast'
-//    });
-//});

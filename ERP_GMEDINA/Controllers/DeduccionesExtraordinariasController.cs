@@ -55,9 +55,7 @@ namespace ERP_GMEDINA.Controllers
             //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
-            /*var tbCatalogoDeDeducciones1 = db.tbCatalogoDeDeducciones
-                        .Select(c => new { tde_Descripcion = c.tbTipoDeduccion.tde_Descripcion, tde_IdTipoDedu = c.tbTipoDeduccion.tde_IdTipoDedu, cde_UsuarioModifica = c.cde_UsuarioModifica, cde_UsuarioCrea = c.cde_UsuarioCrea, cde_PorcentajeEmpresa = c.cde_PorcentajeEmpresa, cde_PorcentajeColaborador = c.cde_PorcentajeColaborador, cde_IdDeducciones = c.cde_IdDeducciones, cde_DescripcionDeduccion = c.cde_DescripcionDeduccion, cde_Activo = c.cde_Activo, cde_FechaCrea = c.cde_FechaCrea, cde_FechaModifica = c.cde_FechaModifica }).Where(c => c.cde_Activo == true)
-                        .ToList();*/
+
             var tbDeduccionesExtraordinariasD = db.tbDeduccionesExtraordinarias
                 .Select(d => new
                 {
@@ -261,11 +259,11 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Inactivar([Bind(Include = "dex_IdDeduccionesExtra,dex_UsuarioModifica,dex_FechaModifica")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
+        public ActionResult Inactivar(int dex_IdDeduccionesExtra)
         {
             //Para llenar los campos de auditoria
-            tbDeduccionesExtraordinarias.dex_UsuarioModifica = 1;
-            tbDeduccionesExtraordinarias.dex_FechaModifica = DateTime.Now;
+            //tbDeduccionesExtraordinarias.dex_UsuarioModifica = 1;
+            //tbDeduccionesExtraordinarias.dex_FechaModifica = DateTime.Now;
             //Variable para enviarla al lado del Cliente
             string Response = String.Empty;
             IEnumerable<object> listDeduccionesExtraordinarias = null;
@@ -275,9 +273,9 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //Ejecutar Procedimiento Almacenado
-                    listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar(tbDeduccionesExtraordinarias.dex_IdDeduccionesExtra,
-                                                                                                         tbDeduccionesExtraordinarias.dex_UsuarioModifica,
-                                                                                                         tbDeduccionesExtraordinarias.dex_FechaModifica);
+                    listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar(dex_IdDeduccionesExtra,
+                                                                                                         1,
+                                                                                                         DateTime.Now);
 
                     //El tipo complejo del Procedimiento Almacenado
                     foreach (UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result Resultado in listDeduccionesExtraordinarias)
