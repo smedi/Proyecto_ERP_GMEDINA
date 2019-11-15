@@ -26,7 +26,7 @@
                 <div class="ibox-title">
                     <h5>Catalogo De Ingresos</h5>
                     <div class="ibox-tools">
-                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoIngresos">Nuevo</button>
+                        <button type="button" class="btn btn-primary btn-xs" id="btnAgregarCatalogoIngresos">Registrar Ingreso</button>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -109,8 +109,8 @@
             </div>
             <div class="modal-footer">
                 @*data-dismiss="modal"*@
-                <button type="button" class="btn btn-white" id="btnCerrarEditar">Close</button>
-                <button type="button" class="btn btn-primary" id="btnUpdateIngresos">Aceptar</button>
+                <button type="button" class="btn btn-white" id="btnCerrarEditar">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnUpdateIngresos">Guardar</button>
                 <button type="button" class="btn btn-danger" id="btnModalInactivar">Inactivar</button>
             </div>
         </div>
@@ -130,8 +130,8 @@
                 @Html.Partial("_CreateCatalogoDeIngresos", new ERP_GMEDINA.Models.tbCatalogoDeIngresos())
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="btnCreateRegistroIngresos">Agregar</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnCreateRegistroIngresos">Guardar</button>
             </div>
         </div>
     </div>
@@ -149,7 +149,7 @@
                 @Html.Partial("_DetailCatalogoDeIngreso", new ERP_GMEDINA.Models.tbCatalogoDeIngresos())
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>
@@ -159,14 +159,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cancelar</span></button>
                 <h4 class="modal-title">Inactivar</h4>
             </div>
             <div class="modal-body" id="Inactivar">
                 ¿Esta seguro que desea Inactivar este registro?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-danger " id="btnInactivarIngresos">Inactivar</button>
             </div>
         </div>
