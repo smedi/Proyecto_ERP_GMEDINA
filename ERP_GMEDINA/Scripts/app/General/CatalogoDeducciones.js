@@ -68,7 +68,6 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                console.log('Hla')
                 $("#Editar #cde_IdDeducciones").val(data.cde_IdDeducciones);
                 $("#Editar #cde_DescripcionDeduccion").val(data.cde_DescripcionDeduccion);
                 $("#Editar #cde_PorcentajeColaborador").val(data.cde_PorcentajeColaborador);
@@ -106,34 +105,69 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateDeduccion").click(function () {
+
+    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmCatalogoDeducciones").serializeArray();
-    //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    $.ajax({
-        url: "/CatalogoDeDeducciones/Edit",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo editar el registro, contacte al administrador',
-            });
-        }
-        else {
-            // REFRESCAR UNICAMENTE LA TABLA
-            cargarGridDeducciones();
-            
-            //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#EditarCatalogoDeducciones").modal('hide');
-            //Mensaje de exito de la edicion
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue editado de forma exitosa!',
-            });
-        }
-    });
+    //CREAMOS VARIABLES PARA VALIDAR QUE NO ESTEN VACIAS
+    var DescripcipnDeduccion = $("#Editar #cde_DescripcionDeduccion").val();
+    var TipodeDedu = $("#Editar #tde_IdTipoDedu").val();
+    var PorcenColaborador = $("#Editar #cde_PorcentajeColaborador").val();
+    var PorcenEmpresa = $("#Editar #cde_PorcentajeEmpresa").val();
+    var ModelState = false;
+    //CONDICIONAMOS
+    if (DescripcipnDeduccion != '' && DescripcipnDeduccion != null && DescripcipnDeduccion != undefined) ModelState = true;
+    else
+        ModelState = false
+
+    if (PorcenColaborador != '' && PorcenColaborador != null && PorcenColaborador != undefined && PorcenColaborador != 0) ModelState = true;
+    else
+        ModelState = false
+
+    if (PorcenEmpresa != '' && PorcenEmpresa != null && PorcenEmpresa != undefined && PorcenEmpresa != 0) ModelState = true;
+    else
+        ModelState = false
+
+    if (TipodeDedu != '' && TipodeDedu != null && TipodeDedu != undefined && TipodeDedu != 0) ModelState = true;
+    else
+        ModelState = false
+
+    if (ModelState == true) 
+    {
+        
+        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        $.ajax({
+            url: "/CatalogoDeDeducciones/Edit",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            if (data == "error") {
+                //Cuando traiga un error del backend al guardar la edicion
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo editar el registro, contacte al administrador',
+                });
+            }
+            else {
+                // REFRESCAR UNICAMENTE LA TABLA
+                cargarGridDeducciones();
+
+                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+                $("#EditarCatalogoDeducciones").modal('hide');
+                //Mensaje de exito de la edicion
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue editado de forma exitosa!',
+                });
+            }
+
+        });
+    } else {
+        iziToast.error({
+            title: 'Error',
+            message: 'No puede dejar campos vacios',
+        });
+    }
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -221,26 +255,35 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
 $('#btnCreateRegistroDeduccion').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
 
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
+    
     //CREAMOS VARIABLES PARA VALIDAR QUE NO ESTEN VACIAS
     var DescripcipnDeduccion = $("#Crear #cde_DescripcionDeduccion").val();
     var TipodeDedu = $("#Crear #tde_IdTipoDedu").val();
     var PorcenColaborador = $("#Crear #cde_PorcentajeColaborador").val();
     var PorcenEmpresa = $("#Crear #cde_PorcentajeEmpresa").val();
-    var ModelState = true;
+    var ModelState = false;
     //CONDICIONAMOS
-    if (DescripcipnDeduccion == '' && DescripcipnDeduccion == null && DescripcipnDeduccion == undefined) ModelState = false;
+    if (DescripcipnDeduccion != '' && DescripcipnDeduccion != null && DescripcipnDeduccion != undefined) ModelState = true;
+    else
+        ModelState=false
 
-    if ( TipodeDedu != '' && TipodeDedu != null && TipodeDedu != undefined) ModelState =  false;
+    if (PorcenColaborador != '' && PorcenColaborador != null && PorcenColaborador != undefined && PorcenColaborador != 0) ModelState = true;
+    else
+        ModelState = false
 
-    if ( PorcenColaborador != '' && PorcenColaborador != null && PorcenColaborador != undefined) ModelState =  false;
+    if (PorcenEmpresa != '' && PorcenEmpresa != null && PorcenEmpresa != undefined && PorcenEmpresa != 0) ModelState = true;
+    else
+        ModelState = false
 
-    if ( PorcenEmpresa != '' && PorcenEmpresa != null && PorcenEmpresa != undefined) ModelState =  false;
+    if (TipodeDedu != '' && TipodeDedu != null && TipodeDedu != undefined && TipodeDedu != 0 ) ModelState = true;
+    else
+        ModelState = false
 
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    if (ModelState = true)
-        {
+    if (ModelState == true)
+    {
+        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+        var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
         $.ajax({
             url: "/CatalogoDeDeducciones/Create",
             method: "POST",
