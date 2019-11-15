@@ -105,36 +105,9 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateDeduccion").click(function () {
-
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmCatalogoDeducciones").serializeArray();
-    //CREAMOS VARIABLES PARA VALIDAR QUE NO ESTEN VACIAS
-    var DescripcipnDeduccion = $("#Editar #cde_DescripcionDeduccion").val();
-    var TipodeDedu = $("#Editar #tde_IdTipoDedu").val();
-    var PorcenColaborador = $("#Editar #cde_PorcentajeColaborador").val();
-    var PorcenEmpresa = $("#Editar #cde_PorcentajeEmpresa").val();
-    var ModelState = false;
-    //CONDICIONAMOS
-    if (DescripcipnDeduccion != '' && DescripcipnDeduccion != null && DescripcipnDeduccion != undefined) ModelState = true;
-    else
-        ModelState = false
 
-    if (PorcenColaborador != '' && PorcenColaborador != null && PorcenColaborador != undefined && PorcenColaborador != 0) ModelState = true;
-    else
-        ModelState = false
-
-    if (PorcenEmpresa != '' && PorcenEmpresa != null && PorcenEmpresa != undefined && PorcenEmpresa != 0) ModelState = true;
-    else
-        ModelState = false
-
-    if (TipodeDedu != '' && TipodeDedu != null && TipodeDedu != undefined && TipodeDedu != 0) ModelState = true;
-    else
-        ModelState = false
-
-    if (ModelState == true) 
-    {
-        
         //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/CatalogoDeDeducciones/Edit",
@@ -162,12 +135,6 @@ $("#btnUpdateDeduccion").click(function () {
             }
 
         });
-    } else {
-        iziToast.error({
-            title: 'Error',
-            message: 'No puede dejar campos vacios',
-        });
-    }
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -255,65 +222,50 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
 $('#btnCreateRegistroDeduccion').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
 
+    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+    var Descrip = $("#Crear #cde_DescripcionDeduccion").val();
+    var Tipodedu = $("#Crear #tde_IdTipoDedu").val();
+    var Porcencola = $("#Crear #cde_PorcentajeColaborador").val();
+    var PorcenEmpre = $("#Crear #cde_PorcentajeEmpresa").val();
+    var ModelState=false;
+
     
-    //CREAMOS VARIABLES PARA VALIDAR QUE NO ESTEN VACIAS
-    var DescripcipnDeduccion = $("#Crear #cde_DescripcionDeduccion").val();
-    var TipodeDedu = $("#Crear #tde_IdTipoDedu").val();
-    var PorcenColaborador = $("#Crear #cde_PorcentajeColaborador").val();
-    var PorcenEmpresa = $("#Crear #cde_PorcentajeEmpresa").val();
-    var ModelState = false;
-    //CONDICIONAMOS
-    if (DescripcipnDeduccion != '' && DescripcipnDeduccion != null && DescripcipnDeduccion != undefined) ModelState = true;
-    else
-        ModelState=false
 
-    if (PorcenColaborador != '' && PorcenColaborador != null && PorcenColaborador != undefined && PorcenColaborador != 0) ModelState = true;
-    else
-        ModelState = false
+    if (Descrip != '' && Descrip != null && Descrip != undefined) ModelState = true;
+    else 
+        ModelState = false;
 
-    if (PorcenEmpresa != '' && PorcenEmpresa != null && PorcenEmpresa != undefined && PorcenEmpresa != 0) ModelState = true;
+    if (PorcenEmpre != '' && PorcenEmpre != null && PorcenEmpre != undefined) ModelState = true;
     else
-        ModelState = false
+        ModelState = false;
 
-    if (TipodeDedu != '' && TipodeDedu != null && TipodeDedu != undefined && TipodeDedu != 0 ) ModelState = true;
+    if (Porcencola != '' && Porcencola != null && Porcencola != undefined) ModelState = true;
     else
-        ModelState = false
+        ModelState = false;
 
-        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    if (ModelState == true)
-    {
-        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+    if (Tipodedu != '' && Tipodedu != null && Tipodedu != undefined && Tipodedu != 0) ModelState = true;
+    else
+        ModelState = false;
+
+
+    if (ModelState == true) {
         var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
         $.ajax({
             url: "/CatalogoDeDeducciones/Create",
             method: "POST",
-            data: data
-        }).done(function (data) {
-            //CERRAR EL MODAL DE AGREGAR
-            $("#AgregarCatalogoDeducciones").modal('hide');
-            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-            if (data == "error") {
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo guardar el registro, contacte al administrador',
-                });
-            }
-            else {
+            data: data,
+            success: function () {
                 cargarGridDeducciones();
                 $("#Crear #cde_DescripcionDeduccion").val('');
-                $("#Crear #cde_PorcentajeColaborador").val('0.00');
-                $("#Crear #cde_PorcentajeEmpresa").val('0.00');
+                $("#Crear #cde_PorcentajeColaborador").val('');
+                $("#Crear #cde_PorcentajeEmpresa").val('');
                 // Mensaje de exito cuando un registro se ha guardado bien
+
                 iziToast.success({
                     title: 'Exito',
                     message: 'El registro fue registrado de forma exitosa!',
                 });
             }
-        });
-    } else {
-        iziToast.error({
-            title: 'Error',
-            message: 'No puede dejar campos vacios',
         });
     }
 });
@@ -321,6 +273,10 @@ $('#btnCreateRegistroDeduccion').click(function () {
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
     $("#EditarCatalogoDeducciones").modal('hide');
+});
+
+$("#btnCerrarCrear").click(function () {
+    $("#AgregarCatalogoDeducciones").modal('hide');
 });
 
 $(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
@@ -369,5 +325,3 @@ $("#btnInactivarRegistroDeduccion").click(function () {
 //        message: 'Estoy probando los iziToast'
 //    });
 //});
-
-
