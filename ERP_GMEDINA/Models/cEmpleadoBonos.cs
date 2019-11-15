@@ -25,7 +25,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "ID Ingreso")]
         public int cin_IdIngreso { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "No puede dejar campos vacios.")]
         [Display(Name = "Monto")]
         public decimal cb_Monto { get; set; }
 

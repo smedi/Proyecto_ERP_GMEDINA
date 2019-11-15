@@ -239,8 +239,8 @@ namespace ERP_GMEDINA.Controllers
         {
             //LLENAR DATA DE AUDITORIA
             //, cb_UsuarioModifica, cb_FechaModifica
-            //tbEmpleadoBonos.cb_UsuarioModifica = 1;
-            //tbEmpleadoBonos.cb_FechaModifica = DateTime.Now;
+            tbEmpleadoBonos.cb_UsuarioModifica = 1;
+            tbEmpleadoBonos.cb_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
             IEnumerable<object> listEmpleadoBonos = null;
@@ -251,7 +251,10 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listEmpleadoBonos = db.UDP_Plani_tbEmpleadoBonos_Inactivar(tbEmpleadoBonos.cb_Id);
+                    listEmpleadoBonos = db.UDP_Plani_tbEmpleadoBonos_Inactivar(tbEmpleadoBonos.cb_Id,
+                                                                               tbEmpleadoBonos.cb_UsuarioModifica,
+                                                                               tbEmpleadoBonos.cb_FechaModifica);
+
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbEmpleadoBonos_Inactivar_Result Resultado in listEmpleadoBonos)
                         MensajeError = Resultado.MensajeError;
