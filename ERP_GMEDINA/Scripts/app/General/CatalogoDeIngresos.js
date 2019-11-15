@@ -266,3 +266,7 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarCatalogoIngresos").modal('hide');
 });
 
+//$("#btnCerrarAgregar").click(function () {
+//    $("#AgregarCatalogoIngresos").modal('hide');
+//});
+
