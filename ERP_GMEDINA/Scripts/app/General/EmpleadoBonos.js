@@ -19,6 +19,24 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
+//FUNCION: MOSTRAR ERRORES IZITOAST
+function mostrarError(Mensaje) {
+    iziToast.error({
+        title: 'Error',
+        message: Mensaje,
+    });
+}
+
+//FUNCION: ESCUCHA EL CAMBIO EN EL CHECKBOX Y CAMBIA SU VALOR
+$('#Editar #cb_Pagado').click(function () {
+    if ($('#Editar #cb_Pagado').is(':checked')) {
+        $('#Editar #cb_Pagado').val(true);
+    }
+    else {
+        $('#Editar #cb_Pagado').val(false);
+    }
+});
+
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridBonos() {
     _ajax(null,
@@ -64,6 +82,94 @@ function cargarGridBonos() {
         });
 }
 
+//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+$(document).on("click", "#btnAgregarEmpleadoBonos", function () {
+    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DE EMPLEADOS DEL MODAL
+    $.ajax({
+        url: "/EmpleadoBonos/EditGetDDLEmpleado",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    })
+        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
+        .done(function (data) {
+            $("#Crear #emp_IdEmpleado").empty();
+            $("#Crear #emp_IdEmpleado").append("<option value='0'>Selecione una opción...</option>");
+            $.each(data, function (i, iter) {
+                $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+            });
+        });
+
+    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DE INGRESO DEL MODAL
+    $.ajax({
+        url: "/EmpleadoBonos/EditGetDDLIngreso",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    })
+        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
+        .done(function (data) {
+            $("#Crear #cin_IdIngreso").empty();
+            $.each(data, function (i, iter) {
+                $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+            });
+        });
+    //MOSTRAR EL MODAL DE AGREGAR
+    $("#AgregarEmpleadoBonos").modal();
+    $("#Crear #cb_Monto").val("");
+});
+
+//FUNCION: CREAR EL NUEVO REGISTRO
+$('#btnCreateRegistroBonos').click(function () {
+    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+
+    var IdEmpleado = $("#Crear #emp_IdEmpleado").val();
+    var Monto = $("#Crear #cb_Monto").val();
+
+    if (IdEmpleado != 0 &&
+        Monto != "" && Monto != null && Monto != undefined && Monto > 0) {
+
+        //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+        var data = $("#frmEmpleadoBonosCreate").serializeArray();
+        //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+        $.ajax({
+            url: "/EmpleadoBonos/Create",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            //CERRAR EL MODAL DE AGREGAR
+            $("#AgregarEmpleadoBonos").modal('hide');
+            $("#Crear #cb_Monto").val("");
+            //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+            if (data == "error") {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo guardar el registro, contacte al administrador',
+                });
+            }
+            else {
+                cargarGridBonos();
+                // Mensaje de exito cuando un registro se ha guardado bien
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue registrado de forma exitosa!',
+                });
+            }
+        });
+
+    }
+    else {
+        if (IdEmpleado == 0) {
+            $("#Crear #emp_IdEmpleado").focus;
+            mostrarError('Ingrese un colaborador válido');
+        }
+
+        if (Monto == "" || Monto == null || Monto == undefined || Monto <= 0) {
+            $("#Crear #cb_Monto").focus;
+            mostrarError('Ingrese un Monto válido');
+        }
+    }
+});
 
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos", function () {
@@ -143,27 +249,13 @@ $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos",
         });
 });
 
-
-//NECESITA ESTA FUNCION PARA ESCUCHAR EL CAMBIO EN EL CHECKBOX Y CAMBIAR SU VALOR
-$('#Editar #cb_Pagado').click(function () {
-    if ($('#Editar #cb_Pagado').is(':checked')) {
-        $('#Editar #cb_Pagado').val(true);
-    }
-    else {
-        $('#Editar #cb_Pagado').val(false);
-    }
-});
-
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateBonos").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     
-    var Monto = $("#Crear #cb_Monto").val();
-    var FechaRegistro = $("#Crear #cb_FechaRegistro").val();
+    var Monto = $("#Editar #cb_Monto").val();
 
-
-    if (Monto != "" && Monto != null && Monto != undefined && Monto != "0,00" &&
-        FechaRegistro != "" && FechaRegistro != null && FechaRegistro != undefined) {
+    if (Monto != "" && Monto != null && Monto != undefined && Monto > 0) {
     
     var data = $("#frmEmpleadoBonos").serializeArray();
 
@@ -193,132 +285,9 @@ $("#btnUpdateBonos").click(function () {
         }
     });
     } else {
-            $("#Crear #cb_Monto").focus;
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pueden guardar registros vacíos',
-            });
+            $("#Editar #cb_Monto").focus;
+            mostrarError('Ingrese un Monto válido');
      }
-});
-
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarEmpleadoBonos", function () {
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
-    $.ajax({
-        url: "/EmpleadoBonos/EditGetDDLEmpleado",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            console.log(data);
-            $("#Crear #emp_IdEmpleado").empty();
-            $("#Crear #emp_IdEmpleado").append("<option value='0'>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarEmpleadoBonos").modal();
-});
-
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarEmpleadoBonos", function () {
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
-    $.ajax({
-        url: "/EmpleadoBonos/EditGetDDLIngreso",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            $("#Crear #cin_IdIngreso").empty();
-            $.each(data, function (i, iter) {
-                $("#Crear #cin_IdIngreso").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarEmpleadoBonos").modal();
-});
-
-//FUNCION: CREAR EL NUEVO REGISTRO
-$('#btnCreateRegistroBonos').click(function () {
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-
-    var IdEmpleado = $("#Crear #emp_IdEmpleado").val();
-    var IdIngreso = $("#Crear #cin_IdIngreso").val();
-    var Monto = $("#Crear #cb_Monto").val();
-    var FechaRegistro = $("#Crear #cb_FechaRegistro").val();
-    var Pagado = $("#Crear #cb_Pagado").val();
-
-    if (IdEmpleado != 0 &&
-        Monto != "" && Monto != null && Monto != undefined && Monto != "0,00" &&
-        FechaRegistro != "" && FechaRegistro != null && FechaRegistro != undefined) {
-
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmEmpleadoBonosCreate").serializeArray();
-    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    $.ajax({
-        url: "/EmpleadoBonos/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-        $("#AgregarEmpleadoBonos").modal('hide');
-        $("#Crear #cb_Monto").val("");
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo guardar el registro, contacte al administrador',
-            });
-        }
-        else {
-            cargarGridBonos();
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
-            });
-        }
-    });
-
-    }
-    else {
-        if (IdEmpleado == 0) {
-            $("#Crear #emp_IdEmpleado").focus;
-            iziToast.error({
-                title: 'Error',
-                message: 'Ingrese un colaborador válido',
-            });
-        }
-
-        if (Monto == "" || Monto == null || Monto == undefined ) {
-            $("#Crear #cb_Monto").focus;
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pueden guardar montos vacíos',
-            });
-        }
-
-        if (Monto == "0,00") {
-            $("#Crear #cb_Monto").focus;
-            iziToast.error({
-                title: 'Error',
-                message: 'Ingrese un monto válido',
-            });
-        }
-
-        if (FechaRegistro == "" || FechaRegistro == null || FechaRegistro == undefined) {
-            $("#Crear #cb_FechaRegistro").focus;
-            iziToast.error({
-                title: 'Error',
-                message: 'Ingrese una fecha válida',
-            });
-        }
-    }
 });
 
 //FUNCION: MOSTRAR EL MODAL DE DETALLES

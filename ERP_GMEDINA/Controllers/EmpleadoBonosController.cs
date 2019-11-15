@@ -85,8 +85,10 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create([Bind(Include = "emp_Id, cin_IdIngreso, cb_Monto, cb_FechaRegistro, cb_Pagado, cb_UsuarioCrea, cb_FechaCrea")] tbEmpleadoBonos tbEmpleadoBonos)
         {
             //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
+            tbEmpleadoBonos.cb_FechaRegistro = DateTime.Now;
+            tbEmpleadoBonos.cb_Pagado = false;
             tbEmpleadoBonos.cb_UsuarioCrea = 1;
-            tbEmpleadoBonos.cb_FechaCrea = DateTime.Now;
+            tbEmpleadoBonos.cb_FechaCrea = DateTime.Now;            
 
             //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
             string response = String.Empty;
