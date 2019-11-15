@@ -123,35 +123,48 @@ $("#btnEditDeduccionesExtraordinarias").click(function () {
         }
     });
 });
-$(document).ready(function () {
 
-//codigo cargar grid
+
+$(document).ready(function () {
+    //codigo cargar grid
+    /*cargarGridDeducciones();*/
 });
 
+
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarDeduccionExtraordinaria", function () {
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
-    console.log("Hola")
-    $.ajax({
-        url: "/DeduccionesExtraordinarias/EditGetDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
+/*$(document).on("click", "#btnAgregarDeduccionExtraordinaria", function () {
+    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL 
     console.log("Adios")
     debugger
     console.log("Prueba")
+        .done(function (data) {
+            //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
+            if (data) {
+                $("#eqem_Id").val(data.eqem_Id);
+                $("#per_Nombres").val(data.per_Nombres);
+                //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
+                var SelectedId = data.eqem_Id;
+                
+                $.ajax({
+                    url: "/DeduccionesExtraordinarias/EditGetDDL",
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8"
+                })
+
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
+            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
             $("#eqem_Id").empty();
-            $("#eqem_Id").append("<option value='0'>Selecione una opción...</option>");
+            //LLENAR EL DROPDOWNLIST
+            $("#eqem_Id").append("<option value=0>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
-                $("#eqem_Id").append("<option value='" + iter.Id + "'>" + iter.Nombre + "</option>");
+                $("#eqem_Id").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
     //MOSTRAR EL MODAL DE AGREGAR
     //$("#AgregarDeduccionesExtraordinarias").modal();
-});
+});*/
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateDeduccionesExtraordinarias').click(function () {
@@ -189,18 +202,19 @@ $('#btnCreateDeduccionesExtraordinarias').click(function () {
 
 //Modal de Inactivar
 $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnInactivarDeduccionesExtraordinarias", function () {
-    var ID = $(this).closest('tr').data('id');
+    console.log("Adios")
+    var ID = $(this).closest('tr').data('ID');
     $.ajax({
         url: "/DeduccionesExtraordinarias/Inactivar/" + ID,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
-    }).done(function (data) {
-        $('#dex_IdDeduccionesExtra').val(data.dex_IdDeduccionesExtra);
-        //Mostrar el Modal
-        $("#InactivarDeduccionesExtraordinarias").modal();
-    });
+    })
+
+    //Mostrar el Modal
+    $("#InactivarDeduccionesExtraordinarias").modal();
+
 });
 
 //Funcionamiento del Modal

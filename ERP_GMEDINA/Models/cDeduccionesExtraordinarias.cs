@@ -17,18 +17,29 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id Deducciones Extraordinarias")]
         public int dex_IdDeduccionesExtra { get; set; }
 
+        [Range(0.01, 9999999999.99,
+         ErrorMessage = "El Monto Inicial no puede menor de 0.01")]
+        [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Monto Inicial")]
         public decimal dex_MontoInicial { get; set; }
 
+        [Range(0.01, 9999999999.99,
+         ErrorMessage = "El Monto Inicial no puede menor de 0.01")]
+        [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Monto Restante")]
         public decimal dex_MontoRestante { get; set; }
 
+        [MaxLength (100, ErrorMessage = "No puede ingresar más de 100 caracteres")]
+        [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Observaciones")]
         public string dex_ObservacionesComentarios { get; set; }
 
         [Display(Name = "Id Deducción")]
         public int cde_IdDeducciones { get; set; }
 
+        [Range(0.01, 9999999999.99,
+         ErrorMessage = "El Monto Inicial no puede menor de 0.01")]
+        [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Cuota")]
         public decimal dex_Cuota { get; set; }
 

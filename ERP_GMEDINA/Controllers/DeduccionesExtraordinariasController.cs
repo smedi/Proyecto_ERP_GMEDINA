@@ -49,11 +49,45 @@ namespace ERP_GMEDINA.Controllers
             return View(tbDeduccionesExtraordinarias);
         }
 
+        // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
+        public ActionResult GetData()
+        {
+            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
+            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
+            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
+            /*var tbCatalogoDeDeducciones1 = db.tbCatalogoDeDeducciones
+                        .Select(c => new { tde_Descripcion = c.tbTipoDeduccion.tde_Descripcion, tde_IdTipoDedu = c.tbTipoDeduccion.tde_IdTipoDedu, cde_UsuarioModifica = c.cde_UsuarioModifica, cde_UsuarioCrea = c.cde_UsuarioCrea, cde_PorcentajeEmpresa = c.cde_PorcentajeEmpresa, cde_PorcentajeColaborador = c.cde_PorcentajeColaborador, cde_IdDeducciones = c.cde_IdDeducciones, cde_DescripcionDeduccion = c.cde_DescripcionDeduccion, cde_Activo = c.cde_Activo, cde_FechaCrea = c.cde_FechaCrea, cde_FechaModifica = c.cde_FechaModifica }).Where(c => c.cde_Activo == true)
+                        .ToList();*/
+            var tbDeduccionesExtraordinariasD = db.tbDeduccionesExtraordinarias
+                .Select(d => new
+                {
+                    per_Nombres = d.tbEquipoEmpleados.tbEmpleados.tbPersonas.per_Nombres,
+                    per_Apellidos = d.tbEquipoEmpleados.tbEmpleados.tbPersonas.per_Apellidos,
+                    dex_IdDeduccionesExtra = d.dex_IdDeduccionesExtra,
+                    eqem_Id = d.eqem_Id,
+                    cde_IdDeducciones = d.cde_IdDeducciones,
+                    dex_MontoInicial = d.dex_MontoInicial,
+                    dex_MontoRestante = d.dex_MontoRestante,
+                    dex_ObservacionesComentarios = d.dex_ObservacionesComentarios,
+                    cde_DescripcionDeduccion = d.tbCatalogoDeDeducciones.cde_DescripcionDeduccion,
+                    dex_Cuota = d.dex_Cuota,
+                    dex_Activo = d.dex_Activo,
+                    dex_UsuarioCrea = d.dex_UsuarioCrea,
+                    dex_FechaCrea = d.dex_FechaCrea,
+                    dex_UsuarioModifica = d.dex_UsuarioModifica,
+                    dex_FechaModifica = d.dex_FechaModifica
+                }).Where(d => d.dex_Activo == true)
+                .ToList();
+            //RETORNAR JSON AL LADO DEL CLIENTE
+            return new JsonResult { Data = tbDeduccionesExtraordinariasD, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
         // GET: DeduccionesExtraordinarias/Create
         public ActionResult Create()
         {
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
-            //ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id");
+            /*ViewBag.per_Nombres = new SelectList(db.tbDeduccionesExtraordinarias.Include(d => d.tbEquipoEmpleados.tbEmpleados.tbPersonas.per_Nombres));*/
+            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id");
             return View();
         }
 
@@ -112,7 +146,7 @@ namespace ERP_GMEDINA.Controllers
                 Response = "Error";
             }
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
-            //ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id", tbDeduccionesExtraordinarias.eqem_Id);
+            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "eqem_Id", tbDeduccionesExtraordinarias.eqem_Id);
             return Json(Response, JsonRequestBehavior.AllowGet);
 
         }
