@@ -18,30 +18,12 @@ namespace ERP_GMEDINA.Controllers
         // GET: tbCatalogoDeIngresos
         public ActionResult Index()
         {
-            //var INNERJOIN = from tbCatIngreso in db.tbCatalogoDeIngresos
-            //                where tbCatIngreso.cin_Activo == true
-            //                join tbUsuCrea in db.tbUsuario on tbCatIngreso.cin_UsuarioCrea equals tbUsuCrea.usu_Id
-            //                select new { tbCatIngreso.cin_IdIngreso,
-            //                             tbCatIngreso.cin_DescripcionIngreso,
-            //                             tbCatIngreso.cin_Activo,
-            //                             tbCatIngreso.cin_UsuarioCrea,
-            //                             tbCatIngreso.cin_FechaCrea,
-            //                             tbCatIngreso.cin_UsuarioModifica,
-            //                             tbCatIngreso.cin_FechaModifica
-            //                           };
-
-            //var tbCatalogoDeIngresos1 = db.tbCatalogoDeIngresos
-             //           .Select(c => new { cin_DescripcionIngreso = c.cin_DescripcionIngreso, cin_IdIngreso = c.cin_IdIngreso, cin_UsuarioCrea = c.cin_UsuarioCrea, usu_NombreUsuario = c.tbUsuario.usu_NombreUsuario, cin_FechaCrea = c.cin_FechaCrea, cin_UsuarioModifica = c.cin_UsuarioModifica, cin_FechaModifica= c.cin_FechaModifica, cin_Activo= c.cin_Activo}).Where(c => c.cin_Activo == true)
-             //           .ToList();
             var tbCatalogoDeIngresos = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Where(x => x.cin_Activo == true);
             return View(tbCatalogoDeIngresos.ToList());
         }
 
         public ActionResult GetData()
         {
-            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
-            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
-            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbCatalogoDeIngresos1 = db.tbCatalogoDeIngresos               
                         .Select(c => new {
                                            cin_IdIngresos = c.cin_IdIngreso,
@@ -51,8 +33,7 @@ namespace ERP_GMEDINA.Controllers
                                            cin_FechaCrea = c.cin_FechaCrea,
                                            cin_UsuarioModifica= c.cin_UsuarioModifica,
                                            cin_FechaModifica = c.cin_FechaModifica})
-                                           .Where(x => x.cin_Activo == true)
-                        .ToList();
+                                           .Where(x => x.cin_Activo == true).ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbCatalogoDeIngresos1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
@@ -121,8 +102,6 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult Details(int? ID)
         {
             var tbCatalogoDeIngresosJSON = from tbCatIngreso in db.tbCatalogoDeIngresos
-                                           //join tbUsuCrea in db.tbUsuario on tbCatIngreso.cin_UsuarioCrea equals tbUsuCrea.usu_Id
-                                           //join tbUsuModi in db.tbUsuario on tbCatIngreso.cin_UsuarioModifica equals tbUsuModi.usu_Id
                                            where tbCatIngreso.cin_Activo == true && tbCatIngreso.cin_IdIngreso == ID
                                            select new
                                            {
@@ -148,12 +127,6 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "cin_IdIngreso,cin_DescripcionIngreso,cin_UsuarioModifica,cin_FechaModifica,cin_Activo")] tbCatalogoDeIngresos tbCatalogoDeIngresos)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            //tbCatalogoDeIngresos.cin_UsuarioCrea = 1;
-            //tbCatalogoDeIngresos.cin_FechaCrea = DateTime.Now;
-
-
             //LLENAR DATA DE AUDITORIA
             tbCatalogoDeIngresos.cin_UsuarioModifica = 1;
             tbCatalogoDeIngresos.cin_FechaModifica = DateTime.Now;
@@ -196,16 +169,9 @@ namespace ERP_GMEDINA.Controllers
                 ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                 response = "error";
             }
-          
-
-
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
-
-
-
-       
 
         public JsonResult Inactivar(int? ID)
         {
@@ -218,12 +184,6 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Inactivar([Bind(Include = "cin_IdIngreso,cin_UsuarioModifica,cin_FechaModifica")] tbCatalogoDeIngresos tbCatalogoDeIngresos)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            //tbCatalogoDeIngresos.cin_UsuarioCrea = 1;
-            //tbCatalogoDeIngresos.cin_FechaCrea = DateTime.Now;
-
-
             //LLENAR DATA DE AUDITORIA
             tbCatalogoDeIngresos.cin_UsuarioModifica = 1;
             tbCatalogoDeIngresos.cin_FechaModifica = DateTime.Now;
@@ -262,36 +222,7 @@ namespace ERP_GMEDINA.Controllers
             }
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
-        }
-
-        //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
-        //public JsonResult EditGetDDL()
-        //{
-        //    //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
-        //    var DDL =
-        //    from TipoDedu in db.tbTipoDeduccion
-        //    join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
-        //    select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
-        //    //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-        //    return Json(DDL, JsonRequestBehavior.AllowGet);
-        //}
-
-        // GET: CatalogoDeDeducciones/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    tbCatalogoDeIngresos tbCatalogoDeIngresos = db.tbCatalogoDeIngresos.Find(id);
-        //    if (tbCatalogoDeIngresos == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(tbCatalogoDeIngresos);
-        //}
-
-        // GET: CatalogoDeDeducciones/Create
+        }        
 
         // GET: CatalogoDeDeducciones/Delete/5
         public ActionResult Delete(int? id)
