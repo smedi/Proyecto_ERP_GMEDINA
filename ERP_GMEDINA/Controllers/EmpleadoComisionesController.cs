@@ -68,9 +68,36 @@ namespace ERP_GMEDINA.Controllers
         // GET: EmpleadoBonos/Details/5
         public JsonResult Details(int? ID)
         {
+            var tbEmpleadoComisionesJSON = from tbEmplComisiones in db.tbEmpleadoComisiones
+                                               //join tbUsuCrea in db.tbUsuario on tbCatIngreso.cin_UsuarioCrea equals tbUsuCrea.usu_Id
+                                               //join tbUsuModi in db.tbUsuario on tbCatIngreso.cin_UsuarioModifica equals tbUsuModi.usu_Id
+                                           where tbEmplComisiones.cc_Activo == true && tbEmplComisiones.cc_Id == ID
+                                           select new
+                                           {
+                                               tbEmplComisiones.cc_Id,
+                                               tbEmplComisiones.emp_Id,
+                                               NombreEmpleado = tbEmplComisiones.tbEmpleados.tbPersonas.per_Nombres,
+                                               ApellidosEmpleado = tbEmplComisiones.tbEmpleados.tbPersonas.per_Apellidos,
+                                               tbEmplComisiones.cin_IdIngreso,
+                                               Ingreso =tbEmplComisiones.tbCatalogoDeIngresos.cin_DescripcionIngreso,
+                                               tbEmplComisiones.cc_Monto,
+                                               tbEmplComisiones.cc_FechaRegistro,
+                                               tbEmplComisiones.cc_Pagado,
+                                               tbEmplComisiones.cc_Activo,
+                                               tbEmplComisiones.cc_UsuarioCrea,
+                                               UsuCrea = tbEmplComisiones.tbUsuario.usu_NombreUsuario,
+                                               tbEmplComisiones.cc_FechaCrea,
+                                               tbEmplComisiones.cc_UsuarioModifica,
+                                               UsuModifica = tbEmplComisiones.tbUsuario1.usu_NombreUsuario,
+                                               tbEmplComisiones.cc_FechaModifica
+                                           };
+
+
+
+
             db.Configuration.ProxyCreationEnabled = false;
-            tbEmpleadoComisiones tbtbEmpleadoComisionesJSON = db.tbEmpleadoComisiones.Find(ID);
-            return Json(tbtbEmpleadoComisionesJSON, JsonRequestBehavior.AllowGet);
+            //tbCatalogoDeIngresos tbCatalogoDeIngresosJSON = db.tbCatalogoDeIngresos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Find(ID);
+            return Json(tbEmpleadoComisionesJSON, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -127,8 +154,9 @@ namespace ERP_GMEDINA.Controllers
                 //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
                 response = "error";
             }
-            //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
-            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbEmpleadoBonos.tde_IdTipoDedu);
+            ViewBag.cc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleadoComisiones.cc_UsuarioCrea);
+            ViewBag.cc_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbEmpleadoComisiones.cc_UsuarioModifica);
+            ViewBag.cc_IdIngreso = new SelectList(db.tbCatalogoDeIngresos, "cin_IdIngreso", "cin_DescripcionIngreso", tbEmpleadoComisiones.cin_IdIngreso);
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 

@@ -7,18 +7,20 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.cc_Id)
 
-
         <div class="form-group">
             @Html.LabelFor(model => model.emp_Id, "emp_Id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="emp_IdEmpleado" name="emp_Id" class="form-control" disabled="disabled"></select>
+                @Html.HiddenFor(model => model.emp_Id, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                @Html.EditorFor(model => model.tbEmpleados.tbPersonas.per_Nombres, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.tbCatalogoDeIngresos.cin_DescripcionIngreso, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.cin_IdIngreso, "cin_IdIngresos", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.HiddenFor(model => model.cin_IdIngreso, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
             <div class="col-md-10">
-                <select id="cin_IdIngreso" name="cin_IdIngreso" class="form-control" disabled="disabled"></select>
+                @Html.EditorFor(model => model.tbCatalogoDeIngresos.cin_DescripcionIngreso, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.cin_IdIngreso, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -67,12 +69,14 @@
                     <tbody>
                         <tr>
                             <td>Creado</td>
-                            <td>@Html.EditorFor(model => model.tbUsuario.usu_Nombres)</td>
+                            @Html.HiddenFor(model => model.cc_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                            <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                             <td>@Html.EditorFor(model => model.cc_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                         </tr>
                         <tr>
                             <td>Modificado</td>
-                            <td>@Html.EditorFor(model => model.cc_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            @Html.HiddenFor(model => model.cc_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                            <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                             <td>@Html.EditorFor(model => model.cc_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                         </tr>
                     </tbody>

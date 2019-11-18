@@ -1,12 +1,19 @@
-﻿console.log("Entro en el js EmpleadoComisiones");
-//OBTENER SCRIPT DE FORMATEO DE FECHA // 
+﻿//OBTENER SCRIPT DE FORMATEO DE FECHA // 
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
-        console.log(textStatus);
     })
     .fail(function (jqxhr, settings, exception) {
         console.log("No se pudo recuperar Script SerializeDate");
     });
+
+
+//Mascara 
+//$(document).ready(function(){
+//    $("#cc_Monto").mask("0000.00");
+
+//})
+
+
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
@@ -58,8 +65,8 @@ function cargarGridComisiones() {
                     '<td>' + FechaRegistro + '</td>' +
                      '<td>' + Check + '</td>' + //-----------------------------------AQUI ENVIA LA VARIABLE
                     '<td>' +
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>' +
-                    '<button type="button" class="btn btn-default btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>' +
+                    '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-primary btn-xs" id="btnEditarEmpleadoComisiones">Editar</button>' +
+                    '<button data-id = "' + ListaComisiones[i].cc_Id + '" type="button" class="btn btn-default btn-xs" id="btnDetalleEmpleadoComisiones">Detalle</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -157,6 +164,9 @@ $('#Editar #cc_Pagado').click(function () {
 $("#btnUpdateComisiones").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEmpleadoComisiones").serializeArray();
+    var idEmpleado = $('#EditarEmpleadoComisiones #emp_IdEmpleado').val();
+    var cc_Monto = $('#EditarEmpleadoComisiones #cc_Monto').val();
+    if (idEmpleado != "0" && cc_Monto != "" && cc_Monto!="0.00" && cc_Monto !=undefined && cc_Monto != null) {
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/EmpleadoComisiones/Edit",
@@ -182,16 +192,36 @@ $("#btnUpdateComisiones").click(function () {
             });
         }
     });
+    }
+    else {
+        if (cc_Monto == " " || cc_Monto == "0.00") {
+            $('#EditarEmpleadoComisiones #cc_Monto').focus();
+            iziToast.error({
+                title: 'Error',
+                message: 'No deben Haber Campos Vacios',
+            });
+        }
+        else {
+            $('#EditarEmpleadoComisiones #emp_IdEmpleado').focus();
+            iziToast.error({
+                title: 'Error',
+                message: 'No deben Haber Campos Vacios',
+            });
+        }
+
+    }
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
+    var cc_Pagado = $('#AgregarEmpleadoComisiones #cc_Pagado').prop('checked', false);
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/EmpleadoComisiones/EditGetDDLEmpleado",
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8"
+
     })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
@@ -217,7 +247,6 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
     })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
-            console.log(data);
             //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
             $("#Crear #cin_IdIngreso").empty();
             //LLENAR EL DROPDOWNLIST
@@ -230,11 +259,11 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 });
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroComisiones').click(function () {
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmEmpleadoComisionesCreate").serializeArray();
-    console.log(data);
+    //var idEmpleado = $('#AgregarEmpleadoComisiones #emp_IdEmpleado').val();
+    //var cc_Monto = $('#AgregarEmpleadoComisiones #cc_Monto').val();
+    //if (idEmpleado != "0" && cc_Monto != "" && cc_Monto != "0.00" && cc_Monto != undefined && cc_Monto != null && cc_Monto != "00.00" && cc_Monto != "000.00" && cc_Monto != "0000.00" && cc_Monto!="00000.00"  && cc_Monto !="000000.00" && cc_Monto!="0000000.00" && cc_Monto!="00000000.00" && cc_Monto!="000000000.00" &&cc_Monto!="0000000000.00") {
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
     $.ajax({
         url: "/EmpleadoComisiones/Create",
@@ -259,7 +288,26 @@ $('#btnCreateRegistroComisiones').click(function () {
             });
         }
     });
+//}
+    //else {
+    //    if (cc_Monto == " " || cc_Monto == "0.00") {
+    //        $('#AgregarEmpleadoComisiones #cc_Monto').focus();
+    //        iziToast.error({
+    //            title: 'Error',
+    //            message: 'No deben Haber Campos Vacios',
+    //        });
+    //    }
+    //    else {
+    //        $('#AgregarEmpleadoComisiones #emp_IdEmpleado').focus();
+    //        iziToast.error({
+    //            title: 'Error',
+    //            message: 'No deben Haber Campos Vacios',
+    //        });
+    //    }
+        
+    //}
 });
+
 
 
 //FUNCION: Detail 
@@ -277,27 +325,39 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
         .done(function (data){
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                var FechaRegistro = FechaFormato(data.cc_FechaRegistro);
-                var FechaCrea = FechaFormato(data.cc_FechaCrea);
-                var FechaModifica = FechaFormato(data.cc_FechaModifica);
+                var FechaRegistro = FechaFormato(data[0].cc_FechaRegistro);
+                var FechaCrea = FechaFormato(data[0].cc_FechaCrea);
+                var FechaModifica = FechaFormato(data[0].cc_FechaModifica);
               
-               // -----------------------------------AQUI VALIDA EL CHECKBOX PARA PODER CARGARLO EN EL MODAL
+                // -----------------------------------AQUI VALIDA EL CHECKBOX PARA PODER CARGARLO EN EL MODAL
                 if (data.cc_Pagado) {
                     $('#Detallar #cc_Pagado').prop('checked', true);
                 } else {
                     $('#Detallar #cc_Pagado').prop('checked', false);
                 }//-----------------------------------
-                $("#Detallar #cc_Id").val(data.cc_Id);
-                $("#Detallar #cc_Monto").val(data.cc_Monto);
+                $("#Detallar #cc_Id").val(data[0].cc_Id);
+                $("#Detallar #cc_Monto").val(data[0].cc_Monto);
                 $("#Detallar #cc_FechaRegistro").val(FechaRegistro);
                 $("#Detallar #cc_Pagado").val(cc_Pagado);
-                $("#Detallar #cc_UsuarioCrea").val(data.cc_UsuarioCrea);
+                $("#Detallar #cc_UsuarioCrea").val(data[0].cc_UsuarioCrea);
+                $("#Detallar #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
+
+
+                $("#Detallar #tbCatalogoDeIngresos_cin_DescripcionIngreso").val(data[0].Ingreso);
+                $("#Detallar #cin_IdIngreso").val(data[0].cin_IdIngreso);
+
+                $("#Detallar #emp_Id").val(data[0].emp_Id);
+                $("#Detallar #tbEmpleados_tbPersonas_per_Nombres").val(data[0].NombreEmpleado+' '+data[0].ApellidosEmpleado);
+
+                
+            
                 $("#Detallar #cc_FechaCrea").val(FechaCrea);
-                $("#Detallar #cc_UsuarioModifica").val(data.cc_UsuarioModifica);
+                $("#Detallar #cc_UsuarioModifica").val(data[0].cc_UsuarioModifica);
+                data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
                 $("#Detallar #cc_FechaModifica").val(FechaModifica);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedIdEmp = data.emp_Id;
-                var SelectedIdCatIngreso = data.cin_IdIngreso;
+                var SelectedIdEmp = data[0].emp_Id;
+                var SelectedIdCatIngreso = data[0].cin_IdIngreso;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
                     url: "/EmpleadoComisiones/EditGetDDLEmpleado",
