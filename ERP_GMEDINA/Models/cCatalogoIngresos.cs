@@ -15,6 +15,7 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "ID Ingresos")]
         public int cin_IdIngreso { get; set; }
 
+        [Required]
         [Display(Name = "Descripcion Ingresos")]
         public string cin_DescripcionIngreso { get; set; }
 
@@ -32,6 +33,6 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Activo")]
         public bool cin_Activo { get; set; }
- 
-        }
+
     }
+}

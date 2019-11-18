@@ -1,6 +1,4 @@
-﻿//
-//OBTENER SCRIPT DE FORMATEO DE FECHA
-//
+﻿//OBTENER SCRIPT DE FORMATEO DE FECHA
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
       console.log(textStatus);
@@ -21,6 +19,7 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
+// REFRESCAR INFORMACIÓN DE LA TABLA
 function cargarGridIngresos() {
     _ajax(null,
         '/CatalogoDeIngresos/GetData',
@@ -41,9 +40,8 @@ function cargarGridIngresos() {
                     '<td>' + ListaIngresos[i].cin_IdIngresos + '</td>' +
                     '<td>' + ListaIngresos[i].cin_DescripcionIngreso + '</td>' +
                     '<td>' +
-                    '<button type="button" class="btn btn-primary btn-xs" id="btnEditarIngreso">Editar</button>' +
-                    '<button type="button" class="btn btn-default btn-xs" id="btnDetalle">Detalle</button>' +
-                    //'<button type="button" class="btn btn-danger btn-xs" id="btnInactivarIngreso">Inactivar</button>'+
+                    '<button data-id = "' + ListaIngresos[i].cin_IdIngresos + '" type="button" class="btn btn-primary btn-xs" id="btnEditarIngreso">Editar</button>' +
+                    '<button data-id = "' + ListaIngresos[i].cin_IdIngresos + '" type="button" class="btn btn-default btn-xs" id="btnDetalle">Detalle</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -53,9 +51,9 @@ function cargarGridIngresos() {
 }
 
 
-//DETALLES
+// DETALLES
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function () {
-    var ID = $(this).closest('tr').data('id');
+    var ID = $(this).data('id');
     $.ajax({
         url: "/CatalogoDeIngresos/Details/" + ID,
         method: "GET",
@@ -63,10 +61,10 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ ID: ID })
     })
-        .done(function (data) {$("#DetailCatalogoIngresos").modal();
+        .done(function (data) {            
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
         if (data) {
-            console.log(data);
+                console.log(data);
                 var FechaCrea = FechaFormato(data[0].cin_FechaCrea);
                 var FechaModifica = FechaFormato(data[0].cin_FechaModifica);
                 $("#Detallar #cin_IdIngreso").val(data[0].cin_IdIngreso);
@@ -77,6 +75,7 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
                 data[0].UsuModifica == null ? $("#Detallar #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones'): $("#Detallar #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
                 $("#Detallar #cin_UsuarioModifica").val(data[0].cin_UsuarioModifica);
                 $("#Detallar #cin_FechaModifica").val(FechaModifica);
+                $("#DetailCatalogoIngresos").modal();
                 
             }
             else {
@@ -89,9 +88,11 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
         });
 });
 
+// EDITAR
+
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", function () {
-    var ID = $(this).closest('tr').data('id');
+    var ID = $(this).data('id');
     $.ajax({
         url: "/CatalogoDeIngresos/Edit/" + ID,
         method: "GET",
@@ -104,6 +105,7 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
             if (data) {
                 $("#Editar #cin_IdIngreso").val(data.cin_IdIngreso);
                 $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
+                $(".field-validation-error").css('display', 'none');
                 $("#EditarCatalogoIngresos").modal();
             }
             else {
@@ -116,15 +118,55 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
         });
 });
 
+//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
+$("#btnUpdateIngresos").click(function () {
+    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+    var data = $("#frmCatalogoIngresos").serializeArray();
+    var descripcionEditar = $("#Editar #cin_DescripcionIngreso").val();
 
+    //VALIDAMOS LOS CAMPOS
+    if (descripcionEditar != '' && descripcionEditar != null && descripcionEditar != undefined && isNaN(descripcionEditar) == true) {
 
-
-
-$("#btnModalInactivar").click(function () {
-    $("#InactivarCatalogoIngresos").modal();
+        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+        $.ajax({
+            url: "/CatalogoDeIngresos/Edit",
+            method: "POST",
+            data: data
+        }).done(function (data) {
+            if (data == "error") {
+                //Cuando traiga un error del backend al guardar la edicion
+                iziToast.error({
+                    title: 'Error',
+                    message: 'No se pudo editar el registro, contacte al administrador',
+                });
+            }
+            else {
+                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
+                $("#EditarCatalogoIngresos").modal('hide');
+                cargarGridIngresos();
+                //Mensaje de exito de la edicion
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue editado de forma exitosa!',
+                });
+            }
+        });
+    }
+    else {
+        $("#Editar #cin_DescripcionIngreso").focus();
+        iziToast.error({
+            title: 'Error',
+            message: 'Ingrese datos válidos.',
+        });
+    }
 });
 
 
+// INACTIVAR 
+$("#btnModalInactivar").click(function () {
+    $("#EditarCatalogoIngresos").modal('hide'); 
+    $("#InactivarCatalogoIngresos").modal();
+});
 
 $("#btnInactivarIngresos").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
@@ -156,56 +198,13 @@ $("#btnInactivarIngresos").click(function () {
 });
 
 
-//EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnUpdateIngresos").click(function () {
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmCatalogoIngresos").serializeArray();
-    var descripcionEditar = $("#Editar #cin_DescripcionIngreso").val();
 
-    //VALIDAMOS LOS CAMPOS
-    if (descripcionEditar != '' && descripcionEditar != null && descripcionEditar != undefined) {
-
-        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-        $.ajax({
-            url: "/CatalogoDeIngresos/Edit",
-            method: "POST",
-            data: data
-        }).done(function (data) {
-            if (data == "error") {
-                //Cuando traiga un error del backend al guardar la edicion
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo editar el registro, contacte al administrador',
-                });
-            }
-            else {
-                // REFRESCAR UNICAMENTE LA TABLA
-
-                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                $("#EditarCatalogoIngresos").modal('hide');
-                cargarGridIngresos();
-                //Mensaje de exito de la edicion
-                iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue editado de forma exitosa!',
-                });
-            }
-        });
-    }
-
-    else {
-        $("#Editar #cin_DescripcionIngreso").focus();
-        iziToast.error({
-            title: 'Error',
-            message: 'No se pueden dejar campos vacíos.',
-        });
-    }
-
-});
+// CREATE
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarCatalogoIngresos", function () {
     //MOSTRAR EL MODAL DE AGREGAR
+    $(".field-validation-error").css('display', 'none');
     $("#AgregarCatalogoIngresos").modal();
 });
 
@@ -219,7 +218,7 @@ $('#btnCreateRegistroIngresos').click(function () {
     var descripcion = $("#Crear #cin_DescripcionIngreso").val();
 
     //VALIDAMOS LOS CAMPOS
-    if (descripcion != '' && descripcion != null && descripcion != undefined) {
+    if (descripcion != '' && descripcion != null && descripcion != undefined && isNaN(descripcion) == true) {
 
         //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
         $.ajax({
@@ -255,7 +254,7 @@ $('#btnCreateRegistroIngresos').click(function () {
         $("#Crear #cin_DescripcionIngreso").focus();
         iziToast.error({
             title: 'Error',
-            message: 'No se pueden dejar campos vacíos.',
+            message: 'Ingrese datos válidos.',
         });
     }
 });
@@ -265,8 +264,4 @@ $('#btnCreateRegistroIngresos').click(function () {
 $("#btnCerrarEditar").click(function () {
     $("#EditarCatalogoIngresos").modal('hide');
 });
-
-//$("#btnCerrarAgregar").click(function () {
-//    $("#AgregarCatalogoIngresos").modal('hide');
-//});
 

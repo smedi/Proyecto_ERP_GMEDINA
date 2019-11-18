@@ -36,10 +36,19 @@
             </div>
         </div>*@
     </div>
+    <div class="modal-footer">
+        @*data-dismiss="modal"*@
+        <button type="button" class="btn btn-white" id="btnCerrarEditar">Close</button>
+        <input type="submit" class="btn btn-primary" id="btnUpdateIngresos" value="Aceptar"/>
+        <button type="button" class="btn btn-danger" id="btnModalInactivar">Inactivar</button>
+    </div>
 }
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInactivarCatalogoIngresos" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.cin_IdIngreso)
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
