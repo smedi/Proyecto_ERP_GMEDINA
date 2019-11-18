@@ -21,3 +21,6 @@ namespace ERP_GMEDINA
         }
     }
 }
+
+/*DeduccionesExtraordinarias*/
+/*CatalogoDeDeducciones*/

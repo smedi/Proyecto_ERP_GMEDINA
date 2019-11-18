@@ -28,16 +28,16 @@ function cargarGridDeducciones() {
             //RECORRER DATA OBTENIDA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeduccionesExtraordinarias.length; i++) {
                 template += '<tr data-id = "' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">' +
+                    '<td>' + ListaDeduccionesExtraordinarias[i].tbEquipoEmpleados.eqem_Id + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_MontoInicial + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_MontoRestante + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_ObservacionesComentarios + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_Cuota + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].tbCatalogoDeDeducciones.cde_DescripcionDeduccion + '</td>' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].tbEquipoEmpleados.eqem_Id + '</td>' +
                     '<td>' +
                     '<a href="DeduccionesExtraordinarias/Edit?id='+ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra+' class="btn btn-primary btn-xs" id="btnEditarDeduccionesExtraordinarias">Editar</a>' +
                     '<a href="DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + ' class="btn btn-default btn-xs" id="btnDetalleDeduccionesExtraordinarias">Detalle</a>' +
-                    '<button IdDeduccionesExtra=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + ' type="button" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias">Inactivar</button>' +
+                    '<button iddeduccionesextra=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + ' type="button" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias">Inactivar</button>' +
                     '</td>' +
                     '</tr>';
             }
@@ -132,7 +132,7 @@ $("#btnEditDeduccionesExtraordinarias").click(function () {
 //});
 
 
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+////FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarDeduccionExtraordinaria", function () {
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL 
     console.log("Adios")
@@ -152,6 +152,7 @@ $(document).on("click", "#btnAgregarDeduccionExtraordinaria", function () {
                     dataType: "json",
                     contentType: "application/json; charset=utf-8"
                 })
+            }})
 
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
@@ -225,10 +226,7 @@ $(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnInactiva
 $("#btnInactivar").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmDeduccionesExtraordinariasInactivar").serializeArray();
-    console.log(data);
-    debugger;
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
-    console.log(data)
     $.ajax({
         url: "/DeduccionesExtraordinarias/Inactivar",
         method: "POST",
@@ -251,6 +249,7 @@ $("#btnInactivar").click(function () {
                 title: 'Exito',
                 message: 'El registro fue Inactivado de forma exitosa!',
             });
+
         }
     });
 });

@@ -17,36 +17,8 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionesExtraordinarias
         public ActionResult Index()
         {
-            /*var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias
-                .Select(d => new
-                {
-                    per_Nombres = d.tbEquipoEmpleados.tbEmpleados.tbPersonas.per_Nombres,
-                    per_Apellidos = d.tbEquipoEmpleados.tbEmpleados.tbPersonas.per_Apellidos,
-                    dex_MontoInicial = d.dex_MontoInicial,
-                    dex_MontoRestante = d.dex_MontoRestante,
-                    dex_ObservacionesComentarios = d.dex_ObservacionesComentarios,
-                    dex_Cuota = d.dex_Cuota,
-                    cde_DescripcionDeduccion = d.tbCatalogoDeDeducciones.cde_DescripcionDeduccion
-                })
-                .ToList();*/
-
             var tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Where(t => t.dex_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEquipoEmpleados);
             return View(tbDeduccionesExtraordinarias.ToList());
-        }
-
-        // GET: DeduccionesExtraordinarias/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Find(id);
-            if (tbDeduccionesExtraordinarias == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbDeduccionesExtraordinarias);
         }
 
         // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
@@ -59,8 +31,6 @@ namespace ERP_GMEDINA.Controllers
             var tbDeduccionesExtraordinariasD = db.tbDeduccionesExtraordinarias
                 .Select(d => new
                 {
-                    per_Nombres = d.tbEquipoEmpleados.tbEmpleados.tbPersonas.per_Nombres,
-                    per_Apellidos = d.tbEquipoEmpleados.tbEmpleados.tbPersonas.per_Apellidos,
                     dex_IdDeduccionesExtra = d.dex_IdDeduccionesExtra,
                     eqem_Id = d.eqem_Id,
                     cde_IdDeducciones = d.cde_IdDeducciones,
@@ -78,6 +48,21 @@ namespace ERP_GMEDINA.Controllers
                 .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbDeduccionesExtraordinariasD, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        // GET: DeduccionesExtraordinarias/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Find(id);
+            if (tbDeduccionesExtraordinarias == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbDeduccionesExtraordinarias);
         }
 
         // GET: DeduccionesExtraordinarias/Create
@@ -166,7 +151,7 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
 
             //Aqui iria la Vista donde trae al empleado según su Id
-            ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_Detalles, "eqem_Id", "per_Empleado");
+            ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_Detalles.Include(d => d.per_Empleado).Where(d => d.eqem_Id == id), "eqem_Id", "per_Empleado");
             return View(tbDeduccionesExtraordinarias);
         }
 

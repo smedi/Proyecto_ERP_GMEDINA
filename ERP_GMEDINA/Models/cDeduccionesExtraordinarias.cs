@@ -17,15 +17,15 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Id Deducciones Extraordinarias")]
         public int dex_IdDeduccionesExtra { get; set; }
 
-        [Display(Name = "Id Equipo Empleado")]
-        public int eqem_Id { get; set; }
+        //[Display(Name = "Id Equipo Empleado")]
+        //public int eqem_Id { get; set; }
 
-        [Range(0.01, 99.99, ErrorMessage = "El Monto Inicial no puede menor de 0.01")]
+        [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor de 0 dígitos, ni mayor de 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Monto Inicial")]
         public decimal dex_MontoInicial { get; set; }
 
-        [Range(0.01, 99.99, ErrorMessage = "El Monto Inicial no puede menor de 0.01")]
+        [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor de 0 dígitos, ni mayor de 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Monto Restante")]
         public decimal dex_MontoRestante { get; set; }
@@ -35,14 +35,13 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Observaciones")]
         public string dex_ObservacionesComentarios { get; set; }
 
-        [Display(Name = "Id Deducción")]
-        public int cde_IdDeducciones { get; set; }
+        //[Display(Name = "Id Deducción")]
+        //public int cde_IdDeducciones { get; set; }
 
-        [Display(Name = "Deducción")]
-        public string cde_DescripcionDeduccion { get; set; }
+        //[Display(Name = "Deducción")]
+        //public string cde_DescripcionDeduccion { get; set; }
 
-        [Range(0.01, 99.99,
-         ErrorMessage = "El Monto Inicial no puede menor de 0.01")]
+        [Range(0.01, 9999999999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
         [Required(ErrorMessage = "Campo Requerido")]
         [Display(Name = "Cuota")]
         public decimal dex_Cuota { get; set; }
@@ -62,17 +61,17 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Activo")]
         public bool dex_Activo { get; set; }
 
-        [Display(Name = "Empleado")]
-        public string per_Empleado { get; set; }
+        //[Display(Name = "Empleado")]
+        //public string per_Empleado { get; set; }
 
-        [Display(Name = "Cargo")]
-        public string car_Cargo { get; set; }
+        //[Display(Name = "Cargo")]
+        //public string car_Cargo { get; set; }
 
-        [Display(Name = "Departamento")]
-        public string depto_Departamento { get; set; }
+        //[Display(Name = "Departamento")]
+        //public string depto_Departamento { get; set; }
 
-        [Display(Name = "Área")]
-        public string area_Area { get; set; }
+        //[Display(Name = "Área")]
+        //public string area_Area { get; set; }
 
     }
 }
