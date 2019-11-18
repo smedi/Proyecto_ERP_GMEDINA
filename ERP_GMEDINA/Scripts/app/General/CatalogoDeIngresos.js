@@ -1,16 +1,4 @@
-
-﻿//OBTENER SCRIPT DE FORMATEO DE FECHA
-$.getScript("../Scripts/app/General/SerializeDate.js")
-  .done(function (script, textStatus) {
-      console.log(textStatus);
-  })
-  .fail(function (jqxhr, settings, exception) {
-      console.log("No se pudo recuperar Script SerializeDate");
-  });
-
-
 ﻿//FUNCION GENERICA PARA REUTILIZAR AJAX
-
 function _ajax(params, uri, type, callback) {
     $.ajax({
         url: uri,
@@ -122,10 +110,8 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
                 $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
                 $(".field-validation-error").css('display', 'none');
                 $("#EditarCatalogoIngresos").modal();
-                $(".field-validation-error").css('display', 'none');
             }
             else {
-                
                 ////Mensaje de error si no hay data
                 //iziToast.error({
                 //    title: 'Error',
@@ -152,10 +138,10 @@ $("#btnUpdateIngresos").click(function () {
         }).done(function (data) {
             if (data == "error") {
                 //Cuando traiga un error del backend al guardar la edicion
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo editar el registro, contacte al administrador',
-                });
+                //iziToast.error({
+                //    title: 'Error',
+                //    message: 'No se pudo editar el registro, contacte al administrador',
+                //});
             }
             else {
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
@@ -170,16 +156,13 @@ $("#btnUpdateIngresos").click(function () {
         });
     }
     else {
-
-        $("#Editar #cin_DescripcionIngreso").focus();
-        iziToast.error({
-            title: 'Error',
-            message: 'Ingrese datos válidos.',
-        });
+        //$("#Editar #cin_DescripcionIngreso").focus();
+        //iziToast.error({
+        //    title: 'Error',
+        //    message: 'Ingrese datos válidos.',
+        //});
     }
 });
-
-
 
 // INACTIVAR 
 $("#btnModalInactivar").click(function () {
@@ -187,6 +170,7 @@ $("#btnModalInactivar").click(function () {
     $("#InactivarCatalogoIngresos").modal();
 
 });
+
 
 $("#btnInactivarIngresos").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
@@ -236,8 +220,11 @@ $('#btnCreateRegistroIngresos').click(function () {
     var data = $("#frmCatalogoIngresosCreate").serializeArray();
     //Declaramos variable para obtener datos escritos en el TextBox
     var descripcion = $("#Crear #cin_DescripcionIngreso").val();
+<<<<<<< Updated upstream
 
+=======
     $(".field-validation-error").css('display', 'none');
+>>>>>>> Stashed changes
     //VALIDAMOS LOS CAMPOS
     if (descripcion != '' && descripcion != null && descripcion != undefined && isNaN(descripcion) == true) {
 
@@ -251,19 +238,19 @@ $('#btnCreateRegistroIngresos').click(function () {
             
             if (data == "error") {
                 //CERRAR EL MODAL DE AGREGAR
-
+<<<<<<< Updated upstream
                 $("#AgregarCatalogoIngresos").modal('hide');
                 iziToast.error({
                     title: 'Error',
                     message: 'No se pudo guardar el registro, contacte al administrador',
                 });
-
+=======
                 //$("#AgregarCatalogoIngresos").modal('hide');
                 //iziToast.error({
                 //    title: 'Error',
                 //    message: 'No se pudo guardar el registro, contacte al administrador',
                 //});
-
+>>>>>>> Stashed changes
             }
             else {
                 //CERRAR EL MODAL DE AGREGAR
@@ -281,17 +268,18 @@ $('#btnCreateRegistroIngresos').click(function () {
     }
     else {
         $("#Crear #cin_DescripcionIngreso").focus();
-
+<<<<<<< Updated upstream
         iziToast.error({
             title: 'Error',
             message: 'Ingrese datos válidos.',
         });
-
+=======
         $(".field-validation-error").css('display', 'none');
         //iziToast.error({
         //    title: 'Error',
         //    message: 'Ingrese datos válidos.',
         //});
+>>>>>>> Stashed changes
     }
 });
 
@@ -301,6 +289,8 @@ $("#btnCerrarEditar").click(function () {
     $("#EditarCatalogoIngresos").modal('hide');
 });
 
+<<<<<<< Updated upstream
+=======
 
 
 
@@ -376,4 +366,4 @@ $("#btnCreateRegistroIngresos").click(function () {
 
 
 });
-
+>>>>>>> Stashed changes
