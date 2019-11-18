@@ -6,15 +6,6 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
         console.log("No se pudo recuperar Script SerializeDate");
     });
 
-
-//Mascara 
-//$(document).ready(function(){
-//    $("#cc_Monto").mask("0000.00");
-
-//})
-
-
-
 //FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
     $.ajax({
@@ -213,28 +204,7 @@ $("#btnUpdateComisiones").click(function () {
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
-    var cc_Pagado = $('#AgregarEmpleadoComisiones #cc_Pagado').prop('checked', false);
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
-    $.ajax({
-        url: "/EmpleadoComisiones/EditGetDDLEmpleado",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
 
-    })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            console.log(data);
-            $("#Crear #emp_IdEmpleado").empty();
-            $("#Crear #emp_IdEmpleado").append("<option value='0'>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarEmpleadoComisiones").modal();
-});
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
@@ -406,8 +376,6 @@ $(document).on("click", "#tblEmpleadoComisiones tbody tr td #btnDetalleEmpleadoC
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 $(document).on("click", "#btnInactivarEmpleadoComisiones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
