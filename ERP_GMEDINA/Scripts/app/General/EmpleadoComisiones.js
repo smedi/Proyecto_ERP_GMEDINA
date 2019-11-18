@@ -227,8 +227,7 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
-    var cc_Monto = $('#AgregarEmpleadoComisiones #cc_Monto').val(" ");
+$(document).on("click", "#btnAgregarEmpleadoComisiones", function () { 
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/EmpleadoComisiones/EditGetDDLIngreso",
@@ -252,9 +251,7 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 $('#btnCreateRegistroComisiones').click(function () {
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmEmpleadoComisionesCreate").serializeArray();
-    //var idEmpleado = $('#AgregarEmpleadoComisiones #emp_IdEmpleado').val();
-    //var cc_Monto = $('#AgregarEmpleadoComisiones #cc_Monto').val();
-    //if (idEmpleado != "0" && cc_Monto != "" && cc_Monto != "0.00" && cc_Monto != undefined && cc_Monto != null && cc_Monto != "00.00" && cc_Monto != "000.00" && cc_Monto != "0000.00" && cc_Monto!="00000.00"  && cc_Monto !="000000.00" && cc_Monto!="0000000.00" && cc_Monto!="00000000.00" && cc_Monto!="000000000.00" &&cc_Monto!="0000000000.00") {
+
     //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
     $.ajax({
         url: "/EmpleadoComisiones/Create",
@@ -279,24 +276,6 @@ $('#btnCreateRegistroComisiones').click(function () {
             });
         }
     });
-//}
-    //else {
-    //    if (cc_Monto == " " || cc_Monto == "0.00") {
-    //        $('#AgregarEmpleadoComisiones #cc_Monto').focus();
-    //        iziToast.error({
-    //            title: 'Error',
-    //            message: 'No deben Haber Campos Vacios',
-    //        });
-    //    }
-    //    else {
-    //        $('#AgregarEmpleadoComisiones #emp_IdEmpleado').focus();
-    //        iziToast.error({
-    //            title: 'Error',
-    //            message: 'No deben Haber Campos Vacios',
-    //        });
-    //    }
-        
-    //}
 });
 
 
