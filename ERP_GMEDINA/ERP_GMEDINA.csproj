@@ -228,9 +228,6 @@
     <Compile Include="Models\tbDecimoCuartoMes.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbDecimoTercerMes.cs">
-      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbDeduccionesExtraordinarias.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>

@@ -8,7 +8,7 @@ namespace ERP_GMEDINA.Models
 {
 
     [MetadataType(typeof(cDeduccionesExtraordinarias))]
-    public partial class V_DeduccionesExtraordinarias_Detalles
+    public partial class tbDeduccionesExtraordinarias
     {
     }
 
