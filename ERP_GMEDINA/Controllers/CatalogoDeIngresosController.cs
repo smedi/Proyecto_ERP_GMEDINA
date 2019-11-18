@@ -182,46 +182,48 @@ namespace ERP_GMEDINA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Inactivar([Bind(Include = "cin_IdIngreso,cin_UsuarioModifica,cin_FechaModifica")] tbCatalogoDeIngresos tbCatalogoDeIngresos)
+        public ActionResult Inactivar(int id)
         {
-            //LLENAR DATA DE AUDITORIA
-            tbCatalogoDeIngresos.cin_UsuarioModifica = 1;
-            tbCatalogoDeIngresos.cin_FechaModifica = DateTime.Now;
-            string response = String.Empty;
             IEnumerable<object> listCatalogoDeIngresos = null;
             string MensajeError = "";
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Inactivar(tbCatalogoDeIngresos.cin_IdIngreso,
-                                                                                            tbCatalogoDeIngresos.cin_UsuarioModifica,
-                                                                                            tbCatalogoDeIngresos.cin_FechaModifica
+                    listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeIngresos_Inactivar(id,
+                                                                                         1,
+                                                                                         DateTime.Now
                                                                                             );
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+
                     foreach (UDP_Plani_tbCatalogoDeIngresos_Inactivar_Result Resultado in listCatalogoDeIngresos)
                         MensajeError = Resultado.MensajeError;
 
-
-                    //RETORNAR MENSAJE DE CONFIRMACIÓN EN CASO QUE NO HAYA CAIDO EN EL CATCH
-                    response = "bien";
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
+                        response = "error";
+                    }
                 }
-                catch (Exception e)
+                catch (Exception Ex)
                 {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
                     response = "error";
                 }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
             }
             else
             {
-                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
-                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
                 response = "error";
             }
-            //RETORNAR MENSAJE AL LADO DEL CLIENTE
-            return Json(response, JsonRequestBehavior.AllowGet);
+
+            return Json(JsonRequestBehavior.AllowGet);
+
+           
         }        
 
         // GET: CatalogoDeDeducciones/Delete/5

@@ -1,3 +1,4 @@
+
 ﻿//OBTENER SCRIPT DE FORMATEO DE FECHA
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
@@ -7,7 +8,9 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
       console.log("No se pudo recuperar Script SerializeDate");
   });
 
-//FUNCION GENERICA PARA REUTILIZAR AJAX
+
+﻿//FUNCION GENERICA PARA REUTILIZAR AJAX
+
 function _ajax(params, uri, type, callback) {
     $.ajax({
         url: uri,
@@ -18,6 +21,17 @@ function _ajax(params, uri, type, callback) {
         }
     });
 }
+
+var InactivarID = 0;
+
+//OBTENER SCRIPT DE FORMATEO DE FECHA
+$.getScript("../Scripts/app/General/SerializeDate.js")
+  .done(function (script, textStatus) {
+      console.log(textStatus);
+  })
+  .fail(function (jqxhr, settings, exception) {
+      console.log("No se pudo recuperar Script SerializeDate");
+  });
 
 // REFRESCAR INFORMACIÓN DE LA TABLA
 function cargarGridIngresos() {
@@ -93,6 +107,7 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnDetalle", function
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", function () {
     var ID = $(this).data('id');
+    InactivarID = ID;
     $.ajax({
         url: "/CatalogoDeIngresos/Edit/" + ID,
         method: "GET",
@@ -107,13 +122,15 @@ $(document).on("click", "#tblCatalogoIngresos tbody tr td #btnEditarIngreso", fu
                 $("#Editar #cin_DescripcionIngreso").val(data.cin_DescripcionIngreso);
                 $(".field-validation-error").css('display', 'none');
                 $("#EditarCatalogoIngresos").modal();
+                $(".field-validation-error").css('display', 'none');
             }
             else {
-                //Mensaje de error si no hay data
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo cargar la información, contacte al administrador',
-                });
+                
+                ////Mensaje de error si no hay data
+                //iziToast.error({
+                //    title: 'Error',
+                //    message: 'No se pudo cargar la información, contacte al administrador',
+                //});
             }
         });
 });
@@ -153,6 +170,7 @@ $("#btnUpdateIngresos").click(function () {
         });
     }
     else {
+
         $("#Editar #cin_DescripcionIngreso").focus();
         iziToast.error({
             title: 'Error',
@@ -162,10 +180,12 @@ $("#btnUpdateIngresos").click(function () {
 });
 
 
+
 // INACTIVAR 
 $("#btnModalInactivar").click(function () {
-    $("#EditarCatalogoIngresos").modal('hide'); 
+    $("#EditarCatalogoIngresos").modal('hide');
     $("#InactivarCatalogoIngresos").modal();
+
 });
 
 $("#btnInactivarIngresos").click(function () {
@@ -173,7 +193,7 @@ $("#btnInactivarIngresos").click(function () {
     var data = $("#frmInactivarCatalogoIngresos").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/CatalogoDeIngresos/Inactivar",
+        url: "/CatalogoDeIngresos/Inactivar/" + InactivarID,
         method: "POST",
         data: data
     }).done(function (data) {
@@ -217,6 +237,7 @@ $('#btnCreateRegistroIngresos').click(function () {
     //Declaramos variable para obtener datos escritos en el TextBox
     var descripcion = $("#Crear #cin_DescripcionIngreso").val();
 
+    $(".field-validation-error").css('display', 'none');
     //VALIDAMOS LOS CAMPOS
     if (descripcion != '' && descripcion != null && descripcion != undefined && isNaN(descripcion) == true) {
 
@@ -230,11 +251,19 @@ $('#btnCreateRegistroIngresos').click(function () {
             
             if (data == "error") {
                 //CERRAR EL MODAL DE AGREGAR
+
                 $("#AgregarCatalogoIngresos").modal('hide');
                 iziToast.error({
                     title: 'Error',
                     message: 'No se pudo guardar el registro, contacte al administrador',
                 });
+
+                //$("#AgregarCatalogoIngresos").modal('hide');
+                //iziToast.error({
+                //    title: 'Error',
+                //    message: 'No se pudo guardar el registro, contacte al administrador',
+                //});
+
             }
             else {
                 //CERRAR EL MODAL DE AGREGAR
@@ -252,10 +281,17 @@ $('#btnCreateRegistroIngresos').click(function () {
     }
     else {
         $("#Crear #cin_DescripcionIngreso").focus();
+
         iziToast.error({
             title: 'Error',
             message: 'Ingrese datos válidos.',
         });
+
+        $(".field-validation-error").css('display', 'none');
+        //iziToast.error({
+        //    title: 'Error',
+        //    message: 'Ingrese datos válidos.',
+        //});
     }
 });
 
@@ -263,5 +299,81 @@ $('#btnCreateRegistroIngresos').click(function () {
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
     $("#EditarCatalogoIngresos").modal('hide');
+});
+
+
+
+
+
+///VALIDACIÓN AGREGAR
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+$("#btnCerrarModal").click(function () {
+    $("#Validation_descipcionAgregar").css("display", "none");
+});
+
+
+
+//FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+$("#IconoCerrar").click(function () {
+    $("#Validation_descipcionAgregar").css("display", "none");
+});
+
+
+
+
+//FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+$("#btnCreateRegistroIngresos").click(function () {
+    var Descripcion = $("#cin_DescripcionIngreso").val();
+
+
+    if (Descripcion == "") {
+        $("#Validation_descipcionAgregar").css("display", "");
+    }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+///VALIDACIÓN EDITAR
+
+
+
+    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON INFERIOR CERRAR DEL MODAL.
+    $("#btnCerrarEditar").click(function () {
+        $("#Validation_descipcion").css("display", "none");
+    });
+
+
+
+
+    //FUNCION: OCULTAR DATA ANNOTATION CON BOTON SUPERIOR DE CERRAR (BOTON CON X).
+    $("#IconoCerrarEditar").click(function () {
+        $("#Validation_descipcion").css("display", "none");
+    });
+
+
+
+
+    //FUNCION: MOSTRAR DATA ANNOTATION SI LOS CAMPOS SIGUEN VACIOS (EN CASO DE USO CONTINUO PREVIO AL CIERRE DEL MODAL).
+    $("#btnUpdateIngresos").click(function () {
+        var DescripcionEditar = $("#cin_DescripcionIngreso").val();
+
+
+        if (DescripcionEditar == "") {
+            $("#Validation_descipcion").css("display", "");
+             }
+
+
 });
 
