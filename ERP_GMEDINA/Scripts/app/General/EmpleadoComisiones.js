@@ -204,7 +204,27 @@ $("#btnUpdateComisiones").click(function () {
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+$(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
+    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
+    $.ajax({
+        url: "/EmpleadoComisiones/EditGetDDLEmpleado",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
 
+    })
+        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
+        .done(function (data) {
+            console.log(data);
+            $("#Crear #emp_IdEmpleado").empty();
+            $("#Crear #emp_IdEmpleado").append("<option value='0'>Selecione una opción...</option>");
+            $.each(data, function (i, iter) {
+                $("#Crear #emp_IdEmpleado").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+            });
+        });
+    //MOSTRAR EL MODAL DE AGREGAR
+    $("#AgregarEmpleadoComisiones").modal();
+});
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
