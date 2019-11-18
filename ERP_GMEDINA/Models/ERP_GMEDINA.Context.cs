@@ -118,7 +118,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_DecimoCuartoMes> V_DecimoCuartoMes { get; set; }
         public virtual DbSet<V_DecimoTercerMes> V_DecimoTercerMes { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias> V_DeduccionesExtraordinarias { get; set; }
-        public virtual DbSet<V_DeduccionesExtraordinarias_Empleados> V_DeduccionesExtraordinarias_Empleados { get; set; }
         public virtual DbSet<V_DeduccionesExtrasColaboradores> V_DeduccionesExtrasColaboradores { get; set; }
         public virtual DbSet<V_DeduccionesInstitucionesFinancierasColaboradres> V_DeduccionesInstitucionesFinancierasColaboradres { get; set; }
         public virtual DbSet<V_EmpleadoBonos> V_EmpleadoBonos { get; set; }
@@ -133,7 +132,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_TechosDeducciones> V_TechosDeducciones { get; set; }
         public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
-        public virtual DbSet<V_DeduccionesExtraordinarias_Empleados1> V_DeduccionesExtraordinarias_Empleados1Set { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

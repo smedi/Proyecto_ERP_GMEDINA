@@ -8,7 +8,7 @@ namespace ERP_GMEDINA.Models
 {
 
     [MetadataType(typeof(cDeduccionesExtraordinarias))]
-    public partial class tbDeduccionesExtraordinarias
+    public partial class V_DeduccionesExtraordinarias_Detalles
     {
     }
 
@@ -16,6 +16,9 @@ namespace ERP_GMEDINA.Models
     {
         [Display(Name = "Id Deducciones Extraordinarias")]
         public int dex_IdDeduccionesExtra { get; set; }
+
+        [Display(Name = "Id Equipo Empleado")]
+        public int eqem_Id { get; set; }
 
         [Range(0.01, 99.99, ErrorMessage = "El Monto Inicial no puede menor de 0.01")]
         [Required(ErrorMessage = "Campo Requerido")]
@@ -34,6 +37,9 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Id Deducción")]
         public int cde_IdDeducciones { get; set; }
+
+        [Display(Name = "Deducción")]
+        public string cde_DescripcionDeduccion { get; set; }
 
         [Range(0.01, 99.99,
          ErrorMessage = "El Monto Inicial no puede menor de 0.01")]
@@ -55,5 +61,18 @@ namespace ERP_GMEDINA.Models
 
         [Display(Name = "Activo")]
         public bool dex_Activo { get; set; }
+
+        [Display(Name = "Empleado")]
+        public string per_Empleado { get; set; }
+
+        [Display(Name = "Cargo")]
+        public string car_Cargo { get; set; }
+
+        [Display(Name = "Departamento")]
+        public string depto_Departamento { get; set; }
+
+        [Display(Name = "Área")]
+        public string area_Area { get; set; }
+
     }
 }

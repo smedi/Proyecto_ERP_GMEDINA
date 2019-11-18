@@ -1415,35 +1415,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Det
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_DeduccionesExtraordinarias_Empleados">
-          <Key>
-            <PropertyRef Name="dex_IdDeduccionesExtra" />
-            <PropertyRef Name="eqem_Id" />
-            <PropertyRef Name="per_Empleado" />
-            <PropertyRef Name="car_Cargo" />
-            <PropertyRef Name="dex_MontoInicial" />
-            <PropertyRef Name="dex_MontoRestante" />
-            <PropertyRef Name="cde_IdDeducciones" />
-            <PropertyRef Name="dex_Cuota" />
-            <PropertyRef Name="dex_UsuarioCrea" />
-            <PropertyRef Name="dex_FechaCrea" />
-            <PropertyRef Name="dex_Activo" />
-          </Key>
-          <Property Name="dex_IdDeduccionesExtra" Type="int" Nullable="false" />
-          <Property Name="eqem_Id" Type="int" Nullable="false" />
-          <Property Name="per_Empleado" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="car_Cargo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="dex_MontoInicial" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="dex_MontoRestante" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="dex_ObservacionesComentarios" Type="nvarchar" MaxLength="100" />
-          <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
-          <Property Name="dex_Cuota" Type="decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="dex_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="dex_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="dex_UsuarioModifica" Type="int" />
-          <Property Name="dex_FechaModifica" Type="datetime" />
-          <Property Name="dex_Activo" Type="bit" Nullable="false" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtrasColaboradores' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DeduccionesExtrasColaboradores">
@@ -5317,24 +5288,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
     [V_DeduccionesExtraordinarias_Detalles].[dex_Activo] AS [dex_Activo]
     FROM [Plani].[V_DeduccionesExtraordinarias_Detalles] AS [V_DeduccionesExtraordinarias_Detalles]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_DeduccionesExtraordinarias_Empleados" EntityType="Self.V_DeduccionesExtraordinarias_Empleados" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_IdDeduccionesExtra] AS [dex_IdDeduccionesExtra], 
-    [V_DeduccionesExtraordinarias_Empleados].[eqem_Id] AS [eqem_Id], 
-    [V_DeduccionesExtraordinarias_Empleados].[per_Empleado] AS [per_Empleado], 
-    [V_DeduccionesExtraordinarias_Empleados].[car_Cargo] AS [car_Cargo], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_MontoInicial] AS [dex_MontoInicial], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_MontoRestante] AS [dex_MontoRestante], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_ObservacionesComentarios] AS [dex_ObservacionesComentarios], 
-    [V_DeduccionesExtraordinarias_Empleados].[cde_IdDeducciones] AS [cde_IdDeducciones], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_Cuota] AS [dex_Cuota], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_UsuarioCrea] AS [dex_UsuarioCrea], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_FechaCrea] AS [dex_FechaCrea], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_UsuarioModifica] AS [dex_UsuarioModifica], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_FechaModifica] AS [dex_FechaModifica], 
-    [V_DeduccionesExtraordinarias_Empleados].[dex_Activo] AS [dex_Activo]
-    FROM [Plani].[V_DeduccionesExtraordinarias_Empleados] AS [V_DeduccionesExtraordinarias_Empleados]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_DeduccionesExtrasColaboradores" EntityType="Self.V_DeduccionesExtrasColaboradores" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [V_DeduccionesExtrasColaboradores].[eqtra_Id] AS [eqtra_Id], 
@@ -8459,12 +8412,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="dex_MontoRestante" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="dex_Cuota" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="V_DeduccionesExtraordinarias_Empleados">
-          <Key>
-            <PropertyRef Name="per_DeduccionEmpleado" />
-          </Key>
-          <Property Name="per_DeduccionEmpleado" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="V_DeduccionesExtrasColaboradores">
           <Key>
@@ -12006,7 +11953,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="V_DecimoCuartoMes" EntityType="Self.V_DecimoCuartoMes" />
           <EntitySet Name="V_DecimoTercerMes" EntityType="Self.V_DecimoTercerMes" />
           <EntitySet Name="V_DeduccionesExtraordinarias" EntityType="Self.V_DeduccionesExtraordinarias" />
-          <EntitySet Name="V_DeduccionesExtraordinarias_Empleados" EntityType="Self.V_DeduccionesExtraordinarias_Empleados" />
           <EntitySet Name="V_DeduccionesExtrasColaboradores" EntityType="Self.V_DeduccionesExtrasColaboradores" />
           <EntitySet Name="V_DeduccionesInstitucionesFinancierasColaboradres" EntityType="Self.V_DeduccionesInstitucionesFinancierasColaboradres" />
           <EntitySet Name="V_EmpleadoBonos" EntityType="Self.V_EmpleadoBonos" />
@@ -13315,7 +13261,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Parameter Name="tpdi_IdDetallePlanillaIngreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="V_DeduccionesExtraordinarias_Detalles" EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Detalles" />
-          <EntitySet Name="V_DeduccionesExtraordinarias_Empleados1Set" EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Empleados1" />
           <AssociationSet Name="C_FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id" Association="ERP_GMEDINAModel.C_FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id">
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
             <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
@@ -13399,35 +13344,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="dex_Cuota" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="dex_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="dex_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dex_UsuarioModifica" Type="Int32" />
-          <Property Name="dex_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="dex_Activo" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="V_DeduccionesExtraordinarias_Empleados1">
-          <Key>
-            <PropertyRef Name="dex_IdDeduccionesExtra" />
-            <PropertyRef Name="eqem_Id" />
-            <PropertyRef Name="per_Empleado" />
-            <PropertyRef Name="car_Cargo" />
-            <PropertyRef Name="dex_MontoInicial" />
-            <PropertyRef Name="dex_MontoRestante" />
-            <PropertyRef Name="cde_IdDeducciones" />
-            <PropertyRef Name="dex_Cuota" />
-            <PropertyRef Name="dex_UsuarioCrea" />
-            <PropertyRef Name="dex_FechaCrea" />
-            <PropertyRef Name="dex_Activo" />
-          </Key>
-          <Property Name="dex_IdDeduccionesExtra" Type="Int32" Nullable="false" />
-          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Empleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
-          <Property Name="car_Cargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="dex_MontoInicial" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="dex_MontoRestante" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="dex_ObservacionesComentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
-          <Property Name="dex_Cuota" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
           <Property Name="dex_UsuarioCrea" Type="Int32" Nullable="false" />
           <Property Name="dex_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="dex_UsuarioModifica" Type="Int32" />
@@ -15204,26 +15120,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
                 <ScalarProperty Name="dex_ObservacionesComentarios" ColumnName="dex_ObservacionesComentarios" />
                 <ScalarProperty Name="area_Area" ColumnName="area_Area" />
                 <ScalarProperty Name="depto_Departamento" ColumnName="depto_Departamento" />
-                <ScalarProperty Name="car_Cargo" ColumnName="car_Cargo" />
-                <ScalarProperty Name="per_Empleado" ColumnName="per_Empleado" />
-                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
-                <ScalarProperty Name="dex_IdDeduccionesExtra" ColumnName="dex_IdDeduccionesExtra" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_DeduccionesExtraordinarias_Empleados1Set">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Empleados1">
-              <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias_Empleados">
-                <ScalarProperty Name="dex_Activo" ColumnName="dex_Activo" />
-                <ScalarProperty Name="dex_FechaModifica" ColumnName="dex_FechaModifica" />
-                <ScalarProperty Name="dex_UsuarioModifica" ColumnName="dex_UsuarioModifica" />
-                <ScalarProperty Name="dex_FechaCrea" ColumnName="dex_FechaCrea" />
-                <ScalarProperty Name="dex_UsuarioCrea" ColumnName="dex_UsuarioCrea" />
-                <ScalarProperty Name="dex_Cuota" ColumnName="dex_Cuota" />
-                <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
-                <ScalarProperty Name="dex_ObservacionesComentarios" ColumnName="dex_ObservacionesComentarios" />
-                <ScalarProperty Name="dex_MontoRestante" ColumnName="dex_MontoRestante" />
-                <ScalarProperty Name="dex_MontoInicial" ColumnName="dex_MontoInicial" />
                 <ScalarProperty Name="car_Cargo" ColumnName="car_Cargo" />
                 <ScalarProperty Name="per_Empleado" ColumnName="per_Empleado" />
                 <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
