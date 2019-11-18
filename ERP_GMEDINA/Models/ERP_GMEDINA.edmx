@@ -6736,8 +6736,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbRazonSalidas1" Relationship="Self.FK_rrhh_tbUsuario_usu_Id_tbRazonSalidas_rsal_UsuarioModifica" FromRole="tbUsuario" ToRole="tbRazonSalidas" />
           <NavigationProperty Name="tbRequisiciones" Relationship="Self.FK_rrhh_tbUsuario_usu_Id_tbRequisiciones_req_usuariocrea" FromRole="tbUsuario" ToRole="tbRequisiciones" />
           <NavigationProperty Name="tbRequisiciones1" Relationship="Self.FK_rrhh_tbUsuario_usu_Id_tbRequisiciones_req_usuariomodifica" FromRole="tbUsuario" ToRole="tbRequisiciones" />
-          <NavigationProperty Name="tbRequisicionPersonal" Relationship="Self.FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariocrea" FromRole="tbUsuario" ToRole="tbRequisicionPersonal" />
-          <NavigationProperty Name="tbRequisicionPersonal1" Relationship="Self.FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariomodifica" FromRole="tbUsuario" ToRole="tbRequisicionPersonal" />
           <NavigationProperty Name="tbSeleccionCandidatos" Relationship="Self.FK_rrhh_tbUsuario_usu_Id_tbSeleccionCandidatos_scan_UsuarioCrea" FromRole="tbUsuario" ToRole="tbSeleccionCandidatos" />
           <NavigationProperty Name="tbSeleccionCandidatos1" Relationship="Self.FK_rrhh_tbUsuario_usu_Id_tbSeleccionCandidatos_scan_UsuarioModifica" FromRole="tbUsuario" ToRole="tbSeleccionCandidatos" />
           <NavigationProperty Name="tbSucursales" Relationship="Self.FK_rrhh_tbUsuario_usu_Id_tbSucursal_suc_FechaModifica" FromRole="tbUsuario" ToRole="tbSucursales" />
@@ -7389,7 +7387,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbCargos" Relationship="Self.FK_rrhh_tbCargos_car_id_tbDepartamentos_car_id" FromRole="tbDepartamentos" ToRole="tbCargos" />
           <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbDepartamentos_depto_Id_tbEmpleados_depto_Id" FromRole="tbDepartamentos" ToRole="tbEmpleados" />
           <NavigationProperty Name="tbHistorialContrataciones" Relationship="Self.FK_rrhh_tbDepartamentos_depto_Id_tbHistorialContrataciones_depto_Id" FromRole="tbDepartamentos" ToRole="tbHistorialContrataciones" />
-          <NavigationProperty Name="tbRequisicionPersonal" Relationship="Self.FK_rrhh_tbDepartamentos_depto_Id_tbRequisicionPersonal_depto_Id" FromRole="tbDepartamentos" ToRole="tbRequisicionPersonal" />
         </EntityType>
         <EntityType Name="tbEmpleados">
           <Key>
@@ -7437,7 +7434,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbHistorialRefrendamientos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_tbHistorialRefrendamientos_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialRefrendamientos" />
           <NavigationProperty Name="tbHistorialSalidas" Relationship="Self.FK_rrhh_tbEmpleados_emp_id_tbHistorialSalidas_emp_id" FromRole="tbEmpleados" ToRole="tbHistorialSalidas" />
           <NavigationProperty Name="tbHistorialVacaciones" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_tbHistorialVacaciones_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialVacaciones" />
-          <NavigationProperty Name="tbRequisicionPersonal" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_tbRequisicionPersonal_emp_Id" FromRole="tbEmpleados" ToRole="tbRequisicionPersonal" />
           <NavigationProperty Name="tbSueldos" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_tbSueldos_emp_Id" FromRole="tbEmpleados" ToRole="tbSueldos" />
           <NavigationProperty Name="tbVacaciones" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_tbVacaciones_emp_Id" FromRole="tbEmpleados" ToRole="tbVacaciones" />
           <NavigationProperty Name="tbHistorialAmonestaciones" Relationship="Self.FK_rrhh_tbempledos_emp_Id_tbHistorialAmonestaciones_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialAmonestaciones" />
@@ -8017,27 +8013,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbTitulosRequisicion" Relationship="Self.FK_rrhh_tbRequisicion_req_Id_tbTitulosRequisicion_req_Id" FromRole="tbRequisiciones" ToRole="tbTitulosRequisicion" />
           <NavigationProperty Name="tbSeleccionCandidatos" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id" FromRole="tbRequisiciones" ToRole="tbSeleccionCandidatos" />
         </EntityType>
-        <EntityType Name="tbRequisicionPersonal">
-          <Key>
-            <PropertyRef Name="rper_Id" />
-          </Key>
-          <Property Name="rper_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="depto_Id" Type="Int32" Nullable="false" />
-          <Property Name="rper_Plaza" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="rper_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="rper_Estado" Type="Boolean" Nullable="false" />
-          <Property Name="rper_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="rper_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="rper_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="rper_UsuarioModifica" Type="Int32" />
-          <Property Name="rper_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariocrea" FromRole="tbRequisicionPersonal" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariomodifica" FromRole="tbRequisicionPersonal" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbDepartamentos" Relationship="Self.FK_rrhh_tbDepartamentos_depto_Id_tbRequisicionPersonal_depto_Id" FromRole="tbRequisicionPersonal" ToRole="tbDepartamentos" />
-          <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_emp_Id_tbRequisicionPersonal_emp_Id" FromRole="tbRequisicionPersonal" ToRole="tbEmpleados" />
-          <NavigationProperty Name="tbSeleccionCandidatos" Relationship="Self.FK_rrhh_tbRequisicionpersonal_rper_Id_tbSeleccionCandidatos_rper_Id" FromRole="tbRequisicionPersonal" ToRole="tbSeleccionCandidatos" />
-        </EntityType>
         <EntityType Name="tbSeleccionCandidatos">
           <Key>
             <PropertyRef Name="scan_Id" />
@@ -8058,7 +8033,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbFaseSeleccion" Relationship="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_tbSeleccionCandidatos_fare_Id" FromRole="tbSeleccionCandidatos" ToRole="tbFaseSeleccion" />
           <NavigationProperty Name="tbHistorialContrataciones" Relationship="Self.FK_rrhh_tbCandidatos_can_Id_tbHistorialContrataciones_can_Id" FromRole="tbSeleccionCandidatos" ToRole="tbHistorialContrataciones" />
           <NavigationProperty Name="tbPersonas" Relationship="Self.FK_rrhh_tbPersonas_per_Id_tbSeleccionCandidatos_per_Id" FromRole="tbSeleccionCandidatos" ToRole="tbPersonas" />
-          <NavigationProperty Name="tbRequisicionPersonal" Relationship="Self.FK_rrhh_tbRequisicionpersonal_rper_Id_tbSeleccionCandidatos_rper_Id" FromRole="tbSeleccionCandidatos" ToRole="tbRequisicionPersonal" />
           <NavigationProperty Name="tbRequisiciones" Relationship="ERP_GMEDINAModel.C_FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id" FromRole="tbSeleccionCandidatos" ToRole="tbRequisiciones" />
         </EntityType>
         <EntityType Name="tbSucursales">
@@ -10421,30 +10395,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariocrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbRequisicionPersonal" Type="Self.tbRequisicionPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbRequisicionPersonal">
-              <PropertyRef Name="rper_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariomodifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbRequisicionPersonal" Type="Self.tbRequisicionPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbRequisicionPersonal">
-              <PropertyRef Name="rper_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbUsuario_usu_Id_tbSeleccionCandidatos_scan_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
@@ -11273,18 +11223,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbDepartamentos_depto_Id_tbRequisicionPersonal_depto_Id">
-          <End Role="tbDepartamentos" Type="Self.tbDepartamentos" Multiplicity="1" />
-          <End Role="tbRequisicionPersonal" Type="Self.tbRequisicionPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbDepartamentos">
-              <PropertyRef Name="depto_Id" />
-            </Principal>
-            <Dependent Role="tbRequisicionPersonal">
-              <PropertyRef Name="depto_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbEmpleados_emp_Id_tbEquipoEmpleados_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbEquipoEmpleados" Type="Self.tbEquipoEmpleados" Multiplicity="*" />
@@ -11377,18 +11315,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               <PropertyRef Name="emp_Id" />
             </Principal>
             <Dependent Role="tbHistorialVacaciones">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_rrhh_tbEmpleados_emp_Id_tbRequisicionPersonal_emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
-          <End Role="tbRequisicionPersonal" Type="Self.tbRequisicionPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbRequisicionPersonal">
               <PropertyRef Name="emp_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -11801,18 +11727,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbRequisicionpersonal_rper_Id_tbSeleccionCandidatos_rper_Id">
-          <End Role="tbRequisicionPersonal" Type="Self.tbRequisicionPersonal" Multiplicity="1" />
-          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbRequisicionPersonal">
-              <PropertyRef Name="rper_Id" />
-            </Principal>
-            <Dependent Role="tbSeleccionCandidatos">
-              <PropertyRef Name="rper_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbSueldos_hsue_Id_tbSueldos_hsue_SueldoAnterior">
           <End Role="tbSueldos" Type="Self.tbSueldos" Multiplicity="0..1" />
           <End Role="tbSueldos1" Type="Self.tbSueldos" Multiplicity="*" />
@@ -11931,7 +11845,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbPrestaciones" EntityType="Self.tbPrestaciones" />
           <EntitySet Name="tbRazonSalidas" EntityType="Self.tbRazonSalidas" />
           <EntitySet Name="tbRequisiciones" EntityType="Self.tbRequisiciones" />
-          <EntitySet Name="tbRequisicionPersonal" EntityType="Self.tbRequisicionPersonal" />
           <EntitySet Name="tbSeleccionCandidatos" EntityType="Self.tbSeleccionCandidatos" />
           <EntitySet Name="tbSucursales" EntityType="Self.tbSucursales" />
           <EntitySet Name="tbSueldos" EntityType="Self.tbSueldos" />
@@ -12534,14 +12447,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariocrea" Association="Self.FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariocrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbRequisicionPersonal" EntitySet="tbRequisicionPersonal" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariomodifica" Association="Self.FK_rrhh_tbUsuario_usu_id_tbRequisicionPersonal_rper_Usuariomodifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbRequisicionPersonal" EntitySet="tbRequisicionPersonal" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbUsuario_usu_Id_tbSeleccionCandidatos_scan_UsuarioCrea" Association="Self.FK_rrhh_tbUsuario_usu_Id_tbSeleccionCandidatos_scan_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
@@ -12818,10 +12723,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
             <End Role="tbHistorialContrataciones" EntitySet="tbHistorialContrataciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbDepartamentos_depto_Id_tbRequisicionPersonal_depto_Id" Association="Self.FK_rrhh_tbDepartamentos_depto_Id_tbRequisicionPersonal_depto_Id">
-            <End Role="tbDepartamentos" EntitySet="tbDepartamentos" />
-            <End Role="tbRequisicionPersonal" EntitySet="tbRequisicionPersonal" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_tbEquipoEmpleados_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_tbEquipoEmpleados_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbEquipoEmpleados" EntitySet="tbEquipoEmpleados" />
@@ -12853,10 +12754,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_tbHistorialVacaciones_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_tbHistorialVacaciones_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialVacaciones" EntitySet="tbHistorialVacaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_tbRequisicionPersonal_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_tbRequisicionPersonal_emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbRequisicionPersonal" EntitySet="tbRequisicionPersonal" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_tbSueldos_emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_tbSueldos_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
@@ -12993,10 +12890,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="FK_rrhh_tbRequisicion_req_Id_tbTitulosRequisicion_req_Id" Association="Self.FK_rrhh_tbRequisicion_req_Id_tbTitulosRequisicion_req_Id">
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbRequisicionpersonal_rper_Id_tbSeleccionCandidatos_rper_Id" Association="Self.FK_rrhh_tbRequisicionpersonal_rper_Id_tbSeleccionCandidatos_rper_Id">
-            <End Role="tbRequisicionPersonal" EntitySet="tbRequisicionPersonal" />
-            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbSueldos_hsue_Id_tbSueldos_hsue_SueldoAnterior" Association="Self.FK_rrhh_tbSueldos_hsue_Id_tbSueldos_hsue_SueldoAnterior">
             <End Role="tbSueldos" EntitySet="tbSueldos" />

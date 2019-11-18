@@ -96,7 +96,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbPrestaciones> tbPrestaciones { get; set; }
         public virtual DbSet<tbRazonSalidas> tbRazonSalidas { get; set; }
         public virtual DbSet<tbRequisiciones> tbRequisiciones { get; set; }
-        public virtual DbSet<tbRequisicionPersonal> tbRequisicionPersonal { get; set; }
         public virtual DbSet<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         public virtual DbSet<tbSucursales> tbSucursales { get; set; }
         public virtual DbSet<tbSueldos> tbSueldos { get; set; }

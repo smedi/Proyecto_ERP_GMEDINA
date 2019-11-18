@@ -156,8 +156,6 @@ namespace ERP_GMEDINA.Models
             this.tbRazonSalidas1 = new HashSet<tbRazonSalidas>();
             this.tbRequisiciones = new HashSet<tbRequisiciones>();
             this.tbRequisiciones1 = new HashSet<tbRequisiciones>();
-            this.tbRequisicionPersonal = new HashSet<tbRequisicionPersonal>();
-            this.tbRequisicionPersonal1 = new HashSet<tbRequisicionPersonal>();
             this.tbSeleccionCandidatos = new HashSet<tbSeleccionCandidatos>();
             this.tbSeleccionCandidatos1 = new HashSet<tbSeleccionCandidatos>();
             this.tbSucursales = new HashSet<tbSucursales>();
@@ -471,10 +469,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbRequisiciones> tbRequisiciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbRequisiciones> tbRequisiciones1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRequisicionPersonal> tbRequisicionPersonal { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRequisicionPersonal> tbRequisicionPersonal1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

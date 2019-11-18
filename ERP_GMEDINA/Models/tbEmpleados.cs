@@ -32,7 +32,6 @@ namespace ERP_GMEDINA.Models
             this.tbHistorialRefrendamientos = new HashSet<tbHistorialRefrendamientos>();
             this.tbHistorialSalidas = new HashSet<tbHistorialSalidas>();
             this.tbHistorialVacaciones = new HashSet<tbHistorialVacaciones>();
-            this.tbRequisicionPersonal = new HashSet<tbRequisicionPersonal>();
             this.tbSueldos = new HashSet<tbSueldos>();
             this.tbVacaciones = new HashSet<tbVacaciones>();
             this.tbHistorialAmonestaciones = new HashSet<tbHistorialAmonestaciones>();
@@ -98,8 +97,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbHistorialSalidas> tbHistorialSalidas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialVacaciones> tbHistorialVacaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRequisicionPersonal> tbRequisicionPersonal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSueldos> tbSueldos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
