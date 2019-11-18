@@ -39,7 +39,6 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbCatalogoDeIngresos> tbCatalogoDeIngresos { get; set; }
         public virtual DbSet<tbCatalogoDePlanillas> tbCatalogoDePlanillas { get; set; }
         public virtual DbSet<tbDecimoCuartoMes> tbDecimoCuartoMes { get; set; }
-        public virtual DbSet<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
         public virtual DbSet<tbDeduccionesExtraordinarias> tbDeduccionesExtraordinarias { get; set; }
         public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }

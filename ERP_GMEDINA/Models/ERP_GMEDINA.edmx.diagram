@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="799506b69948422f822bfdc7dabb085c" Name="Diagram1" ZoomLevel="50">
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAccesoRol" Width="1.5" PointX="5.25" PointY="130" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbObjeto" Width="1.5" PointX="3" PointY="92.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbRol" Width="1.5" PointX="3" PointY="96.5" IsExpanded="true" />
@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCatalogoDeIngresos" Width="1.5" PointX="3" PointY="114.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCatalogoDePlanillas" Width="1.5" PointX="3" PointY="119" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDecimoCuartoMes" Width="1.5" PointX="21.75" PointY="151.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDecimoTercerMes" Width="2" PointX="10.5" PointY="146.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionesExtraordinarias" Width="1.5" PointX="18.75" PointY="153.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionInstitucionFinanciera" Width="1.5" PointX="16.5" PointY="140.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleadoBonos" Width="1.5" PointX="5.25" PointY="141.75" IsExpanded="true" />
@@ -131,8 +130,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK__Acce__tbUsuario__tbCatalogoDePlanillas__cpla_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK__Acce__tbUsuario__tbDecimoCuartoMes__dcm_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK__Acce__tbUsuario__tbDecimoCuartoMes__dcm_UsuarioModifica" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioCrea" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK__Acce__tbUsuario__tbDeduccionesExtraordinarias__dex_UsuarioCrea" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK__Acce__tbUsuario__tbDeduccionesExtraordinarias__dex_UsuarioModifica" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK__Acce__tbUsuario__tbDeduccionInstitucionFinanciera__deif_UsuarioCrea" ManuallyRouted="false" />
@@ -288,7 +285,6 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatálogoPlanillas_tbTipoPlanillaDetalleDeducciones_cpla_IdPlanilla" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoPlanillas_tbTipoPlanillaDetalleIngreso_cpla_IdPlanilla" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbHistorialDePago_tbDecimoCuartoMes_hipa_IdHistorialDePago" ManuallyRouted="false" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_tbDecimoTercerMes_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEquipoEmpleados_tbDeduccionesExtraordinarias_eqem_Id" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbInstitucionesFinancieras_tbDeduInstiFinan_insf_IdInstituFinan" ManuallyRouted="false" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_tbDeduccionInstitucionFinanciera_emp_Id" ManuallyRouted="false" />

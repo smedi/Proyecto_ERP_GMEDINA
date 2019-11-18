@@ -166,20 +166,6 @@
           <Property Name="dcm_FechaModifica" Type="datetime" />
           <Property Name="dcm_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="tbDecimoTercerMes">
-          <Key>
-            <PropertyRef Name="dtm_IdDecimoTercerMes" />
-          </Key>
-          <Property Name="dtm_IdDecimoTercerMes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="dtm_FechaPago" Type="datetime" Nullable="false" />
-          <Property Name="dtm_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="dtm_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="dtm_UsuarioModifica" Type="int" />
-          <Property Name="dtm_FechaModifica" Type="datetime" />
-          <Property Name="emp_Id" Type="int" />
-          <Property Name="dtm_Monto" Type="decimal" Precision="18" Scale="3" />
-          <Property Name="dtm_CodigoPago" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="tbDeduccionesExtraordinarias">
           <Key>
             <PropertyRef Name="dex_IdDeduccionesExtra" />
@@ -2030,30 +2016,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Principal>
             <Dependent Role="tbDecimoCuartoMes">
               <PropertyRef Name="dcm_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbDecimoTercerMes" Type="Self.tbDecimoTercerMes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbDecimoTercerMes">
-              <PropertyRef Name="dtm_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbDecimoTercerMes" Type="Self.tbDecimoTercerMes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbDecimoTercerMes">
-              <PropertyRef Name="dtm_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4145,18 +4107,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="'FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoTercerMes_emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="0..1" />
-          <End Role="tbDecimoTercerMes" Type="Self.tbDecimoTercerMes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbDecimoTercerMes">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="'FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionInstitucionFinanciera_emp_Id">
           <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
           <End Role="tbDeduccionInstitucionFinanciera" Type="Self.tbDeduccionInstitucionFinanciera" Multiplicity="*" />
@@ -5101,7 +5051,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbCatalogoDeIngresos" EntityType="Self.tbCatalogoDeIngresos" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbCatalogoDePlanillas" EntityType="Self.tbCatalogoDePlanillas" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbDecimoCuartoMes" EntityType="Self.tbDecimoCuartoMes" Schema="Plani" store:Type="Tables" />
-          <EntitySet Name="tbDecimoTercerMes" EntityType="Self.tbDecimoTercerMes" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbDeduccionesExtraordinarias" EntityType="Self.tbDeduccionesExtraordinarias" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbDeduccionInstitucionFinanciera" EntityType="Self.tbDeduccionInstitucionFinanciera" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbEmpleadoBonos" EntityType="Self.tbEmpleadoBonos" Schema="Plani" store:Type="Tables" />
@@ -5578,14 +5527,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoCuartoMes_dcm_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoCuartoMes_dcm_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbDecimoCuartoMes" EntitySet="tbDecimoCuartoMes" />
-          </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbDecimoTercerMes" EntitySet="tbDecimoTercerMes" />
-          </AssociationSet>
-          <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioModifica" Association="Self.'FK_Acce_tbUsuario_usu_Id_Plani_tbDecimoTercerMes_dtm_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbDecimoTercerMes" EntitySet="tbDecimoTercerMes" />
           </AssociationSet>
           <AssociationSet Name="'FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea" Association="Self.'FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionesExtraordinarias_dex_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -6283,10 +6224,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbAdelantoSueldo" EntitySet="tbAdelantoSueldo" />
           </AssociationSet>
-          <AssociationSet Name="'FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoTercerMes_emp_Id" Association="Self.'FK_rrhh_tbEmpleados_emp_Id_Plani_tbDecimoTercerMes_emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbDecimoTercerMes" EntitySet="tbDecimoTercerMes" />
-          </AssociationSet>
           <AssociationSet Name="'FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionInstitucionFinanciera_emp_Id" Association="Self.'FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionInstitucionFinanciera_emp_Id">
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbDeduccionInstitucionFinanciera" EntitySet="tbDeduccionInstitucionFinanciera" />
@@ -6617,8 +6554,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="Self.FK__Acce__tbUsuario__tbCatalogoDePlanillas__cpla_UsuarioCrea" FromRole="tbUsuario" ToRole="tbCatalogoDePlanillas" />
           <NavigationProperty Name="tbDecimoCuartoMes" Relationship="Self.FK__Acce__tbUsuario__tbDecimoCuartoMes__dcm_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDecimoCuartoMes" />
           <NavigationProperty Name="tbDecimoCuartoMes1" Relationship="Self.FK__Acce__tbUsuario__tbDecimoCuartoMes__dcm_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDecimoCuartoMes" />
-          <NavigationProperty Name="tbDecimoTercerMes" Relationship="Self.FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDecimoTercerMes" />
-          <NavigationProperty Name="tbDecimoTercerMes1" Relationship="Self.FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDecimoTercerMes" />
           <NavigationProperty Name="tbDeduccionesExtraordinarias" Relationship="Self.FK__Acce__tbUsuario__tbDeduccionesExtraordinarias__dex_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionesExtraordinarias" />
           <NavigationProperty Name="tbDeduccionesExtraordinarias1" Relationship="Self.FK__Acce__tbUsuario__tbDeduccionesExtraordinarias__dex_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDeduccionesExtraordinarias" />
           <NavigationProperty Name="tbDeduccionInstitucionFinanciera" Relationship="Self.FK__Acce__tbUsuario__tbDeduccionInstitucionFinanciera__deif_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDeduccionInstitucionFinanciera" />
@@ -6885,24 +6820,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbUsuario" Relationship="Self.FK__Acce__tbUsuario__tbDecimoCuartoMes__dcm_UsuarioCrea" FromRole="tbDecimoCuartoMes" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK__Acce__tbUsuario__tbDecimoCuartoMes__dcm_UsuarioModifica" FromRole="tbDecimoCuartoMes" ToRole="tbUsuario" />
           <NavigationProperty Name="tbHistorialDePago" Relationship="Self.FK_Plani_tbHistorialDePago_tbDecimoCuartoMes_hipa_IdHistorialDePago" FromRole="tbDecimoCuartoMes" ToRole="tbHistorialDePago" />
-        </EntityType>
-        <EntityType Name="tbDecimoTercerMes">
-          <Key>
-            <PropertyRef Name="dtm_IdDecimoTercerMes" />
-          </Key>
-          <Property Name="dtm_IdDecimoTercerMes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="dtm_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dtm_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="dtm_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dtm_UsuarioModifica" Type="Int32" />
-          <Property Name="dtm_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="emp_Id" Type="Int32" />
-          <Property Name="dtm_DecimoTercer" Type="Decimal" Precision="18" Scale="3" />
-          <NavigationProperty Name="tbUsuario" Relationship="Self.FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioCrea" FromRole="tbDecimoTercerMes" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbUsuario1" Relationship="Self.FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioModifica" FromRole="tbDecimoTercerMes" ToRole="tbUsuario" />
-          <NavigationProperty Name="tbEmpleados" Relationship="Self.FK_rrhh_tbEmpleados_tbDecimoTercerMes_emp_Id" FromRole="tbDecimoTercerMes" ToRole="tbEmpleados" />
-          <Property Name="dtm_Monto" Type="Decimal" Precision="18" Scale="3" />
-          <Property Name="dtm_CodigoPago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbDeduccionesExtraordinarias">
           <Key>
@@ -7416,7 +7333,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <NavigationProperty Name="tbUsuario1" Relationship="Self.FK_rrhh_tbUsuario_usu_Id_tbEmpleados_emp_Usuariomodifica" FromRole="tbEmpleados" ToRole="tbUsuario" />
           <NavigationProperty Name="tbAdelantoSueldo" Relationship="Self.FK_rrhh_tbEmpleados_Plani_tbAdelantoSueldo_emp_Id" FromRole="tbEmpleados" ToRole="tbAdelantoSueldo" />
           <NavigationProperty Name="tbCatalogoDePlanillas" Relationship="Self.FK_plani_tbCatalogoDePlanillas_cpla_IdPlanilla_rrhh_tbEmpleados_cpla_IdPlanilla" FromRole="tbEmpleados" ToRole="tbCatalogoDePlanillas" />
-          <NavigationProperty Name="tbDecimoTercerMes" Relationship="Self.FK_rrhh_tbEmpleados_tbDecimoTercerMes_emp_Id" FromRole="tbEmpleados" ToRole="tbDecimoTercerMes" />
           <NavigationProperty Name="tbDeduccionInstitucionFinanciera" Relationship="Self.FK_rrhh_tbEmpleados_tbDeduccionInstitucionFinanciera_emp_Id" FromRole="tbEmpleados" ToRole="tbDeduccionInstitucionFinanciera" />
           <NavigationProperty Name="tbEmpleadoBonos" Relationship="Self.FK_rrhh_tbEmpleados_tbEmpleadoBonos_emp_Id" FromRole="tbEmpleados" ToRole="tbEmpleadoBonos" />
           <NavigationProperty Name="tbEmpleadoComisiones" Relationship="Self.FK_rrhh_tbEmpleados_bEmpleadoComisiones_emp_Id" FromRole="tbEmpleados" ToRole="tbEmpleadoComisiones" />
@@ -8964,30 +8880,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Principal>
             <Dependent Role="tbDecimoCuartoMes">
               <PropertyRef Name="dcm_UsuarioModifica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioCrea">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
-          <End Role="tbDecimoTercerMes" Type="Self.tbDecimoTercerMes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbDecimoTercerMes">
-              <PropertyRef Name="dtm_UsuarioCrea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioModifica">
-          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
-          <End Role="tbDecimoTercerMes" Type="Self.tbDecimoTercerMes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbUsuario">
-              <PropertyRef Name="usu_Id" />
-            </Principal>
-            <Dependent Role="tbDecimoTercerMes">
-              <PropertyRef Name="dtm_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10851,18 +10743,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbEmpleados_tbDecimoTercerMes_emp_Id">
-          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="0..1" />
-          <End Role="tbDecimoTercerMes" Type="Self.tbDecimoTercerMes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleados">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbDecimoTercerMes">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbEquipoEmpleados_tbDeduccionesExtraordinarias_eqem_Id">
           <End Role="tbEquipoEmpleados" Type="Self.tbEquipoEmpleados" Multiplicity="1" />
           <End Role="tbDeduccionesExtraordinarias" Type="Self.tbDeduccionesExtraordinarias" Multiplicity="*" />
@@ -11788,7 +11668,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="tbCatalogoDeIngresos" EntityType="Self.tbCatalogoDeIngresos" />
           <EntitySet Name="tbCatalogoDePlanillas" EntityType="Self.tbCatalogoDePlanillas" />
           <EntitySet Name="tbDecimoCuartoMes" EntityType="Self.tbDecimoCuartoMes" />
-          <EntitySet Name="tbDecimoTercerMes" EntityType="Self.tbDecimoTercerMes" />
           <EntitySet Name="tbDeduccionesExtraordinarias" EntityType="Self.tbDeduccionesExtraordinarias" />
           <EntitySet Name="tbDeduccionInstitucionFinanciera" EntityType="Self.tbDeduccionInstitucionFinanciera" />
           <EntitySet Name="tbEmpleadoBonos" EntityType="Self.tbEmpleadoBonos" />
@@ -11970,14 +11849,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="FK__Acce__tbUsuario__tbDecimoCuartoMes__dcm_UsuarioModifica" Association="Self.FK__Acce__tbUsuario__tbDecimoCuartoMes__dcm_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbDecimoCuartoMes" EntitySet="tbDecimoCuartoMes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioCrea" Association="Self.FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioCrea">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbDecimoTercerMes" EntitySet="tbDecimoTercerMes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioModifica" Association="Self.FK__Acce__tbUsuario__tbDecimoTercerMes__dtm_UsuarioModifica">
-            <End Role="tbUsuario" EntitySet="tbUsuario" />
-            <End Role="tbDecimoTercerMes" EntitySet="tbDecimoTercerMes" />
           </AssociationSet>
           <AssociationSet Name="FK__Acce__tbUsuario__tbDeduccionesExtraordinarias__dex_UsuarioCrea" Association="Self.FK__Acce__tbUsuario__tbDeduccionesExtraordinarias__dex_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -12598,10 +12469,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <AssociationSet Name="FK_Plani_tbHistorialDePago_tbDecimoCuartoMes_hipa_IdHistorialDePago" Association="Self.FK_Plani_tbHistorialDePago_tbDecimoCuartoMes_hipa_IdHistorialDePago">
             <End Role="tbHistorialDePago" EntitySet="tbHistorialDePago" />
             <End Role="tbDecimoCuartoMes" EntitySet="tbDecimoCuartoMes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbEmpleados_tbDecimoTercerMes_emp_Id" Association="Self.FK_rrhh_tbEmpleados_tbDecimoTercerMes_emp_Id">
-            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
-            <End Role="tbDecimoTercerMes" EntitySet="tbDecimoTercerMes" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEquipoEmpleados_tbDeduccionesExtraordinarias_eqem_Id" Association="Self.FK_rrhh_tbEquipoEmpleados_tbDeduccionesExtraordinarias_eqem_Id">
             <End Role="tbEquipoEmpleados" EntitySet="tbEquipoEmpleados" />
@@ -13431,21 +13298,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
                 <ScalarProperty Name="dcm_UsuarioModifica" ColumnName="dcm_UsuarioModifica" />
                 <ScalarProperty Name="dcm_FechaModifica" ColumnName="dcm_FechaModifica" />
                 <ScalarProperty Name="dcm_Activo" ColumnName="dcm_Activo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbDecimoTercerMes">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbDecimoTercerMes">
-              <MappingFragment StoreEntitySet="tbDecimoTercerMes">
-                <ScalarProperty Name="dtm_CodigoPago" ColumnName="dtm_CodigoPago" />
-                <ScalarProperty Name="dtm_Monto" ColumnName="dtm_Monto" />
-                <ScalarProperty Name="dtm_IdDecimoTercerMes" ColumnName="dtm_IdDecimoTercerMes" />
-                <ScalarProperty Name="dtm_FechaPago" ColumnName="dtm_FechaPago" />
-                <ScalarProperty Name="dtm_UsuarioCrea" ColumnName="dtm_UsuarioCrea" />
-                <ScalarProperty Name="dtm_FechaCrea" ColumnName="dtm_FechaCrea" />
-                <ScalarProperty Name="dtm_UsuarioModifica" ColumnName="dtm_UsuarioModifica" />
-                <ScalarProperty Name="dtm_FechaModifica" ColumnName="dtm_FechaModifica" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
