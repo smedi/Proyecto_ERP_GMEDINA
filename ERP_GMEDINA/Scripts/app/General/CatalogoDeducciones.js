@@ -8,7 +8,7 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
   .fail(function (jqxhr, settings, exception) {
       console.log("No se pudo recuperar Script SerializeDate");
   });
-
+var InactivarID = 0;
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
@@ -58,8 +58,9 @@ function cargarGridDeducciones() {
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoDeducciones", function () {
     var ID = $(this).data('id');
+    InactivarID = ID;
     $.ajax({
-        url: "/CatalogoDeDeducciones/Edit/" + ID,
+        url: "/CatalogoDeDeducciones/Edit/" + ID,      
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -112,29 +113,18 @@ $("#btnUpdateDeduccion").click(function () {
         $.ajax({
             url: "/CatalogoDeDeducciones/Edit",
             method: "POST",
-            data: data
-        }).done(function (data) {
-            if (data == "error") {
-                //Cuando traiga un error del backend al guardar la edicion
-                iziToast.error({
-                    title: 'Error',
-                    message: 'No se pudo editar el registro, contacte al administrador',
-                });
-            }
-            else {
+            data: data,
+            success: function () {
                 // REFRESCAR UNICAMENTE LA TABLA
                 cargarGridDeducciones();
-
-                //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                $("#EditarCatalogoDeducciones").modal('hide');
+                debugger;
                 //Mensaje de exito de la edicion
                 iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue editado de forma exitosa!',
+                title: 'Exito',
+                message: 'El registro fue editado de forma exitosa!',
                 });
             }
-
-        });
+        });  
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -156,8 +146,35 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarCatalogoDeducciones").modal();
+    $("#Crear #cde_PorcentajeColaborador").val('');
+    $("#Crear #cde_PorcentajeEmpresa").val('');
 });
 
+//FUNCION: CREAR EL NUEVO REGISTRO
+$('#btnCreateRegistroDeduccion').click(function () {
+    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+
+    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+    var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
+ 
+        $.ajax({
+            url: "/CatalogoDeDeducciones/Create",
+            method: "POST",
+            data: data,
+            success: function () {
+                cargarGridDeducciones();            
+                $("#Crear #cde_DescripcionDeduccion").val('');
+                $("#Crear #cde_PorcentajeColaborador").val('');
+                $("#Crear #cde_PorcentajeEmpresa").val('');
+                // Mensaje de exito cuando un registro se ha guardado bien
+
+                iziToast.success({
+                    title: 'Exito',
+                    message: 'El registro fue registrado de forma exitosa!',
+                });
+            }
+        });
+});
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogoDeducciones", function () {
     var ID = $(this).data('id');
@@ -218,57 +235,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-//FUNCION: CREAR EL NUEVO REGISTRO
-$('#btnCreateRegistroDeduccion').click(function () {
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
 
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var Descrip = $("#Crear #cde_DescripcionDeduccion").val();
-    var Tipodedu = $("#Crear #tde_IdTipoDedu").val();
-    var Porcencola = $("#Crear #cde_PorcentajeColaborador").val();
-    var PorcenEmpre = $("#Crear #cde_PorcentajeEmpresa").val();
-    var ModelState=false;
-
-    
-
-    if (Descrip != '' && Descrip != null && Descrip != undefined) ModelState = true;
-    else 
-        ModelState = false;
-
-    if (PorcenEmpre != '' && PorcenEmpre != null && PorcenEmpre != undefined) ModelState = true;
-    else
-        ModelState = false;
-
-    if (Porcencola != '' && Porcencola != null && Porcencola != undefined) ModelState = true;
-    else
-        ModelState = false;
-
-    if (Tipodedu != '' && Tipodedu != null && Tipodedu != undefined && Tipodedu != 0) ModelState = true;
-    else
-        ModelState = false;
-
-
-    if (ModelState == true) {
-        var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
-        $.ajax({
-            url: "/CatalogoDeDeducciones/Create",
-            method: "POST",
-            data: data,
-            success: function () {
-                cargarGridDeducciones();
-                $("#Crear #cde_DescripcionDeduccion").val('');
-                $("#Crear #cde_PorcentajeColaborador").val('');
-                $("#Crear #cde_PorcentajeEmpresa").val('');
-                // Mensaje de exito cuando un registro se ha guardado bien
-
-                iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue registrado de forma exitosa!',
-                });
-            }
-        });
-    }
-});
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
@@ -290,7 +257,7 @@ $("#btnInactivarRegistroDeduccion").click(function () {
     var data = $("#frmCatalogoDeduccionesInactivar").serializeArray();
   //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/CatalogoDeDeducciones/Inactivar",
+        url: "/CatalogoDeDeducciones/Inactivar/" + InactivarID,
         method: "POST",
         data: data
     }).done(function (data) {
@@ -316,6 +283,15 @@ $("#btnInactivarRegistroDeduccion").click(function () {
     });
 });
 
+//Mascara para Inputs
+//$ (documento).ready(function (){
+////$ ("# teléfono"). inputmask ("máscara", {"máscara": "(99) 9999-99999"});//Mascara para Telefono
+////$ ("# zip"). inputmask ("máscara", {"máscara": "99999-999"});//Mascara Codigo Postal
+////$ ("# birth"). inputmask ("máscara", {"máscara": "99/99/9999"});//Mascara Fecha
+//$ ("#precio"). inputmask ("máscara", {"máscara": "999,999.99"}, {reverso: true});//Mascara Precio
+////$ ("#value"). inputmask ("mask", {"mask": "#. ## 9.99"}, {reverse: true});//Mascara Valor
+////$ ("# ip"). inputmask ("máscara", {"máscara": "999,999,999,999"});//Mascara IP
+//});
 
 // PROBANDO LOS IZITOAST
 //$(document).ready(function () {
