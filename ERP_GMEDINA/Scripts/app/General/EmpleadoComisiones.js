@@ -228,6 +228,7 @@ $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarEmpleadoComisiones", function () {
+    var cc_Monto = $('#AgregarEmpleadoComisiones #cc_Monto').val(" ");
     //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
     $.ajax({
         url: "/EmpleadoComisiones/EditGetDDLIngreso",
