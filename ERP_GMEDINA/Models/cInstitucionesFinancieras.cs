@@ -26,9 +26,13 @@ namespace ERP_GMEDINA.Models
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public string insf_Contacto { get; set; }
         [Display(Name = "Telefono Contacto")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Favor ingresar solamente números.")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
+        [MaxLength(15, ErrorMessage = "Numero debe ser inferior a 15 digitos.")]
+       
         public string insf_Telefono { get; set; }
         [Display(Name = "Correo Electronico Contacto")]
+        [EmailAddress(ErrorMessage = "Correo Electrónico inválido.")]
         [Required(ErrorMessage = "Campo {0} requerido.")]
         public string insf_Correo { get; set; }
         [Display(Name = "Usuario Creacion")]

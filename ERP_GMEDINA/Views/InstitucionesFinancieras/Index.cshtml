@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ERP_GMEDINA.Models.tbInstitucionesFinancieras>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listado";
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
@@ -60,7 +60,7 @@
                               <button type="button" class="btn btn-default btn-xs" id="btnEditar">Editar</button>*@
                                 @Html.ActionLink("Editar", "Edit", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-primary btn-xs" })
                                 @Html.ActionLink("Detalles", "Details", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-default btn-xs" })
-                                @Html.ActionLink("Eliminar", "Dispose", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-warning btn-xs" })
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.insf_IdInstitucionFinanciera }, new { @class = "btn btn-danger btn-xs" })
                             </td>
                         </tr>
                       }
@@ -75,7 +75,6 @@
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Scripts.Render("~/plugins/izitoast")
-    @Scripts.Render("~/Scripts/app/general/InstitucionesFinancieras")
 }
 
 @section Scripts {

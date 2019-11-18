@@ -748,6 +748,7 @@
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
+    <Content Include="Scripts\app\General\InstitucionesFinancieras.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
@@ -805,7 +806,7 @@
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery.mask.js" />
     <Content Include="Scripts\plugins\blueimp\jquery.blueimp-gallery.min.js" />
     <Content Include="Scripts\plugins\bootstrap-markdown\bootstrap-markdown.js" />
     <Content Include="Scripts\plugins\bootstrap-markdown\markdown.js" />
@@ -1239,6 +1240,8 @@
     <Content Include="Scripts\Scripts_Base\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\Scripts_Base\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\Scripts_Base\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Scripts_Base\jquery.mask.js" />
+    <Content Include="Scripts\Scripts_Base\jquery.mask.min.js" />
     <Content Include="Scripts\Scripts_Base\jquery.validate.js" />
     <Content Include="Scripts\Scripts_Base\jquery.validate.min.js" />
     <Content Include="Scripts\Scripts_Base\jquery.validate.unobtrusive.js" />
