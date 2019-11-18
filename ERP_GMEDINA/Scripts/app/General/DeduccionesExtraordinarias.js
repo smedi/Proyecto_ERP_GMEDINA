@@ -28,12 +28,12 @@ function cargarGridDeducciones() {
             //RECORRER DATA OBTENIDA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeduccionesExtraordinarias.length; i++) {
                 template += '<tr data-id = "' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + '">' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].tbEquipoEmpleados.eqem_Id + '</td>' +
+                    '<td>' + ListaDeduccionesExtraordinarias[i].eqem_Id + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_MontoInicial + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_MontoRestante + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_ObservacionesComentarios + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_Cuota + '</td>' +
-                    '<td>' + ListaDeduccionesExtraordinarias[i].tbCatalogoDeDeducciones.cde_DescripcionDeduccion + '</td>' +
+                    '<td>' + ListaDeduccionesExtraordinarias[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' +
                     '<a href="DeduccionesExtraordinarias/Edit?id='+ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra+' class="btn btn-primary btn-xs" id="btnEditarDeduccionesExtraordinarias">Editar</a>' +
                     '<a href="DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + ' class="btn btn-default btn-xs" id="btnDetalleDeduccionesExtraordinarias">Detalle</a>' +
