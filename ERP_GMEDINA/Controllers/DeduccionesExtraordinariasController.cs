@@ -216,7 +216,7 @@ namespace ERP_GMEDINA.Controllers
                                    select new { eqem_Id = tbDed.eqem_Id, per_Empleado = tbPer.per_Nombres }; //$"{tbPer.per_Nombres}" + " " + $"{tbPer.per_Apellidos}"
         //};//, dex_IdDeduccionesExtra = tbDed.dex_IdDeduccionesExtra };*/
             //Aqui iria la Vista donde trae al empleado según su Id
-            ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_Empleado");
+            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "per_Empleado", db.V_DeduccionesExtraordinarias_EquipoEmpleado.Include(d => d.per_Empleado).Where());
             return View(tbDeduccionesExtraordinarias);
         }
 
