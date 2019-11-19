@@ -411,7 +411,7 @@
           <Property Name="tede_Id" Type="int" Nullable="false" />
           <Property Name="tede_RangoInicial" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="tede_RangoFinal" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="tede_Porcentaje" Type="int" Nullable="false" />
+          <Property Name="tede_Porcentaje" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="tede_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="tede_FechaCrea" Type="datetime" Nullable="false" />
@@ -1322,22 +1322,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoCuartoMes' does not have
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoTercerMes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_DecimoTercerMes">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="per_Nombres" />
-            <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="car_Descripcion" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-          </Key>
-          <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="per_Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="per_Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="emp_CuentaBancaria" Type="nvarchar" MaxLength="100" />
-          <Property Name="DecimoTercerMes" Type="decimal" Precision="38" Scale="6" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DeduccionesExtraordinarias">
@@ -1400,7 +1384,15 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Det
           <Property Name="dex_Activo" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_EquipoEmpleado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_DeduccionesExtraordinarias_EquipoEmpleado">
+          <Key>
+            <PropertyRef Name="eqem_Id" />
+            <PropertyRef Name="per_Empleado" />
+          </Key>
+          <Property Name="eqem_Id" Type="int" Nullable="false" />
+          <Property Name="per_Empleado" Type="nvarchar" MaxLength="101" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtrasColaboradores' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DeduccionesExtrasColaboradores">
@@ -5191,17 +5183,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
     [V_DecimoCuartoMes].[DecimoTercerMes] AS [DecimoTercerMes]
     FROM [Plani].[V_DecimoCuartoMes] AS [V_DecimoCuartoMes]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_DecimoTercerMes" EntityType="Self.V_DecimoTercerMes" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DecimoTercerMes].[emp_Id] AS [emp_Id], 
-    [V_DecimoTercerMes].[per_Nombres] AS [per_Nombres], 
-    [V_DecimoTercerMes].[per_Apellidos] AS [per_Apellidos], 
-    [V_DecimoTercerMes].[car_Descripcion] AS [car_Descripcion], 
-    [V_DecimoTercerMes].[cpla_DescripcionPlanilla] AS [cpla_DescripcionPlanilla], 
-    [V_DecimoTercerMes].[emp_CuentaBancaria] AS [emp_CuentaBancaria], 
-    [V_DecimoTercerMes].[DecimoTercerMes] AS [DecimoTercerMes]
-    FROM [Plani].[V_DecimoTercerMes] AS [V_DecimoTercerMes]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_DeduccionesExtraordinarias" EntityType="Self.V_DeduccionesExtraordinarias" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [V_DeduccionesExtraordinarias].[per_DeduccionEmpleado] AS [per_DeduccionEmpleado], 
@@ -5236,6 +5217,12 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
     [V_DeduccionesExtraordinarias_Detalles].[dex_FechaModifica] AS [dex_FechaModifica], 
     [V_DeduccionesExtraordinarias_Detalles].[dex_Activo] AS [dex_Activo]
     FROM [Plani].[V_DeduccionesExtraordinarias_Detalles] AS [V_DeduccionesExtraordinarias_Detalles]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_DeduccionesExtraordinarias_EquipoEmpleado" EntityType="Self.V_DeduccionesExtraordinarias_EquipoEmpleado" store:Type="Views" store:Schema="Plani">
+            <DefiningQuery>SELECT 
+    [V_DeduccionesExtraordinarias_EquipoEmpleado].[eqem_Id] AS [eqem_Id], 
+    [V_DeduccionesExtraordinarias_EquipoEmpleado].[per_Empleado] AS [per_Empleado]
+    FROM [Plani].[V_DeduccionesExtraordinarias_EquipoEmpleado] AS [V_DeduccionesExtraordinarias_EquipoEmpleado]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DeduccionesExtrasColaboradores" EntityType="Self.V_DeduccionesExtrasColaboradores" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
@@ -8268,22 +8255,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="per_Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="car_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DecimoTercerMes" Type="Decimal" Precision="38" Scale="6" />
-        </EntityType>
-        <EntityType Name="V_DecimoTercerMes">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-            <PropertyRef Name="per_Nombres" />
-            <PropertyRef Name="per_Apellidos" />
-            <PropertyRef Name="car_Descripcion" />
-            <PropertyRef Name="cpla_DescripcionPlanilla" />
-          </Key>
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="per_Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="car_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="emp_CuentaBancaria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DecimoTercerMes" Type="Decimal" Precision="38" Scale="6" />
         </EntityType>
         <EntityType Name="V_DeduccionesExtraordinarias">
@@ -11743,7 +11714,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="V_ColaboradoresPorPlanilla" EntityType="Self.V_ColaboradoresPorPlanilla" />
           <EntitySet Name="V_ComisionesColaborador" EntityType="Self.V_ComisionesColaborador" />
           <EntitySet Name="V_DecimoCuartoMes" EntityType="Self.V_DecimoCuartoMes" />
-          <EntitySet Name="V_DecimoTercerMes" EntityType="Self.V_DecimoTercerMes" />
           <EntitySet Name="V_DeduccionesExtraordinarias" EntityType="Self.V_DeduccionesExtraordinarias" />
           <EntitySet Name="V_DeduccionesExtrasColaboradores" EntityType="Self.V_DeduccionesExtrasColaboradores" />
           <EntitySet Name="V_DeduccionesInstitucionesFinancierasColaboradres" EntityType="Self.V_DeduccionesInstitucionesFinancierasColaboradres" />
@@ -13025,6 +12995,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <End Role="tbRequisiciones" EntitySet="tbRequisiciones" />
             <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
           </AssociationSet>
+          <EntitySet Name="V_DeduccionesExtraordinarias_EquipoEmpleado" EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_EquipoEmpleado" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -13122,6 +13093,14 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_DeduccionesExtraordinarias_EquipoEmpleado">
+          <Key>
+            <PropertyRef Name="eqem_Id" />
+            <PropertyRef Name="per_Empleado" />
+          </Key>
+          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
+          <Property Name="per_Empleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14489,19 +14468,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_DecimoTercerMes">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DecimoTercerMes">
-              <MappingFragment StoreEntitySet="V_DecimoTercerMes">
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="per_Nombres" ColumnName="per_Nombres" />
-                <ScalarProperty Name="per_Apellidos" ColumnName="per_Apellidos" />
-                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
-                <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-                <ScalarProperty Name="emp_CuentaBancaria" ColumnName="emp_CuentaBancaria" />
-                <ScalarProperty Name="DecimoTercerMes" ColumnName="DecimoTercerMes" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_DeduccionesExtraordinarias">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias">
               <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias">
@@ -14869,6 +14835,14 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
                 <ScalarProperty Name="per_Empleado" ColumnName="per_Empleado" />
                 <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
                 <ScalarProperty Name="dex_IdDeduccionesExtra" ColumnName="dex_IdDeduccionesExtra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_DeduccionesExtraordinarias_EquipoEmpleado">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_EquipoEmpleado">
+              <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias_EquipoEmpleado">
+                <ScalarProperty Name="per_Empleado" ColumnName="per_Empleado" />
+                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
