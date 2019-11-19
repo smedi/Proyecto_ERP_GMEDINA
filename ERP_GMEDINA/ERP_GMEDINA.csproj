@@ -460,6 +460,7 @@
     <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModelDeduccionesExtraordinarias.cs" />
     <Compile Include="Models\V_BonosColaborador.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1288,9 +1289,10 @@
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Create.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Delete.cshtml" />
-    <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Edit.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Index.cshtml" />
+    <Content Include="Views\DeduccionesExtraordinarias\DetalleDE.cshtml" />
+    <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
