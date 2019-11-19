@@ -208,6 +208,13 @@ namespace ERP_GMEDINA.Controllers
 
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
 
+            //Lista
+            /*var ListaDeducciones = from tbDed in db.tbDeduccionesExtraordinarias
+                                   join tbEqEm in db.tbEquipoEmpleados on tbDed.eqem_Id equals tbEqEm.eqem_Id
+                                   join tbEmp in db.tbEmpleados on tbEqEm.emp_Id equals tbEmp.emp_Id
+                                   join tbPer in db.tbPersonas on tbEmp.per_Id equals tbPer.per_Id
+                                   select new { eqem_Id = tbDed.eqem_Id, per_Empleado = tbPer.per_Nombres }; //$"{tbPer.per_Nombres}" + " " + $"{tbPer.per_Apellidos}"
+        //};//, dex_IdDeduccionesExtra = tbDed.dex_IdDeduccionesExtra };*/
             //Aqui iria la Vista donde trae al empleado según su Id
             ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_Empleado");
             return View(tbDeduccionesExtraordinarias);
