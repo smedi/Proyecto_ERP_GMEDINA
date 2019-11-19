@@ -69,6 +69,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
+                $(".field-validation-error").css('display', 'none');
                 $("#Editar #cde_IdDeducciones").val(data.cde_IdDeducciones);
                 $("#Editar #cde_DescripcionDeduccion").val(data.cde_DescripcionDeduccion);
                 $("#Editar #cde_PorcentajeColaborador").val(data.cde_PorcentajeColaborador);
@@ -106,25 +107,35 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnEditarCatalogoD
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnUpdateDeduccion").click(function () {
-    //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmCatalogoDeducciones").serializeArray();
+        //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
+        var data = $("#frmCatalogoDeducciones").serializeArray();
 
-        //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
+            //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
         $.ajax({
             url: "/CatalogoDeDeducciones/Edit",
             method: "POST",
-            data: data,
-            success: function () {
+            data: data
+        })
+        .done(function (data) {
+            if (data != "error") {
                 // REFRESCAR UNICAMENTE LA TABLA
                 cargarGridDeducciones();
-                debugger;
+
+                //Ocultar el modal 
+                $("#EditarCatalogoDeducciones").modal('hide');
+
                 //Mensaje de exito de la edicion
                 iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue editado de forma exitosa!',
+                    title: 'Exito',
+                    message: 'El registro fue editado de forma exitosa!',
                 });
             }
-        });  
+        });
+});  
+
+// EVITAR POSTBACK DE FORMULARIOS
+$("#frmCatalogoDeducciones").submit(function (e) {
+    return false;
 });
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -138,6 +149,12 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
     })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
+            if (data =="error")
+            {
+                $(".field-validation-error");
+            }
+            else
+            $(".field-validation-error").css('display', 'none');
             $("#Crear #tde_IdTipoDedu").empty();
             $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
@@ -157,24 +174,35 @@ $('#btnCreateRegistroDeduccion').click(function () {
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
  
-        $.ajax({
-            url: "/CatalogoDeDeducciones/Create",
-            method: "POST",
-            data: data,
-            success: function () {
-                cargarGridDeducciones();            
-                $("#Crear #cde_DescripcionDeduccion").val('');
-                $("#Crear #cde_PorcentajeColaborador").val('');
-                $("#Crear #cde_PorcentajeEmpresa").val('');
-                // Mensaje de exito cuando un registro se ha guardado bien
+    $.ajax({
+        url: "/CatalogoDeDeducciones/Create",
+        method: "POST",
+        data: data
+    })
+    .done(function (data) {
+        if (data != "error") {
+            cargarGridDeducciones();
+            $("#Crear #cde_DescripcionDeduccion").val('');
+            $("#Crear #cde_PorcentajeColaborador").val('');
+            $("#Crear #cde_PorcentajeEmpresa").val('');
 
-                iziToast.success({
-                    title: 'Exito',
-                    message: 'El registro fue registrado de forma exitosa!',
-                });
-            }
-        });
+            //ocultar el modal
+            $("#AgregarCatalogoDeducciones").modal('hide');
+
+            // Mensaje de exito cuando un registro se ha guardado bien
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro fue registrado de forma exitosa!',
+            });
+        }
+    });     
 });
+
+// EVITAR POSTBACK DE FORMULARIOS
+$("#frmCatalogoDeduccionesCreate").submit(function (e) {
+    return false;
+});
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogoDeducciones", function () {
     var ID = $(this).data('id');
@@ -279,9 +307,12 @@ $("#btnInactivarRegistroDeduccion").click(function () {
                 title: 'Exito',
                 message: 'El registro fue Inactivado de forma exitosa!',
             });
+
         }
     });
 });
+
+
 
 //Mascara para Inputs
 //$ (documento).ready(function (){

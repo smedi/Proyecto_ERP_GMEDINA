@@ -209,6 +209,50 @@ namespace PruebaPlanilla.Controllers
             return Json(tbCatalogoDeDeduccionesJSON, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Inactivar(int id)
+        {
+            IEnumerable<object> listCatalogoDeIngresos = null;
+            string MensajeError = "";
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeDeducciones_Inactivar(id,
+                                                                                         1,
+                                                                                         DateTime.Now
+                                                                                            );
+
+                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeIngresos)
+                        MensajeError = Resultado.MensajeError;
+
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
+                        response = "error";
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    response = "error";
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
+            }
+            else
+            {
+                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
+                response = "error";
+            }
+            return Json(JsonRequestBehavior.AllowGet);
+        }
+
         // GET: CatalogoDeDeducciones/Details/5
         //public ActionResult Details2(int? id)
         //{
@@ -292,83 +336,6 @@ namespace PruebaPlanilla.Controllers
         //    //RETORNAR MENSAJE AL LADO DEL CLIENTE
         //    return Json(response, JsonRequestBehavior.AllowGet);
         //}
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Inactivar(int id)
-        {
-            IEnumerable<object> listCatalogoDeIngresos = null;
-            string MensajeError = "";
-            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
-            string response = String.Empty;
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    listCatalogoDeIngresos = db.UDP_Plani_tbCatalogoDeDeducciones_Inactivar(id,
-                                                                                         1,
-                                                                                         DateTime.Now
-                                                                                            );
-
-
-
-                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result Resultado in listCatalogoDeIngresos)
-                        MensajeError = Resultado.MensajeError;
-
-
-
-                    if (MensajeError.StartsWith("-1"))
-                    {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
-                        response = "error";
-                    }
-                }
-                catch (Exception Ex)
-                {
-                    response = "error";
-                }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";
-            }
-            else
-            {
-                //Se devuelve un mensaje de error en caso de que el modelo no sea válido
-                response = "error";
-            }
-
-
-
-            return Json(JsonRequestBehavior.AllowGet);
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         // GET: CatalogoDeDeducciones/Delete/5
