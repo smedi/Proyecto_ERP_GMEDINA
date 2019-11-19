@@ -27,6 +27,7 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/plugins/jquery-ui/jqueryuiStyles").Include(
                         "~/Scripts/plugins/jquery-ui/jquery-ui.css"));
 
+
             // jQueryUI 
             bundles.Add(new StyleBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/plugins/jquery-ui/jquery-ui.min.js"));
@@ -113,6 +114,13 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/plugins/dataTables").Include(
                       "~/Scripts/plugins/dataTables/datatables.min.js",
                       "~/Scripts/plugins/dataTables/DatatablesConfigurations.js"));
+
+            ////
+            //// Mascara
+            //bundles.Add(new ScriptBundle("~/plugins/jquery.maskedinput-master").Include(
+            //          "~/Scripts/plugins/maskedinput-master/dist/jquery.maskedinput.js",
+            //           "~/Scripts/plugins/maskedinput-master/dist/jquery.maskedinput.min.js",
+            //           "~/Scripts/plugins/maskedinput-master/gruntfile.js"));
 
             // jeditable 
             bundles.Add(new ScriptBundle("~/plugins/jeditable").Include(
@@ -459,6 +467,16 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/CatalogoDeducciones").Include(
                 "~/Scripts/app/General/CatalogoDeducciones.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/EmpleadoComisiones").Include(
+               "~/Scripts/app/General/EmpleadoComisiones.js"));
+
+            //bundles ScripBase/Validate DataAnnotations
+            bundles.Add(new ScriptBundle("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations").Include(
+                "~/Scripts/Scripts_Base/jquery.validate.js",
+                "~/Scripts/Scripts_Base/jquery.validate.min.js",
+                "~/Scripts/Scripts_Base/jquery.validate-vsdoc.js",
+                "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.js",
+                "~/Scripts/Scripts_Base/jquery.validate.unobtrusive.min.js"));
 
             //OPTIMIZATION
 
