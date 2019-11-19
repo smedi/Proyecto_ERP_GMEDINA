@@ -7,10 +7,11 @@
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.emp_Id, "emp_Id", htmlAttributes: new { @class = "control-label col-md-2" , @id="Empleado"})
+                @Html.LabelFor(model => model.emp_Id, "emp_Id", htmlAttributes: new { @class = "control-label col-md-2", })
                 <div class="col-md-10">
-                    <select id="emp_IdEmpleado" name="emp_Id" class="form-control"></select>
-                </div>
+                    <select id="emp_IdEmpleado" name="emp_Id" class="form-control" required></select>
+                  
+                </div> 
             </div>
 
             <div class="form-group" style="display:none">
