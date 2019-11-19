@@ -19,8 +19,9 @@
             @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
+                @Html.ValidationMessageFor(model => model.tbTipoDeduccion.tde_IdTipoDedu, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>  
 
 
         <div class="form-group">

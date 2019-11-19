@@ -20,7 +20,7 @@ namespace ERP_GMEDINA.Models
         public string cde_DescripcionDeduccion { get; set; }
 
         [Display(Name = "Tipo Deduccion")]
-        [Required(ErrorMessage = "No puede dejar campos vacios.")]
+        [Required]
         public int tde_IdTipoDedu { get; set; }
 
         [Display(Name = "Porcentaje Colaborador")]

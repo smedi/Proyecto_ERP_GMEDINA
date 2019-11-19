@@ -148,12 +148,7 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
         contentType: "application/json; charset=utf-8"
     })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
-        .done(function (data) {
-            if (data =="error")
-            {
-                $(".field-validation-error");
-            }
-            else
+        .done(function (data) {         
             $(".field-validation-error").css('display', 'none');
             $("#Crear #tde_IdTipoDedu").empty();
             $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
