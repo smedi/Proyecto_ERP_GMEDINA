@@ -158,7 +158,7 @@ namespace ERP_GMEDINA.Controllers
                                    select new { eqem_Id = tbDed.eqem_Id, per_Empleado = tbPer.per_Nombres }; //$"{tbPer.per_Nombres}" + " " + $"{tbPer.per_Apellidos}"
         //};//, dex_IdDeduccionesExtra = tbDed.dex_IdDeduccionesExtra };*/
             //Aqui iria la Vista donde trae al empleado según su Id
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "per_Empleado", db.V_DeduccionesExtraordinarias_Editar.Include(d => d.per_Empleado).Where(d => d.dex_IdDeduccionesExtra == id));
+            ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_Editar, "emp_Id", "per_Empleado", tbDeduccionesExtraordinarias.tbEquipoEmpleados.emp_Id);
             return View(tbDeduccionesExtraordinarias);
         }
 
@@ -219,7 +219,7 @@ namespace ERP_GMEDINA.Controllers
             }
 
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "per_Nombres", db.V_DeduccionesExtraordinarias_Editar.Include(d => d.per_Empleado));
+            ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_Editar, "emp_Id", "per_Empleado", tbDeduccionesExtraordinarias.tbEquipoEmpleados.emp_Id);
             return Json(Response, JsonRequestBehavior.AllowGet);
 
         }

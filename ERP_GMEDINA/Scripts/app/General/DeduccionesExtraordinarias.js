@@ -35,8 +35,8 @@ function cargarGridDeducciones() {
                     '<td>' + ListaDeduccionesExtraordinarias[i].dex_Cuota + '</td>' +
                     '<td>' + ListaDeduccionesExtraordinarias[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' +
-                    '<a href="DeduccionesExtraordinarias/Edit?id='+ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra+' class="btn btn-primary btn-xs" id="btnEditarDeduccionesExtraordinarias">Editar</a>' +
-                    '<a href="DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + ' class="btn btn-default btn-xs" id="btnDetalleDeduccionesExtraordinarias">Detalle</a>' +
+                    '<a class="btn btn-primary btn-xs" href="/DeduccionesExtraordinarias/Edit?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra +'">Editar</a>' +
+                    '<a class="btn btn-default btn-xs" href="/DeduccionesExtraordinarias/Details?id=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra +'">Detalle</a>' +
                     '<button iddeduccionesextra=' + ListaDeduccionesExtraordinarias[i].dex_IdDeduccionesExtra + ' type="button" class="btn btn-danger btn-xs" id="btnInactivarDeduccionesExtraordinarias">Inactivar</button>' +
                     '</td>' +
                     '</tr>';
