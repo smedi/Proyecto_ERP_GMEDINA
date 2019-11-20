@@ -65,64 +65,6 @@ namespace ERP_GMEDINA.Controllers
             return View(oDeduccionesExtraordinarias_Detalles);
         }
 
-        [HttpPost]
-        public ActionResult DetalleDE(int? id)
-        {
-            if (ModelState.IsValid)
-            {
-
-                try
-                {
-
-                    var ConsultaDetalle = from pde in db.tbDeduccionesExtraordinarias
-                                          join pcd in db.tbCatalogoDeDeducciones on pde.cde_IdDeducciones equals pcd.cde_IdDeducciones
-                                          join rhee in db.tbEquipoEmpleados on pde.eqem_Id equals rhee.eqem_Id
-                                          join rhet in db.tbEquipoTrabajo on rhee.eqtra_Id equals rhet.eqtra_Id
-                                          join rhe in db.tbEmpleados on rhee.emp_Id equals rhe.emp_Id
-                                          join rhp in db.tbPersonas on rhe.per_Id equals rhp.per_Id
-                                          join rhc in db.tbCargos on rhe.car_Id equals rhc.car_Id
-                                          join rhd in db.tbDepartamentos on rhc.car_Id equals rhd.car_Id
-                                          join rha in db.tbAreas on rhd.area_Id equals rha.area_Id
-
-                                          where
-                                          pde.dex_Activo == true &&
-                                          pde.dex_IdDeduccionesExtra == id
-
-                                          select new ViewModelDeduccionesExtraordinarias
-                                          {
-                                              dex_IdDeduccionesExtra = pde.dex_IdDeduccionesExtra,
-                                              eqem_Id = pde.eqem_Id,
-                                              per_Empleado = rhp.per_Nombres + ' ' + rhp.per_Apellidos,
-                                              car_Cargo = rhc.car_Descripcion,
-                                              depto_Departamento = rhd.depto_Descripcion,
-                                              area_Area = rha.area_Descripcion,
-                                              dex_ObservacionesComentarios = pde.dex_ObservacionesComentarios,
-                                              eqtra_Id = rhet.eqtra_Id,
-                                              eqtra_Codigo = rhet.eqtra_Codigo,
-                                              eqtra_Descripcion = rhet.eqtra_Descripcion,
-                                              dex_MontoInicial = pde.dex_MontoInicial,
-                                              dex_MontoRestante = pde.dex_MontoRestante,
-                                              dex_Cuota = pde.dex_Cuota,
-                                              cde_IdDeducciones = pde.cde_IdDeducciones,
-                                              cde_DescripcionDeduccion = pcd.cde_DescripcionDeduccion,
-                                              dex_UsuarioCrea = pde.dex_UsuarioCrea,
-                                              dex_FechaCrea = pde.dex_FechaCrea,
-                                              dex_UsuarioModifica = pde.dex_UsuarioModifica,
-                                              dex_FechaModifica = pde.dex_FechaModifica,
-                                              dex_Activo = pde.dex_Activo
-                                          };
-
-                    ViewBag.ConsultasDetalles = ConsultaDetalle.ToList();
-                }
-                catch (Exception ex)
-                {
-                    ex.Message.ToString();
-                }
-
-            }
-            return View();
-        }
-
         // GET: DeduccionesExtraordinarias/Create
         public ActionResult Create()
         {
@@ -216,7 +158,7 @@ namespace ERP_GMEDINA.Controllers
                                    select new { eqem_Id = tbDed.eqem_Id, per_Empleado = tbPer.per_Nombres }; //$"{tbPer.per_Nombres}" + " " + $"{tbPer.per_Apellidos}"
         //};//, dex_IdDeduccionesExtra = tbDed.dex_IdDeduccionesExtra };*/
             //Aqui iria la Vista donde trae al empleado según su Id
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "per_Empleado", db.V_DeduccionesExtraordinarias_EquipoEmpleado.Include(d => d.per_Empleado).Where());
+            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "per_Empleado", db.V_DeduccionesExtraordinarias_Editar.Include(d => d.per_Empleado).Where(d => d.dex_IdDeduccionesExtra == id));
             return View(tbDeduccionesExtraordinarias);
         }
 
@@ -277,7 +219,7 @@ namespace ERP_GMEDINA.Controllers
             }
 
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
-            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "per_Nombres", db.V_DeduccionesExtraordinarias_EquipoEmpleado.Include(d => d.per_Empleado));
+            ViewBag.eqem_Id = new SelectList(db.tbEquipoEmpleados, "eqem_Id", "per_Nombres", db.V_DeduccionesExtraordinarias_Editar.Include(d => d.per_Empleado));
             return Json(Response, JsonRequestBehavior.AllowGet);
 
         }

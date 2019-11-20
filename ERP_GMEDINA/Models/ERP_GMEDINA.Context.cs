@@ -112,24 +112,19 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_CatalogoDeIngresos> V_CatalogoDeIngresos { get; set; }
         public virtual DbSet<V_CatalogoDePlanillasConIngresosYDeducciones> V_CatalogoDePlanillasConIngresosYDeducciones { get; set; }
         public virtual DbSet<V_ColaboradoresPorPlanilla> V_ColaboradoresPorPlanilla { get; set; }
-        public virtual DbSet<V_ComisionesColaborador> V_ComisionesColaborador { get; set; }
-        public virtual DbSet<V_DecimoCuartoMes> V_DecimoCuartoMes { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias> V_DeduccionesExtraordinarias { get; set; }
         public virtual DbSet<V_DeduccionesExtrasColaboradores> V_DeduccionesExtrasColaboradores { get; set; }
-        public virtual DbSet<V_DeduccionesInstitucionesFinancierasColaboradres> V_DeduccionesInstitucionesFinancierasColaboradres { get; set; }
         public virtual DbSet<V_EmpleadoBonos> V_EmpleadoBonos { get; set; }
         public virtual DbSet<V_EmpleadoComisiones> V_EmpleadoComisiones { get; set; }
         public virtual DbSet<V_FormaDePago> V_FormaDePago { get; set; }
         public virtual DbSet<V_InformacionColaborador> V_InformacionColaborador { get; set; }
-        public virtual DbSet<V_PlanillaDeducciones> V_PlanillaDeducciones { get; set; }
         public virtual DbSet<V_PlanillaIngresos> V_PlanillaIngresos { get; set; }
         public virtual DbSet<V_PreviewPlanilla> V_PreviewPlanilla { get; set; }
         public virtual DbSet<V_tbCatalogoDeDeducciones> V_tbCatalogoDeDeducciones { get; set; }
         public virtual DbSet<V_tbCatalogoDeIngresos> V_tbCatalogoDeIngresos { get; set; }
-        public virtual DbSet<V_TechosDeducciones> V_TechosDeducciones { get; set; }
-        public virtual DbSet<V_TipoDeduccion> V_TipoDeduccion { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_EquipoEmpleado> V_DeduccionesExtraordinarias_EquipoEmpleado { get; set; }
+        public virtual DbSet<V_DeduccionesExtraordinarias_Editar> V_DeduccionesExtraordinarias_Editar { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
