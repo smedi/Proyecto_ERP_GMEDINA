@@ -1276,7 +1276,6 @@
     <Content Include="Views\DeduccionesExtraordinarias\Delete.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Edit.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Index.cshtml" />
-    <Content Include="Views\DeduccionesExtraordinarias\DetalleDE.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
