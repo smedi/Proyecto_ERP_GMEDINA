@@ -3,7 +3,7 @@
 //
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
-      console.log(textStatus);
+      
   })
   .fail(function (jqxhr, settings, exception) {
       console.log("No se pudo recuperar Script SerializeDate");
@@ -149,7 +149,6 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
     })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {         
-            $(".field-validation-error").css('display', 'none');
             $("#Crear #tde_IdTipoDedu").empty();
             $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
@@ -165,7 +164,15 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccion').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+    var val1 = $("#cde_Descripcion").val();
+    var val2 = $("#ddltipodededu").val();
 
+    if (val1 == "" && val1 == null && val1 == undefined) {
+        $("#Crear #cde_DescripcionDeduccion").css("display", "");
+    }
+    else if (val2 == "" && val2 == null && val2 == undefined && val2 <= 0) {
+        $("#Crear #ddltipodededu").css("display", "");
+    }
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
  
@@ -263,9 +270,16 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
     $("#EditarCatalogoDeducciones").modal('hide');
+    $("#Validation_descipcion").css("display", "none");
+    $("#Validation_descipcion2").css("display", "none");
 });
 
 $("#btnCerrarCrear").click(function () {
+    var val1 = $("#cde_Descripcion").val();
+    var val2 = $("#ddltipodededu").val();
+
+    $("#Crear #cde_DescripcionDeduccion").css("display", "none");
+    $("#Crear #ddltipodededu").css("display", "none");
     $("#AgregarCatalogoDeducciones").modal('hide');
 });
 

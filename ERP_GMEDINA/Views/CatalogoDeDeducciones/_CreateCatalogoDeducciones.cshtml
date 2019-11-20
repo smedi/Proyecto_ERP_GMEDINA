@@ -6,7 +6,7 @@
         @Html.HiddenFor(model => model.cde_IdDeducciones)
         @Html.HiddenFor(model => model.cde_FechaCrea)
         @Html.HiddenFor(model => model.cde_UsuarioCrea)
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.cde_DescripcionDeduccion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -19,7 +19,7 @@
             @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control"></select>
-                @Html.ValidationMessageFor(model => model.tbTipoDeduccion.tde_IdTipoDedu, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.tbTipoDeduccion.tde_IdTipoDedu, "", new { @class = "text-danger", @id = "ddltipodededu" })
             </div>
         </div>  
 
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-white" data-dismiss="modal" id="btncerrarAgregar">Close</button>
+        <button type="button" class="btn btn-white" data-dismiss="modal" id="btncerrarAgregar">Cerrar</button>
         <button type="submit" class="btn btn-primary" id="btnCreateRegistroDeduccion">Agregar</button>
     </div>
 }
