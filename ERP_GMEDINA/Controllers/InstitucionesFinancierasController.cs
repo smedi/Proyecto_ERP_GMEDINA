@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using System.IO;
+using SpreadsheetLight;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -211,62 +212,163 @@ namespace ERP_GMEDINA.Controllers
             return View("CargaDocumento");
         }
 
-
-        public ActionResult CargaPlanilla()
+       // [HttpPost]
+        public ActionResult CargaDocumento(HttpPostedFileBase archivoexcel)
         {
-            HttpPostedFileBase PlanillaCargada;
-           // string ubicacion = "Content/PlanillasInstitucionesFinancieras/";
-     
-                bool GuardadoConExito;
-                string fName = "";
-                try
+            // string ubicacion = "Content/PlanillasInstitucionesFinancieras/";
+            string path = @"C:\Users\LAB02\Downloads\Deduccion_Planilla_Prueba.xlsx";
+            SLDocument sl = new SLDocument(path);
+
+            using (var db = new ERP_GMEDINAEntities())
+            {
+
+                int iRow = 2;
+                while (!string.IsNullOrEmpty(sl.GetCellValueAsString(iRow, 1)))
                 {
-                    foreach (string fileName in Request.Files)
-                    {
-                        HttpPostedFileBase file = Request.Files[fileName];
-                        //Save file content goes here
-                        fName = file.FileName;
-                        if (file != null && file.ContentLength > 0)
-                        {
+                    string identidad = sl.GetCellValueAsString(iRow, 1);
+                    decimal monto = sl.GetCellValueAsDecimal(iRow, 2);
+                    string comentario = sl.GetCellValueAsString(iRow, 3);
+                    string nombres = sl.GetCellValueAsString(iRow, 4);
+                    string apellidos = sl.GetCellValueAsString(iRow, 5);
+                    
 
-                            var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\WallImages", Server.MapPath(@"\")));
+                    var oMiExcel = new tbDeduccionInstitucionFinanciera();
 
-                            string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagepath");
+                    int empleadoID = 0, ultimoID = 0;
 
-                            var fileName1 = Path.GetFileName(file.FileName);
 
-                            bool isExists = System.IO.Directory.Exists(pathString);
+                    var Excel = from P in db.tbPersonas
+                                join E in db.tbEmpleados on P.per_Id equals E.per_Id
 
-                            if (!isExists)
-                                System.IO.Directory.CreateDirectory(pathString);
+                                where
+                                P.per_Identidad == identidad
 
-                            var path = string.Format("{0}\\{1}", pathString, file.FileName);
-                            file.SaveAs(path);
+                                select new
+                                {
+                                    empleadoID = E.emp_Id,
+                                    nombres = P.per_Nombres,
+                                    apellidos = P.per_Apellidos
+                                };
+                    var sql = db.Database.ExecuteSqlCommand("SELECT ");
 
-                        }
 
-                    }
 
-                 GuardadoConExito = true;
+                    oMiExcel.deif_IdDeduccionInstFinanciera = ultimoID;
+                    oMiExcel.emp_Id = empleadoID;
+                    oMiExcel.deif_Monto = monto;
+                    oMiExcel.deif_Comentarios = comentario;
+                    
+
+                    db.tbDeduccionInstitucionFinanciera.Add(oMiExcel);
+                    db.SaveChanges();
+
+                    iRow++;
+                }
 
             }
-                catch (Exception ex)
-                {
-                    GuardadoConExito = false;
-                }
+
+            //try
+            //{
+            //    if(archivoexcel.ContentLength > 0)
+            //    {
+            //        //Guardado del archivo en el server
+            //        string _NombreArchivo = Path.GetFileName(archivoexcel.FileName);
+            //        string _Ubicacion = Path.Combine(Server.MapPath("~/Content/PlanillasInstitucionesFinancieras"), _NombreArchivo);
+            //        archivoexcel.SaveAs(_Ubicacion);
+
+            //Leemos el CSV y lo pasamos a una lista
+
+            //List<tbDeduccionInstitucionFinanciera> listaColaboradores = (from p in File.ReadAllLines(_Ubicacion)
+            //                                          let parts = p.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            //                                          select new Excel
+            //                                          {
+            //                                              identidad = parts[0],
+            //                                              nombres = parts[1],
+            //                                              apellidos = parts[2],
+            //                                              nombres = parts[3],
+            //                                              comentario = parts[4],
+            //                                              totalDeducciones = Convert.ToDecimal(parts[5]),
+            //                                          }).ToList();
+
+            //Guardamos toda la información de esa lista en base de datos
+            //using (var context = new ERP_GMEDINAEntities())
+            //{
+            //    foreach (var colaborador in listaColaboradores)
+            //    {
+            //       context.tbDeduccionInstitucionFinanciera.Add(colaborador);
+
+            //    }
+
+            //    context.SaveChanges();
+            //}
+            //    }
+            //}
+            //catch
+            //{
+
+            //}
 
 
-                if (GuardadoConExito)
-                {
-                    return Json(new { Message = fName });
-                }
-                else
-                {
-                    return Json(new { Message = "Error al guardar los archivos en el sistema." },JsonRequestBehavior.AllowGet);
-                }
-            }
-        
+            //    bool GuardadoConExito;
+            //    string fName = "";
+            //    try
+            //    {
+            //        foreach (string fileName in Request.Files)
+            //        {
+            //            HttpPostedFileBase file = Request.Files[fileName];
+            //            //Save file content goes here
+            //            fName = file.FileName;
+            //            if (file != null && file.ContentLength > 0)
+            //            {
+
+            //                var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\WallImages", Server.MapPath(@"\")));
+
+            //                string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagepath");
+
+            //                var fileName1 = Path.GetFileName(file.FileName);
+
+            //                bool isExists = System.IO.Directory.Exists(pathString);
+
+            //                if (!isExists)
+            //                    System.IO.Directory.CreateDirectory(pathString);
+
+            //                var path = string.Format("{0}\\{1}", pathString, file.FileName);
+            //                file.SaveAs(path);
+
+            //            }
+
+            //        }
+
+            //     GuardadoConExito = true;
+
+            //}
+            //    catch (Exception ex)
+            //    {
+            //        GuardadoConExito = false;
+            //    }
 
 
+            //    if (GuardadoConExito)
+            //    {
+            //        return Json(new { Message = fName });
+            //    }
+            //    else
+            //    {
+            //        return Json(new { Message = "Error al guardar los archivos en el sistema." },JsonRequestBehavior.AllowGet);
+            //    }
+
+            //return Json(new { Message = "Bien" });
+            return Content("Correct");
+        }
+
+    }
+
+    class Excel
+    {
+        public string identidad { get; set; }
+        public string nombres { get; set; }
+        public string apellidos { get; set; }
+        public string comentario { get; set; }
+        public decimal totalDeducciones { get; set; }
     }
 }

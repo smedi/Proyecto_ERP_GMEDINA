@@ -27,13 +27,13 @@
                     </p>
                     <form action="#" class="dropzone" id="dropzoneForm">
                         <div class="fallback">
-                            <input name="file" type="file" multiple required />
+                            <input name="archivoexcel" type="file" multiple required />
                         </div>
                     </form>
 
                     <hr>
-                    @*<input type="button" class="btn-primary  col-md-offset-5" name="Cargar Archivos" value="Cargar Archivos">*@
-                    @Html.ActionLink("Cargar Archivos", "CargaPlanilla", @*new { id = item.insf_IdInstitucionFinanciera },*@ new { @class = "btn btn-primary col-md-offset-5" })
+                   
+                    @Html.ActionLink("Cargar Archivos", "CargaDocumento", null, new { @class = "btn btn-primary col-md-offset-5" })
                 </div>
 
             </div>
@@ -54,7 +54,7 @@
 <script src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <!-- Custom and plugin javascript -->
 <script src="~/Scripts/app/inspinia.js"></script>
-<script src="~/Scripts/plugins/pace/pace.min.js"></script>
+@*<script src="~/Scripts/plugins/pace/pace.min.js"></script>*@
 
 <!-- Jasny -->
 
@@ -73,26 +73,6 @@
             dictDefaultMessage: "<center><strong>Suelte los archivos aquí o haga clic para cargar.</strong></br></center>"
         };
 
-        //$(document).ready(function () {
-
-        //    var editor_one = CodeMirror.fromTextArea(document.getElementById("code1"), {
-        //        lineNumbers: true,
-        //        matchBrackets: true
-        //    });
-
-        //    var editor_two = CodeMirror.fromTextArea(document.getElementById("code2"), {
-        //        lineNumbers: true,
-        //        matchBrackets: true
-        //    });
-
-        //    var editor_two = CodeMirror.fromTextArea(document.getElementById("code3"), {
-        //        lineNumbers: true,
-        //        matchBrackets: true
-        //    });
-
-        //});
-
-
-        //File Upload response from the server
+      
 
 </script>
