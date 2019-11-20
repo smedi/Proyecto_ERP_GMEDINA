@@ -164,7 +164,7 @@ $(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccion').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    var val1 = $("#cde_Descripcion").val();
+    var val1 = $("#Crear #cde_Descripcion").val();
     var val2 = $("#ddltipodededu").val();
 
     if (val1 == "" && val1 == null && val1 == undefined) {
@@ -270,16 +270,14 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
     $("#EditarCatalogoDeducciones").modal('hide');
-    $("#Validation_descipcion").css("display", "none");
-    $("#Validation_descipcion2").css("display", "none");
 });
 
 $("#btnCerrarCrear").click(function () {
     var val1 = $("#cde_Descripcion").val();
     var val2 = $("#ddltipodededu").val();
 
-    $("#Crear #cde_DescripcionDeduccion").css("display", "none");
-    $("#Crear #ddltipodededu").css("display", "none");
+    $("#val1").css("display", "none");
+    $("#val2").css("display", "none");
     $("#AgregarCatalogoDeducciones").modal('hide');
 });
 
