@@ -125,6 +125,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_DeduccionesExtraordinarias_Detalles> V_DeduccionesExtraordinarias_Detalles { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_EquipoEmpleado> V_DeduccionesExtraordinarias_EquipoEmpleado { get; set; }
         public virtual DbSet<V_DeduccionesExtraordinarias_Editar> V_DeduccionesExtraordinarias_Editar { get; set; }
+        public virtual DbSet<V_DeduccionesExtraordinarias_EquipoEmpleado1> V_DeduccionesExtraordinarias_EquipoEmpleado1Set { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -718,13 +719,21 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbEmpleadoBonos_Update", cb_IdParameter, emp_IdParameter, cin_IdIngresoParameter, cb_MontoParameter, cb_FechaRegistroParameter, cb_PagadoParameter, cb_UsuarioModificaParameter, cb_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbFormaPago_Inactivar(Nullable<int> fpa_IdFormaPago)
+        public virtual ObjectResult<string> UDP_Plani_tbFormaPago_Inactivar(Nullable<int> fpa_IdFormaPago, Nullable<int> fpa_UsuarioModifica, Nullable<System.DateTime> fpa_FechaModifica)
         {
             var fpa_IdFormaPagoParameter = fpa_IdFormaPago.HasValue ?
                 new ObjectParameter("fpa_IdFormaPago", fpa_IdFormaPago) :
                 new ObjectParameter("fpa_IdFormaPago", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbFormaPago_Inactivar", fpa_IdFormaPagoParameter);
+            var fpa_UsuarioModificaParameter = fpa_UsuarioModifica.HasValue ?
+                new ObjectParameter("fpa_UsuarioModifica", fpa_UsuarioModifica) :
+                new ObjectParameter("fpa_UsuarioModifica", typeof(int));
+    
+            var fpa_FechaModificaParameter = fpa_FechaModifica.HasValue ?
+                new ObjectParameter("fpa_FechaModifica", fpa_FechaModifica) :
+                new ObjectParameter("fpa_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbFormaPago_Inactivar", fpa_IdFormaPagoParameter, fpa_UsuarioModificaParameter, fpa_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Plani_tbInstitucionesFinancieras_Insert(string insf_DescInstitucionFinanc, string insf_Contacto, string insf_Telefono, string insf_Correo, Nullable<int> insf_UsuarioCrea, Nullable<System.DateTime> insf_FechaCrea, Nullable<bool> insf_Activo)

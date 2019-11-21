@@ -485,6 +485,9 @@
     <Compile Include="Models\V_DeduccionesExtraordinarias_EquipoEmpleado.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_DeduccionesExtraordinarias_EquipoEmpleado1.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_DeduccionesExtrasColaboradores.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>

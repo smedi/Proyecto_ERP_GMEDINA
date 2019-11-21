@@ -86,7 +86,7 @@
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="adsu_FechaAdelanto" Type="datetime" Nullable="false" />
           <Property Name="adsu_RazonAdelanto" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="adsu_Monto" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="adsu_Monto" Type="decimal" Precision="16" Scale="4" />
           <Property Name="peri_IdPeriodo" Type="int" Nullable="false" />
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="adsu_Pagado" Type="bit" Nullable="false" />
@@ -117,8 +117,8 @@
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="tde_IdTipoDedu" Type="int" Nullable="false" />
-          <Property Name="cde_PorcentajeColaborador" Type="decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="cde_PorcentajeEmpresa" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="cde_PorcentajeColaborador" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="cde_PorcentajeEmpresa" Type="decimal" Precision="16" Scale="4" />
           <Property Name="cde_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="cde_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="cde_UsuarioModifica" Type="int" />
@@ -172,11 +172,11 @@
           </Key>
           <Property Name="dex_IdDeduccionesExtra" Type="int" Nullable="false" />
           <Property Name="eqem_Id" Type="int" Nullable="false" />
-          <Property Name="dex_MontoInicial" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="dex_MontoRestante" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="dex_MontoInicial" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="dex_MontoRestante" Type="decimal" Precision="16" Scale="4" />
           <Property Name="dex_ObservacionesComentarios" Type="nvarchar" MaxLength="100" />
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
-          <Property Name="dex_Cuota" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="dex_Cuota" Type="decimal" Precision="16" Scale="4" />
           <Property Name="dex_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="dex_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="dex_UsuarioModifica" Type="int" />
@@ -190,7 +190,7 @@
           <Property Name="deif_IdDeduccionInstFinanciera" Type="int" Nullable="false" />
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="insf_IdInstitucionFinanciera" Type="int" Nullable="false" />
-          <Property Name="deif_Monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="deif_Monto" Type="decimal" Precision="16" Scale="4" />
           <Property Name="deif_Comentarios" Type="nvarchar" MaxLength="100" />
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="deif_UsuarioCrea" Type="int" Nullable="false" />
@@ -207,7 +207,7 @@
           <Property Name="cb_Id" Type="int" Nullable="false" />
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="cin_IdIngreso" Type="int" Nullable="false" />
-          <Property Name="cb_Monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="cb_Monto" Type="decimal" Precision="16" Scale="4" />
           <Property Name="cb_FechaRegistro" Type="datetime" Nullable="false" />
           <Property Name="cb_Pagado" Type="bit" Nullable="false" />
           <Property Name="cb_UsuarioCrea" Type="int" Nullable="false" />
@@ -223,7 +223,7 @@
           <Property Name="cc_Id" Type="int" Nullable="false" />
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="cin_IdIngreso" Type="int" Nullable="false" />
-          <Property Name="cc_Monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="cc_Monto" Type="decimal" Precision="16" Scale="4" />
           <Property Name="cc_FechaRegistro" Type="datetime" Nullable="false" />
           <Property Name="cc_Pagado" Type="bit" Nullable="false" />
           <Property Name="cc_UsuarioCrea" Type="int" Nullable="false" />
@@ -251,7 +251,7 @@
           <Property Name="hidp_IdHistorialdeDeduPago" Type="int" Nullable="false" />
           <Property Name="tpdd_IdPlanillaDetDeduccion" Type="int" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
-          <Property Name="hidp_Total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="hidp_Total" Type="decimal" Precision="16" Scale="4" />
           <Property Name="hidp_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="hidp_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="hidp_UsuarioModifica" Type="int" />
@@ -267,7 +267,7 @@
           <Property Name="hip_FechaFinal" Type="datetime" Nullable="false" />
           <Property Name="hip_UnidadesPagar" Type="int" Nullable="false" />
           <Property Name="hip_MedidaUnitaria" Type="int" Nullable="false" />
-          <Property Name="hip_TotalPagar" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="hip_TotalPagar" Type="decimal" Precision="16" Scale="4" />
           <Property Name="tpdi_IdDetallePlanillaIngreso" Type="int" Nullable="false" />
           <Property Name="hip_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="hip_FechaCrea" Type="datetime" Nullable="false" />
@@ -280,7 +280,7 @@
           </Key>
           <Property Name="hipa_IdHistorialDePago" Type="int" Nullable="false" />
           <Property Name="emp_Id" Type="int" Nullable="false" />
-          <Property Name="hipa_SueldoNeto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="hipa_SueldoNeto" Type="decimal" Precision="16" Scale="4" />
           <Property Name="hipa_FechaInicio" Type="datetime" Nullable="false" />
           <Property Name="hipa_FechaFin" Type="datetime" Nullable="false" />
           <Property Name="hipa_FechaPago" Type="datetime" Nullable="false" />
@@ -393,9 +393,9 @@
           </Key>
           <Property Name="saph_Idsaph" Type="int" Nullable="false" />
           <Property Name="rama_Id" Type="int" Nullable="false" />
-          <Property Name="saph_SalarioMinimo" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="saph_SalarioMinimo" Type="decimal" Precision="16" Scale="4" />
           <Property Name="jor_Id" Type="int" Nullable="false" />
-          <Property Name="saph_Monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="saph_Monto" Type="decimal" Precision="16" Scale="4" />
           <Property Name="saph_TamanoEmpresaInicial" Type="int" Nullable="false" />
           <Property Name="saph_TamanoEmpresaFinal" Type="int" Nullable="false" />
           <Property Name="saph_UsuarioCrea" Type="int" Nullable="false" />
@@ -409,9 +409,9 @@
             <PropertyRef Name="tede_Id" />
           </Key>
           <Property Name="tede_Id" Type="int" Nullable="false" />
-          <Property Name="tede_RangoInicial" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="tede_RangoFinal" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="tede_Porcentaje" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="tede_RangoInicial" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="tede_RangoFinal" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="tede_Porcentaje" Type="decimal" Precision="16" Scale="4" />
           <Property Name="cde_IdDeducciones" Type="int" Nullable="false" />
           <Property Name="tede_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="tede_FechaCrea" Type="datetime" Nullable="false" />
@@ -974,9 +974,9 @@
           </Key>
           <Property Name="pres_Id" Type="int" Nullable="false" />
           <Property Name="pres_DerechoPreaviso" Type="bit" Nullable="false" />
-          <Property Name="pres_Preaviso" Type="decimal" Precision="8" Scale="4" Nullable="false" />
-          <Property Name="pres_DecimoTercer" Type="decimal" Precision="8" Scale="4" Nullable="false" />
-          <Property Name="pres_Catorceavo" Type="decimal" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="pres_Preaviso" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pres_DecimoTercer" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="pres_Catorceavo" Type="decimal" Precision="16" Scale="4" />
           <Property Name="pres_Estado" Type="bit" Nullable="false" />
           <Property Name="pres_RazonInactivo" Type="nvarchar" MaxLength="100" />
           <Property Name="pres_UsuarioCrea" Type="int" Nullable="false" />
@@ -1059,7 +1059,7 @@
           <Property Name="sue_Id" Type="int" Nullable="false" />
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="tmon_Id" Type="int" Nullable="false" />
-          <Property Name="sue_Cantidad" Type="decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="sue_Cantidad" Type="decimal" Precision="16" Scale="4" />
           <Property Name="sue_SueldoAnterior" Type="int" />
           <Property Name="sue_Estado" Type="bit" Nullable="false" />
           <Property Name="sue_RazonInactivo" Type="nvarchar" MaxLength="100" />
@@ -1276,29 +1276,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_ColaboradoresPorPlanilla' does
           <Property Name="CantidadColaboradores" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_ComisionesColaborador' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DecimoCuartoMes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_DeduccionesExtraordinarias">
-          <Key>
-            <PropertyRef Name="per_DeduccionEmpleado" />
-            <PropertyRef Name="car_Descripcion" />
-            <PropertyRef Name="dex_MontoInicial" />
-            <PropertyRef Name="dex_MontoRestante" />
-            <PropertyRef Name="dex_Cuota" />
-            <PropertyRef Name="cde_DescripcionDeduccion" />
-          </Key>
-          <Property Name="per_DeduccionEmpleado" Type="nvarchar" MaxLength="101" Nullable="false" />
-          <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="dex_ObservacionesComentarios" Type="nvarchar" MaxLength="100" />
-          <Property Name="dex_MontoInicial" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="dex_MontoRestante" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="dex_Cuota" Type="decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="cde_DescripcionDeduccion" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Detalles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_DeduccionesExtraordinarias_Detalles">
           <Key>
@@ -1361,10 +1338,14 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtraordinarias_Equ
         <EntityType Name="V_DeduccionesExtraordinarias_EquipoEmpleado">
           <Key>
             <PropertyRef Name="eqem_Id" />
-            <PropertyRef Name="per_Empleado" />
+            <PropertyRef Name="eqtra_Id" />
+            <PropertyRef Name="eqtra_Codigo" />
+            <PropertyRef Name="per_EquipoEmpleado" />
           </Key>
           <Property Name="eqem_Id" Type="int" Nullable="false" />
-          <Property Name="per_Empleado" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="eqtra_Id" Type="int" Nullable="false" />
+          <Property Name="eqtra_Codigo" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="per_EquipoEmpleado" Type="nvarchar" MaxLength="154" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtrasColaboradores' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1401,8 +1382,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesExtrasColaboradores
           <Property Name="dex_FechaModifica" Type="datetime" />
           <Property Name="dex_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_DeduccionesInstitucionesFinancierasColaboradres' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_EmpleadoBonos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_EmpleadoBonos">
@@ -1500,8 +1479,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_InformacionColaborador' does n
           <Property Name="fpa_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_PlanillaDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.Plani.V_PlanillaIngresos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_PlanillaIngresos">
           <Key>
@@ -1589,10 +1566,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_tbCatalogoDeIngresos' does not
           <Property Name="cin_FechaModifica" Type="datetime" />
           <Property Name="cin_Activo" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TechosDeducciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <Association Name="FK_ Acce _ tbUsuario_ tbAccesoRol _acrol_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
           <End Role="tbAccesoRol" Type="Self.tbAccesoRol" Multiplicity="*" />
@@ -4824,6 +4797,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
         </Function>
         <Function Name="UDP_Plani_tbFormaPago_Inactivar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="fpa_IdFormaPago" Type="int" Mode="In" />
+          <Parameter Name="fpa_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="fpa_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Plani_tbInstitucionesFinancieras_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="insf_DescInstitucionFinanc" Type="nvarchar" Mode="In" />
@@ -5027,17 +5002,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
     [V_ColaboradoresPorPlanilla].[CantidadColaboradores] AS [CantidadColaboradores]
     FROM [Plani].[V_ColaboradoresPorPlanilla] AS [V_ColaboradoresPorPlanilla]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="V_DeduccionesExtraordinarias" EntityType="Self.V_DeduccionesExtraordinarias" store:Type="Views" store:Schema="Plani">
-            <DefiningQuery>SELECT 
-    [V_DeduccionesExtraordinarias].[per_DeduccionEmpleado] AS [per_DeduccionEmpleado], 
-    [V_DeduccionesExtraordinarias].[car_Descripcion] AS [car_Descripcion], 
-    [V_DeduccionesExtraordinarias].[dex_ObservacionesComentarios] AS [dex_ObservacionesComentarios], 
-    [V_DeduccionesExtraordinarias].[dex_MontoInicial] AS [dex_MontoInicial], 
-    [V_DeduccionesExtraordinarias].[dex_MontoRestante] AS [dex_MontoRestante], 
-    [V_DeduccionesExtraordinarias].[dex_Cuota] AS [dex_Cuota], 
-    [V_DeduccionesExtraordinarias].[cde_DescripcionDeduccion] AS [cde_DescripcionDeduccion]
-    FROM [Plani].[V_DeduccionesExtraordinarias] AS [V_DeduccionesExtraordinarias]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_DeduccionesExtraordinarias_Detalles" EntityType="Self.V_DeduccionesExtraordinarias_Detalles" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [V_DeduccionesExtraordinarias_Detalles].[dex_IdDeduccionesExtra] AS [dex_IdDeduccionesExtra], 
@@ -5074,7 +5038,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <EntitySet Name="V_DeduccionesExtraordinarias_EquipoEmpleado" EntityType="Self.V_DeduccionesExtraordinarias_EquipoEmpleado" store:Type="Views" store:Schema="Plani">
             <DefiningQuery>SELECT 
     [V_DeduccionesExtraordinarias_EquipoEmpleado].[eqem_Id] AS [eqem_Id], 
-    [V_DeduccionesExtraordinarias_EquipoEmpleado].[per_Empleado] AS [per_Empleado]
+    [V_DeduccionesExtraordinarias_EquipoEmpleado].[eqtra_Id] AS [eqtra_Id], 
+    [V_DeduccionesExtraordinarias_EquipoEmpleado].[eqtra_Codigo] AS [eqtra_Codigo], 
+    [V_DeduccionesExtraordinarias_EquipoEmpleado].[per_EquipoEmpleado] AS [per_EquipoEmpleado]
     FROM [Plani].[V_DeduccionesExtraordinarias_EquipoEmpleado] AS [V_DeduccionesExtraordinarias_EquipoEmpleado]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_DeduccionesExtrasColaboradores" EntityType="Self.V_DeduccionesExtrasColaboradores" store:Type="Views" store:Schema="Plani">
@@ -6488,7 +6454,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="adsu_FechaAdelanto" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="adsu_RazonAdelanto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="adsu_Monto" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="adsu_Monto" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="peri_IdPeriodo" Type="Int32" Nullable="false" />
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="adsu_Pagado" Type="Boolean" Nullable="false" />
@@ -6527,8 +6493,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="cde_DescripcionDeduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="tde_IdTipoDedu" Type="Int32" Nullable="false" />
-          <Property Name="cde_PorcentajeColaborador" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="cde_PorcentajeEmpresa" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="cde_PorcentajeColaborador" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="cde_PorcentajeEmpresa" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="cde_UsuarioCrea" Type="Int32" Nullable="false" />
           <Property Name="cde_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="cde_UsuarioModifica" Type="Int32" />
@@ -6603,11 +6569,11 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           </Key>
           <Property Name="dex_IdDeduccionesExtra" Type="Int32" Nullable="false" />
           <Property Name="eqem_Id" Type="Int32" Nullable="false" />
-          <Property Name="dex_MontoInicial" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="dex_MontoRestante" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="dex_MontoInicial" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="dex_MontoRestante" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="dex_ObservacionesComentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
-          <Property Name="dex_Cuota" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="dex_Cuota" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="dex_UsuarioCrea" Type="Int32" Nullable="false" />
           <Property Name="dex_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="dex_UsuarioModifica" Type="Int32" />
@@ -6625,7 +6591,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="deif_IdDeduccionInstFinanciera" Type="Int32" Nullable="false" />
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="insf_IdInstitucionFinanciera" Type="Int32" Nullable="false" />
-          <Property Name="deif_Monto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="deif_Monto" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="deif_Comentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="deif_UsuarioCrea" Type="Int32" Nullable="false" />
@@ -6647,7 +6613,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="cb_Id" Type="Int32" Nullable="false" />
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="cin_IdIngreso" Type="Int32" Nullable="false" />
-          <Property Name="cb_Monto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="cb_Monto" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="cb_FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="cb_Pagado" Type="Boolean" Nullable="false" />
           <Property Name="cb_UsuarioCrea" Type="Int32" Nullable="false" />
@@ -6667,7 +6633,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="cc_Id" Type="Int32" Nullable="false" />
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="cin_IdIngreso" Type="Int32" Nullable="false" />
-          <Property Name="cc_Monto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="cc_Monto" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="cc_FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="cc_Pagado" Type="Boolean" Nullable="false" />
           <Property Name="cc_UsuarioCrea" Type="Int32" Nullable="false" />
@@ -6702,7 +6668,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="hidp_IdHistorialdeDeduPago" Type="Int32" Nullable="false" />
           <Property Name="tpdd_IdPlanillaDetDeduccion" Type="Int32" Nullable="false" />
           <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
-          <Property Name="hidp_Total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="hidp_Total" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="hidp_UsuarioCrea" Type="Int32" Nullable="false" />
           <Property Name="hidp_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hidp_UsuarioModifica" Type="Int32" />
@@ -6722,7 +6688,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="hip_FechaFinal" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hip_UnidadesPagar" Type="Int32" Nullable="false" />
           <Property Name="hip_MedidaUnitaria" Type="Int32" Nullable="false" />
-          <Property Name="hip_TotalPagar" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="hip_TotalPagar" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="tpdi_IdDetallePlanillaIngreso" Type="Int32" Nullable="false" />
           <Property Name="hip_UsuarioCrea" Type="Int32" Nullable="false" />
           <Property Name="hip_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
@@ -6739,7 +6705,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           </Key>
           <Property Name="hipa_IdHistorialDePago" Type="Int32" Nullable="false" />
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="hipa_SueldoNeto" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="hipa_FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hipa_FechaFin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="hipa_FechaPago" Type="DateTime" Nullable="false" Precision="3" />
@@ -6885,9 +6851,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           </Key>
           <Property Name="saph_Idsaph" Type="Int32" Nullable="false" />
           <Property Name="rama_Id" Type="Int32" Nullable="false" />
-          <Property Name="saph_SalarioMinimo" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="saph_SalarioMinimo" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="jor_Id" Type="Int32" Nullable="false" />
-          <Property Name="saph_Monto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="saph_Monto" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="saph_TamanoEmpresaInicial" Type="Int32" Nullable="false" />
           <Property Name="saph_TamanoEmpresaFinal" Type="Int32" Nullable="false" />
           <Property Name="saph_UsuarioCrea" Type="Int32" Nullable="false" />
@@ -6905,9 +6871,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
             <PropertyRef Name="tede_Id" />
           </Key>
           <Property Name="tede_Id" Type="Int32" Nullable="false" />
-          <Property Name="tede_RangoInicial" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="tede_RangoFinal" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="tede_Porcentaje" Type="Int32" Nullable="false" />
+          <Property Name="tede_RangoInicial" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="tede_RangoFinal" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="tede_Porcentaje" Type="Int32" />
           <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
           <Property Name="tede_UsuarioCrea" Type="Int32" Nullable="false" />
           <Property Name="tede_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
@@ -7650,9 +7616,9 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           </Key>
           <Property Name="pres_Id" Type="Int32" Nullable="false" />
           <Property Name="pres_DerechoPreaviso" Type="Boolean" Nullable="false" />
-          <Property Name="pres_Preaviso" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
-          <Property Name="pres_DecimoTercer" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
-          <Property Name="pres_Catorceavo" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="pres_Preaviso" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pres_DecimoTercer" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="pres_Catorceavo" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="pres_Estado" Type="Boolean" Nullable="false" />
           <Property Name="pres_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="pres_UsuarioCrea" Type="Int32" Nullable="false" />
@@ -7758,7 +7724,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="sue_Id" Type="Int32" Nullable="false" />
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="tmon_Id" Type="Int32" Nullable="false" />
-          <Property Name="sue_Cantidad" Type="Decimal" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="sue_Cantidad" Type="Decimal" Precision="16" Scale="4" />
           <Property Name="sue_SueldoAnterior" Type="Int32" />
           <Property Name="sue_Estado" Type="Boolean" Nullable="false" />
           <Property Name="sue_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -12553,6 +12519,8 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbFormaPago_Inactivar" ReturnType="Collection(String)">
           <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
+            <Parameter Name="fpa_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="fpa_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbInstitucionesFinancieras_Insert" ReturnType="Collection(String)">
             <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
@@ -12636,6 +12604,7 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           </AssociationSet>
           <EntitySet Name="V_DeduccionesExtraordinarias_EquipoEmpleado" EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_EquipoEmpleado" />
           <EntitySet Name="V_DeduccionesExtraordinarias_Editar" EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Editar" />
+          <EntitySet Name="V_DeduccionesExtraordinarias_EquipoEmpleado1Set" EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_EquipoEmpleado1" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -12754,6 +12723,18 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
           <Property Name="emp_Id" Type="Int32" Nullable="false" />
           <Property Name="per_Id" Type="Int32" Nullable="false" />
           <Property Name="per_Empleado" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_DeduccionesExtraordinarias_EquipoEmpleado1">
+          <Key>
+            <PropertyRef Name="eqem_Id" />
+            <PropertyRef Name="eqtra_Id" />
+            <PropertyRef Name="eqtra_Codigo" />
+            <PropertyRef Name="per_EquipoEmpleado" />
+          </Key>
+          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
+          <Property Name="eqtra_Id" Type="Int32" Nullable="false" />
+          <Property Name="eqtra_Codigo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="per_EquipoEmpleado" Type="String" Nullable="false" MaxLength="154" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -14092,19 +14073,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_DeduccionesExtraordinarias">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias">
-              <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias">
-                <ScalarProperty Name="per_DeduccionEmpleado" ColumnName="per_DeduccionEmpleado" />
-                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
-                <ScalarProperty Name="dex_ObservacionesComentarios" ColumnName="dex_ObservacionesComentarios" />
-                <ScalarProperty Name="dex_MontoInicial" ColumnName="dex_MontoInicial" />
-                <ScalarProperty Name="dex_MontoRestante" ColumnName="dex_MontoRestante" />
-                <ScalarProperty Name="dex_Cuota" ColumnName="dex_Cuota" />
-                <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_DeduccionesExtrasColaboradores">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtrasColaboradores">
               <MappingFragment StoreEntitySet="V_DeduccionesExtrasColaboradores">
@@ -14390,14 +14358,6 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_DeduccionesExtraordinarias_EquipoEmpleado">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_EquipoEmpleado">
-              <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias_EquipoEmpleado">
-                <ScalarProperty Name="per_Empleado" ColumnName="per_Empleado" />
-                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="V_DeduccionesExtraordinarias_Editar">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Editar">
               <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias_Editar">
@@ -14406,6 +14366,16 @@ warning 6002: The table/view 'ERP_GMEDINA.Plani.V_TipoDeduccion' does not have a
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
                 <ScalarProperty Name="dex_IdDeduccionesExtra" ColumnName="dex_IdDeduccionesExtra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_DeduccionesExtraordinarias_EquipoEmpleado1Set">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_EquipoEmpleado1">
+              <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias_EquipoEmpleado">
+                <ScalarProperty Name="per_EquipoEmpleado" ColumnName="per_EquipoEmpleado" />
+                <ScalarProperty Name="eqtra_Codigo" ColumnName="eqtra_Codigo" />
+                <ScalarProperty Name="eqtra_Id" ColumnName="eqtra_Id" />
+                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

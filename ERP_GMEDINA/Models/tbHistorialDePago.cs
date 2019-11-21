@@ -24,7 +24,7 @@ namespace ERP_GMEDINA.Models
     
         public int hipa_IdHistorialDePago { get; set; }
         public int emp_Id { get; set; }
-        public decimal hipa_SueldoNeto { get; set; }
+        public Nullable<decimal> hipa_SueldoNeto { get; set; }
         public System.DateTime hipa_FechaInicio { get; set; }
         public System.DateTime hipa_FechaFin { get; set; }
         public System.DateTime hipa_FechaPago { get; set; }
