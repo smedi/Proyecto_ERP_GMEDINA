@@ -209,11 +209,37 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult CargaDocumento()
         {
+
+            // var listaINFS = new List<tbInstitucionesFinancieras>();
+            /*List<tbInstitucionesFinancieras>*/var listaINFS = from INFS in db.tbInstitucionesFinancieras
+                                                         select new
+                                                         {
+                                                             idinfs = INFS.insf_IdInstitucionFinanciera,
+                                                             descinfs = INFS.insf_DescInstitucionFinanc
+                                                         };
+            
+            //listaINFS.Add(new cboINFS()
+            //{
+            //    Id = 1,
+            //    Nombre = "4 estaciones",
+            //    Precio = 12
+            //});
+            //listaINFS.Add(new cboINFS()
+            //{
+            //    Id = 2,
+            //    Nombre = "Pepperoni",
+            //    Precio = 10
+            //});
+            var list = new SelectList(listaINFS, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc");
+            ViewData["INFS"] = list;
+
+
+
             return View("CargaDocumento");
         }
 
        // [HttpPost]
-        public ActionResult CargaDocumento(HttpPostedFileBase archivoexcel)
+        public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel,int IdInsF)
         {
             // string ubicacion = "Content/PlanillasInstitucionesFinancieras/";
             string path = @"C:\Users\LAB02\Downloads\Deduccion_Planilla_Prueba.xlsx";
@@ -234,7 +260,7 @@ namespace ERP_GMEDINA.Controllers
 
                     var oMiExcel = new tbDeduccionInstitucionFinanciera();
 
-                    int empleadoID = 0, ultimoID = 0;
+                    int empleadoID = 0;
 
 
                     var Excel = from P in db.tbPersonas
@@ -249,15 +275,21 @@ namespace ERP_GMEDINA.Controllers
                                     nombres = P.per_Nombres,
                                     apellidos = P.per_Apellidos
                                 };
-                    var sql = db.Database.ExecuteSqlCommand("SELECT ");
+                    var sql = db.Database.ExecuteSqlCommand(@"SELECT MAX([deif_IdDeduccionInstFinanciera]) + 1  
+                                                              FROM[Plani].[tbDeduccionInstitucionFinanciera] ");
 
 
 
-                    oMiExcel.deif_IdDeduccionInstFinanciera = ultimoID;
+                    oMiExcel.deif_IdDeduccionInstFinanciera = sql;
                     oMiExcel.emp_Id = empleadoID;
+                    oMiExcel.insf_IdInstitucionFinanciera = IdInsF;
                     oMiExcel.deif_Monto = monto;
                     oMiExcel.deif_Comentarios = comentario;
-                    
+                    oMiExcel.cde_IdDeducciones = 27;
+                    oMiExcel.deif_UsuarioCrea = 1;
+                    oMiExcel.deif_FechaCrea = DateTime.Now;
+                    oMiExcel.deif_UsuarioModifica = null;
+                    oMiExcel.deif_FechaModifica = null;
 
                     db.tbDeduccionInstitucionFinanciera.Add(oMiExcel);
                     db.SaveChanges();
@@ -371,4 +403,11 @@ namespace ERP_GMEDINA.Controllers
         public string comentario { get; set; }
         public decimal totalDeducciones { get; set; }
     }
+
+    class cboINFS
+    {
+        public int IdInstitucionFinanciera { get; set; }
+        public string DescInstitucionFinanciera { get; set; }
+    }
+
 }
