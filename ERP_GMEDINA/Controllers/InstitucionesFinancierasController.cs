@@ -209,95 +209,87 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult CargaDocumento()
         {
-
-            // var listaINFS = new List<tbInstitucionesFinancieras>();
-            /*List<tbInstitucionesFinancieras>*/var listaINFS = from INFS in db.tbInstitucionesFinancieras
-                                                         select new
-                                                         {
-                                                             idinfs = INFS.insf_IdInstitucionFinanciera,
-                                                             descinfs = INFS.insf_DescInstitucionFinanc
-                                                         };
-            
-            //listaINFS.Add(new cboINFS()
-            //{
-            //    Id = 1,
-            //    Nombre = "4 estaciones",
-            //    Precio = 12
-            //});
-            //listaINFS.Add(new cboINFS()
-            //{
-            //    Id = 2,
-            //    Nombre = "Pepperoni",
-            //    Precio = 10
-            //});
-            var list = new SelectList(listaINFS, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc");
+          var listaINFS = from INFS in db.tbInstitucionesFinancieras
+                        select new
+                        {
+                            idinfs = INFS.insf_IdInstitucionFinanciera,
+                            descinfs = INFS.insf_DescInstitucionFinanc
+                        };
+            var list = new SelectList(listaINFS, "idinfs", "descinfs");
             ViewData["INFS"] = list;
-
-
-
             return View("CargaDocumento");
         }
 
        // [HttpPost]
-        public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel,int IdInsF)
+        public ActionResult _CargaDocumento(/*HttpPostedFileBase archivoexcel,int IdInsF*/)
         {
-            // string ubicacion = "Content/PlanillasInstitucionesFinancieras/";
-            string path = @"C:\Users\LAB02\Downloads\Deduccion_Planilla_Prueba.xlsx";
-            SLDocument sl = new SLDocument(path);
-
-            using (var db = new ERP_GMEDINAEntities())
+            try
             {
+                int IdInsF = 1;
+                // string ubicacion = "Content/PlanillasInstitucionesFinancieras/";
+                string path = @"C:\Users\LAB02\Downloads\Deduccion_Planilla_Prueba.xlsx";
+                SLDocument sl = new SLDocument(path);
 
-                int iRow = 2;
-                while (!string.IsNullOrEmpty(sl.GetCellValueAsString(iRow, 1)))
+                using (var db = new ERP_GMEDINAEntities())
                 {
-                    string identidad = sl.GetCellValueAsString(iRow, 1);
-                    decimal monto = sl.GetCellValueAsDecimal(iRow, 2);
-                    string comentario = sl.GetCellValueAsString(iRow, 3);
-                    string nombres = sl.GetCellValueAsString(iRow, 4);
-                    string apellidos = sl.GetCellValueAsString(iRow, 5);
-                    
 
-                    var oMiExcel = new tbDeduccionInstitucionFinanciera();
+                    int iRow = 2;
+                    while (!string.IsNullOrEmpty(sl.GetCellValueAsString(iRow, 1)))
+                    {
+                        string identidad = sl.GetCellValueAsString(iRow, 1);
+                        decimal monto = sl.GetCellValueAsDecimal(iRow, 2);
+                        string comentario = sl.GetCellValueAsString(iRow, 3);
+                        string nombres = sl.GetCellValueAsString(iRow, 4);
+                        string apellidos = sl.GetCellValueAsString(iRow, 5);
 
-                    int empleadoID = 0;
+
+                        var oMiExcel = new tbDeduccionInstitucionFinanciera();
+
+                        int empleadoID = 0;
 
 
-                    var Excel = from P in db.tbPersonas
-                                join E in db.tbEmpleados on P.per_Id equals E.per_Id
+                        var Excel = from P in db.tbPersonas
+                                    join E in db.tbEmpleados on P.per_Id equals E.per_Id
 
-                                where
-                                P.per_Identidad == identidad
+                                    where
+                                    P.per_Identidad == identidad
 
-                                select new
-                                {
-                                    empleadoID = E.emp_Id,
-                                    nombres = P.per_Nombres,
-                                    apellidos = P.per_Apellidos
-                                };
-                    var sql = db.Database.ExecuteSqlCommand(@"SELECT MAX([deif_IdDeduccionInstFinanciera]) + 1  
+                                    select new
+                                    {
+                                        empleadoID = E.emp_Id,
+                                        nombres = P.per_Nombres,
+                                        apellidos = P.per_Apellidos
+                                    };
+                        var sql = db.Database.ExecuteSqlCommand(@"SELECT MAX([deif_IdDeduccionInstFinanciera]) + 1  
                                                               FROM[Plani].[tbDeduccionInstitucionFinanciera] ");
 
 
 
-                    oMiExcel.deif_IdDeduccionInstFinanciera = sql;
-                    oMiExcel.emp_Id = empleadoID;
-                    oMiExcel.insf_IdInstitucionFinanciera = IdInsF;
-                    oMiExcel.deif_Monto = monto;
-                    oMiExcel.deif_Comentarios = comentario;
-                    oMiExcel.cde_IdDeducciones = 27;
-                    oMiExcel.deif_UsuarioCrea = 1;
-                    oMiExcel.deif_FechaCrea = DateTime.Now;
-                    oMiExcel.deif_UsuarioModifica = null;
-                    oMiExcel.deif_FechaModifica = null;
+                        oMiExcel.deif_IdDeduccionInstFinanciera = sql;
+                        oMiExcel.emp_Id = empleadoID;
+                        oMiExcel.insf_IdInstitucionFinanciera = IdInsF;
+                        oMiExcel.deif_Monto = monto;
+                        oMiExcel.deif_Comentarios = comentario;
+                        oMiExcel.cde_IdDeducciones = 27;
+                        oMiExcel.deif_UsuarioCrea = 1;
+                        oMiExcel.deif_FechaCrea = DateTime.Now;
+                        oMiExcel.deif_UsuarioModifica = null;
+                        oMiExcel.deif_FechaModifica = null;
 
-                    db.tbDeduccionInstitucionFinanciera.Add(oMiExcel);
-                    db.SaveChanges();
+                        db.tbDeduccionInstitucionFinanciera.Add(oMiExcel);
+                        db.SaveChanges();
 
-                    iRow++;
+                        iRow++;
+                    }
+
                 }
 
             }
+            catch (Exception Ex)
+            {
+                ViewBag.sms = Ex.ToString();
+            }
+           
 
             //try
             //{

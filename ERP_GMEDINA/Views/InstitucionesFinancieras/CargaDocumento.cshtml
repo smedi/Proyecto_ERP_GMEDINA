@@ -14,55 +14,62 @@
 }
 
 <div class="wrapper wrapper-content animated fadeIn">
-
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h2>Carga de Planilla Externa </h2>
+                    <h2>Carga de Planilla externa de Deduccion </h2>
                 </div>
                 <div class="ibox-content">
-                   
-                    @*@Html.DropDownList("Instituciones Financieras", ViewData["INFS"] as SelectList,"Seleccione una opcion...")*@ 
-                    <div class="col-md-6">
-                           Seleccione una Institucion Financiera a la cual sera asignada la planilla:
-                        <select class="select2_demo_3 form-control select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                            <option></option>
-                            <option value="Bahamas">Bahamas</option>
-                            <option value="Bahrain">Bahrain</option>
-                            <option value="Bangladesh">Bangladesh</option>
-                            <option value="Barbados">Barbados</option>
-                            <option value="Belarus">Belarus</option>
-                            <option value="Belgium">Belgium</option>
-                            <option value="Belize">Belize</option>
-                            <option value="Benin">Benin</option>
-                        </select>
-                        @*<span class="select2 select2-container select2-container--default select2-container--above" dir="ltr" style="width: 326px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-2b83-container"><span class="select2-selection__rendered" id="select2-2b83-container"><span class="select2-selection__placeholder">Select a state</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>*@
-                    </div>
-
-                    <br><br><br><br><hr>
-                    <div class="col-md-8">
-                        <p>
-                            Favor seleccionar planilla externa (Excel), para ser cargada al sistema.
-                        </p>
-                    </div>
-                    <br><br>
-                    <form action="#" class="dropzone" id="dropzoneForm">
-                        <div class="fallback">
-                            <input name="archivoexcel" type="file" multiple required />
+                    <div class="row">
+                        <div class="col-md-7">
+                            <p>Seleccionar Institucion Financiera a la cual sera asignada la planilla:</p>
+                            @Html.DropDownList("cboINFS", ViewData["INFS"] as SelectList, "Seleccione una opcion...", new { @class = "select2_demo_3 form-control select2-hidden-accessible" })
                         </div>
-                    </form>
+                    </div>
+                        @*<br><br>*@
 
-                    <hr>
-                   
-                    @Html.ActionLink("Cargar Archivos", "CargaDocumento",null @*,new { id =  }*@, new { @class = "btn btn-primary col-md-offset-5" })
-                </div>
+                        @*<div class="col-md-8 pull-right">
+                <p>En caso de que la Institucion Financiera que busca no aparezca en la lista, favor registrarla.<p>
+                    @Html.ActionLink("Registrar", "Create", null, new { @class = "btn btn-success" })
+
+            </div>*@
+
+
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <hr/>
+                        </div>
+                    </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>Favor seleccionar planilla externa (Excel), para ser cargada al sistema.</p>
+                                <form action="#" class="dropzone" id="dropzoneForm">
+                                    <div class="fallback">
+                                        <input name="archivoexcel" type="file" multiple required />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="ibox-footer">
+                    <a href="@Url.Action("_CargaDocumento","InstitucionesFinancieras"@*,new { IdInsF = Html.DropDownList("cboINFS") }*@)" class="btn btn-primary col-md-offset-5"><i class="fa fa-upload"></i>&nbsp;&nbsp;Cargar Documento</a>
+                    
+                        @*@Html.ActionLink("Cargar Documento", "CargaDocumento", null, new { @class = "btn btn-primary col-md-offset-5" })*@
+                    
+                    
+</div>
 
             </div>
         </div>
-
     </div>
 </div>
+
+@ViewBag.sms;
+
+
 
 
 
