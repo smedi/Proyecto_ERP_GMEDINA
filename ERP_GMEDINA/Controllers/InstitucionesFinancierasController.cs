@@ -227,7 +227,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 int IdInsF = 1;
                 // string ubicacion = "Content/PlanillasInstitucionesFinancieras/";
-                string path = @"C:\Users\LAB02\Downloads\Deduccion_Planilla_Prueba.xlsx";
+                string path = @"C:\Deduccion_Planilla_Prueba.xlsx";
                 SLDocument sl = new SLDocument(path);
 
                 using (var db = new ERP_GMEDINAEntities())
