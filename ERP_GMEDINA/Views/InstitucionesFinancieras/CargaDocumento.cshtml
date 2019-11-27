@@ -13,95 +13,99 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<div class="wrapper wrapper-content animated fadeIn">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h2>Carga de Planilla externa de Deduccion </h2>
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <p>Seleccionar Institucion Financiera a la cual sera asignada la planilla:</p>
-                            @Html.DropDownList("cboINFS", ViewData["INFS"] as SelectList, "Seleccione una opcion...", new { @class = "select2_demo_3 form-control select2-hidden-accessible" })
-                        </div>
+@using (Html.BeginForm("_CargaDocumento", "InstitucionesFinancieras", FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
+{
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h2>Carga de Planilla externa de Deduccion </h2>
                     </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <p>Seleccionar Institucion Financiera a la cual sera asignada la planilla:</p>
+                                @Html.DropDownList("cboINFS", ViewData["INFS"] as SelectList, "Seleccione una opcion...", new { @class = "select2_demo_3 form-control select2-hidden-accessible" })
+                            </div>
+                        </div>
                         @*<br><br>*@
 
                         @*<div class="col-md-8 pull-right">
-                <p>En caso de que la Institucion Financiera que busca no aparezca en la lista, favor registrarla.<p>
-                    @Html.ActionLink("Registrar", "Create", null, new { @class = "btn btn-success" })
+                                <p>En caso de que la Institucion Financiera que busca no aparezca en la lista, favor registrarla.<p>
+                                    @Html.ActionLink("Registrar", "Create", null, new { @class = "btn btn-success" })
 
-            </div>*@
+                            </div>*@
 
 
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <hr/>
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <hr />
+                            </div>
                         </div>
-                    </div>
 
                         <div class="row">
                             <div class="col-md-12">
                                 <p>Favor seleccionar planilla externa (Excel), para ser cargada al sistema.</p>
-                                <form action="#" class="dropzone" id="dropzoneForm">
+                                @*<form action="#" class="dropzone" id="dropzoneForm">*@
                                     <div class="fallback">
-                                        <input name="archivoexcel" type="file" multiple required />
+                                        <input name="archivoexcel" class="dropzone" type="file" multiple required id="archivoexcel"/>
                                     </div>
-                                </form>
+                                @*</form>*@
                             </div>
                         </div>
                     </div>
 
-                <div class="ibox-footer">
-                    <a href="@Url.Action("_CargaDocumento","InstitucionesFinancieras"@*,new { IdInsF = Html.DropDownList("cboINFS") }*@)" class="btn btn-primary col-md-offset-5"><i class="fa fa-upload"></i>&nbsp;&nbsp;Cargar Documento</a>
-                    
+                    <div class="ibox-footer">
+                        @*<a href="@Url.Action("_CargaDocumento","InstitucionesFinancieras",new { PLNLL = archivoexcel  })" class="btn btn-primary col-md-offset-5"><i class="fa fa-upload"></i>&nbsp;&nbsp;Cargar Documento</a>*@
+                        <input type="submit" value="Cargar" />
                         @*@Html.ActionLink("Cargar Documento", "CargaDocumento", null, new { @class = "btn btn-primary col-md-offset-5" })*@
-                    
-                    
-</div>
 
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@ViewBag.sms;
-
+    @ViewBag.sms;
 
 
 
 
 
 
-<!-- Mainly scripts -->
 
-<script src="~/Scripts/jquery-2.1.1.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/plugins/metisMenu/metisMenu.min.js"></script>
-<script src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<!-- Custom and plugin javascript -->
-<script src="~/Scripts/app/inspinia.js"></script>
-@*<script src="~/Scripts/plugins/pace/pace.min.js"></script>*@
+    <!-- Mainly scripts -->
 
-<!-- Jasny -->
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/plugins/metisMenu/metisMenu.min.js"></script>
+    <script src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Custom and plugin javascript -->
+    <script src="~/Scripts/app/inspinia.js"></script>
+    @*<script src="~/Scripts/plugins/pace/pace.min.js"></script>*@
 
-<script src="~/Scripts/plugins/jasny/jasny-bootstrap.min.js"></script>
-<!-- DROPZONE -->
+    <!-- Jasny -->
 
-<script src="~/Scripts/plugins/dropzone/dropzone.js"></script>
-<!-- CodeMirror -->
-<script src="~/Scripts/plugins/codemirror/codemirror.js"></script>
-<script src="~/Scripts/plugins/codemirror/mode/xml/xml.js"></script>
+    <script src="~/Scripts/plugins/jasny/jasny-bootstrap.min.js"></script>
+    <!-- DROPZONE -->
 
-<script>
+    <script src="~/Scripts/plugins/dropzone/dropzone.js"></script>
+    <!-- CodeMirror -->
+    <script src="~/Scripts/plugins/codemirror/codemirror.js"></script>
+    <script src="~/Scripts/plugins/codemirror/mode/xml/xml.js"></script>
+
+    <script>
         Dropzone.options.dropzoneForm = {
             paramName: "file", // The name that will be used to transfer the file
             maxFilesize: 10, // MB
             dictDefaultMessage: "<center><strong>Suelte los archivos aquí o haga clic para cargar.</strong></br></center>"
         };
 
-      
 
-</script>
+
+    </script>
+}
