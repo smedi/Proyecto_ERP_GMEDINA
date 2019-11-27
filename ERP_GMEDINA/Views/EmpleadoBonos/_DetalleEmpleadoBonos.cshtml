@@ -2,7 +2,7 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoBonosDetalle" }))
 {
-    <div class="ibox-content">
+    <div class="modal-body" id="Detalles">
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
@@ -90,7 +90,7 @@
                         </table>
                     </div>
                     <div class="footer">
-                        <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>

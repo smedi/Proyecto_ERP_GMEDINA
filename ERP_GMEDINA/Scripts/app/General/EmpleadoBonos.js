@@ -1,4 +1,7 @@
-﻿ //OBTENER SCRIPT DE FORMATEO DE FECHA // 
+﻿//VARIABLE PARA INACTIVACION DE REGISTROS
+var IDInactivar = 0;
+
+//OBTENER SCRIPT DE FORMATEO DE FECHA // 
 $.getScript("../Scripts/app/General/SerializeDate.js")
     .done(function (script, textStatus) {
         console.log(textStatus);
@@ -6,6 +9,15 @@ $.getScript("../Scripts/app/General/SerializeDate.js")
     .fail(function (jqxhr, settings, exception) {
         console.log("No se pudo recuperar Script SerializeDate");
     });
+
+//EVITAR POSTBACK DE FORMULARIOS
+
+$('#frmEmpleadoBonosCreate').submit(function (e) {
+    return false;
+});
+$('#frmEmpleadoBonos').submit(function (e) {
+    return false;
+});
 
 //FUNCION GENERICA PARA REUTILIZAR AJAX
 function _ajax(params, uri, type, callback) {
@@ -80,6 +92,7 @@ function cargarGridBonos() {
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyBonos').html(template);
         });
+    FullBody();
 }
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -174,6 +187,7 @@ $('#btnCreateRegistroBonos').click(function () {
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblEmpleadoBonos tbody tr td #btnEditarEmpleadoBonos", function () {
     var ID = $(this).closest('tr').data('id');
+    IDInactivar = ID;
     $.ajax({
         url: "/EmpleadoBonos/Edit/" + ID,
         method: "GET",
@@ -382,13 +396,11 @@ $(document).on("click", "#btnmodalInactivarEmpleadoBonos", function () {
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroBono").click(function () {
-
-    var data = $("#frmEmpleadoBonosInactivar").serializeArray();
+    console.log(IDInactivar);
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/EmpleadoBonos/Inactivar",
-        method: "POST",
-        data: data
+        url: "/EmpleadoBonos/Inactivar/" + IDInactivar,
+        method: "POST"
     }).done(function (data) {
         if (data == "error") {
             //Cuando traiga un error del backend al guardar la edicion
@@ -409,5 +421,6 @@ $("#btnInactivarRegistroBono").click(function () {
             });
         }
     });
+    IDInactivar = 0;
 });
 

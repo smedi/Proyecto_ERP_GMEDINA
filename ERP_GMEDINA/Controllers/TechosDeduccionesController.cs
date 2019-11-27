@@ -17,40 +17,45 @@ namespace ERP_GMEDINA.Controllers
         // GET: TechosDeducciones
         public ActionResult Index()
         {
-            var tbTechosDeducciones = db.tbTechosDeducciones.Where(d => d.tede_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones);
+            var tbTechosDeducciones = db.tbTechosDeducciones.Where(d => d.tddu_Activo == true).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbCatalogoDeDeducciones).OrderBy(t => t.tddu_FechaCrea);
             return View(tbTechosDeducciones.ToList());
         }
-
+        [HttpGet]
         // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
         public ActionResult GetData()
         {
-            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
-            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
-            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
-             db.tbTechosDeducciones.Where(d => d.tede_Activo == true).ToList();
+            var otbTechosDeducciones = db.tbTechosDeducciones
+                        .Select(c => new { cde_DescripcionDeduccion = c.tbCatalogoDeDeducciones.cde_DescripcionDeduccion, tddu_IdTechosDeducciones = c.tddu_IdTechosDeducciones, tddu_PorcentajeEmpresa = c.tddu_PorcentajeEmpresa, tddu_PorcentajeColaboradores = c.tddu_PorcentajeColaboradores, tddu_Techo = c.tddu_Techo, tede_Activo = c.tddu_Activo , tede_FechaCrea = c.tddu_FechaCrea }).Where(c => c.tede_Activo == true).OrderByDescending(c => c.tede_FechaCrea)
+                        .ToList();
+
             //RETORNAR JSON AL LADO DEL CLIENTE
-            return new JsonResult {JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+            return new JsonResult {Data = otbTechosDeducciones, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
 
-        //// GET: TechosDeducciones/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    tbTechosDeducciones tbTechosDeducciones = db.tbTechosDeducciones.Find(id);
-        //    if (tbTechosDeducciones == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(tbTechosDeducciones);
-        //}
 
         public JsonResult Details(int? ID)
         {
+            var tbTechosDeduccionesJSON = from tbTechosDeducciones in db.tbTechosDeducciones
+                                          where tbTechosDeducciones.tddu_Activo == true && tbTechosDeducciones.tddu_IdTechosDeducciones == ID
+                                           select new
+                                           {
+                                               tbTechosDeducciones.tddu_IdTechosDeducciones,
+                                               tbTechosDeducciones.tddu_PorcentajeColaboradores,
+                                               tbTechosDeducciones.tddu_PorcentajeEmpresa,
+                                               tbTechosDeducciones.tddu_Techo,
+                                               tbTechosDeducciones.cde_IdDeducciones,
+
+                                               tbTechosDeducciones.tddu_UsuarioCrea,
+                                               UsuCrea = tbTechosDeducciones.tbUsuario.usu_NombreUsuario,
+                                               tbTechosDeducciones.tddu_FechaCrea,
+
+                                               tbTechosDeducciones.tddu_UsuarioModifica,
+                                               UsuModifica = tbTechosDeducciones.tbUsuario1.usu_NombreUsuario,
+                                               tbTechosDeducciones.tddu_FechaModifica
+                                           };
+
             db.Configuration.ProxyCreationEnabled = false;
-            tbTechosDeducciones tbTechosDeduccionesJSON = db.tbTechosDeducciones.Find(ID);
+            
             return Json(tbTechosDeduccionesJSON, JsonRequestBehavior.AllowGet);
         }
 
@@ -69,45 +74,46 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]        
         public ActionResult Create([Bind(Include = "tede_Id,tede_RangoInicial,tede_RangoFinal,tede_Porcentaje,cde_IdDeducciones,tede_UsuarioCrea,tede_FechaCrea,tede_UsuarioModifica,tede_FechaModifica,tede_Activo")] tbTechosDeducciones tbTechosDeducciones)
         {
+            #region declaracion de variables 
             //Llenar los datos de auditoría, de no hacerlo el modelo será inválido y entrará directamente al Catch
-            tbTechosDeducciones.tede_UsuarioCrea = 1;
-            tbTechosDeducciones.tede_FechaCrea = DateTime.Now;
+            tbTechosDeducciones.tddu_UsuarioCrea = 1;
+            tbTechosDeducciones.tddu_FechaCrea = DateTime.Now;
             //Variable para almacenar el resultado del proceso y enviarlo al lado del cliente
             string response = String.Empty;
             IEnumerable<object> listTechosDeducciones = null;
             string MensajeError = "";
-            //Validar si el modelo es válido
+            #endregion
+
             if (ModelState.IsValid)
             {
-                try
-                {
-                    //Ejecutar el procedimiento almacenado
-                    listTechosDeducciones = db.UDP_Plani_tbTechosDeducciones_Insert(tbTechosDeducciones.tede_RangoInicial,
-                                                                                     tbTechosDeducciones.tede_RangoFinal,
-                                                                                     tbTechosDeducciones.tede_Porcentaje,
-                                                                                     tbTechosDeducciones.cde_IdDeducciones,
-                                                                                     tbTechosDeducciones.tede_UsuarioCrea,
-                                                                                     tbTechosDeducciones.tede_FechaCrea);
+                //try
+                //{
+                //    //Ejecutar el procedimiento almacenado
+                //    listTechosDeducciones = db.UDP_Plani_tbTechosDeducciones_Insert(tbTechosDeducciones.tede_RangoInicial,
+                //                                                                     tbTechosDeducciones.tede_RangoFinal,
+                //                                                                     tbTechosDeducciones.tede_Porcentaje,
+                //                                                                     tbTechosDeducciones.cde_IdDeducciones,
+                //                                                                     tbTechosDeducciones.tede_UsuarioCrea,
+                //                                                                     tbTechosDeducciones.tede_FechaCrea);
 
-                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbTechosDeducciones_Insert_Result Resultado in listTechosDeducciones)
-                        MensajeError = Resultado.MensajeError;
+                //    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                //    foreach (UDP_Plani_tbTechosDeducciones_Insert_Result Resultado in listTechosDeducciones)
+                //        MensajeError = Resultado.MensajeError;
 
-                    if (MensajeError.StartsWith("-1"))
-                    {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo ingresar el registro. Contacte al administrador.");
-                        response = "error";
-                    }
-                }
-                catch (Exception Ex)
-                {
-                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
-                }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
-                response = "bien";            
+                //    response = "bien";
+                //    if (MensajeError.StartsWith("-1"))
+                //    {
+                //        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                //        ModelState.AddModelError("", "No se pudo ingresar el registro. Contacte al administrador.");
+                //        response = "error";
+                //    }
+                //}
+                //catch (Exception Ex)
+                //{
+                //    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                //    response = Ex.Message.ToString();
+                //}
+                         
         }
             else
             {
@@ -115,8 +121,8 @@ namespace ERP_GMEDINA.Controllers
                 response = "error";
             }
             //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
-            ViewBag.tede_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTechosDeducciones.tede_UsuarioCrea);
-            ViewBag.tede_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTechosDeducciones.tede_UsuarioModifica);
+            ViewBag.tede_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTechosDeducciones.tddu_UsuarioCrea);
+            ViewBag.tede_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTechosDeducciones.tddu_UsuarioModifica);
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbTechosDeducciones.cde_IdDeducciones);
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -136,13 +142,8 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tede_Id,tede_RangoInicial,tede_RangoFinal,tede_Porcentaje,cde_IdDeducciones,tede_UsuarioCrea,tede_FechaCrea,tede_UsuarioModifica,tede_FechaModifica,tede_Activo")] tbTechosDeducciones tbTechosDeducciones)
         {
-            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
-            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
-            tbTechosDeducciones.tede_UsuarioCrea = 1;
-            tbTechosDeducciones.tede_FechaCrea = DateTime.Now;
-
-            tbTechosDeducciones.tede_UsuarioModifica = 1;
-            tbTechosDeducciones.tede_FechaModifica = DateTime.Now;            
+            tbTechosDeducciones.tddu_UsuarioModifica = 1;
+            tbTechosDeducciones.tddu_FechaModifica = DateTime.Now;            
             IEnumerable<object> listTechosDeducciones = null;
             string MensajeError = "";
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
@@ -150,34 +151,32 @@ namespace ERP_GMEDINA.Controllers
             //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
-                try
-                {
-                    //Ejecución del procedimiento almacenado
-                    listTechosDeducciones = db.UDP_Plani_tbTechosDeducciones_Update(tbTechosDeducciones.tede_Id,
-                                                                                    tbTechosDeducciones.tede_RangoInicial,
-                                                                                     tbTechosDeducciones.tede_RangoFinal,
-                                                                                     tbTechosDeducciones.tede_Porcentaje,
-                                                                                     tbTechosDeducciones.cde_IdDeducciones, //ID del porcentaje de deducción
-                                                                                     1,
-                                                                                     DateTime.Now);
+                //try
+                //{
+                //    //Ejecución del procedimiento almacenado
+                //    listTechosDeducciones = db.UDP_Plani_tbTechosDeducciones_Update(tbTechosDeducciones.tede_Id,
+                //                                                                    tbTechosDeducciones.tede_RangoInicial,
+                //                                                                     tbTechosDeducciones.tede_RangoFinal,
+                //                                                                     tbTechosDeducciones.tede_Porcentaje,
+                //                                                                     tbTechosDeducciones.cde_IdDeducciones, //ID del porcentaje de deducción
+                //                                                                     1,
+                //                                                                     DateTime.Now);
 
-                    foreach (UDP_Plani_tbTechosDeducciones_Update_Result Resultado in listTechosDeducciones.ToList())
-                        MensajeError = Resultado.MensajeError;
+                //    foreach (UDP_Plani_tbTechosDeducciones_Update_Result Resultado in listTechosDeducciones.ToList())
+                //        MensajeError = Resultado.MensajeError;
 
-                    if (MensajeError.StartsWith("-1"))
-                    {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
-                        response = "error";
-                    }
-                }
-                catch (Exception Ex)
-                {
-                    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                    response = Ex.Message.ToString();
-                }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                //    if (MensajeError.StartsWith("-1"))
+                //    {
+                //        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                //        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
+                //        response = "error";
+                //    }
+                //}
+                //catch (Exception Ex)
+                //{
+                //    //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                //    response = Ex.Message.ToString();
+                //}
                 response = "bien";
             }
             else
@@ -185,8 +184,8 @@ namespace ERP_GMEDINA.Controllers
                 //Se devuelve un mensaje de error en caso de que el modelo no sea válido
                 response = "error";
             }
-                ViewBag.tede_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTechosDeducciones.tede_UsuarioCrea);
-            ViewBag.tede_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTechosDeducciones.tede_UsuarioModifica);
+            ViewBag.tede_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTechosDeducciones.tddu_UsuarioCrea);
+            ViewBag.tede_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbTechosDeducciones.tddu_UsuarioModifica);
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbTechosDeducciones.cde_IdDeducciones);
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -211,26 +210,26 @@ namespace ERP_GMEDINA.Controllers
             string response = String.Empty;
             if (ModelState.IsValid)
             {
-                try
-                {
-                    //listTechosDeducciones = db.UDP_Plani_tbTechosDeducciones_Inactivar(id);
+                //try
+                //{
+                //    listTechosDeducciones = db.UDP_Plani_tbTechosDeducciones_Inactivar(id,
+                //                                                                        1,
+                //                                                                        DateTime.Now);
 
-                    foreach (UDP_Plani_tbTechosDeducciones_Inactivar_Result Resultado in listTechosDeducciones)
-                        MensajeError = Resultado.MensajeError;
+                //    foreach (UDP_Plani_tbTechosDeducciones_Inactivar_Result Resultado in listTechosDeducciones)
+                //        MensajeError = Resultado.MensajeError;
 
-                    if (MensajeError.StartsWith("-1"))
-                    {
-                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
-                        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
-                        response = "error";
-                    }
-                }                
-                catch (Exception Ex)
-                {
-                    response = "error";
-                }
-                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
-                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                //    if (MensajeError.StartsWith("-1"))
+                //    {
+                //        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                //        ModelState.AddModelError("", "No se pudo actualizar el registro. Contacte al administrador.");
+                //        response = "error";
+                //    }
+                //}                
+                //catch (Exception Ex)
+                //{
+                //    response = "error";
+                //}
                 response = "bien";
             }
             else

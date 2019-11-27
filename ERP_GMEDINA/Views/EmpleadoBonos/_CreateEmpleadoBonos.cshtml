@@ -2,7 +2,7 @@
 
         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEmpleadoBonosCreate" }))
         {
-            <div class="ibox-content">
+            <div class="modal-body" id="Crear">
                 @Html.AntiForgeryToken()
                 <div class="form-horizontal">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -50,7 +50,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-primary" id="btnCreateRegistroBonos">Aceptar</button>
             </div>
         }

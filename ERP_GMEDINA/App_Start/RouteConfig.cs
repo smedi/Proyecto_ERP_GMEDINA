@@ -16,7 +16,7 @@ namespace ERP_GMEDINA
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "EmpleadoBonos", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "CatalogoDeDeducciones", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

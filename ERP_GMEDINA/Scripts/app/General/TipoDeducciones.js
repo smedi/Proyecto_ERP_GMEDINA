@@ -24,15 +24,12 @@ function _ajax(params, uri, type, callback) {
     });
 }
 
-
-
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridTipoDeducciones() {
     _ajax(null,
         '/TipoDeducciones/GetData',
         'GET',
         (data) => {
-            console.log(data);
             if (data.length == 0) {
                 //Validar si se genera un error al cargar de nuevo el grid
                 iziToast.error({
@@ -65,19 +62,21 @@ function cargarGridTipoDeducciones() {
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             $('#tbodyTipoDeducciones').html(template);
         });
+    FullBody();
 }
 
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
 $(document).on("click", "#btnAgregarTipoDeducciones", function () {
     //MOSTRAR EL MODAL DE AGREGAR
+    $("#Crear #Validation_descipcion").css("display", "none");
+    $("#Crear input[type=text]").val('');
     $("#AgregarTipoDeducciones").modal();
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroTipoDeducciones').click(function () {
-    console.log("Entra al click de crear");
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    $("#Crear #Validation_descipcion").css("display", "block");
+    $("#Crear #Validation_descripcion").css("display", "block");
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmTipoDeduccionCreate").serializeArray();
     //SE VALIDA QUE EL CAMPO DESCRIPCION ESTE INICIALIZADO PARA NO IR AL SERVIDOR INNECESARIAMENTE
@@ -125,7 +124,6 @@ $(document).on("click", "#tblTipoDeducciones tbody tr td #btnEditarTipoDeduccion
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                console.log(data);
                 //debugger;
                 $.each(data, function (i, iter) {
                     $("#Editar #tde_IdTipoDedu").val(iter.tde_IdTipoDedu);
@@ -166,9 +164,7 @@ $("#btnUpdateTipoDeducciones").click(function () {
             else {
                 // REFRESCAR UNICAMENTE LA TABLA
                 cargarGridTipoDeducciones();
-                console.log("Recarga");
                 //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-                if ($("#Editar #tde_Descripcion").val())
                     $("#EditarTipoDeducciones").modal('hide');
                 //Mensaje de exito de la edicion
                 iziToast.success({
@@ -231,4 +227,12 @@ $("#IconCerrarEditar").click(function () {
 $("#btnCerrar").click(function () {
     $("#EditarTipoDeducciones").modal('hide');
     $("#Editar #Validation_descripcion").css("display", "none");
+});
+
+$("#frmTipoDeduccionCreate").submit(function (event) {
+    event.preventDefault();
+});
+
+$("#frmTipoDeduccionEdit").submit(function (event) {
+    event.preventDefault();
 });
