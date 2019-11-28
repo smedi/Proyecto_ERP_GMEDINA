@@ -39,65 +39,36 @@ namespace ERP_GMEDINA.Controllers
 			//Contexto de base de datos para que se use solo cuando sea necesario.
 			using (ERP_GMEDINAEntities entities = new ERP_GMEDINAEntities())
 			{
-                
-                    try
+                try
+                {
+				//se construyen los lotes dependiendo de la cantidad de registros que reciba el controlador
+                    int numeroLotes;
+                    //Corroborar si la lista viene nula a través de Singleton.
+                    DecimoTercer = (DecimoTercer == null) ? new List<tbDecimoTercerMes>() : DecimoTercer;
+                    int CantidadRegistros = DecimoTercer.Count;
+                    //Realizar la validación 
+                    numeroLotes = (CantidadRegistros <= 1) ? 1 :
+                                  (CantidadRegistros <= 10) ? 5 :
+                                  (CantidadRegistros <= 50) ? 10 :
+                                  (CantidadRegistros <= 100) ? 20 :
+                                  (CantidadRegistros <= 500) ? 50 :
+                                  (CantidadRegistros > 500 || CantidadRegistros <= 1000) ? 100 : 0;
+                    int i = 0;
+                    //Ciclo para insertar los registros.
+                    foreach (tbDecimoTercerMes DC in DecimoTercer)
                     {
-					//se construyen los lotes dependiendo de la cantidad de registros que reciba el controlador
-                        int numeroLotes = 1;
-                        int CantidadRegistros = DecimoTercer.Count;
-
-                        if (CantidadRegistros == 1)
-                        {
-                            numeroLotes = 1;
-                        }
-                        else if (CantidadRegistros <= 10)
-                        {
-                            numeroLotes = 5;
-                        }
-                        else if (CantidadRegistros <= 50)
-                        {
-                            numeroLotes = 10;
-                        }
-                        else if (CantidadRegistros <= 100)
-                        {
-                            numeroLotes = 20;
-                        }
-                        else if (CantidadRegistros <= 500)
-                        {
-                            numeroLotes = 50;
-                        }
-                        else if (CantidadRegistros <= 1000 || CantidadRegistros >= 1000)
-                        {
-                            numeroLotes = 100;
-                        }
-
-
-                        //Corroborar si la lista viene nula.
-                        if (DecimoTercer == null)
-                        {
-                            DecimoTercer = new List<tbDecimoTercerMes>();
-                        }
-                        int i = 0;
-                        //Ciclo para insertar los registros.
-                        foreach (tbDecimoTercerMes DC in DecimoTercer)
-                        {
-                            i++;
-                            entities.UDP_Plani_tbDecimoTercerMes_Insert(DC.emp_Id, DC.dtm_Monto);
-                            if (i % numeroLotes == 0)
-                                entities.SaveChanges();                            
-                        }
-
+                        i++;
+                        entities.UDP_Plani_tbDecimoTercerMes_Insert(DC.emp_Id, DC.dtm_Monto);
+                        if (i % numeroLotes == 0)
+                            entities.SaveChanges();                            
                     }
-                    catch(Exception ex)
-                    {
-                        ex.Message.ToString();
-                        
-                    }
-                    
-
-                    int RegistrosInsertados = entities.SaveChanges();
-                    return Json(RegistrosInsertados);
-                
+                }
+                catch(Exception ex)
+                {
+                    ex.Message.ToString();       
+                }
+                int RegistrosInsertados = entities.SaveChanges();
+                return Json(RegistrosInsertados);
 			}
 		}
 

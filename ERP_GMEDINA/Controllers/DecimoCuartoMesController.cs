@@ -35,29 +35,28 @@ namespace ERP_GMEDINA.Controllers
         #endregion
 
         #region POST: INSERT 
-            public JsonResult InsertDecimoCuarto(List<tbDecimoCuartoMes> DecimoCuarto)
+            public JsonResult InsertDecimoCuartoMes(List<tbDecimoCuartoMes> DecimoCuarto)
             {
                 using (ERP_GMEDINAEntities entities = new ERP_GMEDINAEntities())
                 {
                     try
                     {
-                        int numeroLotes = 1;
-                        //Corroborar si la lista viene nula a través de Singleton.
-                        DecimoCuarto = (DecimoCuarto == null) ? new List<tbDecimoCuartoMes>() : DecimoCuarto;
+                    if (DecimoCuarto.Count == 0)
+                            Json("No hay registros en el objeto", JsonRequestBehavior.AllowGet);
                         int CantidadRegistros = DecimoCuarto.Count;
-                        //Realizar la validación 
-                        numeroLotes = (CantidadRegistros <= 1)    ? 1   :
-                                      (CantidadRegistros <= 10)   ? 5   :
-                                      (CantidadRegistros <= 50)   ? 10  :
-                                      (CantidadRegistros <= 100)  ? 20  :
-                                      (CantidadRegistros <= 500)  ? 50  :
-                                      (CantidadRegistros >  500  || CantidadRegistros <= 1000) ? 100 : 0;
+                        //Declaración y validación del numero de lotes
+                        int numeroLotes = (CantidadRegistros <= 1)   ?  1 :
+                                          (CantidadRegistros <= 10)  ?  5 :
+                                          (CantidadRegistros <= 50)  ? 10 :
+                                          (CantidadRegistros <= 100) ? 20 :
+                                          (CantidadRegistros <= 500) ? 50 :
+                                          (CantidadRegistros >  500 || CantidadRegistros <= 1000) ? 100 : 0 ;
                         int i = 0;
                         //Ciclo para insertar los registros.
                         foreach (tbDecimoCuartoMes DC in DecimoCuarto)
                         {
                             i++;
-                            entities.UDP_Plani_tbDecimoTercerMes_Insert(DC.emp_Id, DC.dcm_Monto);
+                            //entities.UDP_Plani_tbDecimoCuartoMes_Insert(DC.emp_Id, DC.dcm_Monto);
                             if (i % numeroLotes == 0)
                                 entities.SaveChanges();
                         }

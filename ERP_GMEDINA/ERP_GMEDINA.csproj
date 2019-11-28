@@ -1531,6 +1531,7 @@
     <Content Include="Views\ISR\Index.cshtml" />
     <Content Include="Views\DecimoCuartoMes\Index.cshtml" />
     <Content Include="Views\DecimoCuartoMes\FechaEspecifica.cshtml" />
+    <Content Include="Views\DecimoCuartoMes\_FechasDecimoCuarto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
