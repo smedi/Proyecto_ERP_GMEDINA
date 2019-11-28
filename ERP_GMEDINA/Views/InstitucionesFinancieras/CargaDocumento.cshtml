@@ -13,8 +13,7 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-@using (Html.BeginForm("_CargaDocumento", "InstitucionesFinancieras", FormMethod.Post,
-                        new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("_CargaDocumento", "InstitucionesFinancieras", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">
@@ -30,14 +29,6 @@
                                 @Html.DropDownList("cboINFS", ViewData["INFS"] as SelectList, "Seleccione una opcion...", new { @class = "select2_demo_3 form-control select2-hidden-accessible" })
                             </div>
                         </div>
-                        @*<br><br>*@
-
-                        @*<div class="col-md-8 pull-right">
-                                <p>En caso de que la Institucion Financiera que busca no aparezca en la lista, favor registrarla.<p>
-                                    @Html.ActionLink("Registrar", "Create", null, new { @class = "btn btn-success" })
-
-                            </div>*@
-
 
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2">
@@ -45,37 +36,26 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" >
                             <div class="col-md-12">
-                                <p>Favor seleccionar planilla externa (Excel), para ser cargada al sistema.</p>
-                                @*<form action="#" class="dropzone" id="dropzoneForm">*@
+                                <p>Favor seleccionar planilla externa (Excel), para ser cargada al sistema:</p>
+                                <div action="#" class="dropzone" id="dropzoneForm">
                                     <div class="fallback">
-                                        <input name="archivoexcel" class="dropzone" type="file" multiple required id="archivoexcel"/>
+                                        <input name="archivoexcel"  id="archivoexcel" type="file" required />
                                     </div>
-                                @*</form>*@
+                                </div>
                             </div>
                         </div>
                     </div>
 
+
                     <div class="ibox-footer">
-                        @*<a href="@Url.Action("_CargaDocumento","InstitucionesFinancieras",new { PLNLL = archivoexcel  })" class="btn btn-primary col-md-offset-5"><i class="fa fa-upload"></i>&nbsp;&nbsp;Cargar Documento</a>*@
-                        <input type="submit" value="Cargar" />
-                        @*@Html.ActionLink("Cargar Documento", "CargaDocumento", null, new { @class = "btn btn-primary col-md-offset-5" })*@
-
-
+                        <button class="btn btn-primary col-md-offset-5" type="submit"><i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">Cargar Documento</span></button>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
-    @ViewBag.sms;
-
-
-
-
-
 
 
     <!-- Mainly scripts -->
@@ -86,7 +66,7 @@
     <script src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <!-- Custom and plugin javascript -->
     <script src="~/Scripts/app/inspinia.js"></script>
-    @*<script src="~/Scripts/plugins/pace/pace.min.js"></script>*@
+   
 
     <!-- Jasny -->
 
@@ -100,12 +80,11 @@
 
     <script>
         Dropzone.options.dropzoneForm = {
-            paramName: "file", // The name that will be used to transfer the file
+            paramName: "archivoexcel", // The name that will be used to transfer the file
             maxFilesize: 10, // MB
             dictDefaultMessage: "<center><strong>Suelte los archivos aquí o haga clic para cargar.</strong></br></center>"
         };
 
-
-
     </script>
 }
+

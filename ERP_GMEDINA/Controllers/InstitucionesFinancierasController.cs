@@ -249,34 +249,34 @@ namespace ERP_GMEDINA.Controllers
                             string identidad = sl.GetCellValueAsString(iRow, 1);
                             decimal monto = sl.GetCellValueAsDecimal(iRow, 2);
                             string comentario = sl.GetCellValueAsString(iRow, 3);
-                            string nombres = sl.GetCellValueAsString(iRow, 4);
-                            string apellidos = sl.GetCellValueAsString(iRow, 5);
+                            //string nombres = sl.GetCellValueAsString(iRow, 4);
+                            //string apellidos = sl.GetCellValueAsString(iRow, 5);
 
 
                             var oMiExcel = new tbDeduccionInstitucionFinanciera();
 
-                            int empleadoID = 0;
+                            //   int empleadoID = 0;
 
-
-                            var Excel = from P in db.tbPersonas
+                            // var IdEmple = db.Database.ExecuteSqlCommand("SELECT E.emp_Id FROM [rrhh].[tbPersonas] P INNER JOIN  [rrhh].[tbEmpleados] E ON P.per_Id = E.per_Id WHERE P.per_Identidad ="+identidad);
+                            var Excel = (from P in db.tbPersonas
                                         join E in db.tbEmpleados on P.per_Id equals E.per_Id
-
                                         where
                                         P.per_Identidad == identidad
-
                                         select new
                                         {
                                             empleadoID = E.emp_Id,
-                                            nombres = P.per_Nombres,
-                                            apellidos = P.per_Apellidos
-                                        };
-                            var sql = db.Database.ExecuteSqlCommand(@"SELECT MAX([deif_IdDeduccionInstFinanciera]) + 1  
-                                                              FROM[Plani].[tbDeduccionInstitucionFinanciera] ");
+                                        }).Single();
+                            var sql = (from infs in db.tbDeduccionInstitucionFinanciera select infs.deif_IdDeduccionInstFinanciera).Max();
+                            var iddeducfin = sql + 1;
 
+                            //db.Database.ExecuteSqlCommand(@"SELECT MAX([deif_IdDeduccionInstFinanciera]) + 1 AS [deif_IdDeduccionInstFinanciera]  
+                            //                                            FROM [Plani].[tbDeduccionInstitucionFinanciera]");
 
+                            var IdEmple = Excel.empleadoID;
+                            
 
-                            oMiExcel.deif_IdDeduccionInstFinanciera = sql;
-                            oMiExcel.emp_Id = empleadoID;
+                            oMiExcel.deif_IdDeduccionInstFinanciera = iddeducfin;
+                            oMiExcel.emp_Id = IdEmple;
                             oMiExcel.insf_IdInstitucionFinanciera = IdInsF;
                             oMiExcel.deif_Monto = monto;
                             oMiExcel.deif_Comentarios = comentario;
