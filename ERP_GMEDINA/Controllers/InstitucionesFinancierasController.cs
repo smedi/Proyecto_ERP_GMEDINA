@@ -222,7 +222,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
         [HttpPost]
-        public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel)
+        public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel, string cboINFS)
         {
 
             if(archivoexcel != null && archivoexcel.ContentLength > 0)

@@ -827,6 +827,7 @@
     <Content Include="Models\ERP_GMEDINA.edmx.diagram">
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\PlanillasInstitucionesFinancieras\Deduccion_Planilla_Prueba.xlsx" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1306,7 +1307,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\PlanillasInstitucionesFinancieras\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

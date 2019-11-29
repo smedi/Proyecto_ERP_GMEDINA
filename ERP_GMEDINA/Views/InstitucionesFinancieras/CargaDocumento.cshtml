@@ -1,4 +1,5 @@
-﻿
+﻿@model ERP_GMEDINA.Models.tbInstitucionesFinancieras
+
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link href="~/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link href="~/Content/animate.css" rel="stylesheet" />
@@ -13,7 +14,7 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-@using (Html.BeginForm("_CargaDocumento", "InstitucionesFinancieras", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("_CargaDocumento", "InstitucionesFinancieras", FormMethod.Post, new { enctype = "multipart/form-data" ,@id="dropzoneForm"}))
 {
     <div class="wrapper wrapper-content animated fadeIn">
         <div class="row">
@@ -26,7 +27,10 @@
                         <div class="row">
                             <div class="col-md-7">
                                 <p>Seleccionar Institucion Financiera a la cual sera asignada la planilla:</p>
-                                @Html.DropDownList("cboINFS", ViewData["INFS"] as SelectList, "Seleccione una opcion...", new { @class = "select2_demo_3 form-control select2-hidden-accessible" })
+                                @*@Html.DropDownList("cboINFS", ViewData["INFS"] as SelectList, "Seleccione una opcion...", new { @class = "select2_demo_3 form-control select2-hidden-accessible", @required = true })*@
+                                @*@Html.DropDownList("cboINFS", model => model.insf_, "Seleccione una opcion...", new { @class = "select2_demo_3 form-control select2-hidden-accessible", @required = true })
+                                @Html.DropDownListFor(x => Model.insf_IdInstitucionFinanciera new SelectList(Model.tbDeduccionInstitucionFinanciera, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Country" })*@
+                                @Html.ValidationMessageFor(model => model.insf_IdInstitucionFinanciera, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -39,18 +43,25 @@
                         <div class="row" >
                             <div class="col-md-12">
                                 <p>Favor seleccionar planilla externa (Excel), para ser cargada al sistema:</p>
-                                <div action="#" class="dropzone" id="dropzoneForm">
-                                    <div class="fallback">
-                                        <input name="archivoexcel"  id="archivoexcel" type="file" required />
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
                                     </div>
+                                    <span class="input-group-addon btn btn-primary btn-file">
+                                        <span class="fileinput-new">Seleccionar archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                        <input name="archivoexcel" id="archivoexcel" type="file" required />
+                                    </span>
+                                    <a href="#" class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput">Remover</a>
                                 </div>
                             </div>
-                        </div>
+                            </div>
                     </div>
-
-
                     <div class="ibox-footer">
-                        <button class="btn btn-primary col-md-offset-5" type="submit"><i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">Cargar Documento</span></button>
+                        <p>Nota: Favor asegurarse de haber seleccionado el archivo correcto.</p>
+                        <br>
+                        <button class="btn btn-primary col-md-offset-5" type="submit"><i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">Enviar Documento</span></button>
                     </div>
                 </div>
             </div>
@@ -84,7 +95,6 @@
             maxFilesize: 10, // MB
             dictDefaultMessage: "<center><strong>Suelte los archivos aquí o haga clic para cargar.</strong></br></center>"
         };
-
     </script>
 }
 
