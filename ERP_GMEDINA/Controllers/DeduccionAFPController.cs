@@ -77,6 +77,44 @@ namespace ERP_GMEDINA.Controllers
             return View(tbDeduccionAFP);
         }
 
+
+        //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
+        public JsonResult EditGetEmpleadoDDL()
+        {
+            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
+            var DDL =
+            from TipoDedu in db.tbTipoDeduccion
+            join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
+            select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
+            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
+            return Json(DDL, JsonRequestBehavior.AllowGet);
+        }
+
+        //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
+        public JsonResult EditGetAFPDDL()
+        {
+            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
+            var DDL =
+            from TipoDedu in db.tbTipoDeduccion
+            join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
+            select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
+            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
+            return Json(DDL, JsonRequestBehavior.AllowGet);
+        }
+
+        //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
+        public JsonResult EditGetDeduccionesDDL()
+        {
+            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
+            var DDL =
+            from TipoDedu in db.tbTipoDeduccion
+            join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
+            select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
+            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
+            return Json(DDL, JsonRequestBehavior.AllowGet);
+        }
+
+
         // GET: DeduccionAFP/Edit/5
         public ActionResult Edit(int? id)
         {
