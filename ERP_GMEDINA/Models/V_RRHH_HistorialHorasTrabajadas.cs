@@ -12,11 +12,15 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class V_DeduccionesExtraordinarias_EquipoEmpleado
+    public partial class V_RRHH_HistorialHorasTrabajadas
     {
-        public int eqem_Id { get; set; }
-        public int eqtra_Id { get; set; }
-        public string eqtra_Codigo { get; set; }
-        public string per_EquipoEmpleado { get; set; }
+        public string Nombre_Completo { get; set; }
+        public string Jornada { get; set; }
+        public string Tipo_Horas { get; set; }
+        public int Recargo { get; set; }
+        public string Usuario_Crea { get; set; }
+        public System.DateTime Fecha_Crea { get; set; }
+        public string Usuario_Modifica { get; set; }
+        public Nullable<System.DateTime> Fecha_Modifica { get; set; }
     }
 }

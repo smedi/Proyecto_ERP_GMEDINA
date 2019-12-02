@@ -10,16 +10,11 @@
 namespace ERP_GMEDINA.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class V_DeduccionesExtraordinarias
+    public partial class UDP_RRHH_tbEmpresas_Select_Result
     {
-        public string per_DeduccionEmpleado { get; set; }
-        public string car_Descripcion { get; set; }
-        public string dex_ObservacionesComentarios { get; set; }
-        public decimal dex_MontoInicial { get; set; }
-        public decimal dex_MontoRestante { get; set; }
-        public decimal dex_Cuota { get; set; }
-        public string cde_DescripcionDeduccion { get; set; }
+        public string empr_Nombre { get; set; }
+        public bool empr_Estado { get; set; }
+        public string empr_RazonInactivo { get; set; }
     }
 }

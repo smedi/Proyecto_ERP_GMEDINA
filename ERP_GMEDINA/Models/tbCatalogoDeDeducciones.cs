@@ -22,6 +22,7 @@ namespace ERP_GMEDINA.Models
             this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
             this.tbTechosDeducciones = new HashSet<tbTechosDeducciones>();
             this.tbTipoPlanillaDetalleDeduccion = new HashSet<tbTipoPlanillaDetalleDeduccion>();
+            this.tbDeduccionAFP = new HashSet<tbDeduccionAFP>();
         }
     
         public int cde_IdDeducciones { get; set; }
@@ -48,5 +49,7 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTipoPlanillaDetalleDeduccion> tbTipoPlanillaDetalleDeduccion { get; set; }
         public virtual tbTipoDeduccion tbTipoDeduccion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDeduccionAFP> tbDeduccionAFP { get; set; }
     }
 }

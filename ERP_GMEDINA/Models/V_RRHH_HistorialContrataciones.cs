@@ -12,14 +12,14 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class V_EmpleadoComisiones
+    public partial class V_RRHH_HistorialContrataciones
     {
-        public int emp_Id { get; set; }
-        public string Empleado { get; set; }
-        public int cin_IdIngreso { get; set; }
-        public string cin_DescripcionIngreso { get; set; }
-        public decimal cc_Monto { get; set; }
-        public System.DateTime cc_FechaRegistro { get; set; }
-        public bool cc_Pagado { get; set; }
+        public string Nombre_Completo { get; set; }
+        public string Departamento { get; set; }
+        public Nullable<System.DateTime> Fecha_Seleccion_Candidato { get; set; }
+        public string Usuario_Crea { get; set; }
+        public System.DateTime Fecha_Crea { get; set; }
+        public string Usuario_Modifica { get; set; }
+        public Nullable<System.DateTime> Fecha_Modifica { get; set; }
     }
 }
