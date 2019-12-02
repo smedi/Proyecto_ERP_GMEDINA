@@ -128,18 +128,18 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #per_Nombres + #per_Apellidos").empty();
+                        $("#Editar #cde_Descripcion").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Editar #per_Nombres + #per_Apellidos").append("<option value = 0>Selecione una opción...</option>");
+                        $("#Editar #cde_Descripcion").append("<option value = 0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
-                            $("#Editar #per_Nombres + #per_Apellidos").append("<option" + (iter.Id == SelectedIdEmpleado ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            $("#Editar #cde_Descripcion").append("<option" + (iter.Id == SelectedIdDeducciones ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
 
 
 
+                $("#EditarDeduccionAFP").modal();
 
-                $("#EditarCatalogoDeducciones").modal();
             }
             else {
                 //Mensaje de error si no hay data
@@ -159,7 +159,7 @@ $("#btnUpdateDeduccion").click(function () {
     var data = $("#frmCatalogoDeducciones").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
-        url: "/CatalogoDeDeducciones/Edit",
+        url: "/DeduccionAFP/Edit",
         method: "POST",
         data: data
     }).done(function (data) {
@@ -174,7 +174,7 @@ $("#btnUpdateDeduccion").click(function () {
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
-            $("#EditarCatalogoDeducciones").modal('hide');
+            $("#EditarDeduccionAFP").modal('hide');
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',
