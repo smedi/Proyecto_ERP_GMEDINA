@@ -451,6 +451,24 @@
     <Compile Include="Models\UDP_Plani_DecimoTercerMes_RPT_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Insert_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Update_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionesExtraordinarias_Update_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbEmpresas_Select_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
