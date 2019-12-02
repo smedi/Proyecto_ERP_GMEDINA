@@ -29,18 +29,24 @@
                   <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                     <thead>
                         <tr role="row">
+                            <th>Empleado</th>
+                            <th>@Html.DisplayNameFor(model => model.tbEmpleados.emp_CuentaBancaria)</th>
                             <th>@Html.DisplayNameFor(model => model.dafp_AporteLps)</th>
                             <th>@Html.DisplayNameFor(model => model.dafp_AporteDol)</th>
                             <th>@Html.DisplayNameFor(model => model.tbAFP.afp_Descripcion)</th>
                             <th>@Html.DisplayNameFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)</th>
-                            <th>Empleado</th>
-                            <th>@Html.DisplayNameFor(model => model.tbEmpleados.emp_CuentaBancaria)</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                       @foreach (var item in Model) {
                         <tr class="gradeA odd" role="row" data-id="@item.dafp_Id">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres) @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Apellidos)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbEmpleados.emp_CuentaBancaria)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.dafp_AporteLps)
                             </td>
@@ -52,12 +58,6 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres) @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Apellidos)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tbEmpleados.emp_CuentaBancaria)
                             </td>
                             <td>
                                 <button data-id="@item.dafp_Id" type="button" class="btn btn-primary btn-xs" id="btnEditarDeduccionAFP">Editar</button>

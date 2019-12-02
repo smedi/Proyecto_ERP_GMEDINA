@@ -25,7 +25,7 @@ function _ajax(params, uri, type, callback) {
 //FUNCION: CARGAR DATA Y REFRESCAR LA TABLA DEL INDEX
 function cargarGridDeducciones() {
     _ajax(null,
-        '/CatalogoDeDeducciones/GetData',
+        '/DeduccionAFP/GetData',
         'GET',
         (data) => {
             if (data.length == 0) {
@@ -36,17 +36,19 @@ function cargarGridDeducciones() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaDeducciones = data, template = '';
+            var ListaDeduccion = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            for (var i = 0; i < ListaDeducciones.length; i++) {
-                template += '<tr data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '">' +
-                    '<td>' + ListaDeducciones[i].cde_DescripcionDeduccion + '</td>' +
-                    '<td>' + ListaDeducciones[i].cde_PorcentajeColaborador + '</td>' +
-                    '<td>' + ListaDeducciones[i].cde_PorcentajeEmpresa + '</td>' +
-                    '<td>' + ListaDeducciones[i].tde_Descripcion + '</td>' +
+            for (var i = 0; i < ListaDeduccionAFP.length; i++) {
+                template += '<tr data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">' +
+                    '<td>' + ListaDeduccionAFP[i].per_Nombres + ' ' + ListaDeduccion[i].per_Apellidos + '</td>' +
+                    '<td>' + ListaDeduccionAFP[i].emp_CuentaBancaria + '</td>' +
+                    '<td>' + ListaDeduccionAFP[i].dafp_AporteLps + '</td>' +
+                    '<td>' + ListaDeduccionAFP[i].dafp_AporteDol + '</td>' +
+                    '<td>' + ListaDeduccionAFP[i].afp_Descripcion + '</td>' +
+                    '<td>' + ListaDeduccionAFP[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' +
-                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-primary btn-xs" id="btnEditarCatalogoDeducciones">Editar</button>' +
-                    '<button type="button" data-id = "' + ListaDeducciones[i].cde_IdDeducciones + '" class="btn btn-default btn-xs" id="btnDetalleCatalogoDeducciones">Detalle</button>' +
+                    '<button type="button" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '" class="btn btn-primary btn-xs" id="btnEditarDeduccionAFP">Editar</button>' +
+                    '<button type="button" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '" class="btn btn-default btn-xs" id="btnDetalleDeduccionAFP">Detalle</button>' +
                     '</td>' +
                     '</tr>';
             }

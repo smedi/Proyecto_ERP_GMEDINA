@@ -17,8 +17,21 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionAFP
         public ActionResult Index()
         {
-            var tbDeduccionAFP = db.tbDeduccionAFP.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbAFP).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEmpleados);
+            var tbDeduccionAFP = db.tbDeduccionAFP.Include(t => t.tbAFP).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEmpleados);
             return View(tbDeduccionAFP.ToList());
+        }
+
+        // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
+        public ActionResult GetData()
+        {
+            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
+            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
+            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
+            var tbDeduccionAFP1 = db.tbDeduccionAFP
+                        .Select(d => new {  }).Where( =>  == true)
+                        .ToList();
+            //RETORNAR JSON AL LADO DEL CLIENTE
+            return new JsonResult { Data = tbDeduccionAFP1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         // GET: DeduccionAFP/Details/5
@@ -39,8 +52,6 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionAFP/Create
         public ActionResult Create()
         {
-            ViewBag.dafp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.dafp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion");
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
             ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
@@ -60,9 +71,6 @@ namespace ERP_GMEDINA.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.dafp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionAFP.dafp_UsuarioCrea);
-            ViewBag.dafp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionAFP.dafp_UsuarioModifica);
             ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", tbDeduccionAFP.afp_Id);
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionAFP.cde_IdDeducciones);
             ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionAFP.emp_Id);
@@ -81,8 +89,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.dafp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionAFP.dafp_UsuarioCrea);
-            ViewBag.dafp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionAFP.dafp_UsuarioModifica);
+
             ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", tbDeduccionAFP.afp_Id);
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionAFP.cde_IdDeducciones);
             ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionAFP.emp_Id);
@@ -102,14 +109,15 @@ namespace ERP_GMEDINA.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.dafp_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionAFP.dafp_UsuarioCrea);
-            ViewBag.dafp_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbDeduccionAFP.dafp_UsuarioModifica);
+
             ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", tbDeduccionAFP.afp_Id);
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionAFP.cde_IdDeducciones);
             ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionAFP.emp_Id);
             return View(tbDeduccionAFP);
         }
 
+
+        /*
         // GET: DeduccionAFP/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -135,6 +143,7 @@ namespace ERP_GMEDINA.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        */
 
         protected override void Dispose(bool disposing)
         {
