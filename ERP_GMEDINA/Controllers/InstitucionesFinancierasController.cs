@@ -224,21 +224,21 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel, string cboINFS)
         {
-
+            //Verificacion del objetto recibido (archivo excel), si esta vacio retornara un error, de lo contrario continuara con el proceso.
             if(archivoexcel != null && archivoexcel.ContentLength > 0)
             {
+                //Guardado del archivo en el servidor
                 string path = Path.Combine(Server.MapPath("~/Content/PlanillasInstitucionesFinancieras"),
                                       Path.GetFileName(archivoexcel.FileName));
                 archivoexcel.SaveAs(path);
 
-
-                //https://www.c-sharpcorner.com/article/how-to-upload-records-from-excel-file-and-save-in-database-using-store-procedure/
+               
                 try
                 {
-                    int IdInsF = 1;
-                    // string ubicacion = "Content/PlanillasInstitucionesFinancieras/";
-                   // string _path = @"C:\Deduccion_Planilla_Prueba.xlsx";
+                    int IdInsF = Convert.ToInt16(cboINFS);
+                  
                     SLDocument sl = new SLDocument(path);
+
 
                     using (var db = new ERP_GMEDINAEntities())
                     {
@@ -249,15 +249,10 @@ namespace ERP_GMEDINA.Controllers
                             string identidad = sl.GetCellValueAsString(iRow, 1);
                             decimal monto = sl.GetCellValueAsDecimal(iRow, 2);
                             string comentario = sl.GetCellValueAsString(iRow, 3);
-                            //string nombres = sl.GetCellValueAsString(iRow, 4);
-                            //string apellidos = sl.GetCellValueAsString(iRow, 5);
 
 
                             var oMiExcel = new tbDeduccionInstitucionFinanciera();
 
-                            //   int empleadoID = 0;
-
-                            // var IdEmple = db.Database.ExecuteSqlCommand("SELECT E.emp_Id FROM [rrhh].[tbPersonas] P INNER JOIN  [rrhh].[tbEmpleados] E ON P.per_Id = E.per_Id WHERE P.per_Identidad ="+identidad);
                             var Excel = (from P in db.tbPersonas
                                         join E in db.tbEmpleados on P.per_Id equals E.per_Id
                                         where
@@ -269,8 +264,7 @@ namespace ERP_GMEDINA.Controllers
                             var sql = (from infs in db.tbDeduccionInstitucionFinanciera select infs.deif_IdDeduccionInstFinanciera).Max();
                             var iddeducfin = sql + 1;
 
-                            //db.Database.ExecuteSqlCommand(@"SELECT MAX([deif_IdDeduccionInstFinanciera]) + 1 AS [deif_IdDeduccionInstFinanciera]  
-                            //                                            FROM [Plani].[tbDeduccionInstitucionFinanciera]");
+                           
 
                             var IdEmple = Excel.empleadoID;
                             
@@ -305,7 +299,7 @@ namespace ERP_GMEDINA.Controllers
             }
             else
             {
-
+                ViewBag.sms = "Error: Debe seleccionar un archivo para poder cargarlo al sistema.";
 
             }
            
