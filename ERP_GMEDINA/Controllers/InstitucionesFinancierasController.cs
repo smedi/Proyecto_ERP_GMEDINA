@@ -239,7 +239,7 @@ namespace ERP_GMEDINA.Controllers
                   
                     SLDocument sl = new SLDocument(path);
 
-
+                    //Recorremos 
                     using (var db = new ERP_GMEDINAEntities())
                     {
 
