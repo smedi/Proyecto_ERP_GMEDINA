@@ -90,6 +90,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_CatalogoDeIngresos" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_CatalogoDePlanillasConIngresosYDeducciones" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_ColaboradoresPorPlanilla" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias" Width="2.875" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtrasColaboradores" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EmpleadoBonos" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_EmpleadoComisiones" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
@@ -355,21 +356,9 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_tbtitulosRequisicion_titu_Id" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Detalles" Width="1.5" PointX="5.375" PointY="14.75" />
         <AssociationConnector Association="ERP_GMEDINAModel.C_FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbAFP" Width="1.5" PointX="16.25" PointY="161.375" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbDeduccionAFP" Width="1.5" PointX="24.5" PointY="156.375" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_EquipoEmpleado" Width="1.5" PointX="7.375" PointY="0.75" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbAFP_afp_UsuarioCrea" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbAFP_afp_UsuarioModifica" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionAFP_dafp_UsuarioCrea" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbDeduccionAFP_dafp_UsuarioModifica" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbTechosDeducciones_tddu_UsuarioCrea" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_Plani_tbTechosDeducciones_tddu_UsuarioModifica" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbAFP_afp_Id_Plani_tbDeduccionAFP_afp_Id" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbTipoDeduccion_tde_IdTipoDedu_Plani_tbAFP_tde_IdTipoDedu" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbDeduccionAFP_cde_IdDeducciones" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_tbempledos_emp_Id_tbDecimoCuartoMes_emp_Id" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_Plani_tbDeduccionAFP_emp_Id" />
-        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_EquipoEmpleado" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Editar" Width="1.5" PointX="15.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_EquipoEmpleado1" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
