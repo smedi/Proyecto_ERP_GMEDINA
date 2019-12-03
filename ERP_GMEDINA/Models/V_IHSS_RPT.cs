@@ -14,22 +14,16 @@ namespace ERP_GMEDINA.Models
     
     public partial class V_IHSS_RPT
     {
-        public int emp_emp_Id { get; set; }
-        public Nullable<int> cpla_cpla_IdPlanilla { get; set; }
-        public string cpla_DescripcionPlanilla { get; set; }
-        public string NombreCompleto { get; set; }
+        public int emp_Id { get; set; }
         public string per_Identidad { get; set; }
-        public string per_Sexo { get; set; }
-        public Nullable<int> per_Edad { get; set; }
-        public string per_Direccion { get; set; }
-        public string per_Telefono { get; set; }
-        public string per_CorreoElectronico { get; set; }
-        public string per_EstadoCivil { get; set; }
-        public Nullable<decimal> hipa_SueldoNeto { get; set; }
-        public Nullable<decimal> CantidadIHSSEmpresa { get; set; }
-        public Nullable<decimal> CantidadIHSSColaborador { get; set; }
-        public Nullable<decimal> TotalIHSS { get; set; }
+        public string per_Nombres { get; set; }
+        public string per_Apellidos { get; set; }
+        public string depto_descripcion { get; set; }
+        public string area_Descripcion { get; set; }
+        public string cpla_DescripcionPlanilla { get; set; }
+        public int cde_IdDeducciones { get; set; }
+        public string cde_DescripcionDeduccion { get; set; }
+        public Nullable<decimal> hidp_Total { get; set; }
         public System.DateTime hipa_FechaPago { get; set; }
-        public bool emp_Estado { get; set; }
     }
 }

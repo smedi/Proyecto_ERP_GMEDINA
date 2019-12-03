@@ -22,6 +22,7 @@ namespace ERP_GMEDINA.Models
         public Nullable<decimal> dtm_Monto { get; set; }
         public string emp_CuentaBancaria { get; set; }
         public string dtm_CodigoPago { get; set; }
+        public int cpla_IdPlanilla { get; set; }
         public string cpla_DescripcionPlanilla { get; set; }
     }
 }
