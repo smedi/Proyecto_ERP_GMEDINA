@@ -33,8 +33,8 @@ namespace ERP_GMEDINA.Controllers
                                            per_Apellidos = t.tbEmpleados.tbPersonas.per_Apellidos,
                                            emp_CuentaBancaria = t.tbEmpleados.emp_CuentaBancaria,
                                            dafp_AporteLps = t.dafp_AporteLps,
-                                           afp_Descripcion = t.tbAFP.afp_Descripcion,
                                            afp_Id = t.afp_Id,
+                                           afp_Descripcion = t.tbAFP.afp_Descripcion,
                                            emp_Id = t.emp_Id,
                                            dafp_UsuarioCrea = t.dafp_UsuarioCrea,
                                            dafp_UsuarioModifica = t.dafp_UsuarioModifica,
@@ -42,7 +42,7 @@ namespace ERP_GMEDINA.Controllers
                                            dafp_FechaModifica = t.dafp_FechaModifica,
                                            dafp_Activo = t.dafp_Activo
                                          })
-                                           .Where(t => t.dafp_Activo == true)
+                        .Where(t => t.dafp_Activo == true)
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbDeduccionAFP1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -77,7 +77,7 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dafp_Id,dafp_AporteLps,dafp_AporteDol,afp_Id,cde_IdDeducciones,emp_Id,dafp_UsuarioCrea,dafp_FechaCrea,dafp_UsuarioModifica,dafp_FechaModifica,dafp_Activo")] tbDeduccionAFP tbDeduccionAFP)
+        public ActionResult Create([Bind(Include = "dafp_Id,dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioCrea,dafp_FechaCrea")] tbDeduccionAFP tbDeduccionAFP)
         {
             if (ModelState.IsValid)
             {
@@ -147,7 +147,7 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dafp_Id,dafp_AporteLps,dafp_AporteDol,afp_Id,cde_IdDeducciones,emp_Id,dafp_UsuarioCrea,dafp_FechaCrea,dafp_UsuarioModifica,dafp_FechaModifica,dafp_Activo")] tbDeduccionAFP tbDeduccionAFP)
+        public ActionResult Edit([Bind(Include = "dafp_Id,dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioModifica,dafp_FechaModifica")] tbDeduccionAFP tbDeduccionAFP)
         {
             if (ModelState.IsValid)
             {

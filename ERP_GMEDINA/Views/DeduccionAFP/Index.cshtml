@@ -32,9 +32,7 @@
                             <th>Empleado</th>
                             <th>@Html.DisplayNameFor(model => model.tbEmpleados.emp_CuentaBancaria)</th>
                             <th>@Html.DisplayNameFor(model => model.dafp_AporteLps)</th>
-                            <th>@Html.DisplayNameFor(model => model.dafp_AporteDol)</th>
                             <th>@Html.DisplayNameFor(model => model.tbAFP.afp_Descripcion)</th>
-                            <th>@Html.DisplayNameFor(model => model.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -51,13 +49,7 @@
                                 @Html.DisplayFor(modelItem => item.dafp_AporteLps)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.dafp_AporteDol)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => item.tbAFP.afp_Descripcion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tbCatalogoDeDeducciones.cde_DescripcionDeduccion)
                             </td>
                             <td>
                                 <button data-id="@item.dafp_Id" type="button" class="btn btn-primary btn-xs" id="btnEditarDeduccionAFP">Editar</button>

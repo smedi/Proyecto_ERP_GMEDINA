@@ -43,9 +43,7 @@ function cargarGridDeducciones() {
                     '<td>' + ListaDeduccionAFP[i].per_Nombres + ' ' + ListaDeduccion[i].per_Apellidos + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].emp_CuentaBancaria + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].dafp_AporteLps + '</td>' +
-                    '<td>' + ListaDeduccionAFP[i].dafp_AporteDol + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].afp_Descripcion + '</td>' +
-                    '<td>' + ListaDeduccionAFP[i].cde_DescripcionDeduccion + '</td>' +
                     '<td>' +
                     '<button type="button" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '" class="btn btn-primary btn-xs" id="btnEditarDeduccionAFP">Editar</button>' +
                     '<button type="button" data-id = "' + ListaDeduccionAFP[i].dafp_Id + '" class="btn btn-default btn-xs" id="btnDetalleDeduccionAFP">Detalle</button>' +
@@ -74,7 +72,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
             if (data) {
                 console.log('Hla')
                 $("#Editar #dafp_AporteLps").val(data.dafp_AporteLps);
-                $("#Editar #dafp_AporteDol").val(data.dafp_AporteDol);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
 
 
@@ -114,26 +111,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                         $("#Editar #afp_Descripcion").append("<option value = 0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
                             $("#Editar #afp_Descripcion").append("<option" + (iter.Id == SelectedIdAFP ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
-
-
-                var SelectedIdDeducciones = data.cde_IdDeducciones;
-                //CARGAR INFORMACIÓN DEL DROPDOWNLIST DEDUCCIÓN PARA EL MODAL
-                $.ajax({
-                    url: "/DeduccionAFP/EditGetDeduccionesDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ ID })
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #cde_Descripcion").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $("#Editar #cde_Descripcion").append("<option value = 0>Selecione una opción...</option>");
-                        $.each(data, function (i, iter) {
-                            $("#Editar #cde_Descripcion").append("<option" + (iter.Id == SelectedIdDeducciones ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
 
@@ -185,7 +162,7 @@ $("#btnEditDeduccion").click(function () {
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
 $("#btnCerrarEditar").click(function () {
-    $("#EditarCatalogoDeducciones").modal('hide');
+    $("#EditarDeduccionAFP").modal('hide');
 });
 
 
@@ -228,24 +205,6 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
             $("#Editar #afp_Descripcion").append("<option value = 0>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
                 $("#Editar #afp_Descripcion").append("<optionvalue='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
-
-    //CARGAR INFORMACIÓN DEL DROPDOWNLIST DEDUCCIÓN PARA EL MODAL
-    $.ajax({
-        url: "/DeduccionAFP/EditGetDeduccionesDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID })
-    })
-        .done(function (data) {
-            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-            $("#Editar #cde_Descripcion").empty();
-            //LLENAR EL DROPDOWNLIST
-            $("#Editar #cde_Descripcion").append("<option value = 0>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Editar #cde_Descripcion").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
 
@@ -306,8 +265,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
             if (data) {
                 var FechaCrea = FechaFormato(data.dafp_FechaCrea);
                 var FechaModifica = FechaFormato(data.dafp_FechaModifica);
-                $("#Detalles #cde_IdDeducciones").val(data.cde_IdDeducciones);
-                $("#Detalles #cde_DescripcionDeduccion").val(data.cde_DescripcionDeduccion);
+                $("#Detalles #dafp").val(data.cde_DescripcionDeduccion);
                 $("#Detalles #cde_PorcentajeColaborador").val(data.cde_PorcentajeColaborador);
                 $("#Detalles #cde_PorcentajeEmpresa").val(data.cde_PorcentajeEmpresa);
                 $("#Detalles #cde_UsuarioCrea").val(data.cde_UsuarioCrea);
