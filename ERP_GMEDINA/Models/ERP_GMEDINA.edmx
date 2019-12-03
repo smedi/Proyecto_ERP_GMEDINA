@@ -3726,6 +3726,42 @@
           <Parameter Name="resp_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="resp_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbSucursales_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="suc_id" Type="int" Mode="In" />
+          <Parameter Name="suc_razon_Inactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="suc_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbSucursales_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="empr_Id" Type="int" Mode="In" />
+          <Parameter Name="mun_Codigo" Type="char" Mode="In" />
+          <Parameter Name="bod_Id" Type="int" Mode="In" />
+          <Parameter Name="pemi_Id" Type="int" Mode="In" />
+          <Parameter Name="suc_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Correo" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Telefono" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_usuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="suc_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbSucursales_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="suc_id" Type="int" Mode="In" />
+          <Parameter Name="suc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="suc_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbSucursales_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="suc_Id" Type="int" Mode="In" />
+          <Parameter Name="empr_Id" Type="int" Mode="In" />
+          <Parameter Name="mun_Codigo" Type="char" Mode="In" />
+          <Parameter Name="bod_Id" Type="int" Mode="In" />
+          <Parameter Name="pemi_Id" Type="int" Mode="In" />
+          <Parameter Name="suc_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Correo" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_Telefono" Type="nvarchar" Mode="In" />
+          <Parameter Name="suc_usuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="suc_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="ERP_GMEDINAModelStoreContainer">
           <EntitySet Name="tbAccesoRol" EntityType="Self.tbAccesoRol" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbObjeto" EntityType="Self.tbObjeto" Schema="Acce" store:Type="Tables" />
@@ -5775,6 +5811,42 @@
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbRequerimientosEspeciales" EntitySet="tbRequerimientosEspeciales" />
           </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbSucursales_Delete" ReturnType="Collection(String)">
+            <Parameter Name="suc_id" Mode="In" Type="Int32" />
+            <Parameter Name="suc_razon_Inactivo" Mode="In" Type="String" />
+            <Parameter Name="suc_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="suc_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbSucursales_Insert" ReturnType="Collection(String)">
+            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+            <Parameter Name="mun_Codigo" Mode="In" Type="String" />
+            <Parameter Name="bod_Id" Mode="In" Type="Int32" />
+            <Parameter Name="pemi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="suc_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="suc_Correo" Mode="In" Type="String" />
+            <Parameter Name="suc_Direccion" Mode="In" Type="String" />
+            <Parameter Name="suc_Telefono" Mode="In" Type="String" />
+            <Parameter Name="suc_usuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="suc_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbSucursales_Restore" ReturnType="Collection(String)">
+            <Parameter Name="suc_id" Mode="In" Type="Int32" />
+            <Parameter Name="suc_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="suc_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbSucursales_Update" ReturnType="Collection(String)">
+            <Parameter Name="suc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+            <Parameter Name="mun_Codigo" Mode="In" Type="String" />
+            <Parameter Name="bod_Id" Mode="In" Type="Int32" />
+            <Parameter Name="pemi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="suc_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="suc_Correo" Mode="In" Type="String" />
+            <Parameter Name="suc_Direccion" Mode="In" Type="String" />
+            <Parameter Name="suc_Telefono" Mode="In" Type="String" />
+            <Parameter Name="suc_usuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="suc_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -10958,6 +11030,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSucursales_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSucursales_Delete" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSucursales_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSucursales_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSucursales_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSucursales_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSucursales_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSucursales_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

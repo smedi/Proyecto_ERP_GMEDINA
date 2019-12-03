@@ -15,7 +15,7 @@ $(document).ready(function () {
             columnas.push({
                 "orderable": false
             });
-        } else {
+        }  else {
             columnas.push(null);
         }
     });
