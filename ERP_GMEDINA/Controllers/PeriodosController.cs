@@ -175,14 +175,14 @@ namespace ERP_GMEDINA.Controllers
         // POST: Periodos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Inactivar(int Id)
+        public ActionResult Inactivar(int id)
         {
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = "bien";
             IEnumerable<object> listPeriodo = null;
             string MensajeError = "";
             //VALIDAR QUE EL ID NO LLEGUE NULL
-            if (Id == null)
+            if (id == null)
             {
                 response = "error";
                 return Json(response, JsonRequestBehavior.AllowGet);
@@ -190,7 +190,7 @@ namespace ERP_GMEDINA.Controllers
             //INSTANCIA DEL MODELO
             tbPeriodos tbPeriodos = new tbPeriodos();
             //LLENAR DATA DE AUDITORIA
-            tbPeriodos.peri_IdPeriodo = (int)Id;
+            tbPeriodos.peri_IdPeriodo = (int)id;
             tbPeriodos.peri_UsuarioModifica = 1;
             tbPeriodos.peri_FechaModifica = DateTime.Now;
             //VALIDAR SI EL ID ES VÁLIDO
