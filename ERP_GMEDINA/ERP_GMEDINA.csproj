@@ -1343,6 +1343,9 @@
     <Content Include="Views\DeduccionAFP\Details.cshtml" />
     <Content Include="Views\DeduccionAFP\Edit.cshtml" />
     <Content Include="Views\DeduccionAFP\Index.cshtml" />
+    <Content Include="Views\DeduccionAFP\_CreateDeduccionAFP.cshtml" />
+    <Content Include="Views\DeduccionAFP\_EditDeduccionAFP.cshtml" />
+    <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

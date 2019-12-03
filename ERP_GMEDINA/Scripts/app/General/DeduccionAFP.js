@@ -57,6 +57,7 @@ function cargarGridDeducciones() {
         });
 }
 
+//Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", function () {
     var ID = $(this).data('id');
@@ -151,12 +152,10 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
         });
 });
 
-
-
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
-$("#btnUpdateDeduccion").click(function () {
+$("#btnEditDeduccion").click(function () {
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
-    var data = $("#frmCatalogoDeducciones").serializeArray();
+    var data = $("#frmEditDeduccionAFP").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
         url: "/DeduccionAFP/Edit",
@@ -184,36 +183,119 @@ $("#btnUpdateDeduccion").click(function () {
     });
 });
 
+//FUNCION: OCULTAR MODAL DE EDICIÓN
+$("#btnCerrarEditar").click(function () {
+    $("#EditarCatalogoDeducciones").modal('hide');
+});
 
 
 
 
+//Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarCatalogoDeducciones", function () {
-    //PEDIR DATA PARA LLENAR EL DROPDOWNLIST DEL MODAL
+$(document).on("click", "#btnAgregarDeduccionAFP", function () {
+
+    //CARGAR INFORMACIÓN DEL DROPDOWNLIST EMPLEADO PARA EL MODAL
     $.ajax({
-        url: "/CatalogoDeDeducciones/EditGetDDL",
+        url: "/DeduccionAFP/EditGetEmpleadoDDL",
         method: "GET",
         dataType: "json",
-        contentType: "application/json; charset=utf-8"
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID })
     })
-        //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
-            $("#Crear #tde_IdTipoDedu").empty();
-            $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
+            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+            $("#Editar #per_Nombres + #per_Apellidos").empty();
+            //LLENAR EL DROPDOWNLIST
+            $("#Editar #per_Nombres + #per_Apellidos").append("<option value = 0>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
-                $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                $("#Editar #per_Nombres + #per_Apellidos").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
+
+    //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
+    $.ajax({
+        url: "/DeduccionAFP/EditGetAFPDDL",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID })
+    })
+        .done(function (data) {
+            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+            $("#Editar #afp_Descripcion").empty();
+            //LLENAR EL DROPDOWNLIST
+            $("#Editar #afp_Descripcion").append("<option value = 0>Selecione una opción...</option>");
+            $.each(data, function (i, iter) {
+                $("#Editar #afp_Descripcion").append("<optionvalue='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+            });
+        });
+
+    //CARGAR INFORMACIÓN DEL DROPDOWNLIST DEDUCCIÓN PARA EL MODAL
+    $.ajax({
+        url: "/DeduccionAFP/EditGetDeduccionesDDL",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ ID })
+    })
+        .done(function (data) {
+            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+            $("#Editar #cde_Descripcion").empty();
+            //LLENAR EL DROPDOWNLIST
+            $("#Editar #cde_Descripcion").append("<option value = 0>Selecione una opción...</option>");
+            $.each(data, function (i, iter) {
+                $("#Editar #cde_Descripcion").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+            });
+        });
+
+
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarCatalogoDeducciones").modal();
 });
 
+
+//FUNCION: CREAR EL NUEVO REGISTRO
+$('#btnCreateRegistroDeduccionAFP').click(function () {
+    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+
+    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+    var data = $("#frmCreateDeduccionAFP").serializeArray();
+    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+    $.ajax({
+        url: "/DeduccionAFP/Create",
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        //CERRAR EL MODAL DE AGREGAR
+        $("#AgregarDeduccionAFP").modal('hide');
+        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo guardar el registro, contacte al administrador',
+            });
+        }
+        else {
+            cargarGridDeducciones();
+            // Mensaje de exito cuando un registro se ha guardado bien
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro fue registrado de forma exitosa!',
+            });
+        }
+    });
+});
+
+
+
+
+//Detalles//
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-$(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogoDeducciones", function () {
+$(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", function () {
     var ID = $(this).data('id');
     $.ajax({
-        url: "/CatalogoDeDeducciones/Details/" + ID,
+        url: "/DeduccionAFP/Details/" + ID,
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -222,8 +304,8 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                var FechaCrea = FechaFormato(data.cde_FechaCrea);
-                var FechaModifica = FechaFormato(data.cde_FechaModifica);
+                var FechaCrea = FechaFormato(data.dafp_FechaCrea);
+                var FechaModifica = FechaFormato(data.dafp_FechaModifica);
                 $("#Detalles #cde_IdDeducciones").val(data.cde_IdDeducciones);
                 $("#Detalles #cde_DescripcionDeduccion").val(data.cde_DescripcionDeduccion);
                 $("#Detalles #cde_PorcentajeColaborador").val(data.cde_PorcentajeColaborador);
@@ -251,7 +333,7 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
                             $("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                $("#DetallesCatalogoDeducciones").modal();
+                $("#DetallesDeduccionAFP").modal();
             }
             else {
                 //Mensaje de error si no hay data
@@ -262,44 +344,9 @@ $(document).on("click", "#tblCatalogoDeducciones tbody tr td #btnDetalleCatalogo
             }
         });
 });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-//FUNCION: CREAR EL NUEVO REGISTRO
-$('#btnCreateRegistroDeduccion').click(function () {
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCatalogoDeduccionesCreate").serializeArray();
-    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    $.ajax({
-        url: "/CatalogoDeDeducciones/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-        $("#AgregarCatalogoDeducciones").modal('hide');
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo guardar el registro, contacte al administrador',
-            });
-        }
-        else {
-            cargarGridDeducciones();
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
-            });
-        }
-    });
-});
-
-//FUNCION: OCULTAR MODAL DE EDICIÓN
-$("#btnCerrarEditar").click(function () {
-    $("#EditarCatalogoDeducciones").modal('hide');
-});
 
 $(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
     //MOSTRAR EL MODAL DE INACTIVAR

@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionAFP
         public ActionResult Index()
         {
-            var tbDeduccionAFP = db.tbDeduccionAFP.Include(t => t.tbAFP).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEmpleados);
+            var tbDeduccionAFP = db.tbDeduccionAFP.Where(t => t.dafp_Activo == true).Include(t => t.tbAFP).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEmpleados);
             return View(tbDeduccionAFP.ToList());
         }
 
@@ -28,7 +28,24 @@ namespace ERP_GMEDINA.Controllers
             //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbDeduccionAFP1 = db.tbDeduccionAFP
-                        .Select(d => new {  }).Where( =>  == true)
+                        .Select(t => new { dafp_Id = t.dafp_Id,
+                                           per_Nombres = t.tbPersonas.per_Nombres,
+                                           per_Apellidos = t.tbPersonas.per_Apellidos,
+                                           emp_CuentaBancaria = t.tbEmpleados.emp_CuentaBancaria,
+                                           dafp_AporteLps = t.dafp_AporteLps,
+                                           dafp_AporteDol = t.dafp_AporteDol,
+                                           afp_Descripcion = t.tbAFP.afp_Descripcion,
+                                           cde_DescripcionDeduccion = t.tbCatalogoDeDeducciones.cde_DescripcionDeduccion,
+                                           afp_Id = t.afp_Id,
+                                           emp_Id = t.emp_Id,
+                                           cde_IdDeducciones = t.cde_IdDeducciones,
+                                           dafp_UsuarioCrea = t.dafp_UsuarioCrea,
+                                           dafp_UsuarioModifica = t.dafp_UsuarioModifica,
+                                           dafp_FechaCrea = t.dafp_FechaCrea,
+                                           dafp_FechaModifica = t.dafp_FechaModifica,
+                                           dafp_Activo = t.dafp_Activo
+                                         })
+                                           .Where(t => t.dafp_Activo == true)
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbDeduccionAFP1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -52,9 +69,9 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionAFP/Create
         public ActionResult Create()
         {
-            ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion");
+            /*ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion");
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");*/
             return View();
         }
 
@@ -71,9 +88,12 @@ namespace ERP_GMEDINA.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+           /* 
             ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", tbDeduccionAFP.afp_Id);
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionAFP.cde_IdDeducciones);
             ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionAFP.emp_Id);
+           */
             return View(tbDeduccionAFP);
         }
 
@@ -83,9 +103,10 @@ namespace ERP_GMEDINA.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from TipoDedu in db.tbTipoDeduccion
-            join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
-            select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
+            from DeduAFP in db.tbDeduccionAFP
+            join Emp in db.tbEmpleados on Emp.emp_Id equals DeduAFP.emp_Id into prodGroup
+            join Per in db.tbPersonas on Per.per_Id equals Emp.per_Id into prodsGroup
+            select new { Id = DeduAFP.emp_Id, Descripcion = Per.per_Nombres + ' ' + Per.per_Apellidos };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
@@ -95,9 +116,9 @@ namespace ERP_GMEDINA.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from TipoDedu in db.tbTipoDeduccion
-            join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
-            select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
+            from DeduAFP in db.tbDeduccionAFP
+            join AFP in db.tbAFP on DeduAFP.afp_Id equals AFP.afp_Id into prodGroup
+            select new { Id = AFP.afp_Id, Descripcion = AFP.afp_Descripcion };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
@@ -107,9 +128,9 @@ namespace ERP_GMEDINA.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from TipoDedu in db.tbTipoDeduccion
-            join CatDeduc in db.tbCatalogoDeDeducciones on TipoDedu.tde_IdTipoDedu equals CatDeduc.tde_IdTipoDedu into prodGroup
-            select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
+            from DeduAFP in db.tbDeduccionAFP
+            join CatDeduc in db.tbCatalogoDeDeducciones on DeduAFP.cde_IdDeducciones equals CatDeduc.cde_IdDeducciones into prodGroup
+            select new { Id = CatDeduc.cde_IdDeducciones, Descripcion = CatDeduc.cde_DescripcionDeduccion };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
@@ -128,9 +149,11 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
 
+            /*
             ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", tbDeduccionAFP.afp_Id);
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionAFP.cde_IdDeducciones);
             ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionAFP.emp_Id);
+            */
             return View(tbDeduccionAFP);
         }
 
@@ -148,9 +171,11 @@ namespace ERP_GMEDINA.Controllers
                 return RedirectToAction("Index");
             }
 
+            /*
             ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", tbDeduccionAFP.afp_Id);
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionAFP.cde_IdDeducciones);
             ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionAFP.emp_Id);
+            */
             return View(tbDeduccionAFP);
         }
 
