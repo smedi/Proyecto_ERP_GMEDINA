@@ -177,6 +177,7 @@
     <Compile Include="Controllers\EmpleadoComisionesController.cs" />
     <Compile Include="Controllers\FormaPagoController.cs" />
     <Compile Include="Controllers\ISRController.cs" />
+    <Compile Include="Controllers\PeriodosController.cs" />
     <Compile Include="Controllers\PlanillaController.cs" />
     <Compile Include="Controllers\TechosDeduccionesController.cs" />
     <Compile Include="Controllers\TipoDeduccionesController.cs" />
@@ -933,6 +934,7 @@
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
+    <Content Include="Scripts\app\General\Periodos.js" />
     <Content Include="Scripts\app\General\FormaPago.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
@@ -1532,6 +1534,9 @@
     <Content Include="Views\DecimoCuartoMes\Index.cshtml" />
     <Content Include="Views\DecimoCuartoMes\FechaEspecifica.cshtml" />
     <Content Include="Views\DecimoCuartoMes\_FechasDecimoCuarto.cshtml" />
+    <Content Include="Views\Periodos\Index.cshtml" />
+    <Content Include="Views\Periodos\_Create.cshtml" />
+    <Content Include="Views\Periodos\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

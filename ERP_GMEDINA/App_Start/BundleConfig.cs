@@ -509,7 +509,9 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/general/DecimoCuartoMes").Include(
                 "~/Scripts/app/general/DecimoCuartoMes.js"));
-
+            
+            bundles.Add(new ScriptBundle("~/Scripts/app/General/Period").Include(
+                "~/Scripts/app/General/Periodos.js"));
             //OPTIMIZATION
 
             //Allow any type of Content Delivery Network 
