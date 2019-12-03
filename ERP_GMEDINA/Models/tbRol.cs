@@ -17,8 +17,8 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbRol()
         {
-            this.tbAccesoRols = new HashSet<tbAccesoRol>();
-            this.tbRolesUsuarios = new HashSet<tbRolesUsuario>();
+            this.tbAccesoRol = new HashSet<tbAccesoRol>();
+            this.tbRolesUsuario = new HashSet<tbRolesUsuario>();
         }
     
         public int rol_Id { get; set; }
@@ -30,9 +30,9 @@ namespace ERP_GMEDINA.Models
         public bool rol_Estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAccesoRol> tbAccesoRols { get; set; }
+        public virtual ICollection<tbAccesoRol> tbAccesoRol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRolesUsuario> tbRolesUsuarios { get; set; }
+        public virtual ICollection<tbRolesUsuario> tbRolesUsuario { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
     }

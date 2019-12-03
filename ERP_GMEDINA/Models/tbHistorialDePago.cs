@@ -17,8 +17,8 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbHistorialDePago()
         {
-            this.tbHistorialDeduccionPagoes = new HashSet<tbHistorialDeduccionPago>();
-            this.tbHistorialDeIngresosPagoes = new HashSet<tbHistorialDeIngresosPago>();
+            this.tbHistorialDeduccionPago = new HashSet<tbHistorialDeduccionPago>();
+            this.tbHistorialDeIngresosPago = new HashSet<tbHistorialDeIngresosPago>();
         }
     
         public int hipa_IdHistorialDePago { get; set; }
@@ -34,14 +34,17 @@ namespace ERP_GMEDINA.Models
         public System.DateTime hipa_FechaCrea { get; set; }
         public Nullable<int> hipa_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> hipa_FechaModifica { get; set; }
+        public decimal hipa_TotalISR { get; set; }
+        public Nullable<bool> hipa_ISRPendiente { get; set; }
+        public decimal hipa_AFP { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPagoes { get; set; }
+        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPagoes { get; set; }
-        public virtual tbPeriodo tbPeriodo { get; set; }
-        public virtual tbEmpleado tbEmpleado { get; set; }
+        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
+        public virtual tbPeriodos tbPeriodos { get; set; }
+        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

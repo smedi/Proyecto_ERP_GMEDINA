@@ -17,171 +17,171 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbUsuario()
         {
-            this.tbAccesoRols = new HashSet<tbAccesoRol>();
-            this.tbAccesoRols1 = new HashSet<tbAccesoRol>();
-            this.tbObjetoes = new HashSet<tbObjeto>();
-            this.tbObjetoes1 = new HashSet<tbObjeto>();
-            this.tbRols = new HashSet<tbRol>();
-            this.tbRols1 = new HashSet<tbRol>();
-            this.tbRolesUsuarios = new HashSet<tbRolesUsuario>();
-            this.tbRolesUsuarios1 = new HashSet<tbRolesUsuario>();
-            this.tbRolesUsuarios2 = new HashSet<tbRolesUsuario>();
-            this.tbAdelantoSueldoes = new HashSet<tbAdelantoSueldo>();
-            this.tbAdelantoSueldoes1 = new HashSet<tbAdelantoSueldo>();
-            this.tbAFPs = new HashSet<tbAFP>();
-            this.tbAFPs1 = new HashSet<tbAFP>();
-            this.tbAuxilioDeCesantias = new HashSet<tbAuxilioDeCesantia>();
-            this.tbAuxilioDeCesantias1 = new HashSet<tbAuxilioDeCesantia>();
-            this.tbCatalogoDeDeducciones = new HashSet<tbCatalogoDeDeduccione>();
-            this.tbCatalogoDeDeducciones1 = new HashSet<tbCatalogoDeDeduccione>();
-            this.tbCatalogoDeIngresos = new HashSet<tbCatalogoDeIngreso>();
-            this.tbCatalogoDeIngresos1 = new HashSet<tbCatalogoDeIngreso>();
-            this.tbCatalogoDePlanillas = new HashSet<tbCatalogoDePlanilla>();
-            this.tbCatalogoDePlanillas1 = new HashSet<tbCatalogoDePlanilla>();
-            this.tbDecimoCuartoMes = new HashSet<tbDecimoCuartoMe>();
-            this.tbDecimoCuartoMes1 = new HashSet<tbDecimoCuartoMe>();
-            this.tbDecimoTercerMes = new HashSet<tbDecimoTercerMe>();
-            this.tbDecimoTercerMes1 = new HashSet<tbDecimoTercerMe>();
-            this.tbDeduccionAFPs = new HashSet<tbDeduccionAFP>();
-            this.tbDeduccionAFPs1 = new HashSet<tbDeduccionAFP>();
-            this.tbDeduccionesExtraordinarias = new HashSet<tbDeduccionesExtraordinaria>();
-            this.tbDeduccionesExtraordinarias1 = new HashSet<tbDeduccionesExtraordinaria>();
-            this.tbDeduccionInstitucionFinancieras = new HashSet<tbDeduccionInstitucionFinanciera>();
-            this.tbDeduccionInstitucionFinancieras1 = new HashSet<tbDeduccionInstitucionFinanciera>();
-            this.tbEmpleadoBonos = new HashSet<tbEmpleadoBono>();
-            this.tbEmpleadoBonos1 = new HashSet<tbEmpleadoBono>();
-            this.tbEmpleadoComisiones = new HashSet<tbEmpleadoComisione>();
-            this.tbEmpleadoComisiones1 = new HashSet<tbEmpleadoComisione>();
-            this.tbFormaPagoes = new HashSet<tbFormaPago>();
-            this.tbFormaPagoes1 = new HashSet<tbFormaPago>();
-            this.tbHistorialDeduccionPagoes = new HashSet<tbHistorialDeduccionPago>();
-            this.tbHistorialDeduccionPagoes1 = new HashSet<tbHistorialDeduccionPago>();
-            this.tbHistorialDeIngresosPagoes = new HashSet<tbHistorialDeIngresosPago>();
-            this.tbHistorialDeIngresosPagoes1 = new HashSet<tbHistorialDeIngresosPago>();
-            this.tbHistorialDePagoes = new HashSet<tbHistorialDePago>();
-            this.tbHistorialDePagoes1 = new HashSet<tbHistorialDePago>();
-            this.tbInstitucionesFinancieras = new HashSet<tbInstitucionesFinanciera>();
-            this.tbInstitucionesFinancieras1 = new HashSet<tbInstitucionesFinanciera>();
-            this.tbISRs = new HashSet<tbISR>();
-            this.tbISRs1 = new HashSet<tbISR>();
-            this.tbLiquidaciones = new HashSet<tbLiquidacione>();
-            this.tbLiquidaciones1 = new HashSet<tbLiquidacione>();
-            this.tbLiquidacionVacaciones = new HashSet<tbLiquidacionVacacione>();
-            this.tbLiquidacionVacaciones1 = new HashSet<tbLiquidacionVacacione>();
-            this.tbMotivoLiquidaciones = new HashSet<tbMotivoLiquidacione>();
-            this.tbMotivoLiquidaciones1 = new HashSet<tbMotivoLiquidacione>();
-            this.tbPeriodos = new HashSet<tbPeriodo>();
-            this.tbPeriodos1 = new HashSet<tbPeriodo>();
-            this.tbPreavisoes = new HashSet<tbPreaviso>();
-            this.tbPreavisoes1 = new HashSet<tbPreaviso>();
-            this.tbRamaActividads = new HashSet<tbRamaActividad>();
-            this.tbRamaActividads1 = new HashSet<tbRamaActividad>();
-            this.tbSalarioPorHoras = new HashSet<tbSalarioPorHora>();
-            this.tbSalarioPorHoras1 = new HashSet<tbSalarioPorHora>();
-            this.tbTechosDeducciones = new HashSet<tbTechosDeduccione>();
-            this.tbTechosDeducciones1 = new HashSet<tbTechosDeduccione>();
-            this.tbTipoDeduccions = new HashSet<tbTipoDeduccion>();
-            this.tbTipoDeduccions1 = new HashSet<tbTipoDeduccion>();
-            this.tbTipoPlanillaDetalleDeduccions = new HashSet<tbTipoPlanillaDetalleDeduccion>();
-            this.tbTipoPlanillaDetalleDeduccions1 = new HashSet<tbTipoPlanillaDetalleDeduccion>();
-            this.tbTipoPlanillaDetalleIngresoes = new HashSet<tbTipoPlanillaDetalleIngreso>();
-            this.tbTipoPlanillaDetalleIngresoes1 = new HashSet<tbTipoPlanillaDetalleIngreso>();
-            this.tbAreas = new HashSet<tbArea>();
-            this.tbAreas1 = new HashSet<tbArea>();
-            this.tbCargos = new HashSet<tbCargo>();
-            this.tbCargos1 = new HashSet<tbCargo>();
-            this.tbCompetencias = new HashSet<tbCompetencia>();
-            this.tbCompetencias1 = new HashSet<tbCompetencia>();
-            this.tbCompetenciasPersonas = new HashSet<tbCompetenciasPersona>();
-            this.tbCompetenciasPersonas1 = new HashSet<tbCompetenciasPersona>();
-            this.tbCompetenciasRequisicions = new HashSet<tbCompetenciasRequisicion>();
-            this.tbCompetenciasRequisicions1 = new HashSet<tbCompetenciasRequisicion>();
-            this.tbDepartamentos = new HashSet<tbDepartamento>();
-            this.tbDepartamentos1 = new HashSet<tbDepartamento>();
-            this.tbEmpleados = new HashSet<tbEmpleado>();
-            this.tbEmpleados1 = new HashSet<tbEmpleado>();
-            this.tbEmpresas = new HashSet<tbEmpresa>();
-            this.tbEmpresas1 = new HashSet<tbEmpresa>();
-            this.tbEquipoEmpleados = new HashSet<tbEquipoEmpleado>();
-            this.tbEquipoEmpleados1 = new HashSet<tbEquipoEmpleado>();
-            this.tbEquipoTrabajoes = new HashSet<tbEquipoTrabajo>();
-            this.tbEquipoTrabajoes1 = new HashSet<tbEquipoTrabajo>();
-            this.tbFaseSeleccions = new HashSet<tbFaseSeleccion>();
-            this.tbFaseSeleccions1 = new HashSet<tbFaseSeleccion>();
-            this.tbFasesReclutamientoes = new HashSet<tbFasesReclutamiento>();
-            this.tbFasesReclutamientoes1 = new HashSet<tbFasesReclutamiento>();
-            this.tbHabilidades = new HashSet<tbHabilidade>();
-            this.tbHabilidades1 = new HashSet<tbHabilidade>();
-            this.tbHabilidadesPersonas = new HashSet<tbHabilidadesPersona>();
-            this.tbHabilidadesPersonas1 = new HashSet<tbHabilidadesPersona>();
-            this.tbHabilidadesRequisicions = new HashSet<tbHabilidadesRequisicion>();
-            this.tbHabilidadesRequisicions1 = new HashSet<tbHabilidadesRequisicion>();
-            this.tbHistorialAmonestaciones = new HashSet<tbHistorialAmonestacione>();
-            this.tbHistorialAmonestaciones1 = new HashSet<tbHistorialAmonestacione>();
-            this.tbHistorialAudienciaDescargoes = new HashSet<tbHistorialAudienciaDescargo>();
-            this.tbHistorialAudienciaDescargoes1 = new HashSet<tbHistorialAudienciaDescargo>();
-            this.tbHistorialCargos = new HashSet<tbHistorialCargo>();
-            this.tbHistorialCargos1 = new HashSet<tbHistorialCargo>();
-            this.tbHistorialContrataciones = new HashSet<tbHistorialContratacione>();
-            this.tbHistorialContrataciones1 = new HashSet<tbHistorialContratacione>();
-            this.tbHistorialHorasTrabajadas = new HashSet<tbHistorialHorasTrabajada>();
-            this.tbHistorialHorasTrabajadas1 = new HashSet<tbHistorialHorasTrabajada>();
-            this.tbHistorialIncapacidades = new HashSet<tbHistorialIncapacidade>();
-            this.tbHistorialIncapacidades1 = new HashSet<tbHistorialIncapacidade>();
-            this.tbHistorialLiquidaciones = new HashSet<tbHistorialLiquidacione>();
-            this.tbHistorialLiquidaciones1 = new HashSet<tbHistorialLiquidacione>();
-            this.tbHistorialPermisos = new HashSet<tbHistorialPermiso>();
-            this.tbHistorialPermisos1 = new HashSet<tbHistorialPermiso>();
-            this.tbHistorialRefrendamientos = new HashSet<tbHistorialRefrendamiento>();
-            this.tbHistorialRefrendamientos1 = new HashSet<tbHistorialRefrendamiento>();
-            this.tbHistorialSalidas = new HashSet<tbHistorialSalida>();
-            this.tbHistorialSalidas1 = new HashSet<tbHistorialSalida>();
-            this.tbHistorialVacaciones = new HashSet<tbHistorialVacacione>();
-            this.tbHistorialVacaciones1 = new HashSet<tbHistorialVacacione>();
-            this.tbHorarios = new HashSet<tbHorario>();
-            this.tbHorarios1 = new HashSet<tbHorario>();
-            this.tbIdiomaPersonas = new HashSet<tbIdiomaPersona>();
-            this.tbIdiomaPersonas1 = new HashSet<tbIdiomaPersona>();
-            this.tbIdiomas = new HashSet<tbIdioma>();
-            this.tbIdiomas1 = new HashSet<tbIdioma>();
-            this.tbIdiomasRequisicions = new HashSet<tbIdiomasRequisicion>();
-            this.tbIdiomasRequisicions1 = new HashSet<tbIdiomasRequisicion>();
-            this.tbJornadas = new HashSet<tbJornada>();
-            this.tbJornadas1 = new HashSet<tbJornada>();
-            this.tbNacionalidades = new HashSet<tbNacionalidade>();
-            this.tbNacionalidades1 = new HashSet<tbNacionalidade>();
-            this.tbPersonas = new HashSet<tbPersona>();
-            this.tbPersonas1 = new HashSet<tbPersona>();
-            this.tbRazonSalidas = new HashSet<tbRazonSalida>();
-            this.tbRazonSalidas1 = new HashSet<tbRazonSalida>();
-            this.tbRequisiciones = new HashSet<tbRequisicione>();
-            this.tbRequisiciones1 = new HashSet<tbRequisicione>();
-            this.tbSeleccionCandidatos = new HashSet<tbSeleccionCandidato>();
-            this.tbSeleccionCandidatos1 = new HashSet<tbSeleccionCandidato>();
-            this.tbSucursales = new HashSet<tbSucursale>();
-            this.tbSucursales1 = new HashSet<tbSucursale>();
-            this.tbSueldos = new HashSet<tbSueldo>();
-            this.tbSueldos1 = new HashSet<tbSueldo>();
-            this.tbTipoAmonestaciones = new HashSet<tbTipoAmonestacione>();
-            this.tbTipoAmonestaciones1 = new HashSet<tbTipoAmonestacione>();
-            this.tbTipoHoras = new HashSet<tbTipoHora>();
-            this.tbTipoHoras1 = new HashSet<tbTipoHora>();
-            this.tbTipoIncapacidades = new HashSet<tbTipoIncapacidade>();
-            this.tbTipoIncapacidades1 = new HashSet<tbTipoIncapacidade>();
-            this.tbTipoMonedas = new HashSet<tbTipoMoneda>();
-            this.tbTipoMonedas1 = new HashSet<tbTipoMoneda>();
-            this.tbTipoPermisos = new HashSet<tbTipoPermiso>();
-            this.tbTipoPermisos1 = new HashSet<tbTipoPermiso>();
-            this.tbTipoSalidas = new HashSet<tbTipoSalida>();
-            this.tbTipoSalidas1 = new HashSet<tbTipoSalida>();
-            this.tbTitulos = new HashSet<tbTitulo>();
-            this.tbTitulos1 = new HashSet<tbTitulo>();
-            this.tbTitulosPersonas = new HashSet<tbTitulosPersona>();
-            this.tbTitulosPersonas1 = new HashSet<tbTitulosPersona>();
-            this.tbTitulosRequisicions = new HashSet<tbTitulosRequisicion>();
-            this.tbTitulosRequisicions1 = new HashSet<tbTitulosRequisicion>();
-            this.tbVacaciones = new HashSet<tbVacacione>();
-            this.tbVacaciones1 = new HashSet<tbVacacione>();
+            this.tbAccesoRol = new HashSet<tbAccesoRol>();
+            this.tbAccesoRol1 = new HashSet<tbAccesoRol>();
+            this.tbObjeto = new HashSet<tbObjeto>();
+            this.tbObjeto1 = new HashSet<tbObjeto>();
+            this.tbRol = new HashSet<tbRol>();
+            this.tbRol1 = new HashSet<tbRol>();
+            this.tbRolesUsuario = new HashSet<tbRolesUsuario>();
+            this.tbRolesUsuario1 = new HashSet<tbRolesUsuario>();
+            this.tbRolesUsuario2 = new HashSet<tbRolesUsuario>();
+            this.tbAdelantoSueldo = new HashSet<tbAdelantoSueldo>();
+            this.tbAdelantoSueldo1 = new HashSet<tbAdelantoSueldo>();
+            this.tbAFP = new HashSet<tbAFP>();
+            this.tbAFP1 = new HashSet<tbAFP>();
+            this.tbAuxilioDeCesantias = new HashSet<tbAuxilioDeCesantias>();
+            this.tbAuxilioDeCesantias1 = new HashSet<tbAuxilioDeCesantias>();
+            this.tbCatalogoDeDeducciones = new HashSet<tbCatalogoDeDeducciones>();
+            this.tbCatalogoDeDeducciones1 = new HashSet<tbCatalogoDeDeducciones>();
+            this.tbCatalogoDeIngresos = new HashSet<tbCatalogoDeIngresos>();
+            this.tbCatalogoDeIngresos1 = new HashSet<tbCatalogoDeIngresos>();
+            this.tbCatalogoDePlanillas = new HashSet<tbCatalogoDePlanillas>();
+            this.tbCatalogoDePlanillas1 = new HashSet<tbCatalogoDePlanillas>();
+            this.tbDecimoCuartoMes = new HashSet<tbDecimoCuartoMes>();
+            this.tbDecimoCuartoMes1 = new HashSet<tbDecimoCuartoMes>();
+            this.tbDecimoTercerMes = new HashSet<tbDecimoTercerMes>();
+            this.tbDecimoTercerMes1 = new HashSet<tbDecimoTercerMes>();
+            this.tbDeduccionAFP = new HashSet<tbDeduccionAFP>();
+            this.tbDeduccionAFP1 = new HashSet<tbDeduccionAFP>();
+            this.tbDeduccionesExtraordinarias = new HashSet<tbDeduccionesExtraordinarias>();
+            this.tbDeduccionesExtraordinarias1 = new HashSet<tbDeduccionesExtraordinarias>();
+            this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
+            this.tbDeduccionInstitucionFinanciera1 = new HashSet<tbDeduccionInstitucionFinanciera>();
+            this.tbEmpleadoBonos = new HashSet<tbEmpleadoBonos>();
+            this.tbEmpleadoBonos1 = new HashSet<tbEmpleadoBonos>();
+            this.tbEmpleadoComisiones = new HashSet<tbEmpleadoComisiones>();
+            this.tbEmpleadoComisiones1 = new HashSet<tbEmpleadoComisiones>();
+            this.tbFormaPago = new HashSet<tbFormaPago>();
+            this.tbFormaPago1 = new HashSet<tbFormaPago>();
+            this.tbHistorialDeduccionPago = new HashSet<tbHistorialDeduccionPago>();
+            this.tbHistorialDeduccionPago1 = new HashSet<tbHistorialDeduccionPago>();
+            this.tbHistorialDeIngresosPago = new HashSet<tbHistorialDeIngresosPago>();
+            this.tbHistorialDeIngresosPago1 = new HashSet<tbHistorialDeIngresosPago>();
+            this.tbHistorialDePago = new HashSet<tbHistorialDePago>();
+            this.tbHistorialDePago1 = new HashSet<tbHistorialDePago>();
+            this.tbInstitucionesFinancieras = new HashSet<tbInstitucionesFinancieras>();
+            this.tbInstitucionesFinancieras1 = new HashSet<tbInstitucionesFinancieras>();
+            this.tbISR = new HashSet<tbISR>();
+            this.tbISR1 = new HashSet<tbISR>();
+            this.tbLiquidaciones = new HashSet<tbLiquidaciones>();
+            this.tbLiquidaciones1 = new HashSet<tbLiquidaciones>();
+            this.tbLiquidacionVacaciones = new HashSet<tbLiquidacionVacaciones>();
+            this.tbLiquidacionVacaciones1 = new HashSet<tbLiquidacionVacaciones>();
+            this.tbMotivoLiquidaciones = new HashSet<tbMotivoLiquidaciones>();
+            this.tbMotivoLiquidaciones1 = new HashSet<tbMotivoLiquidaciones>();
+            this.tbPeriodos = new HashSet<tbPeriodos>();
+            this.tbPeriodos1 = new HashSet<tbPeriodos>();
+            this.tbPreaviso = new HashSet<tbPreaviso>();
+            this.tbPreaviso1 = new HashSet<tbPreaviso>();
+            this.tbRamaActividad = new HashSet<tbRamaActividad>();
+            this.tbRamaActividad1 = new HashSet<tbRamaActividad>();
+            this.tbSalarioPorHora = new HashSet<tbSalarioPorHora>();
+            this.tbSalarioPorHora1 = new HashSet<tbSalarioPorHora>();
+            this.tbTechosDeducciones = new HashSet<tbTechosDeducciones>();
+            this.tbTechosDeducciones1 = new HashSet<tbTechosDeducciones>();
+            this.tbTipoDeduccion = new HashSet<tbTipoDeduccion>();
+            this.tbTipoDeduccion1 = new HashSet<tbTipoDeduccion>();
+            this.tbTipoPlanillaDetalleDeduccion = new HashSet<tbTipoPlanillaDetalleDeduccion>();
+            this.tbTipoPlanillaDetalleDeduccion1 = new HashSet<tbTipoPlanillaDetalleDeduccion>();
+            this.tbTipoPlanillaDetalleIngreso = new HashSet<tbTipoPlanillaDetalleIngreso>();
+            this.tbTipoPlanillaDetalleIngreso1 = new HashSet<tbTipoPlanillaDetalleIngreso>();
+            this.tbAreas = new HashSet<tbAreas>();
+            this.tbAreas1 = new HashSet<tbAreas>();
+            this.tbCargos = new HashSet<tbCargos>();
+            this.tbCargos1 = new HashSet<tbCargos>();
+            this.tbCompetencias = new HashSet<tbCompetencias>();
+            this.tbCompetencias1 = new HashSet<tbCompetencias>();
+            this.tbCompetenciasPersona = new HashSet<tbCompetenciasPersona>();
+            this.tbCompetenciasPersona1 = new HashSet<tbCompetenciasPersona>();
+            this.tbCompetenciasRequisicion = new HashSet<tbCompetenciasRequisicion>();
+            this.tbCompetenciasRequisicion1 = new HashSet<tbCompetenciasRequisicion>();
+            this.tbDepartamentos = new HashSet<tbDepartamentos>();
+            this.tbDepartamentos1 = new HashSet<tbDepartamentos>();
+            this.tbEmpleados = new HashSet<tbEmpleados>();
+            this.tbEmpleados1 = new HashSet<tbEmpleados>();
+            this.tbEmpresas = new HashSet<tbEmpresas>();
+            this.tbEmpresas1 = new HashSet<tbEmpresas>();
+            this.tbEquipoEmpleados = new HashSet<tbEquipoEmpleados>();
+            this.tbEquipoEmpleados1 = new HashSet<tbEquipoEmpleados>();
+            this.tbEquipoTrabajo = new HashSet<tbEquipoTrabajo>();
+            this.tbEquipoTrabajo1 = new HashSet<tbEquipoTrabajo>();
+            this.tbFaseSeleccion = new HashSet<tbFaseSeleccion>();
+            this.tbFaseSeleccion1 = new HashSet<tbFaseSeleccion>();
+            this.tbFasesReclutamiento = new HashSet<tbFasesReclutamiento>();
+            this.tbFasesReclutamiento1 = new HashSet<tbFasesReclutamiento>();
+            this.tbHabilidades = new HashSet<tbHabilidades>();
+            this.tbHabilidades1 = new HashSet<tbHabilidades>();
+            this.tbHabilidadesPersona = new HashSet<tbHabilidadesPersona>();
+            this.tbHabilidadesPersona1 = new HashSet<tbHabilidadesPersona>();
+            this.tbHabilidadesRequisicion = new HashSet<tbHabilidadesRequisicion>();
+            this.tbHabilidadesRequisicion1 = new HashSet<tbHabilidadesRequisicion>();
+            this.tbHistorialAmonestaciones = new HashSet<tbHistorialAmonestaciones>();
+            this.tbHistorialAmonestaciones1 = new HashSet<tbHistorialAmonestaciones>();
+            this.tbHistorialAudienciaDescargo = new HashSet<tbHistorialAudienciaDescargo>();
+            this.tbHistorialAudienciaDescargo1 = new HashSet<tbHistorialAudienciaDescargo>();
+            this.tbHistorialCargos = new HashSet<tbHistorialCargos>();
+            this.tbHistorialCargos1 = new HashSet<tbHistorialCargos>();
+            this.tbHistorialContrataciones = new HashSet<tbHistorialContrataciones>();
+            this.tbHistorialContrataciones1 = new HashSet<tbHistorialContrataciones>();
+            this.tbHistorialHorasTrabajadas = new HashSet<tbHistorialHorasTrabajadas>();
+            this.tbHistorialHorasTrabajadas1 = new HashSet<tbHistorialHorasTrabajadas>();
+            this.tbHistorialIncapacidades = new HashSet<tbHistorialIncapacidades>();
+            this.tbHistorialIncapacidades1 = new HashSet<tbHistorialIncapacidades>();
+            this.tbHistorialLiquidaciones = new HashSet<tbHistorialLiquidaciones>();
+            this.tbHistorialLiquidaciones1 = new HashSet<tbHistorialLiquidaciones>();
+            this.tbHistorialPermisos = new HashSet<tbHistorialPermisos>();
+            this.tbHistorialPermisos1 = new HashSet<tbHistorialPermisos>();
+            this.tbHistorialRefrendamientos = new HashSet<tbHistorialRefrendamientos>();
+            this.tbHistorialRefrendamientos1 = new HashSet<tbHistorialRefrendamientos>();
+            this.tbHistorialSalidas = new HashSet<tbHistorialSalidas>();
+            this.tbHistorialSalidas1 = new HashSet<tbHistorialSalidas>();
+            this.tbHistorialVacaciones = new HashSet<tbHistorialVacaciones>();
+            this.tbHistorialVacaciones1 = new HashSet<tbHistorialVacaciones>();
+            this.tbHorarios = new HashSet<tbHorarios>();
+            this.tbHorarios1 = new HashSet<tbHorarios>();
+            this.tbIdiomaPersona = new HashSet<tbIdiomaPersona>();
+            this.tbIdiomaPersona1 = new HashSet<tbIdiomaPersona>();
+            this.tbIdiomas = new HashSet<tbIdiomas>();
+            this.tbIdiomas1 = new HashSet<tbIdiomas>();
+            this.tbIdiomasRequisicion = new HashSet<tbIdiomasRequisicion>();
+            this.tbIdiomasRequisicion1 = new HashSet<tbIdiomasRequisicion>();
+            this.tbJornadas = new HashSet<tbJornadas>();
+            this.tbJornadas1 = new HashSet<tbJornadas>();
+            this.tbNacionalidades = new HashSet<tbNacionalidades>();
+            this.tbNacionalidades1 = new HashSet<tbNacionalidades>();
+            this.tbPersonas = new HashSet<tbPersonas>();
+            this.tbPersonas1 = new HashSet<tbPersonas>();
+            this.tbRazonSalidas = new HashSet<tbRazonSalidas>();
+            this.tbRazonSalidas1 = new HashSet<tbRazonSalidas>();
+            this.tbRequisiciones = new HashSet<tbRequisiciones>();
+            this.tbRequisiciones1 = new HashSet<tbRequisiciones>();
+            this.tbSeleccionCandidatos = new HashSet<tbSeleccionCandidatos>();
+            this.tbSeleccionCandidatos1 = new HashSet<tbSeleccionCandidatos>();
+            this.tbSucursales = new HashSet<tbSucursales>();
+            this.tbSucursales1 = new HashSet<tbSucursales>();
+            this.tbSueldos = new HashSet<tbSueldos>();
+            this.tbSueldos1 = new HashSet<tbSueldos>();
+            this.tbTipoAmonestaciones = new HashSet<tbTipoAmonestaciones>();
+            this.tbTipoAmonestaciones1 = new HashSet<tbTipoAmonestaciones>();
+            this.tbTipoHoras = new HashSet<tbTipoHoras>();
+            this.tbTipoHoras1 = new HashSet<tbTipoHoras>();
+            this.tbTipoIncapacidades = new HashSet<tbTipoIncapacidades>();
+            this.tbTipoIncapacidades1 = new HashSet<tbTipoIncapacidades>();
+            this.tbTipoMonedas = new HashSet<tbTipoMonedas>();
+            this.tbTipoMonedas1 = new HashSet<tbTipoMonedas>();
+            this.tbTipoPermisos = new HashSet<tbTipoPermisos>();
+            this.tbTipoPermisos1 = new HashSet<tbTipoPermisos>();
+            this.tbTipoSalidas = new HashSet<tbTipoSalidas>();
+            this.tbTipoSalidas1 = new HashSet<tbTipoSalidas>();
+            this.tbTitulos = new HashSet<tbTitulos>();
+            this.tbTitulos1 = new HashSet<tbTitulos>();
+            this.tbTitulosPersona = new HashSet<tbTitulosPersona>();
+            this.tbTitulosPersona1 = new HashSet<tbTitulosPersona>();
+            this.tbTitulosRequisicion = new HashSet<tbTitulosRequisicion>();
+            this.tbTitulosRequisicion1 = new HashSet<tbTitulosRequisicion>();
+            this.tbVacaciones = new HashSet<tbVacaciones>();
+            this.tbVacaciones1 = new HashSet<tbVacaciones>();
         }
     
         public int usu_Id { get; set; }
@@ -196,334 +196,334 @@ namespace ERP_GMEDINA.Models
         public Nullable<byte> usu_SesionesValidas { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAccesoRol> tbAccesoRols { get; set; }
+        public virtual ICollection<tbAccesoRol> tbAccesoRol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAccesoRol> tbAccesoRols1 { get; set; }
+        public virtual ICollection<tbAccesoRol> tbAccesoRol1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbObjeto> tbObjetoes { get; set; }
+        public virtual ICollection<tbObjeto> tbObjeto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbObjeto> tbObjetoes1 { get; set; }
+        public virtual ICollection<tbObjeto> tbObjeto1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRol> tbRols { get; set; }
+        public virtual ICollection<tbRol> tbRol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRol> tbRols1 { get; set; }
+        public virtual ICollection<tbRol> tbRol1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRolesUsuario> tbRolesUsuarios { get; set; }
+        public virtual ICollection<tbRolesUsuario> tbRolesUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRolesUsuario> tbRolesUsuarios1 { get; set; }
+        public virtual ICollection<tbRolesUsuario> tbRolesUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRolesUsuario> tbRolesUsuarios2 { get; set; }
+        public virtual ICollection<tbRolesUsuario> tbRolesUsuario2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAdelantoSueldo> tbAdelantoSueldoes { get; set; }
+        public virtual ICollection<tbAdelantoSueldo> tbAdelantoSueldo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAdelantoSueldo> tbAdelantoSueldoes1 { get; set; }
+        public virtual ICollection<tbAdelantoSueldo> tbAdelantoSueldo1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAFP> tbAFPs { get; set; }
+        public virtual ICollection<tbAFP> tbAFP { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAFP> tbAFPs1 { get; set; }
+        public virtual ICollection<tbAFP> tbAFP1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAuxilioDeCesantia> tbAuxilioDeCesantias { get; set; }
+        public virtual ICollection<tbAuxilioDeCesantias> tbAuxilioDeCesantias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAuxilioDeCesantia> tbAuxilioDeCesantias1 { get; set; }
+        public virtual ICollection<tbAuxilioDeCesantias> tbAuxilioDeCesantias1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCatalogoDeDeduccione> tbCatalogoDeDeducciones { get; set; }
+        public virtual ICollection<tbCatalogoDeDeducciones> tbCatalogoDeDeducciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCatalogoDeDeduccione> tbCatalogoDeDeducciones1 { get; set; }
+        public virtual ICollection<tbCatalogoDeDeducciones> tbCatalogoDeDeducciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCatalogoDeIngreso> tbCatalogoDeIngresos { get; set; }
+        public virtual ICollection<tbCatalogoDeIngresos> tbCatalogoDeIngresos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCatalogoDeIngreso> tbCatalogoDeIngresos1 { get; set; }
+        public virtual ICollection<tbCatalogoDeIngresos> tbCatalogoDeIngresos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCatalogoDePlanilla> tbCatalogoDePlanillas { get; set; }
+        public virtual ICollection<tbCatalogoDePlanillas> tbCatalogoDePlanillas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCatalogoDePlanilla> tbCatalogoDePlanillas1 { get; set; }
+        public virtual ICollection<tbCatalogoDePlanillas> tbCatalogoDePlanillas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDecimoCuartoMe> tbDecimoCuartoMes { get; set; }
+        public virtual ICollection<tbDecimoCuartoMes> tbDecimoCuartoMes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDecimoCuartoMe> tbDecimoCuartoMes1 { get; set; }
+        public virtual ICollection<tbDecimoCuartoMes> tbDecimoCuartoMes1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDecimoTercerMe> tbDecimoTercerMes { get; set; }
+        public virtual ICollection<tbDecimoTercerMes> tbDecimoTercerMes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDecimoTercerMe> tbDecimoTercerMes1 { get; set; }
+        public virtual ICollection<tbDecimoTercerMes> tbDecimoTercerMes1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDeduccionAFP> tbDeduccionAFPs { get; set; }
+        public virtual ICollection<tbDeduccionAFP> tbDeduccionAFP { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDeduccionAFP> tbDeduccionAFPs1 { get; set; }
+        public virtual ICollection<tbDeduccionAFP> tbDeduccionAFP1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDeduccionesExtraordinaria> tbDeduccionesExtraordinarias { get; set; }
+        public virtual ICollection<tbDeduccionesExtraordinarias> tbDeduccionesExtraordinarias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDeduccionesExtraordinaria> tbDeduccionesExtraordinarias1 { get; set; }
+        public virtual ICollection<tbDeduccionesExtraordinarias> tbDeduccionesExtraordinarias1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinancieras { get; set; }
+        public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinancieras1 { get; set; }
+        public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleadoBono> tbEmpleadoBonos { get; set; }
+        public virtual ICollection<tbEmpleadoBonos> tbEmpleadoBonos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleadoBono> tbEmpleadoBonos1 { get; set; }
+        public virtual ICollection<tbEmpleadoBonos> tbEmpleadoBonos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleadoComisione> tbEmpleadoComisiones { get; set; }
+        public virtual ICollection<tbEmpleadoComisiones> tbEmpleadoComisiones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleadoComisione> tbEmpleadoComisiones1 { get; set; }
+        public virtual ICollection<tbEmpleadoComisiones> tbEmpleadoComisiones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbFormaPago> tbFormaPagoes { get; set; }
+        public virtual ICollection<tbFormaPago> tbFormaPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbFormaPago> tbFormaPagoes1 { get; set; }
+        public virtual ICollection<tbFormaPago> tbFormaPago1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPagoes { get; set; }
+        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPagoes1 { get; set; }
+        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPagoes { get; set; }
+        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPagoes1 { get; set; }
+        public virtual ICollection<tbHistorialDeIngresosPago> tbHistorialDeIngresosPago1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDePago> tbHistorialDePagoes { get; set; }
+        public virtual ICollection<tbHistorialDePago> tbHistorialDePago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDePago> tbHistorialDePagoes1 { get; set; }
+        public virtual ICollection<tbHistorialDePago> tbHistorialDePago1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbInstitucionesFinanciera> tbInstitucionesFinancieras { get; set; }
+        public virtual ICollection<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbInstitucionesFinanciera> tbInstitucionesFinancieras1 { get; set; }
+        public virtual ICollection<tbInstitucionesFinancieras> tbInstitucionesFinancieras1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbISR> tbISRs { get; set; }
+        public virtual ICollection<tbISR> tbISR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbISR> tbISRs1 { get; set; }
+        public virtual ICollection<tbISR> tbISR1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbLiquidacione> tbLiquidaciones { get; set; }
+        public virtual ICollection<tbLiquidaciones> tbLiquidaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbLiquidacione> tbLiquidaciones1 { get; set; }
+        public virtual ICollection<tbLiquidaciones> tbLiquidaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbLiquidacionVacacione> tbLiquidacionVacaciones { get; set; }
+        public virtual ICollection<tbLiquidacionVacaciones> tbLiquidacionVacaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbLiquidacionVacacione> tbLiquidacionVacaciones1 { get; set; }
+        public virtual ICollection<tbLiquidacionVacaciones> tbLiquidacionVacaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbMotivoLiquidacione> tbMotivoLiquidaciones { get; set; }
+        public virtual ICollection<tbMotivoLiquidaciones> tbMotivoLiquidaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbMotivoLiquidacione> tbMotivoLiquidaciones1 { get; set; }
+        public virtual ICollection<tbMotivoLiquidaciones> tbMotivoLiquidaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPeriodo> tbPeriodos { get; set; }
+        public virtual ICollection<tbPeriodos> tbPeriodos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPeriodo> tbPeriodos1 { get; set; }
+        public virtual ICollection<tbPeriodos> tbPeriodos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPreaviso> tbPreavisoes { get; set; }
+        public virtual ICollection<tbPreaviso> tbPreaviso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPreaviso> tbPreavisoes1 { get; set; }
+        public virtual ICollection<tbPreaviso> tbPreaviso1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRamaActividad> tbRamaActividads { get; set; }
+        public virtual ICollection<tbRamaActividad> tbRamaActividad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRamaActividad> tbRamaActividads1 { get; set; }
+        public virtual ICollection<tbRamaActividad> tbRamaActividad1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSalarioPorHora> tbSalarioPorHoras { get; set; }
+        public virtual ICollection<tbSalarioPorHora> tbSalarioPorHora { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSalarioPorHora> tbSalarioPorHoras1 { get; set; }
+        public virtual ICollection<tbSalarioPorHora> tbSalarioPorHora1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTechosDeduccione> tbTechosDeducciones { get; set; }
+        public virtual ICollection<tbTechosDeducciones> tbTechosDeducciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTechosDeduccione> tbTechosDeducciones1 { get; set; }
+        public virtual ICollection<tbTechosDeducciones> tbTechosDeducciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoDeduccion> tbTipoDeduccions { get; set; }
+        public virtual ICollection<tbTipoDeduccion> tbTipoDeduccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoDeduccion> tbTipoDeduccions1 { get; set; }
+        public virtual ICollection<tbTipoDeduccion> tbTipoDeduccion1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoPlanillaDetalleDeduccion> tbTipoPlanillaDetalleDeduccions { get; set; }
+        public virtual ICollection<tbTipoPlanillaDetalleDeduccion> tbTipoPlanillaDetalleDeduccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoPlanillaDetalleDeduccion> tbTipoPlanillaDetalleDeduccions1 { get; set; }
+        public virtual ICollection<tbTipoPlanillaDetalleDeduccion> tbTipoPlanillaDetalleDeduccion1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoPlanillaDetalleIngreso> tbTipoPlanillaDetalleIngresoes { get; set; }
+        public virtual ICollection<tbTipoPlanillaDetalleIngreso> tbTipoPlanillaDetalleIngreso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoPlanillaDetalleIngreso> tbTipoPlanillaDetalleIngresoes1 { get; set; }
+        public virtual ICollection<tbTipoPlanillaDetalleIngreso> tbTipoPlanillaDetalleIngreso1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbArea> tbAreas { get; set; }
+        public virtual ICollection<tbAreas> tbAreas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbArea> tbAreas1 { get; set; }
+        public virtual ICollection<tbAreas> tbAreas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCargo> tbCargos { get; set; }
+        public virtual ICollection<tbCargos> tbCargos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCargo> tbCargos1 { get; set; }
+        public virtual ICollection<tbCargos> tbCargos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCompetencia> tbCompetencias { get; set; }
+        public virtual ICollection<tbCompetencias> tbCompetencias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCompetencia> tbCompetencias1 { get; set; }
+        public virtual ICollection<tbCompetencias> tbCompetencias1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCompetenciasPersona> tbCompetenciasPersonas { get; set; }
+        public virtual ICollection<tbCompetenciasPersona> tbCompetenciasPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCompetenciasPersona> tbCompetenciasPersonas1 { get; set; }
+        public virtual ICollection<tbCompetenciasPersona> tbCompetenciasPersona1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCompetenciasRequisicion> tbCompetenciasRequisicions { get; set; }
+        public virtual ICollection<tbCompetenciasRequisicion> tbCompetenciasRequisicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbCompetenciasRequisicion> tbCompetenciasRequisicions1 { get; set; }
+        public virtual ICollection<tbCompetenciasRequisicion> tbCompetenciasRequisicion1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDepartamento> tbDepartamentos { get; set; }
+        public virtual ICollection<tbDepartamentos> tbDepartamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDepartamento> tbDepartamentos1 { get; set; }
+        public virtual ICollection<tbDepartamentos> tbDepartamentos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleado> tbEmpleados { get; set; }
+        public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleado> tbEmpleados1 { get; set; }
+        public virtual ICollection<tbEmpleados> tbEmpleados1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpresa> tbEmpresas { get; set; }
+        public virtual ICollection<tbEmpresas> tbEmpresas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpresa> tbEmpresas1 { get; set; }
+        public virtual ICollection<tbEmpresas> tbEmpresas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEquipoEmpleado> tbEquipoEmpleados { get; set; }
+        public virtual ICollection<tbEquipoEmpleados> tbEquipoEmpleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEquipoEmpleado> tbEquipoEmpleados1 { get; set; }
+        public virtual ICollection<tbEquipoEmpleados> tbEquipoEmpleados1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEquipoTrabajo> tbEquipoTrabajoes { get; set; }
+        public virtual ICollection<tbEquipoTrabajo> tbEquipoTrabajo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEquipoTrabajo> tbEquipoTrabajoes1 { get; set; }
+        public virtual ICollection<tbEquipoTrabajo> tbEquipoTrabajo1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbFaseSeleccion> tbFaseSeleccions { get; set; }
+        public virtual ICollection<tbFaseSeleccion> tbFaseSeleccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbFaseSeleccion> tbFaseSeleccions1 { get; set; }
+        public virtual ICollection<tbFaseSeleccion> tbFaseSeleccion1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbFasesReclutamiento> tbFasesReclutamientoes { get; set; }
+        public virtual ICollection<tbFasesReclutamiento> tbFasesReclutamiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbFasesReclutamiento> tbFasesReclutamientoes1 { get; set; }
+        public virtual ICollection<tbFasesReclutamiento> tbFasesReclutamiento1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHabilidade> tbHabilidades { get; set; }
+        public virtual ICollection<tbHabilidades> tbHabilidades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHabilidade> tbHabilidades1 { get; set; }
+        public virtual ICollection<tbHabilidades> tbHabilidades1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHabilidadesPersona> tbHabilidadesPersonas { get; set; }
+        public virtual ICollection<tbHabilidadesPersona> tbHabilidadesPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHabilidadesPersona> tbHabilidadesPersonas1 { get; set; }
+        public virtual ICollection<tbHabilidadesPersona> tbHabilidadesPersona1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHabilidadesRequisicion> tbHabilidadesRequisicions { get; set; }
+        public virtual ICollection<tbHabilidadesRequisicion> tbHabilidadesRequisicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHabilidadesRequisicion> tbHabilidadesRequisicions1 { get; set; }
+        public virtual ICollection<tbHabilidadesRequisicion> tbHabilidadesRequisicion1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialAmonestacione> tbHistorialAmonestaciones { get; set; }
+        public virtual ICollection<tbHistorialAmonestaciones> tbHistorialAmonestaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialAmonestacione> tbHistorialAmonestaciones1 { get; set; }
+        public virtual ICollection<tbHistorialAmonestaciones> tbHistorialAmonestaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialAudienciaDescargo> tbHistorialAudienciaDescargoes { get; set; }
+        public virtual ICollection<tbHistorialAudienciaDescargo> tbHistorialAudienciaDescargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialAudienciaDescargo> tbHistorialAudienciaDescargoes1 { get; set; }
+        public virtual ICollection<tbHistorialAudienciaDescargo> tbHistorialAudienciaDescargo1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialCargo> tbHistorialCargos { get; set; }
+        public virtual ICollection<tbHistorialCargos> tbHistorialCargos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialCargo> tbHistorialCargos1 { get; set; }
+        public virtual ICollection<tbHistorialCargos> tbHistorialCargos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialContratacione> tbHistorialContrataciones { get; set; }
+        public virtual ICollection<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialContratacione> tbHistorialContrataciones1 { get; set; }
+        public virtual ICollection<tbHistorialContrataciones> tbHistorialContrataciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialHorasTrabajada> tbHistorialHorasTrabajadas { get; set; }
+        public virtual ICollection<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialHorasTrabajada> tbHistorialHorasTrabajadas1 { get; set; }
+        public virtual ICollection<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialIncapacidade> tbHistorialIncapacidades { get; set; }
+        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialIncapacidade> tbHistorialIncapacidades1 { get; set; }
+        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialLiquidacione> tbHistorialLiquidaciones { get; set; }
+        public virtual ICollection<tbHistorialLiquidaciones> tbHistorialLiquidaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialLiquidacione> tbHistorialLiquidaciones1 { get; set; }
+        public virtual ICollection<tbHistorialLiquidaciones> tbHistorialLiquidaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialPermiso> tbHistorialPermisos { get; set; }
+        public virtual ICollection<tbHistorialPermisos> tbHistorialPermisos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialPermiso> tbHistorialPermisos1 { get; set; }
+        public virtual ICollection<tbHistorialPermisos> tbHistorialPermisos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialRefrendamiento> tbHistorialRefrendamientos { get; set; }
+        public virtual ICollection<tbHistorialRefrendamientos> tbHistorialRefrendamientos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialRefrendamiento> tbHistorialRefrendamientos1 { get; set; }
+        public virtual ICollection<tbHistorialRefrendamientos> tbHistorialRefrendamientos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialSalida> tbHistorialSalidas { get; set; }
+        public virtual ICollection<tbHistorialSalidas> tbHistorialSalidas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialSalida> tbHistorialSalidas1 { get; set; }
+        public virtual ICollection<tbHistorialSalidas> tbHistorialSalidas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialVacacione> tbHistorialVacaciones { get; set; }
+        public virtual ICollection<tbHistorialVacaciones> tbHistorialVacaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialVacacione> tbHistorialVacaciones1 { get; set; }
+        public virtual ICollection<tbHistorialVacaciones> tbHistorialVacaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHorario> tbHorarios { get; set; }
+        public virtual ICollection<tbHorarios> tbHorarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHorario> tbHorarios1 { get; set; }
+        public virtual ICollection<tbHorarios> tbHorarios1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbIdiomaPersona> tbIdiomaPersonas { get; set; }
+        public virtual ICollection<tbIdiomaPersona> tbIdiomaPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbIdiomaPersona> tbIdiomaPersonas1 { get; set; }
+        public virtual ICollection<tbIdiomaPersona> tbIdiomaPersona1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbIdioma> tbIdiomas { get; set; }
+        public virtual ICollection<tbIdiomas> tbIdiomas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbIdioma> tbIdiomas1 { get; set; }
+        public virtual ICollection<tbIdiomas> tbIdiomas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbIdiomasRequisicion> tbIdiomasRequisicions { get; set; }
+        public virtual ICollection<tbIdiomasRequisicion> tbIdiomasRequisicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbIdiomasRequisicion> tbIdiomasRequisicions1 { get; set; }
+        public virtual ICollection<tbIdiomasRequisicion> tbIdiomasRequisicion1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbJornada> tbJornadas { get; set; }
+        public virtual ICollection<tbJornadas> tbJornadas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbJornada> tbJornadas1 { get; set; }
+        public virtual ICollection<tbJornadas> tbJornadas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbNacionalidade> tbNacionalidades { get; set; }
+        public virtual ICollection<tbNacionalidades> tbNacionalidades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbNacionalidade> tbNacionalidades1 { get; set; }
+        public virtual ICollection<tbNacionalidades> tbNacionalidades1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPersona> tbPersonas { get; set; }
+        public virtual ICollection<tbPersonas> tbPersonas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPersona> tbPersonas1 { get; set; }
+        public virtual ICollection<tbPersonas> tbPersonas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRazonSalida> tbRazonSalidas { get; set; }
+        public virtual ICollection<tbRazonSalidas> tbRazonSalidas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRazonSalida> tbRazonSalidas1 { get; set; }
+        public virtual ICollection<tbRazonSalidas> tbRazonSalidas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRequisicione> tbRequisiciones { get; set; }
+        public virtual ICollection<tbRequisiciones> tbRequisiciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRequisicione> tbRequisiciones1 { get; set; }
+        public virtual ICollection<tbRequisiciones> tbRequisiciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSeleccionCandidato> tbSeleccionCandidatos { get; set; }
+        public virtual ICollection<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSeleccionCandidato> tbSeleccionCandidatos1 { get; set; }
+        public virtual ICollection<tbSeleccionCandidatos> tbSeleccionCandidatos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSucursale> tbSucursales { get; set; }
+        public virtual ICollection<tbSucursales> tbSucursales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSucursale> tbSucursales1 { get; set; }
+        public virtual ICollection<tbSucursales> tbSucursales1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSueldo> tbSueldos { get; set; }
+        public virtual ICollection<tbSueldos> tbSueldos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSueldo> tbSueldos1 { get; set; }
+        public virtual ICollection<tbSueldos> tbSueldos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoAmonestacione> tbTipoAmonestaciones { get; set; }
+        public virtual ICollection<tbTipoAmonestaciones> tbTipoAmonestaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoAmonestacione> tbTipoAmonestaciones1 { get; set; }
+        public virtual ICollection<tbTipoAmonestaciones> tbTipoAmonestaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoHora> tbTipoHoras { get; set; }
+        public virtual ICollection<tbTipoHoras> tbTipoHoras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoHora> tbTipoHoras1 { get; set; }
+        public virtual ICollection<tbTipoHoras> tbTipoHoras1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoIncapacidade> tbTipoIncapacidades { get; set; }
+        public virtual ICollection<tbTipoIncapacidades> tbTipoIncapacidades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoIncapacidade> tbTipoIncapacidades1 { get; set; }
+        public virtual ICollection<tbTipoIncapacidades> tbTipoIncapacidades1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoMoneda> tbTipoMonedas { get; set; }
+        public virtual ICollection<tbTipoMonedas> tbTipoMonedas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoMoneda> tbTipoMonedas1 { get; set; }
+        public virtual ICollection<tbTipoMonedas> tbTipoMonedas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoPermiso> tbTipoPermisos { get; set; }
+        public virtual ICollection<tbTipoPermisos> tbTipoPermisos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoPermiso> tbTipoPermisos1 { get; set; }
+        public virtual ICollection<tbTipoPermisos> tbTipoPermisos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoSalida> tbTipoSalidas { get; set; }
+        public virtual ICollection<tbTipoSalidas> tbTipoSalidas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTipoSalida> tbTipoSalidas1 { get; set; }
+        public virtual ICollection<tbTipoSalidas> tbTipoSalidas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTitulo> tbTitulos { get; set; }
+        public virtual ICollection<tbTitulos> tbTitulos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTitulo> tbTitulos1 { get; set; }
+        public virtual ICollection<tbTitulos> tbTitulos1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTitulosPersona> tbTitulosPersonas { get; set; }
+        public virtual ICollection<tbTitulosPersona> tbTitulosPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTitulosPersona> tbTitulosPersonas1 { get; set; }
+        public virtual ICollection<tbTitulosPersona> tbTitulosPersona1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicions { get; set; }
+        public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicions1 { get; set; }
+        public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbVacacione> tbVacaciones { get; set; }
+        public virtual ICollection<tbVacaciones> tbVacaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbVacacione> tbVacaciones1 { get; set; }
+        public virtual ICollection<tbVacaciones> tbVacaciones1 { get; set; }
     }
 }

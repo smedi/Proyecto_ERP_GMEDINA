@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbTipoPlanillaDetalleDeduccion()
         {
-            this.tbHistorialDeduccionPagoes = new HashSet<tbHistorialDeduccionPago>();
+            this.tbHistorialDeduccionPago = new HashSet<tbHistorialDeduccionPago>();
         }
     
         public int tpdd_IdPlanillaDetDeduccion { get; set; }
@@ -31,9 +31,9 @@ namespace ERP_GMEDINA.Models
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbCatalogoDeDeduccione tbCatalogoDeDeduccione { get; set; }
-        public virtual tbCatalogoDePlanilla tbCatalogoDePlanilla { get; set; }
+        public virtual tbCatalogoDeDeducciones tbCatalogoDeDeducciones { get; set; }
+        public virtual tbCatalogoDePlanillas tbCatalogoDePlanillas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPagoes { get; set; }
+        public virtual ICollection<tbHistorialDeduccionPago> tbHistorialDeduccionPago { get; set; }
     }
 }

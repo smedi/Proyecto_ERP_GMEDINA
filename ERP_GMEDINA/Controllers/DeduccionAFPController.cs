@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionAFP
         public ActionResult Index()
         {
-            var tbDeduccionAFP = db.tbDeduccionAFP.Where(t => t.dafp_Activo == true).Include(t => t.tbAFP).Include(t => t.tbCatalogoDeDeducciones).Include(t => t.tbEmpleados);
+            var tbDeduccionAFP = db.tbDeduccionAFP.Where(t => t.dafp_Activo == true).Include(t => t.tbAFP).Include(t => t.tbEmpleados);
             return View(tbDeduccionAFP.ToList());
         }
 
@@ -29,16 +29,13 @@ namespace ERP_GMEDINA.Controllers
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbDeduccionAFP1 = db.tbDeduccionAFP
                         .Select(t => new { dafp_Id = t.dafp_Id,
-                                           per_Nombres = t.tbPersonas.per_Nombres,
-                                           per_Apellidos = t.tbPersonas.per_Apellidos,
+                                           per_Nombres = t.tbEmpleados.tbPersonas.per_Nombres,
+                                           per_Apellidos = t.tbEmpleados.tbPersonas.per_Apellidos,
                                            emp_CuentaBancaria = t.tbEmpleados.emp_CuentaBancaria,
                                            dafp_AporteLps = t.dafp_AporteLps,
-                                           dafp_AporteDol = t.dafp_AporteDol,
                                            afp_Descripcion = t.tbAFP.afp_Descripcion,
-                                           cde_DescripcionDeduccion = t.tbCatalogoDeDeducciones.cde_DescripcionDeduccion,
                                            afp_Id = t.afp_Id,
                                            emp_Id = t.emp_Id,
-                                           cde_IdDeducciones = t.cde_IdDeducciones,
                                            dafp_UsuarioCrea = t.dafp_UsuarioCrea,
                                            dafp_UsuarioModifica = t.dafp_UsuarioModifica,
                                            dafp_FechaCrea = t.dafp_FechaCrea,
@@ -104,8 +101,8 @@ namespace ERP_GMEDINA.Controllers
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
             from DeduAFP in db.tbDeduccionAFP
-            join Emp in db.tbEmpleados on Emp.emp_Id equals DeduAFP.emp_Id into prodGroup
-            join Per in db.tbPersonas on Per.per_Id equals Emp.per_Id into prodsGroup
+            join Emp in db.tbEmpleados on DeduAFP.emp_Id equals Emp.emp_Id
+            join Per in db.tbPersonas on Emp.per_Id equals Per.per_Id
             select new { Id = DeduAFP.emp_Id, Descripcion = Per.per_Nombres + ' ' + Per.per_Apellidos };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
@@ -117,20 +114,8 @@ namespace ERP_GMEDINA.Controllers
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
             from DeduAFP in db.tbDeduccionAFP
-            join AFP in db.tbAFP on DeduAFP.afp_Id equals AFP.afp_Id into prodGroup
+            join AFP in db.tbAFP on DeduAFP.afp_Id equals AFP.afp_Id
             select new { Id = AFP.afp_Id, Descripcion = AFP.afp_Descripcion };
-            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-            return Json(DDL, JsonRequestBehavior.AllowGet);
-        }
-
-        //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
-        public JsonResult EditGetDeduccionesDDL()
-        {
-            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
-            var DDL =
-            from DeduAFP in db.tbDeduccionAFP
-            join CatDeduc in db.tbCatalogoDeDeducciones on DeduAFP.cde_IdDeducciones equals CatDeduc.cde_IdDeducciones into prodGroup
-            select new { Id = CatDeduc.cde_IdDeducciones, Descripcion = CatDeduc.cde_DescripcionDeduccion };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }

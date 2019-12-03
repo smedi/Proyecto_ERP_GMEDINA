@@ -19,9 +19,7 @@ namespace ERP_GMEDINA.Models
         public System.DateTime adsu_FechaAdelanto { get; set; }
         public string adsu_RazonAdelanto { get; set; }
         public Nullable<decimal> adsu_Monto { get; set; }
-        public int peri_IdPeriodo { get; set; }
-        public int cde_IdDeducciones { get; set; }
-        public bool adsu_Pagado { get; set; }
+        public bool adsu_Deducido { get; set; }
         public int adsu_UsuarioCrea { get; set; }
         public System.DateTime adsu_FechaCrea { get; set; }
         public Nullable<int> adsu_UsuarioModifica { get; set; }
@@ -30,8 +28,6 @@ namespace ERP_GMEDINA.Models
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbCatalogoDeDeduccione tbCatalogoDeDeduccione { get; set; }
-        public virtual tbPeriodo tbPeriodo { get; set; }
-        public virtual tbEmpleado tbEmpleado { get; set; }
+        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

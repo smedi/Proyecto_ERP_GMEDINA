@@ -16,10 +16,9 @@ namespace ERP_GMEDINA.Models
     {
         public int dafp_Id { get; set; }
         public decimal dafp_AporteLps { get; set; }
-        public decimal dafp_AporteDol { get; set; }
         public int afp_Id { get; set; }
-        public int cde_IdDeducciones { get; set; }
         public int emp_Id { get; set; }
+        public Nullable<bool> dafp_Pagado { get; set; }
         public int dafp_UsuarioCrea { get; set; }
         public System.DateTime dafp_FechaCrea { get; set; }
         public Nullable<int> dafp_UsuarioModifica { get; set; }
@@ -29,7 +28,6 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbAFP tbAFP { get; set; }
-        public virtual tbCatalogoDeDeduccione tbCatalogoDeDeduccione { get; set; }
-        public virtual tbEmpleado tbEmpleado { get; set; }
+        public virtual tbEmpleados tbEmpleados { get; set; }
     }
 }

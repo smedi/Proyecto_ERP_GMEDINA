@@ -26,7 +26,7 @@ namespace ERP_GMEDINA.Models
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbIdioma tbIdioma { get; set; }
-        public virtual tbRequisicione tbRequisicione { get; set; }
+        public virtual tbIdiomas tbIdiomas { get; set; }
+        public virtual tbRequisiciones tbRequisiciones { get; set; }
     }
 }
