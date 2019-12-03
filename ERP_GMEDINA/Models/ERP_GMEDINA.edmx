@@ -14185,17 +14185,17 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbAcumuladosISR' is referenced by a rel
             <Parameter Name="afp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="afp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Activar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Activar_Result)">
             <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
             <Parameter Name="cde_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cde_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result)">
             <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
             <Parameter Name="cde_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="cde_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Insert_Result)">
             <Parameter Name="cde_DescripcionDedu" Mode="In" Type="String" />
             <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
             <Parameter Name="cde_PorcentajeColaborador" Mode="In" Type="Decimal" />
@@ -14203,7 +14203,7 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbAcumuladosISR' is referenced by a rel
             <Parameter Name="cde_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="cde_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbCatalogoDeDeducciones_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Update_Result)">
             <Parameter Name="cde_IdDeduccion" Mode="In" Type="Int32" />
             <Parameter Name="cde_DescripcionDedu" Mode="In" Type="String" />
             <Parameter Name="tde_IdTipoDedu" Mode="In" Type="Int32" />
@@ -14259,24 +14259,24 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbAcumuladosISR' is referenced by a rel
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="dtm_DecimoTercer" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionAFP_Activar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionAFP_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionAFP_Activar_Result)">
             <Parameter Name="dafp_Id" Mode="In" Type="Int32" />
             <Parameter Name="dafp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dafp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionAFP_Inactivar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionAFP_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionAFP_Inactivar_Result)">
             <Parameter Name="dafp_Id" Mode="In" Type="Int32" />
             <Parameter Name="dafp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dafp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionAFP_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionAFP_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionAFP_Insert_Result)">
             <Parameter Name="dafp_AporteMinimoLps" Mode="In" Type="Decimal" />
             <Parameter Name="afp_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="dafp_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="dafp_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionAFP_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionAFP_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionAFP_Update_Result)">
             <Parameter Name="dafp_Id" Mode="In" Type="Int32" />
             <Parameter Name="dafp_AporteLps" Mode="In" Type="Decimal" />
             <Parameter Name="afp_Id" Mode="In" Type="Int32" />
@@ -14284,17 +14284,17 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbAcumuladosISR' is referenced by a rel
             <Parameter Name="dafp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dafp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Activar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Activar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result)">
             <Parameter Name="dex_IdDeduccionesExtra" Mode="In" Type="Int32" />
             <Parameter Name="dex_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dex_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result)">
             <Parameter Name="dex_IdDeduccionesExtra" Mode="In" Type="Int32" />
             <Parameter Name="dex_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="dex_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result)">
             <Parameter Name="eqem_Id" Mode="In" Type="Int32" />
             <Parameter Name="dex_MontoInicial" Mode="In" Type="Decimal" />
             <Parameter Name="dex_MontoRestante" Mode="In" Type="Decimal" />
@@ -14304,7 +14304,7 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbAcumuladosISR' is referenced by a rel
             <Parameter Name="dex_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="dex_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionesExtraordinarias_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Update_Result)">
             <Parameter Name="dex_IdDeduccionesExtra" Mode="In" Type="Int32" />
             <Parameter Name="eqem_Id" Mode="In" Type="Int32" />
             <Parameter Name="dex_MontoInicial" Mode="In" Type="Decimal" />
@@ -14530,6 +14530,42 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbAcumuladosISR' is referenced by a rel
           <Property Type="Int32" Name="emp_Id" Nullable="true" />
           <Property Type="Decimal" Name="dtm_Monto" Nullable="true" Precision="16" Scale="4" />
           <Property Type="String" Name="dtm_CodigoPago" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbCatalogoDeDeducciones_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionAFP_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionAFP_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionAFP_Inactivar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionAFP_Activar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -16471,10 +16507,34 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbAcumuladosISR' is referenced by a rel
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAFP_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAFP_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAFP_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAFP_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbAFP_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbAFP_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Activar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Inactivar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeDeducciones_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeDeducciones_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbCatalogoDeDeducciones_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeIngresos_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeIngresos_Activar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeIngresos_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeIngresos_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDeIngresos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDeIngresos_Insert" />
@@ -16484,14 +16544,62 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbAcumuladosISR' is referenced by a rel
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbCatalogoDePlanillas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbCatalogoDePlanillas_Update" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDecimoCuartoMes_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDecimoCuartoMes_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDecimoTercerMes_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDecimoTercerMes_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionAFP_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionAFP_Activar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionAFP_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionAFP_Inactivar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionAFP_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionAFP_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionAFP_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionAFP_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Activar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionAFP_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionAFP_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionAFP_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionAFP_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionAFP_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionAFP_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionAFP_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionAFP_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionAFP_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionAFP_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionAFP_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionAFP_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Activar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Activar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionesExtraordinarias_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbDeduccionesExtraordinarias_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_Plani_tbDeduccionesExtraordinarias_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbEmpleadoBonos_Activar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbEmpleadoBonos_Activar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbEmpleadoBonos_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbEmpleadoBonos_Inactivar" />
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbEmpleadoBonos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_Plani_tbEmpleadoBonos_Insert" />
