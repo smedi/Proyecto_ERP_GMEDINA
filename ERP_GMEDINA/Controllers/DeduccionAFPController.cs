@@ -110,8 +110,10 @@ namespace ERP_GMEDINA.Controllers
 
             //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
 
+            /*
             ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", db.tbAFP.Include(d => d.afp_Id));
             ViewBag.emp_Id = new SelectList(db.tbPersonas, "emp_Id", "per_Nombres" + ' ' + "per_Apellidos", db.tbEmpleados.Include(d => d.emp_Id));
+            */
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -213,8 +215,10 @@ namespace ERP_GMEDINA.Controllers
 
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             
+            /*
             ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", db.tbAFP.Include(d => d.afp_Id));
             ViewBag.emp_Id = new SelectList(db.tbPersonas, "emp_Id", "per_Nombres" + ' ' + "per_Apellidos", db.tbEmpleados.Include(d => d.emp_Id));
+            */
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -237,7 +241,7 @@ namespace ERP_GMEDINA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Inactivar([Bind(Include = "cde_IdDeducciones,cde_UsuarioModifica,cde_FechaModifica")] tbDeduccionAFP tbDeduccionAFP)
+        public ActionResult Inactivar([Bind(Include = "dafp_Id,cde_UsuarioModifica,cde_FechaModifica")] tbDeduccionAFP tbDeduccionAFP)
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
@@ -259,8 +263,8 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Inactivar(tbDeduccionAFP.dafp_Id,
-                                                                                               tbDeduccionAFP.dafp_UsuarioModifica,
-                                                                                               tbDeduccionAFP.dafp_FechaModifica);
+                                                                             tbDeduccionAFP.dafp_UsuarioModifica,
+                                                                             tbDeduccionAFP.dafp_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbDeduccionAFP_Inactivar_Result Resultado in listDeduccionAFP)
                         MensajeError = Resultado.MensajeError;

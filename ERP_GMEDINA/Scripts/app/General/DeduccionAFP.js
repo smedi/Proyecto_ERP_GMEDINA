@@ -36,7 +36,7 @@ function cargarGridDeducciones() {
                 });
             }
             //GUARDAR EN UNA VARIABLE LA DATA OBTENIDA
-            var ListaDeduccion = data, template = '';
+            var ListaDeduccionAFP = data, template = '';
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeduccionAFP.length; i++) {
                 template += '<tr data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">' +
@@ -51,7 +51,7 @@ function cargarGridDeducciones() {
                     '</tr>';
             }
             //REFRESCAR EL TBODY DE LA TABLA DEL INDEX
-            $('#tbodyDeducciones').html(template);
+            $('#tbodyDeduccionAFP').html(template);
         });
 }
 
@@ -86,11 +86,11 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #per_Nombres + #per_Apellidos").empty();
+                        $("#Editar #emp_Id").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Editar #per_Nombres + #per_Apellidos").append("<option value = 0>Selecione una opción...</option>");
+                        $("#Editar #emp_Id").append("<option value = 0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
-                            $("#Editar #per_Nombres + #per_Apellidos").append("<option" + (iter.Id == SelectedIdEmpleado ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedIdEmpleado ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
 
@@ -106,11 +106,11 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Editar #afp_Descripcion").empty();
+                        $("#Editar #afp_Id").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Editar #afp_Descripcion").append("<option value = 0>Selecione una opción...</option>");
+                        $("#Editar #afp_Id").append("<option value = 0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
-                            $("#Editar #afp_Descripcion").append("<option" + (iter.Id == SelectedIdAFP ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            $("#Editar #afp_Id").append("<option" + (iter.Id == SelectedIdAFP ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
 
@@ -177,16 +177,15 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
         url: "/DeduccionAFP/EditGetEmpleadoDDL",
         method: "GET",
         dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID })
+        contentType: "application/json; charset=utf-8"
     })
         .done(function (data) {
             //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-            $("#Editar #per_Nombres + #per_Apellidos").empty();
+            $("#Crear #emp_Id").empty();
             //LLENAR EL DROPDOWNLIST
-            $("#Editar #per_Nombres + #per_Apellidos").append("<option value = 0>Selecione una opción...</option>");
+            $("#Crear #emp_Id").append("<option value = 0>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
-                $("#Editar #per_Nombres + #per_Apellidos").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                $("#Crear #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
 
@@ -196,21 +195,20 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
         method: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID })
     })
         .done(function (data) {
             //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-            $("#Editar #afp_Descripcion").empty();
+            $("#Crear #afp_Id").empty();
             //LLENAR EL DROPDOWNLIST
-            $("#Editar #afp_Descripcion").append("<option value = 0>Selecione una opción...</option>");
+            $("#Crear #afp_Id").append("<option value = 0>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
-                $("#Editar #afp_Descripcion").append("<optionvalue='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                $("#Crear #afp_Id").append("<optionvalue='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
         });
 
 
     //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarCatalogoDeducciones").modal();
+    $("#AgregarDeduccionAFP").modal();
 });
 
 
@@ -287,11 +285,11 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detalles #per_Nombres + #per_Apellidos").empty();
+                        $("#Detalles #emp_Id").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Detalles #per_Nombres + #per_Apellidos").append("<option value = 0>Selecione una opción...</option>");
+                        $("#Detalles #emp_Id").append("<option value = 0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
-                            $("#Detalles #per_Nombres + #per_Apellidos").append("<option" + (iter.Id == SelectedIdEmpleado ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            $("#Detalles #emp_Id").append("<option" + (iter.Id == SelectedIdEmpleado ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
 
@@ -307,11 +305,11 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                 })
                     .done(function (data) {
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Detalles #afp_Descripcion").empty();
+                        $("#Detalles #afp_Id").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Detalles #afp_Descripcion").append("<option value = 0>Selecione una opción...</option>");
+                        $("#Detalles #afp_Id").append("<option value = 0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
-                            $("#Detalles #afp_Descripcion").append("<option" + (iter.Id == SelectedIdAFP ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                            $("#Detalles #afp_Id").append("<option" + (iter.Id == SelectedIdAFP ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
 
@@ -331,7 +329,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-$(document).on("click", "#btnmodalInactivarCatalogoDeducciones", function () {
+$(document).on("click", "#btnInactivarRegistroDeduccionAFP", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
     $("#InactivarDeduccionAFP").modal();
 });
