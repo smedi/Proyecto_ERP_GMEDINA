@@ -40,7 +40,7 @@ function cargarGridDeducciones() {
             //RECORRER DATA OBETINA Y CREAR UN "TEMPLATE" PARA REFRESCAR EL TBODY DE LA TABLA DEL INDEX
             for (var i = 0; i < ListaDeduccionAFP.length; i++) {
                 template += '<tr data-id = "' + ListaDeduccionAFP[i].dafp_Id + '">' +
-                    '<td>' + ListaDeduccionAFP[i].per_Nombres + ' ' + ListaDeduccion[i].per_Apellidos + '</td>' +
+                    '<td>' + ListaDeduccionAFP[i].per_Nombres + ' ' + ListaDeduccionAFP[i].per_Apellidos + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].emp_CuentaBancaria + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].dafp_AporteLps + '</td>' +
                     '<td>' + ListaDeduccionAFP[i].afp_Descripcion + '</td>' +
@@ -190,21 +190,21 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
         });
 
     //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
-    $.ajax({
-        url: "/DeduccionAFP/EditGetAFPDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-    })
-        .done(function (data) {
-            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-            $("#Crear #afp_Id").empty();
-            //LLENAR EL DROPDOWNLIST
-            $("#Crear #afp_Id").append("<option value = 0>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #afp_Id").append("<optionvalue='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
+                $.ajax({
+                    url: "/DeduccionAFP/EditGetAFPDDL",
+                    method: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8"
+                })
+                    .done(function (data) {
+                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+                        $("#Crear #afp_Id").empty();
+                        //LLENAR EL DROPDOWNLIST
+                        $("#Crear #afp_Id").append("<option value = 0>Selecione una opción...</option>");
+                        $.each(data, function (i, iter) {
+                            $("#Crear #afp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+                        });
+                    });
 
 
     //MOSTRAR EL MODAL DE AGREGAR
@@ -243,8 +243,6 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
         }
     });
 });
-
-
 
 
 //Detalles//
@@ -329,7 +327,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-$(document).on("click", "#btnInactivarRegistroDeduccionAFP", function () {
+$(document).on("click", "#btnInactivarDeduccionAFP", function () {
     //MOSTRAR EL MODAL DE INACTIVAR
     $("#InactivarDeduccionAFP").modal();
 });

@@ -124,10 +124,9 @@ namespace ERP_GMEDINA.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from DeduAFP in db.tbDeduccionAFP
-            join Emp in db.tbEmpleados on DeduAFP.emp_Id equals Emp.emp_Id
+            from Emp in db.tbEmpleados
             join Per in db.tbPersonas on Emp.per_Id equals Per.per_Id
-            select new { Id = DeduAFP.emp_Id, Descripcion = Per.per_Nombres + ' ' + Per.per_Apellidos };
+            select new { Id = Emp.emp_Id, Descripcion = Per.per_Nombres + " " + Per.per_Apellidos };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
@@ -137,8 +136,7 @@ namespace ERP_GMEDINA.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from DeduAFP in db.tbDeduccionAFP
-            join AFP in db.tbAFP on DeduAFP.afp_Id equals AFP.afp_Id
+            from AFP in db.tbAFP
             select new { Id = AFP.afp_Id, Descripcion = AFP.afp_Descripcion };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
@@ -186,7 +184,7 @@ namespace ERP_GMEDINA.Controllers
                                                                           tbDeduccionAFP.dafp_UsuarioModifica,
                                                                           tbDeduccionAFP.dafp_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
-                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Update_Result Resultado in listDeduccionAFP)
+                    foreach (UDP_Plani_tbDeduccionAFP_Update_Result Resultado in listDeduccionAFP)
                         MensajeError = Resultado.MensajeError;
 
                     if (MensajeError.StartsWith("-1"))

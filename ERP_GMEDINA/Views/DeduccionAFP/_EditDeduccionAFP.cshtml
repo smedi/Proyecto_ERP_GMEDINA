@@ -2,7 +2,8 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditDeduccionAFP" } ))
 {
     @Html.AntiForgeryToken()
-    
+    @Html.HiddenFor(model => model.dafp_Id)
+
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
