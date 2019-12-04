@@ -33,8 +33,8 @@ namespace ERP_GMEDINA.Controllers
                         p => new
                         {
                             Id = p.per_Id,
-                            per_Identidad = p.per_Identidad,
-                            per_NombreCompleto = p.per_Nombres + " " + p.per_Apellidos,
+                            Identidad = p.per_Identidad,
+                            Nombre = p.per_Nombres + " " + p.per_Apellidos,
                             Telefono = p.per_Telefono
                         })
                         .ToList();
@@ -55,7 +55,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.tbPersonas.ToList();
+                    lista = db.tbPersonas.Where(x => x.per_Id == id).ToList();
                 }
                 catch
                 {
