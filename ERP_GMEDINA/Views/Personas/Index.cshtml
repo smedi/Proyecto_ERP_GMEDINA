@@ -32,7 +32,7 @@
                             <th></th>
                             <th>Identidad</th>
                             <th>Nombre Completo</th>
-                            <th>Telefono</th>
+                            <th>Correo Electronico</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -44,10 +44,10 @@
         </div>
     </div>
  </div>
-@*@Html.Partial("_Create", new ERP_GMEDINA.Models.tbPersonas())
-@Html.Partial("_Delete", new ERP_GMEDINA.Models.tbPersonas())
-@Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPersonas())
-@Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbPersonas())*@
+    @*@Html.Partial("_Create", new ERP_GMEDINA.Models.tbPersonas())
+    @Html.Partial("_Delete", new ERP_GMEDINA.Models.tbPersonas())
+    @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbPersonas())*@
+@Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbPersonas())
     
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
@@ -57,5 +57,6 @@
 @Scripts.Render("~/plugins/dataTables")
 @Scripts.Render("~/Scripts/app/general")
 @Scripts.Render("~/Scripts/app/general/Personas/IndexPersonas.js")
+@Scripts.Render("~/Scripts/app/general/Personas/Personas.js")
 }
 

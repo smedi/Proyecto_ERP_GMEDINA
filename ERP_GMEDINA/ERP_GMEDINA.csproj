@@ -689,6 +689,7 @@
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
+    <Content Include="Scripts\app\General\Personas\Personas.js" />
     <Content Include="Scripts\app\General\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
@@ -1217,6 +1218,7 @@
     <Content Include="Views\Personas\Details.cshtml" />
     <Content Include="Views\Personas\Edit.cshtml" />
     <Content Include="Views\Personas\Index.cshtml" />
+    <Content Include="Views\Personas\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

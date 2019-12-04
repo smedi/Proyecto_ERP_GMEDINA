@@ -35,7 +35,7 @@ namespace ERP_GMEDINA.Controllers
                             Id = p.per_Id,
                             Identidad = p.per_Identidad,
                             Nombre = p.per_Nombres + " " + p.per_Apellidos,
-                            Telefono = p.per_Telefono
+                            CorreoElectronico = p.per_CorreoElectronico
                         })
                         .ToList();
                     return Json(tbPersonas, JsonRequestBehavior.AllowGet);
@@ -155,27 +155,41 @@ namespace ERP_GMEDINA.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            tbAreas tbAreas = null;
-            using (db = new ERP_GMEDINAEntities())
+
+            tbPersonas tbPersonas = null;
+            try
             {
-                List<tbSucursales> Sucursales = null;
-                try
+                tbPersonas = db.tbPersonas.Find(id);
+                if (tbPersonas == null || !tbPersonas.per_Estado)
                 {
-                    tbAreas = db.tbAreas.Find(id);
-                    Sucursales = db.tbSucursales.ToList();
-                    ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
-                }
-                catch
-                {
+                    return HttpNotFound();
                 }
             }
-            if (tbAreas == null)
+            catch (Exception ex)
             {
+                ex.Message.ToString();
                 return HttpNotFound();
             }
-            return View(tbAreas);
+            Session["id"] = id;
+            var Personas = new tbPersonas
+            {
+                per_Id = tbPersonas.per_Id,
+                per_Identidad = tbPersonas.per_Identidad,
+                per_Nombres = tbPersonas.per_Nombres,
+                per_Apellidos = tbPersonas.per_Apellidos,
+                per_Sexo = tbPersonas.per_Sexo,
+                per_Edad = tbPersonas.per_Edad,
+                per_Direccion = tbPersonas.per_Direccion,
+                per_Estado = tbPersonas.per_Estado,
+                per_RazonInactivo = tbPersonas.per_RazonInactivo,
+                per_UsuarioCrea = tbPersonas.per_UsuarioCrea,
+                per_FechaCrea = tbPersonas.per_FechaCrea,
+                per_UsuarioModifica = tbPersonas.per_UsuarioModifica,
+                per_FechaModifica = tbPersonas.per_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbPersonas.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbPersonas.tbUsuario1).usu_NombreUsuario }
+            };
+            return Json(Personas, JsonRequestBehavior.AllowGet);
         }
         // POST: Areas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -218,6 +232,18 @@ namespace ERP_GMEDINA.Controllers
                 }
             }
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        protected tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
         }
 
         protected override void Dispose(bool disposing)

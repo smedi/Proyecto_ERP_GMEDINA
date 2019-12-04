@@ -30,7 +30,11 @@ function llenarTabla() {
                    Id: value.Id,
                    Identidad: value.Identidad,
                    NombreCompleto: value.Nombre,//length == 0 ? 'Desconocido' : value.NombreCompleto[0],
-                   Telefono: value.Telefono //.length == 0 ? 'Desconocido' : value.per_Telefono[0]
+                   //Sexo: value.Sexo,
+                   //Direccion: value.Direccion,
+                   //Nacionalidad: value.Nacionalidad,
+                   CorreoElectronico: value.CorreoElectronico,
+                   //Telefono: value.Telefono //.length == 0 ? 'Desconocido' : value.per_Telefono[0]
                });
            });
            tabla.draw();
@@ -61,4 +65,6 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
                 }
             });
     }
+
+
 });
