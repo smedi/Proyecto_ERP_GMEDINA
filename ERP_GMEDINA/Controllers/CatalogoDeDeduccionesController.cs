@@ -204,6 +204,7 @@ namespace PruebaPlanilla.Controllers
         //}
 
         // GET: CatalogoDeDeducciones/Create
+
         public ActionResult Create()
         {
             ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion");

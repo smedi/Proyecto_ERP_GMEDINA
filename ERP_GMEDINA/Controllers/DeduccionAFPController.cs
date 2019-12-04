@@ -48,27 +48,11 @@ namespace ERP_GMEDINA.Controllers
             return new JsonResult { Data = tbDeduccionAFP1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        // GET: DeduccionAFP/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbDeduccionAFP tbDeduccionAFP = db.tbDeduccionAFP.Find(id);
-            if (tbDeduccionAFP == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbDeduccionAFP);
-        }
-
         // GET: DeduccionAFP/Create
         public ActionResult Create()
         {
-            /*ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion");
-            ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");*/
+            ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion");
+            ViewBag.emp_Id = new SelectList(db.tbPersonas, "emp_Id", "per_Nombres" + ' ' + "per_Apellidos", db.tbEmpleados.Include(d => d.emp_Id));
             return View();
         }
 
@@ -77,21 +61,59 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dafp_Id,dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioCrea,dafp_FechaCrea")] tbDeduccionAFP tbDeduccionAFP)
+        public ActionResult Create([Bind(Include = "dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioCrea,dafp_FechaCrea")] tbDeduccionAFP tbDeduccionAFP)
         {
+            //LLENAR LA DATA DE AUDITORIA, DE NO HACERLO EL MODELO NO SERÍA VÁLIDO Y SIEMPRE CAERÍA EN EL CATCH
+            tbDeduccionAFP.dafp_UsuarioCrea = 1;
+            tbDeduccionAFP.dafp_FechaCrea = DateTime.Now;
+            //VARIABLE PARA ALMACENAR EL RESULTADO DEL PROCESO Y ENVIARLO AL LADO DEL CLIENTE
+            string response = String.Empty;
+            IEnumerable<object> listDeduccionAFP = null;
+            string MensajeError = "";
+            //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
-                db.tbDeduccionAFP.Add(tbDeduccionAFP);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Insert(tbDeduccionAFP.dafp_AporteLps,
+                                                                          tbDeduccionAFP.afp_Id,
+                                                                          tbDeduccionAFP.emp_Id,
+                                                                          tbDeduccionAFP.dafp_UsuarioCrea,
+                                                                          tbDeduccionAFP.dafp_FechaCrea);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbDeduccionAFP_Insert_Result Resultado in listDeduccionAFP)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
+            }
+            else
+            {
+                //SI EL MODELO NO ES VÁLIDO, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                response = "error";
             }
 
-           /* 
-            ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", tbDeduccionAFP.afp_Id);
-            ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionAFP.cde_IdDeducciones);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionAFP.emp_Id);
-           */
-            return View(tbDeduccionAFP);
+            //RETORNAMOS LA VARIABLE RESPONSE AL CLIENTE PARA EVALUARLA
+
+            ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", db.tbAFP.Include(d => d.afp_Id));
+            ViewBag.emp_Id = new SelectList(db.tbPersonas, "emp_Id", "per_Nombres" + ' ' + "per_Apellidos", db.tbEmpleados.Include(d => d.emp_Id));
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -122,24 +144,11 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: DeduccionAFP/Edit/5
-        public ActionResult Edit(int? id)
+        public JsonResult Edit(int? ID)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbDeduccionAFP tbDeduccionAFP = db.tbDeduccionAFP.Find(id);
-            if (tbDeduccionAFP == null)
-            {
-                return HttpNotFound();
-            }
-
-            /*
-            ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", tbDeduccionAFP.afp_Id);
-            ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionAFP.cde_IdDeducciones);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionAFP.emp_Id);
-            */
-            return View(tbDeduccionAFP);
+            db.Configuration.ProxyCreationEnabled = false;
+            tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(ID);
+            return Json(tbDeduccionAFPJSON, JsonRequestBehavior.AllowGet);
         }
 
         // POST: DeduccionAFP/Edit/5
@@ -149,19 +158,140 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "dafp_Id,dafp_AporteLps,afp_Id,emp_Id,dafp_UsuarioModifica,dafp_FechaModifica")] tbDeduccionAFP tbDeduccionAFP)
         {
+            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
+            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
+            /*
+            tbDeduccionAFP.cde_UsuarioCrea = 1;
+            tbDeduccionAFP.cde_FechaCrea = DateTime.Now;
+            */
+            //LLENAR DATA DE AUDITORIA
+            tbDeduccionAFP.dafp_UsuarioModifica = 1;
+            tbDeduccionAFP.dafp_FechaModifica = DateTime.Now;
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
+            IEnumerable<object> listDeduccionAFP = null;
+            string MensajeError = "";
+            //VALIDAR SI EL MODELO ES VÁLIDO
             if (ModelState.IsValid)
             {
-                db.Entry(tbDeduccionAFP).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Update(tbDeduccionAFP.dafp_Id,
+                                                                          tbDeduccionAFP.dafp_AporteLps,
+                                                                          tbDeduccionAFP.afp_Id,
+                                                                          tbDeduccionAFP.emp_Id,
+                                                                          tbDeduccionAFP.dafp_UsuarioModifica,
+                                                                          tbDeduccionAFP.dafp_FechaModifica);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbCatalogoDeDeducciones_Update_Result Resultado in listDeduccionAFP)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo ingresar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo modificar el registro, contacte al administrador.");
+                response = "error";
             }
 
-            /*
-            ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", tbDeduccionAFP.afp_Id);
-            ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionAFP.cde_IdDeducciones);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbDeduccionAFP.emp_Id);
-            */
-            return View(tbDeduccionAFP);
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            
+            ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", db.tbAFP.Include(d => d.afp_Id));
+            ViewBag.emp_Id = new SelectList(db.tbPersonas, "emp_Id", "per_Nombres" + ' ' + "per_Apellidos", db.tbEmpleados.Include(d => d.emp_Id));
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: DeduccionAFP/Details/5
+        public JsonResult Details(int? ID)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(ID);
+            return Json(tbDeduccionAFPJSON, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult Inactivar(int? ID)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(ID);
+            return Json(tbDeduccionAFPJSON, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Inactivar([Bind(Include = "cde_IdDeducciones,cde_UsuarioModifica,cde_FechaModifica")] tbDeduccionAFP tbDeduccionAFP)
+        {
+            //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
+            //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
+            //tbCatalogoDeDeducciones.cde_UsuarioCrea = 1;
+            //tbCatalogoDeDeducciones.cde_FechaCrea = DateTime.Now;
+
+
+            //LLENAR DATA DE AUDITORIA
+            tbDeduccionAFP.dafp_UsuarioModifica = 1;
+            tbDeduccionAFP.dafp_FechaModifica = DateTime.Now;
+            //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
+            string response = String.Empty;
+            IEnumerable<object> listDeduccionAFP = null;
+            string MensajeError = "";
+            //VALIDAR SI EL MODELO ES VÁLIDO
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //EJECUTAR PROCEDIMIENTO ALMACENADO
+                    listDeduccionAFP = db.UDP_Plani_tbDeduccionAFP_Inactivar(tbDeduccionAFP.dafp_Id,
+                                                                                               tbDeduccionAFP.dafp_UsuarioModifica,
+                                                                                               tbDeduccionAFP.dafp_FechaModifica);
+                    //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
+                    foreach (UDP_Plani_tbDeduccionAFP_Inactivar_Result Resultado in listDeduccionAFP)
+                        MensajeError = Resultado.MensajeError;
+
+                    if (MensajeError.StartsWith("-1"))
+                    {
+                        //EN CASO DE OCURRIR UN ERROR, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                        ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador");
+                        response = "error";
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    //EN CASO DE CAER EN EL CATCH, IGUALAMOS LA VARIABLE "RESPONSE" A ERROR PARA VALIDARLO EN EL CLIENTE
+                    response = Ex.Message.ToString();
+                }
+                //SI LA EJECUCIÓN LLEGA A ESTE PUNTO SIGNIFICA QUE NO OCURRIÓ NINGÚN ERROR Y EL PROCESO FUE EXITOSO
+                //IGUALAMOS LA VARIABLE "RESPONSE" A "BIEN" PARA VALIDARLO EN EL CLIENTE
+                response = "bien";
+            }
+            else
+            {
+                // SI EL MODELO NO ES CORRECTO, RETORNAR ERROR
+                ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
+                response = "error";
+            }
+            //ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbCatalogoDeDeducciones.tde_IdTipoDedu);
+
+            //RETORNAR MENSAJE AL LADO DEL CLIENTE
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
 

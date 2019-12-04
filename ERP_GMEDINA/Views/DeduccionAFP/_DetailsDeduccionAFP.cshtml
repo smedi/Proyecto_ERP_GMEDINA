@@ -1,37 +1,32 @@
 ﻿@model ERP_GMEDINA.Models.tbDeduccionAFP
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCatalogoDeduccionesDetalle" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
+
         <div class="form-group">
-            @Html.LabelFor(model => model.cde_DescripcionDeduccion, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.cde_DescripcionDeduccion, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.cde_DescripcionDeduccion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control" disabled="disabled"></select>
+                <select id="emp_Id" name="emp_Id" class="form-control" disabled></select>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.cde_PorcentajeColaborador, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.dafp_AporteLps, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.cde_PorcentajeColaborador, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.cde_PorcentajeColaborador, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
             </div>
         </div>
+
         <div class="form-group">
-            @Html.LabelFor(model => model.cde_PorcentajeEmpresa, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.afp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.cde_PorcentajeEmpresa, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.cde_PorcentajeEmpresa, "", new { @class = "text-danger" })
+                <select id="afp_Id" name="afp_Id" class="form-control" disabled></select>
             </div>
         </div>
+
     </div>
+
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h2>Auditoría</h2>
@@ -49,13 +44,13 @@
                     <tbody>
                         <tr>
                             <td>Creado</td>
-                            <td>@Html.EditorFor(model => model.cde_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                            <td>@Html.EditorFor(model => model.cde_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            <td>@Html.EditorFor(model => model.dafp_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            <td>@Html.EditorFor(model => model.dafp_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                         </tr>
                         <tr>
                             <td>Modificado</td>
-                            <td>@Html.EditorFor(model => model.cde_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
-                            <td>@Html.EditorFor(model => model.cde_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            <td>@Html.EditorFor(model => model.dafp_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            <td>@Html.EditorFor(model => model.dafp_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                         </tr>
                     </tbody>
                 </table>
