@@ -144,10 +144,10 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: DeduccionAFP/Edit/5
-        public JsonResult Edit(int? ID)
+        public JsonResult Edit(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(ID);
+            tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(id);
             return Json(tbDeduccionAFPJSON, JsonRequestBehavior.AllowGet);
         }
 
@@ -230,16 +230,16 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-        public JsonResult Inactivar(int? ID)
+        public JsonResult Inactivar(int? id)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(ID);
+            tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(id);
             return Json(tbDeduccionAFPJSON, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Inactivar([Bind(Include = "dafp_Id,cde_UsuarioModifica,cde_FechaModifica")] tbDeduccionAFP tbDeduccionAFP)
+        public ActionResult Inactivar([Bind(Include = "dafp_Id,dafp_UsuarioModifica,dafp_FechaModifica")] tbDeduccionAFP tbDeduccionAFP)
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR

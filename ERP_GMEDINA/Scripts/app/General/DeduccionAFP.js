@@ -71,6 +71,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
                 console.log('Hla')
+                $("#Editar #dafp_Id").val(data.dafp_Id);
                 $("#Editar #dafp_AporteLps").val(data.dafp_AporteLps);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
 
@@ -266,6 +267,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
             if (data) {
                 var FechaCrea = FechaFormato(data.dafp_FechaCrea);
                 var FechaModifica = FechaFormato(data.dafp_FechaModifica);
+                $("#Detalles #dafp_Id").val(data.dafp_Id);
                 $("#Detalles #emp_Id").val(data.emp_Id);
                 $("#Detalles #per_Nombres + #per_Apellidos").val(data.per_Nombres + data.per_Apellidos);
                 $("#Detalles #emp_CuentaBancaria").val(data.emp_CuentaBancaria);
@@ -333,8 +335,9 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
 
 
 $(document).on("click", "#btnInactivarDeduccionAFP", function () {
-    //MOSTRAR EL MODAL DE INACTIVAR
-    $("#InactivarDeduccionAFP").modal();
+        //MOSTRAR EL MODAL DE INACTIVAR
+        $("#InactivarDeduccionAFP").modal();
+    });
 });
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
