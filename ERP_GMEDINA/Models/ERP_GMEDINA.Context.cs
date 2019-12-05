@@ -472,7 +472,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbAdelantoSueldo_Update", adsu_IdAdelantoSueldoParameter, emp_IdParameter, adsu_RazonAdelantoParameter, adsu_MontoParameter, adsu_UsuarioModificaParameter, adsu_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbAFP_Activar(Nullable<int> afp_Id, Nullable<int> afp_UsuarioModifica, Nullable<System.DateTime> afp_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbAFP_Activar_Result> UDP_Plani_tbAFP_Activar(Nullable<int> afp_Id, Nullable<int> afp_UsuarioModifica, Nullable<System.DateTime> afp_FechaModifica)
         {
             var afp_IdParameter = afp_Id.HasValue ?
                 new ObjectParameter("afp_Id", afp_Id) :
@@ -486,10 +486,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("afp_FechaModifica", afp_FechaModifica) :
                 new ObjectParameter("afp_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbAFP_Activar", afp_IdParameter, afp_UsuarioModificaParameter, afp_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAFP_Activar_Result>("UDP_Plani_tbAFP_Activar", afp_IdParameter, afp_UsuarioModificaParameter, afp_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbAFP_Inactivar(Nullable<int> afp_Id, Nullable<int> afp_UsuarioModifica, Nullable<System.DateTime> afp_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbAFP_Inactivar_Result> UDP_Plani_tbAFP_Inactivar(Nullable<int> afp_Id, Nullable<int> afp_UsuarioModifica, Nullable<System.DateTime> afp_FechaModifica)
         {
             var afp_IdParameter = afp_Id.HasValue ?
                 new ObjectParameter("afp_Id", afp_Id) :
@@ -503,10 +503,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("afp_FechaModifica", afp_FechaModifica) :
                 new ObjectParameter("afp_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbAFP_Inactivar", afp_IdParameter, afp_UsuarioModificaParameter, afp_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAFP_Inactivar_Result>("UDP_Plani_tbAFP_Inactivar", afp_IdParameter, afp_UsuarioModificaParameter, afp_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbAFP_Insert(string afp_Descripcion, Nullable<decimal> afp_AporteMinimoLps, Nullable<decimal> afp_InteresAporte, Nullable<decimal> afp_InteresAnual, Nullable<int> tde_IdTipoDedu, Nullable<int> afp_UsuarioCrea, Nullable<System.DateTime> afp_FechaCrea)
+        public virtual ObjectResult<UDP_Plani_tbAFP_Insert_Result> UDP_Plani_tbAFP_Insert(string afp_Descripcion, Nullable<decimal> afp_AporteMinimoLps, Nullable<decimal> afp_InteresAporte, Nullable<decimal> afp_InteresAnual, Nullable<int> tde_IdTipoDedu, Nullable<int> afp_UsuarioCrea, Nullable<System.DateTime> afp_FechaCrea)
         {
             var afp_DescripcionParameter = afp_Descripcion != null ?
                 new ObjectParameter("afp_Descripcion", afp_Descripcion) :
@@ -536,10 +536,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("afp_FechaCrea", afp_FechaCrea) :
                 new ObjectParameter("afp_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbAFP_Insert", afp_DescripcionParameter, afp_AporteMinimoLpsParameter, afp_InteresAporteParameter, afp_InteresAnualParameter, tde_IdTipoDeduParameter, afp_UsuarioCreaParameter, afp_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAFP_Insert_Result>("UDP_Plani_tbAFP_Insert", afp_DescripcionParameter, afp_AporteMinimoLpsParameter, afp_InteresAporteParameter, afp_InteresAnualParameter, tde_IdTipoDeduParameter, afp_UsuarioCreaParameter, afp_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Plani_tbAFP_Update(Nullable<int> afp_Id, string afp_Descripcion, Nullable<decimal> afp_AporteMinimoLps, Nullable<decimal> afp_InteresAporte, Nullable<decimal> afp_InteresAnual, Nullable<int> tde_IdTipoDedu, Nullable<int> afp_UsuarioModifica, Nullable<System.DateTime> afp_FechaModifica)
+        public virtual ObjectResult<UDP_Plani_tbAFP_Update_Result> UDP_Plani_tbAFP_Update(Nullable<int> afp_Id, string afp_Descripcion, Nullable<decimal> afp_AporteMinimoLps, Nullable<decimal> afp_InteresAporte, Nullable<decimal> afp_InteresAnual, Nullable<int> tde_IdTipoDedu, Nullable<int> afp_UsuarioModifica, Nullable<System.DateTime> afp_FechaModifica)
         {
             var afp_IdParameter = afp_Id.HasValue ?
                 new ObjectParameter("afp_Id", afp_Id) :
@@ -573,7 +573,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("afp_FechaModifica", afp_FechaModifica) :
                 new ObjectParameter("afp_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Plani_tbAFP_Update", afp_IdParameter, afp_DescripcionParameter, afp_AporteMinimoLpsParameter, afp_InteresAporteParameter, afp_InteresAnualParameter, tde_IdTipoDeduParameter, afp_UsuarioModificaParameter, afp_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbAFP_Update_Result>("UDP_Plani_tbAFP_Update", afp_IdParameter, afp_DescripcionParameter, afp_AporteMinimoLpsParameter, afp_InteresAporteParameter, afp_InteresAnualParameter, tde_IdTipoDeduParameter, afp_UsuarioModificaParameter, afp_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Plani_tbCatalogoDeDeducciones_Activar_Result> UDP_Plani_tbCatalogoDeDeducciones_Activar(Nullable<int> cde_IdDeduccion, Nullable<int> cde_UsuarioModifica, Nullable<System.DateTime> cde_FechaModifica)

@@ -55,6 +55,86 @@ function cargarGridDeducciones() {
         });
 }
 
+
+
+//Agregar//
+//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
+$(document).on("click", "#btnAgregarDeduccionAFP", function () {
+
+    //CARGAR INFORMACIÓN DEL DROPDOWNLIST EMPLEADO PARA EL MODAL
+    $.ajax({
+        url: "/DeduccionAFP/EditGetEmpleadoDDL",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    })
+        .done(function (data) {
+            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+            $("#Crear #emp_Id").empty();
+            //LLENAR EL DROPDOWNLIST
+            $("#Crear #emp_Id").append("<option value = 0>Selecione una opción...</option>");
+            $.each(data, function (i, iter) {
+                $("#Crear #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+            });
+        });
+
+    //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
+    $.ajax({
+        url: "/DeduccionAFP/EditGetAFPDDL",
+        method: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    })
+        .done(function (data) {
+            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
+            $("#Crear #afp_Id").empty();
+            //LLENAR EL DROPDOWNLIST
+            $("#Crear #afp_Id").append("<option value = 0>Selecione una opción...</option>");
+            $.each(data, function (i, iter) {
+                $("#Crear #afp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
+            });
+        });
+
+
+    //MOSTRAR EL MODAL DE AGREGAR
+    $("#AgregarDeduccionAFP").modal();
+});
+
+
+//FUNCION: CREAR EL NUEVO REGISTRO
+$('#btnCreateRegistroDeduccionAFP').click(function () {
+    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+
+    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
+    var data = $("#frmCreateDeduccionAFP").serializeArray();
+    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
+    $.ajax({
+        url: "/DeduccionAFP/Create",
+        method: "POST",
+        data: data
+    }).done(function (data) {
+        //CERRAR EL MODAL DE AGREGAR
+        $("#AgregarDeduccionAFP").modal('hide');
+        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+        if (data == "error") {
+            iziToast.error({
+                title: 'Error',
+                message: 'No se pudo guardar el registro, contacte al administrador',
+            });
+        }
+        else {
+            cargarGridDeducciones();
+            // Mensaje de exito cuando un registro se ha guardado bien
+            iziToast.success({
+                title: 'Exito',
+                message: 'El registro fue registrado de forma exitosa!',
+            });
+        }
+    });
+});
+
+
+
 //Editar//
 //FUNCION: PRIMERA FASE DE EDICION DE REGISTROS, MOSTRAR MODAL CON LA INFORMACIÓN DEL REGISTRO SELECCIONADO
 $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", function () {
@@ -172,83 +252,6 @@ $("#btnCerrarEditar").click(function () {
 });
 
 
-
-
-//Agregar//
-//FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
-$(document).on("click", "#btnAgregarDeduccionAFP", function () {
-
-    //CARGAR INFORMACIÓN DEL DROPDOWNLIST EMPLEADO PARA EL MODAL
-    $.ajax({
-        url: "/DeduccionAFP/EditGetEmpleadoDDL",
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
-    })
-        .done(function (data) {
-            //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-            $("#Crear #emp_Id").empty();
-            //LLENAR EL DROPDOWNLIST
-            $("#Crear #emp_Id").append("<option value = 0>Selecione una opción...</option>");
-            $.each(data, function (i, iter) {
-                $("#Crear #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-            });
-        });
-
-    //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
-                $.ajax({
-                    url: "/DeduccionAFP/EditGetAFPDDL",
-                    method: "GET",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8"
-                })
-                    .done(function (data) {
-                        //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
-                        $("#Crear #afp_Id").empty();
-                        //LLENAR EL DROPDOWNLIST
-                        $("#Crear #afp_Id").append("<option value = 0>Selecione una opción...</option>");
-                        $.each(data, function (i, iter) {
-                            $("#Crear #afp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
-                        });
-                    });
-
-
-    //MOSTRAR EL MODAL DE AGREGAR
-    $("#AgregarDeduccionAFP").modal();
-});
-
-
-//FUNCION: CREAR EL NUEVO REGISTRO
-$('#btnCreateRegistroDeduccionAFP').click(function () {
-    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-
-    //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
-    var data = $("#frmCreateDeduccionAFP").serializeArray();
-    //ENVIAR DATA AL SERVIDOR PARA EJECUTAR LA INSERCIÓN
-    $.ajax({
-        url: "/DeduccionAFP/Create",
-        method: "POST",
-        data: data
-    }).done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-        $("#AgregarDeduccionAFP").modal('hide');
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo guardar el registro, contacte al administrador',
-            });
-        }
-        else {
-            cargarGridDeducciones();
-            // Mensaje de exito cuando un registro se ha guardado bien
-            iziToast.success({
-                title: 'Exito',
-                message: 'El registro fue registrado de forma exitosa!',
-            });
-        }
-    });
-});
 
 
 //Detalles//

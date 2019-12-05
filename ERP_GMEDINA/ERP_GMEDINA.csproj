@@ -158,6 +158,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AFPController.cs" />
     <Compile Include="Controllers\CatalogoDeDeduccionesController.cs" />
     <Compile Include="Controllers\DeduccionAFPController.cs" />
     <Compile Include="Controllers\DeduccionesExtraordinariasController.cs" />
@@ -450,6 +451,18 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_DecimoTercerMes_RPT_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAFP_Activar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAFP_Inactivar_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAFP_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbAFP_Update_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbCatalogoDeDeducciones_Activar_Result.cs">
@@ -807,6 +820,7 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\app\General\AFP.js" />
     <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\DeduccionAFP.js" />
     <Content Include="Scripts\app\General\DeduccionesExtraordinarias.js" />
@@ -1350,7 +1364,6 @@
     <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
     <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Create.cshtml" />
-    <Content Include="Views\DeduccionesExtraordinarias\Delete.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Edit.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Index.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
@@ -1361,6 +1374,13 @@
     <Content Include="Views\DeduccionAFP\_CreateDeduccionAFP.cshtml" />
     <Content Include="Views\DeduccionAFP\_EditDeduccionAFP.cshtml" />
     <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
+    <Content Include="Views\AFP\Create.cshtml" />
+    <Content Include="Views\AFP\Details.cshtml" />
+    <Content Include="Views\AFP\Edit.cshtml" />
+    <Content Include="Views\AFP\Index.cshtml" />
+    <Content Include="Views\AFP\_EditAFP.cshtml" />
+    <Content Include="Views\AFP\_CreateAFP.cshtml" />
+    <Content Include="Views\AFP\_DetailsAFP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

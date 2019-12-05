@@ -465,6 +465,9 @@ namespace ERP_GMEDINA
             bundles.Add(new ScriptBundle("~/Scripts/app/general/DeduccionAFP").Include(
                 "~/Scripts/app/General/DeduccionAFP.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/app/general/AFP").Include(
+                "~/Scripts/app/General/AFP.js"));
+
             //bundles ScripBase/Validate DataAnnotations
             bundles.Add(new ScriptBundle("~/Scripts/Scripts_Base/Jquery-Validate-DataAnnotations").Include(
                 "~/Scripts/Scripts_Base/jquery.validate.js",
