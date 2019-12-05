@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ERP_GMEDINA.Models;
 using System.IO;
 using SpreadsheetLight;
+using LinqToExcel;
 
 namespace ERP_GMEDINA.Controllers
 {
@@ -220,75 +221,88 @@ namespace ERP_GMEDINA.Controllers
             return View("CargaDocumento");
         }
 
-       // [HttpPost]
-        public ActionResult _CargaDocumento(/*HttpPostedFileBase archivoexcel,int IdInsF*/)
+        [HttpPost]
+        public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel, string cboINFS)
         {
-            try
+            //Verificacion del objetto recibido (archivo excel), si esta vacio retornara un error, de lo contrario continuara con el proceso.
+            if(archivoexcel != null && archivoexcel.ContentLength > 0)
             {
-                int IdInsF = 1;
-                // string ubicacion = "Content/PlanillasInstitucionesFinancieras/";
-                string path = @"C:\Users\LAB02\Downloads\Deduccion_Planilla_Prueba.xlsx";
-                SLDocument sl = new SLDocument(path);
+                //Guardado del archivo en el servidor
+                string path = Path.Combine(Server.MapPath("~/Content/PlanillasInstitucionesFinancieras"),
+                                      Path.GetFileName(archivoexcel.FileName));
+                archivoexcel.SaveAs(path);
 
-                using (var db = new ERP_GMEDINAEntities())
+               
+                try
                 {
+                    int IdInsF = Convert.ToInt16(cboINFS);
+                  
+                    SLDocument sl = new SLDocument(path);
 
-                    int iRow = 2;
-                    while (!string.IsNullOrEmpty(sl.GetCellValueAsString(iRow, 1)))
+                    //Recorremos 
+                    using (var db = new ERP_GMEDINAEntities())
                     {
-                        string identidad = sl.GetCellValueAsString(iRow, 1);
-                        decimal monto = sl.GetCellValueAsDecimal(iRow, 2);
-                        string comentario = sl.GetCellValueAsString(iRow, 3);
-                        string nombres = sl.GetCellValueAsString(iRow, 4);
-                        string apellidos = sl.GetCellValueAsString(iRow, 5);
+
+                        int iRow = 2;
+                        while (!string.IsNullOrEmpty(sl.GetCellValueAsString(iRow, 1)))
+                        {
+                            string identidad = sl.GetCellValueAsString(iRow, 1);
+                            decimal monto = sl.GetCellValueAsDecimal(iRow, 2);
+                            string comentario = sl.GetCellValueAsString(iRow, 3);
 
 
-                        var oMiExcel = new tbDeduccionInstitucionFinanciera();
+                            var oMiExcel = new tbDeduccionInstitucionFinanciera();
 
-                        int empleadoID = 0;
+                            var Excel = (from P in db.tbPersonas
+                                        join E in db.tbEmpleados on P.per_Id equals E.per_Id
+                                        where
+                                        P.per_Identidad == identidad
+                                        select new
+                                        {
+                                            empleadoID = E.emp_Id,
+                                        }).Single();
+                            var sql = (from infs in db.tbDeduccionInstitucionFinanciera select infs.deif_IdDeduccionInstFinanciera).Max();
+                            var iddeducfin = sql + 1;
 
+                           
 
-                        var Excel = from P in db.tbPersonas
-                                    join E in db.tbEmpleados on P.per_Id equals E.per_Id
+                            var IdEmple = Excel.empleadoID;
+                            
 
-                                    where
-                                    P.per_Identidad == identidad
+                            oMiExcel.deif_IdDeduccionInstFinanciera = iddeducfin;
+                            oMiExcel.emp_Id = IdEmple;
+                            oMiExcel.insf_IdInstitucionFinanciera = IdInsF;
+                            oMiExcel.deif_Monto = monto;
+                            oMiExcel.deif_Comentarios = comentario;
+                            oMiExcel.cde_IdDeducciones = 27;
+                            oMiExcel.deif_UsuarioCrea = 1;
+                            oMiExcel.deif_FechaCrea = DateTime.Now;
+                            oMiExcel.deif_UsuarioModifica = null;
+                            oMiExcel.deif_FechaModifica = null;
 
-                                    select new
-                                    {
-                                        empleadoID = E.emp_Id,
-                                        nombres = P.per_Nombres,
-                                        apellidos = P.per_Apellidos
-                                    };
-                        var sql = db.Database.ExecuteSqlCommand(@"SELECT MAX([deif_IdDeduccionInstFinanciera]) + 1  
-                                                              FROM[Plani].[tbDeduccionInstitucionFinanciera] ");
+                            db.tbDeduccionInstitucionFinanciera.Add(oMiExcel);
+                            db.SaveChanges();
 
+                            iRow++;
+                        }
 
-
-                        oMiExcel.deif_IdDeduccionInstFinanciera = sql;
-                        oMiExcel.emp_Id = empleadoID;
-                        oMiExcel.insf_IdInstitucionFinanciera = IdInsF;
-                        oMiExcel.deif_Monto = monto;
-                        oMiExcel.deif_Comentarios = comentario;
-                        oMiExcel.cde_IdDeducciones = 27;
-                        oMiExcel.deif_UsuarioCrea = 1;
-                        oMiExcel.deif_FechaCrea = DateTime.Now;
-                        oMiExcel.deif_UsuarioModifica = null;
-                        oMiExcel.deif_FechaModifica = null;
-
-                        db.tbDeduccionInstitucionFinanciera.Add(oMiExcel);
-                        db.SaveChanges();
-
-                        iRow++;
                     }
 
                 }
+                catch (Exception Ex)
+                {
+                    ViewBag.sms = Ex.ToString();
+                }
+
+
 
             }
-            catch (Exception Ex)
+            else
             {
-                ViewBag.sms = Ex.ToString();
+                ViewBag.sms = "Error: Debe seleccionar un archivo para poder cargarlo al sistema.";
+
             }
+           
            
 
             //try
@@ -382,7 +396,7 @@ namespace ERP_GMEDINA.Controllers
             //    }
 
             //return Json(new { Message = "Bien" });
-            return Content("Correct");
+            return Content(ViewBag.sms);
         }
 
     }

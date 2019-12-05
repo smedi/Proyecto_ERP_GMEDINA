@@ -1,4 +1,5 @@
-﻿
+﻿@model ERP_GMEDINA.Models.tbInstitucionesFinancieras
+
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link href="~/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link href="~/Content/animate.css" rel="stylesheet" />
@@ -13,95 +14,87 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
-<div class="wrapper wrapper-content animated fadeIn">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h2>Carga de Planilla externa de Deduccion </h2>
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-md-7">
-                            <p>Seleccionar Institucion Financiera a la cual sera asignada la planilla:</p>
-                            @Html.DropDownList("cboINFS", ViewData["INFS"] as SelectList, "Seleccione una opcion...", new { @class = "select2_demo_3 form-control select2-hidden-accessible" })
-                        </div>
+@using (Html.BeginForm("_CargaDocumento", "InstitucionesFinancieras", FormMethod.Post, new { enctype = "multipart/form-data" ,@id="dropzoneForm"}))
+{
+    <div class="wrapper wrapper-content animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h2>Carga de Planilla externa de Deduccion </h2>
                     </div>
-                        @*<br><br>*@
-
-                        @*<div class="col-md-8 pull-right">
-                <p>En caso de que la Institucion Financiera que busca no aparezca en la lista, favor registrarla.<p>
-                    @Html.ActionLink("Registrar", "Create", null, new { @class = "btn btn-success" })
-
-            </div>*@
-
-
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <hr/>
-                        </div>
-                    </div>
-
+                    <div class="ibox-content">
                         <div class="row">
-                            <div class="col-md-12">
-                                <p>Favor seleccionar planilla externa (Excel), para ser cargada al sistema.</p>
-                                <form action="#" class="dropzone" id="dropzoneForm">
-                                    <div class="fallback">
-                                        <input name="archivoexcel" type="file" multiple required />
-                                    </div>
-                                </form>
+                            <div class="col-md-7">
+                                <p>Seleccionar Institucion Financiera a la cual sera asignada la planilla:</p>
+                                @Html.DropDownList("cboINFS", ViewData["INFS"] as SelectList, "Seleccione una opcion...", new { @class = "select2_demo_3 form-control select2-hidden-accessible", @required = true })
+                                @*@Html.DropDownList("cboINFS", model => model.insf_, "Seleccione una opcion...", new { @class = "select2_demo_3 form-control select2-hidden-accessible", @required = true })
+                                @Html.DropDownListFor(x => Model.insf_IdInstitucionFinanciera new SelectList(Model.tbDeduccionInstitucionFinanciera, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Country" })*@
+                                @Html.ValidationMessageFor(model => model.insf_IdInstitucionFinanciera, "", new { @class = "text-danger" })
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="row" >
+                            <div class="col-md-12">
+                                <p>Favor seleccionar planilla externa (Excel), para ser cargada al sistema:</p>
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                    <div class="form-control" data-trigger="fileinput">
+                                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                        <span class="fileinput-filename"></span>
+                                    </div>
+                                    <span class="input-group-addon btn btn-primary btn-file">
+                                        <span class="fileinput-new">Seleccionar archivo</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                        <input name="archivoexcel" id="archivoexcel" type="file" required />
+                                    </span>
+                                    <a href="#" class="input-group-addon btn btn-danger fileinput-exists" data-dismiss="fileinput">Remover</a>
+                                </div>
+                            </div>
+                            </div>
                     </div>
-
-                <div class="ibox-footer">
-                    <a href="@Url.Action("_CargaDocumento","InstitucionesFinancieras"@*,new { IdInsF = Html.DropDownList("cboINFS") }*@)" class="btn btn-primary col-md-offset-5"><i class="fa fa-upload"></i>&nbsp;&nbsp;Cargar Documento</a>
-                    
-                        @*@Html.ActionLink("Cargar Documento", "CargaDocumento", null, new { @class = "btn btn-primary col-md-offset-5" })*@
-                    
-                    
-</div>
-
+                    <div class="ibox-footer">
+                        <p>Nota: Favor asegurarse de haber seleccionado el archivo correcto.</p>
+                        <br>
+                        <button class="btn btn-primary col-md-offset-5" type="submit"><i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">Enviar Documento</span></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-@ViewBag.sms;
 
 
+    <!-- Mainly scripts -->
 
+    <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/plugins/metisMenu/metisMenu.min.js"></script>
+    <script src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Custom and plugin javascript -->
+    <script src="~/Scripts/app/inspinia.js"></script>
+   
 
+    <!-- Jasny -->
 
+    <script src="~/Scripts/plugins/jasny/jasny-bootstrap.min.js"></script>
+    <!-- DROPZONE -->
 
+    <script src="~/Scripts/plugins/dropzone/dropzone.js"></script>
+    <!-- CodeMirror -->
+    <script src="~/Scripts/plugins/codemirror/codemirror.js"></script>
+    <script src="~/Scripts/plugins/codemirror/mode/xml/xml.js"></script>
 
-<!-- Mainly scripts -->
-
-<script src="~/Scripts/jquery-2.1.1.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/plugins/metisMenu/metisMenu.min.js"></script>
-<script src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<!-- Custom and plugin javascript -->
-<script src="~/Scripts/app/inspinia.js"></script>
-@*<script src="~/Scripts/plugins/pace/pace.min.js"></script>*@
-
-<!-- Jasny -->
-
-<script src="~/Scripts/plugins/jasny/jasny-bootstrap.min.js"></script>
-<!-- DROPZONE -->
-
-<script src="~/Scripts/plugins/dropzone/dropzone.js"></script>
-<!-- CodeMirror -->
-<script src="~/Scripts/plugins/codemirror/codemirror.js"></script>
-<script src="~/Scripts/plugins/codemirror/mode/xml/xml.js"></script>
-
-<script>
+    @*<script>
         Dropzone.options.dropzoneForm = {
-            paramName: "file", // The name that will be used to transfer the file
+            paramName: "archivoexcel", // The name that will be used to transfer the file
             maxFilesize: 10, // MB
             dictDefaultMessage: "<center><strong>Suelte los archivos aquí o haga clic para cargar.</strong></br></center>"
         };
+    </script>*@
+}
 
-      
-
-</script>
