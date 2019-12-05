@@ -68,7 +68,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
                     listInstitucionesFinancieras = db.UDP_Plani_tbInstitucionesFinancieras_Insert(tbInstitucionesFinancieras.insf_DescInstitucionFinanc,
-                                                                                            tbInstitucionesFinancieras.insf_Contacto, 
+                                                                                            tbInstitucionesFinancieras.insf_Contacto,
                                                                                             tbInstitucionesFinancieras.insf_Telefono,
                                                                                             tbInstitucionesFinancieras.insf_Correo,
                                                                                             tbInstitucionesFinancieras.insf_UsuarioCrea,
@@ -210,210 +210,124 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult CargaDocumento()
         {
-          var listaINFS = from INFS in db.tbInstitucionesFinancieras
-                        select new
-                        {
-                            idinfs = INFS.insf_IdInstitucionFinanciera,
-                            descinfs = INFS.insf_DescInstitucionFinanc
-                        };
-            var list = new SelectList(listaINFS, "idinfs", "descinfs");
-            ViewData["INFS"] = list;
+            try
+            {
+                List<tbCatalogoDeDeducciones> OCatalogoDeducciones = db.tbCatalogoDeDeducciones.Where(x => x.cde_Activo == true).ToList();
+
+                ViewBag.Deducciones = OCatalogoDeducciones;
+                var listaINFS = from INFS in db.tbInstitucionesFinancieras
+                                select new
+                                {
+                                    idinfs = INFS.insf_IdInstitucionFinanciera,
+                                    descinfs = INFS.insf_DescInstitucionFinanc
+                                };
+                var list = new SelectList(listaINFS, "idinfs", "descinfs");
+                ViewData["INFS"] = list;
+            }
+            catch (Exception ex)
+            {
+                return Content("Error de Conexion" + ex.ToString());
+
+            }
+           
             return View("CargaDocumento");
         }
 
         [HttpPost]
-        public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel, string cboINFS)
+        public ActionResult _CargaDocumento(HttpPostedFileBase archivoexcel, string cboINFS,string cboIdDeduccion)
         {
+            
             //Verificacion del objetto recibido (archivo excel), si esta vacio retornara un error, de lo contrario continuara con el proceso.
-            if(archivoexcel != null && archivoexcel.ContentLength > 0)
+            if (archivoexcel != null && archivoexcel.ContentLength > 0)
             {
                 //Guardado del archivo en el servidor
                 string path = Path.Combine(Server.MapPath("~/Content/PlanillasInstitucionesFinancieras"),
                                       Path.GetFileName(archivoexcel.FileName));
                 archivoexcel.SaveAs(path);
 
-               
                 try
                 {
+                    List<int> idsDeducciones = db.tbCatalogoDeDeducciones.Where(x => x.cde_Activo == true).Select(x=> x.cde_IdDeducciones).ToList();
+                    List<int> idsINFS = db.tbInstitucionesFinancieras.Where(x => x.insf_Activo == true).Select(x => x.insf_IdInstitucionFinanciera).ToList();
+
+                    int idCatDeduc = Convert.ToInt16(cboIdDeduccion);
                     int IdInsF = Convert.ToInt16(cboINFS);
-                  
-                    SLDocument sl = new SLDocument(path);
 
-                    //Recorremos 
-                    using (var db = new ERP_GMEDINAEntities())
+                    if (!idsDeducciones.Contains(idCatDeduc))
                     {
-
-                        int iRow = 2;
-                        while (!string.IsNullOrEmpty(sl.GetCellValueAsString(iRow, 1)))
-                        {
-                            string identidad = sl.GetCellValueAsString(iRow, 1);
-                            decimal monto = sl.GetCellValueAsDecimal(iRow, 2);
-                            string comentario = sl.GetCellValueAsString(iRow, 3);
-
-
-                            var oMiExcel = new tbDeduccionInstitucionFinanciera();
-
-                            var Excel = (from P in db.tbPersonas
-                                        join E in db.tbEmpleados on P.per_Id equals E.per_Id
-                                        where
-                                        P.per_Identidad == identidad
-                                        select new
-                                        {
-                                            empleadoID = E.emp_Id,
-                                        }).Single();
-                            var sql = (from infs in db.tbDeduccionInstitucionFinanciera select infs.deif_IdDeduccionInstFinanciera).Max();
-                            var iddeducfin = sql + 1;
-
-                           
-
-                            var IdEmple = Excel.empleadoID;
-                            
-
-                            oMiExcel.deif_IdDeduccionInstFinanciera = iddeducfin;
-                            oMiExcel.emp_Id = IdEmple;
-                            oMiExcel.insf_IdInstitucionFinanciera = IdInsF;
-                            oMiExcel.deif_Monto = monto;
-                            oMiExcel.deif_Comentarios = comentario;
-                            oMiExcel.cde_IdDeducciones = 27;
-                            oMiExcel.deif_UsuarioCrea = 1;
-                            oMiExcel.deif_FechaCrea = DateTime.Now;
-                            oMiExcel.deif_UsuarioModifica = null;
-                            oMiExcel.deif_FechaModifica = null;
-
-                            db.tbDeduccionInstitucionFinanciera.Add(oMiExcel);
-                            db.SaveChanges();
-
-                            iRow++;
-                        }
+                        ViewBag.error = "Error: Debe seleccionar una opcion.";
 
                     }
+                    else if (!idsDeducciones.Contains(IdInsF))
+                    {
+                        ViewBag.error = "Error: Debe seleccionar una opcion.";
+                    }
+                    else
+                    {
+                        //Deserealizacion del archivo excel cargado al sistema.
+                        SLDocument sl = new SLDocument(path);
 
+                        //Recorremos el archivo para obtener la informaicon.
+                        using (var db = new ERP_GMEDINAEntities())
+                        {
+
+                            int iRow = 2;
+                            while (!string.IsNullOrEmpty(sl.GetCellValueAsString(iRow, 1)))
+                            {
+                                string identidad = sl.GetCellValueAsString(iRow, 1);
+                                decimal monto = sl.GetCellValueAsDecimal(iRow, 2);
+                                string comentario = sl.GetCellValueAsString(iRow, 3);
+
+
+                                var oMiExcel = new tbDeduccionInstitucionFinanciera();
+
+                                var IdEmpleado = (from P in db.tbPersonas
+                                             join E in db.tbEmpleados on P.per_Id equals E.per_Id
+                                             where
+                                             P.per_Identidad == identidad
+                                             select new
+                                             {
+                                                 empleadoID = E.emp_Id,
+                                             }).FirstOrDefault();
+                                var sql = (from infs in db.tbDeduccionInstitucionFinanciera select infs.deif_IdDeduccionInstFinanciera).Max();
+                                var iddeducfin = sql + 1;
+
+                                //Validamos si encontro empleados que correspondan a los numeros de identidad proporcionados, de lo contrario mostrara error.
+                                if (IdEmpleado != null)
+                                {
+                                    var IdEmple = IdEmpleado.empleadoID;
+                                    oMiExcel.deif_IdDeduccionInstFinanciera = iddeducfin;
+                                    oMiExcel.emp_Id = IdEmple;
+                                    oMiExcel.insf_IdInstitucionFinanciera = IdInsF;
+                                    oMiExcel.deif_Monto = monto;
+                                    oMiExcel.deif_Comentarios = comentario;
+                                    oMiExcel.cde_IdDeducciones = idCatDeduc;
+                                    oMiExcel.deif_UsuarioCrea = 1;
+                                    oMiExcel.deif_FechaCrea = DateTime.Now;
+                                    oMiExcel.deif_UsuarioModifica = null;
+                                    oMiExcel.deif_FechaModifica = null;
+                                    oMiExcel.deif_Activo = true;
+                                    oMiExcel.deif_Pagado = false;
+                                    db.tbDeduccionInstitucionFinanciera.Add(oMiExcel);
+                                    db.SaveChanges();
+                                }
+                                iRow++;
+                            }
+                        }
+                    }
                 }
                 catch (Exception Ex)
                 {
-                    ViewBag.sms = Ex.ToString();
+                    ViewBag.error = Ex.ToString();
                 }
-
-
-
             }
             else
             {
                 ViewBag.sms = "Error: Debe seleccionar un archivo para poder cargarlo al sistema.";
 
             }
-           
-           
-
-            //try
-            //{
-            //    if(archivoexcel.ContentLength > 0)
-            //    {
-            //        //Guardado del archivo en el server
-            //        string _NombreArchivo = Path.GetFileName(archivoexcel.FileName);
-            //        string _Ubicacion = Path.Combine(Server.MapPath("~/Content/PlanillasInstitucionesFinancieras"), _NombreArchivo);
-            //        archivoexcel.SaveAs(_Ubicacion);
-
-            //Leemos el CSV y lo pasamos a una lista
-
-            //List<tbDeduccionInstitucionFinanciera> listaColaboradores = (from p in File.ReadAllLines(_Ubicacion)
-            //                                          let parts = p.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-            //                                          select new Excel
-            //                                          {
-            //                                              identidad = parts[0],
-            //                                              nombres = parts[1],
-            //                                              apellidos = parts[2],
-            //                                              nombres = parts[3],
-            //                                              comentario = parts[4],
-            //                                              totalDeducciones = Convert.ToDecimal(parts[5]),
-            //                                          }).ToList();
-
-            //Guardamos toda la información de esa lista en base de datos
-            //using (var context = new ERP_GMEDINAEntities())
-            //{
-            //    foreach (var colaborador in listaColaboradores)
-            //    {
-            //       context.tbDeduccionInstitucionFinanciera.Add(colaborador);
-
-            //    }
-
-            //    context.SaveChanges();
-            //}
-            //    }
-            //}
-            //catch
-            //{
-
-            //}
-
-
-            //    bool GuardadoConExito;
-            //    string fName = "";
-            //    try
-            //    {
-            //        foreach (string fileName in Request.Files)
-            //        {
-            //            HttpPostedFileBase file = Request.Files[fileName];
-            //            //Save file content goes here
-            //            fName = file.FileName;
-            //            if (file != null && file.ContentLength > 0)
-            //            {
-
-            //                var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\WallImages", Server.MapPath(@"\")));
-
-            //                string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagepath");
-
-            //                var fileName1 = Path.GetFileName(file.FileName);
-
-            //                bool isExists = System.IO.Directory.Exists(pathString);
-
-            //                if (!isExists)
-            //                    System.IO.Directory.CreateDirectory(pathString);
-
-            //                var path = string.Format("{0}\\{1}", pathString, file.FileName);
-            //                file.SaveAs(path);
-
-            //            }
-
-            //        }
-
-            //     GuardadoConExito = true;
-
-            //}
-            //    catch (Exception ex)
-            //    {
-            //        GuardadoConExito = false;
-            //    }
-
-
-            //    if (GuardadoConExito)
-            //    {
-            //        return Json(new { Message = fName });
-            //    }
-            //    else
-            //    {
-            //        return Json(new { Message = "Error al guardar los archivos en el sistema." },JsonRequestBehavior.AllowGet);
-            //    }
-
-            //return Json(new { Message = "Bien" });
-            return Content(ViewBag.sms);
+            return RedirectToAction("index");
         }
 
     }
-
-    class Excel
-    {
-        public string identidad { get; set; }
-        public string nombres { get; set; }
-        public string apellidos { get; set; }
-        public string comentario { get; set; }
-        public decimal totalDeducciones { get; set; }
-    }
-
-    class cboINFS
-    {
-        public int IdInstitucionFinanciera { get; set; }
-        public string DescInstitucionFinanciera { get; set; }
-    }
-
 }
