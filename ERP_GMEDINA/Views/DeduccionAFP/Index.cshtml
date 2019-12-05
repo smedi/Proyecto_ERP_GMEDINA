@@ -20,7 +20,6 @@
                     <thead>
                         <tr role="row">
                             <th>Empleado</th>
-                            <th>@Html.DisplayNameFor(model => model.tbEmpleados.emp_CuentaBancaria)</th>
                             <th>@Html.DisplayNameFor(model => model.dafp_AporteLps)</th>
                             <th>@Html.DisplayNameFor(model => model.tbAFP.afp_Descripcion)</th>
                             <th>Acciones</th>
@@ -31,9 +30,6 @@
                         <tr class="gradeA odd" role="row" data-id="@item.dafp_Id">
                             <td>
                                 @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Nombres) @Html.DisplayFor(modelItem => item.tbEmpleados.tbPersonas.per_Apellidos)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tbEmpleados.emp_CuentaBancaria)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.dafp_AporteLps)

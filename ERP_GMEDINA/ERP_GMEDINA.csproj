@@ -168,6 +168,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Models\cAFP.cs" />
     <Compile Include="Models\cCatalogoDeDeducciones.cs" />
     <Compile Include="Models\cDeduccionAFP.cs" />
     <Compile Include="Models\cDeduccionesExtraordinarias.cs" />
