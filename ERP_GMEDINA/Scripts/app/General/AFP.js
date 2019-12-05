@@ -80,7 +80,7 @@ $(document).on("click", "#btnAgregarAFP", function () {
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
-$('#btnAgregarAFP').click(function () {
+$('#btnCreateRegistroAFP').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
 
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
@@ -250,7 +250,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                             $("#Detalles #tde_IdTipoDedu").append("<option" + (iter.Id == SelectedId ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
                     });
-                $("#DetallesCatalogoDeducciones").modal();
+                $("#DetallesAFP").modal();
             }
             else {
                 //Mensaje de error si no hay data

@@ -195,8 +195,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                         });
                     });
 
-
-
                 $("#EditarDeduccionAFP").modal();
 
             }
@@ -216,8 +214,6 @@ $("#btnEditDeduccionAFP").click(function () {
     var data = $("#frmEditDeduccionAFP").serializeArray();
     
     console.log("Adios")
-
-    debugger
 
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -334,14 +330,15 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
         });
 });
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+//Inactivar//
 $(document).on("click", "#btnInactivarDeduccionAFP", function () {
         //MOSTRAR EL MODAL DE INACTIVAR
         $("#InactivarDeduccionAFP").modal();
     });
-});
+
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
 $("#btnInactivarRegistroDeduccionAFP").click(function () {

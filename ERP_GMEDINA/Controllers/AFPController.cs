@@ -117,8 +117,7 @@ namespace ERP_GMEDINA.Controllers
         public JsonResult EditGetTipoDeduccionDDL()
         {
             var DDL =
-                from AFP in db.tbAFP
-                join TipoDedu in db.tbTipoDeduccion on AFP.tde_IdTipoDedu equals TipoDedu.tde_IdTipoDedu
+                from TipoDedu in db.tbTipoDeduccion where TipoDedu.tde_Activo == true
                 select new { Id = TipoDedu.tde_IdTipoDedu, Descripcion = TipoDedu.tde_Descripcion };
         
             return Json(DDL, JsonRequestBehavior.AllowGet);

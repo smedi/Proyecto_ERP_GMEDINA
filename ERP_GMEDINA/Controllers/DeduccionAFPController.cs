@@ -124,7 +124,7 @@ namespace ERP_GMEDINA.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from Emp in db.tbEmpleados
+            from Emp in db.tbEmpleados where Emp.emp_Estado == true
             join Per in db.tbPersonas on Emp.per_Id equals Per.per_Id
             select new { Id = Emp.emp_Id, Descripcion = Per.per_Nombres + " " + Per.per_Apellidos };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
@@ -136,7 +136,7 @@ namespace ERP_GMEDINA.Controllers
         {
             //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
             var DDL =
-            from AFP in db.tbAFP
+            from AFP in db.tbAFP where AFP.afp_Activo == true
             select new { Id = AFP.afp_Id, Descripcion = AFP.afp_Descripcion };
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
