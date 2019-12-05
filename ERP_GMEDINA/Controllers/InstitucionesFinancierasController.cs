@@ -326,7 +326,7 @@ namespace ERP_GMEDINA.Controllers
                 ViewBag.sms = "Error: Debe seleccionar un archivo para poder cargarlo al sistema.";
 
             }
-            return RedirectToAction("index");
+            return RedirectToAction("Index");
         }
 
     }
