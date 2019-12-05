@@ -37,6 +37,8 @@ if (property.Scaffold && !property.IsPrimaryKey && !property.IsForeignKey) {
     }
 
 	string ddid = property.PropertyName;
+	try{
+
 if (property.PropertyName.Substring(0,9) == "tbUsuario")
 {
 ddid = "";
@@ -53,6 +55,9 @@ string Valor = GetValueExpression(property);
             }
         }
 }
+}
+	catch{
+	}
 #>
 					<dt>@Html.DisplayNameFor(model => model.<#= GetValueExpression(property) #>)</dt>
                     <dd id="<#= ddid #>"></dd>
