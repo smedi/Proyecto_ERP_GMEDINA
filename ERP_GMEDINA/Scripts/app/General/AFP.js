@@ -69,6 +69,7 @@ $(document).on("click", "#btnAgregarAFP", function () {
     })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
+            $(".field-validation-error").css('display', 'none');
             $("#Crear #tde_IdTipoDedu").empty();
             $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
@@ -133,7 +134,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                console.log('Hla')
+                $(".field-validation-error").css('display', 'none');
                 $("#Editar #afp_Id").val(data.afp_Id);
                 $("#Editar #afp_Descripcion").val(data.afp_Descripcion);
                 $("#Editar #afp_AporteMinimoLps").val(data.afp_AporteMinimoLps);
@@ -233,6 +234,7 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
             if (data) {
                 var FechaCrea = FechaFormato(data.afp_FechaCrea);
                 var FechaModifica = FechaFormato(data.afp_FechaModifica);
+                $(".field-validation-error").css('display', 'none');
                 $("#Detalles #afp_Id").val(data.afp_Id);
                 $("#Detalles #afp_Descripcion").val(data.afp_Descripcion);
                 $("#Detalles #afp_AporteMinimoLps").val(data.afp_AporteMinimoLps);
