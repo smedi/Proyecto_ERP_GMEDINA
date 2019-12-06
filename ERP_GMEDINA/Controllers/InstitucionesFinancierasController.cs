@@ -311,6 +311,11 @@ namespace ERP_GMEDINA.Controllers
                                     db.tbDeduccionInstitucionFinanciera.Add(oMiExcel);
                                     db.SaveChanges();
                                 }
+                                else
+                                {
+                                    //return Content("Error, contacte al administrador.");
+                                    return RedirectToAction("CargaDocumento");
+                                }
                                 iRow++;
                             }
                         }
