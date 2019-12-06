@@ -1,5 +1,5 @@
 ﻿//
-//OBTENER SCRIPT DE FORMATEO DE FECHA
+//Obtención de Script para Formateo de Fechas
 //
 $.getScript("../Scripts/app/General/SerializeDate.js")
   .done(function (script, textStatus) {
@@ -109,6 +109,12 @@ $('#btnCreateRegistroAFP').click(function () {
             });
         }
     });
+
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#frmCreateAFP").submit(function (e) {
+        return false;
+    });
+
 });
 
 
@@ -195,6 +201,12 @@ $("#btnEditAFP").click(function () {
             });
         }
     });
+
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#frmEditarAFP").submit(function (e) {
+        return false;
+    });
+
 });
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
@@ -303,16 +315,10 @@ $("#btnInactivarRegistroAFP").click(function () {
             });
         }
     });
+
+    // Evitar PostBack en los Formularios de las Vistas Parciales de Modal
+    $("#frmInactivarAFP").submit(function (e) {
+        return false;
+    });
+
 });
-
-
-// PROBANDO LOS IZITOAST
-//$(document).ready(function () {
-//    console.log('cargado JS');
-//    iziToast.show({
-//        title: 'Hola',
-//        message: 'Estoy probando los iziToast'
-//    });
-//});
-
-
