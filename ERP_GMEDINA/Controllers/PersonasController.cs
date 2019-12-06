@@ -50,15 +50,16 @@ namespace ERP_GMEDINA.Controllers
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<tbPersonas> lista = new List<tbPersonas> { };
+            List<V_tbPersonas> lista = new List<V_tbPersonas> { };
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    lista = db.V_tbPersonas.Where(x => x.per_Id == id).ToList();
+                    lista = db.V_tbPersonas.OrderByDescending(x => x.Relacion).Where(x => x.per_Id == id).ToList();
                 }
-                catch
+                catch(Exception ex)
                 {
+                    ex.Message.ToString();
                 }
             }
             return Json(lista, JsonRequestBehavior.AllowGet);

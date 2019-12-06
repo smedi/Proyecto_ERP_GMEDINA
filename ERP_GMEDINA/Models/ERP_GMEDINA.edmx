@@ -267,7 +267,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Property Name="Relacion_Id" Type="int" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="Estado" Type="bit" Nullable="false" />
-          <Property Name="Relacion" Type="int" Nullable="false" />
+          <Property Name="Relacion" Type="varchar" MaxLength="24" Nullable="false" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
@@ -1658,7 +1658,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <EntitySet Name="tbRequerimientosEspecialesPersona" EntityType="ERP_GMEDINAModel.tbRequerimientosEspecialesPersona" />
           <EntitySet Name="tbTitulos" EntityType="ERP_GMEDINAModel.tbTitulos" />
           <EntitySet Name="tbTitulosPersona" EntityType="ERP_GMEDINAModel.tbTitulosPersona" />
-          <EntitySet Name="V_tbPersonas" EntityType="ERP_GMEDINAModel.V_tbPersonas" />
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCompetencias_comp_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCompetencias_comp_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbCompetencias" EntitySet="tbCompetencias" />
@@ -1852,6 +1851,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <End Role="tbSucursales" EntitySet="tbSucursales" />
             <End Role="tbAreas" EntitySet="tbAreas" />
           </AssociationSet>
+          <EntitySet Name="V_tbPersonas" EntityType="ERP_GMEDINAModel.V_tbPersonas" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2152,17 +2152,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosPersona_tipe_UsuarioModifica" FromRole="tbTitulosPersona" ToRole="tbUsuario" />
           <NavigationProperty Name="tbTitulos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosPersona_titu_Id" FromRole="tbTitulosPersona" ToRole="tbTitulos" />
           <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbTitulosPersona_per_Id" FromRole="tbTitulosPersona" ToRole="tbPersonas" />
-        </EntityType>
-        <EntityType Name="V_tbPersonas">
-          <Key>
-            <PropertyRef Name="Estado" />
-            <PropertyRef Name="Relacion" />
-          </Key>
-          <Property Name="per_Id" Type="Int32" />
-          <Property Name="Relacion_Id" Type="Int32" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="Relacion" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCompetencias_comp_UsuarioCrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
@@ -2835,6 +2824,17 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_tbPersonas">
+          <Key>
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Relacion" />
+          </Key>
+          <Property Name="per_Id" Type="Int32" />
+          <Property Name="Relacion_Id" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Relacion" Type="String" Nullable="false" MaxLength="24" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3147,17 +3147,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_tbPersonas">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbPersonas">
-              <MappingFragment StoreEntitySet="V_tbPersonas">
-                <ScalarProperty Name="Relacion" ColumnName="Relacion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Relacion_Id" ColumnName="Relacion_Id" />
-                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbPersonas">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbPersonas">
               <MappingFragment StoreEntitySet="tbPersonas">
@@ -3247,6 +3236,17 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
                 <ScalarProperty Name="mun_Codigo" ColumnName="mun_Codigo" />
                 <ScalarProperty Name="empr_Id" ColumnName="empr_Id" />
                 <ScalarProperty Name="suc_Id" ColumnName="suc_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_tbPersonas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbPersonas">
+              <MappingFragment StoreEntitySet="V_tbPersonas">
+                <ScalarProperty Name="Relacion" ColumnName="Relacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Relacion_Id" ColumnName="Relacion_Id" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
