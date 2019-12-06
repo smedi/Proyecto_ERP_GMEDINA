@@ -651,13 +651,14 @@ namespace ERP_GMEDINA.Controllers
 
         #endregion
 
+
         #region Reporte General Totales
 
         //-------------------------------------------------------------------------------------------------------------------------------
         //Reporte General Totales - INICIO
 
         //Index 
-        public ActionResult GeneralIndexRPT()
+        public ActionResult GeneralTotalesIndexRPT()
         {
             //Cargar DDL del modal (Tipo de planilla a seleccionar)
             ViewBag.TipoPlanillaDDL = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
@@ -719,6 +720,7 @@ namespace ERP_GMEDINA.Controllers
         //-------------------------------------------------------------------------------------------------------------------------------
 
         #endregion
+
 
     }
 }

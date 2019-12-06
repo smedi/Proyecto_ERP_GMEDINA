@@ -212,6 +212,7 @@
     <Compile Include="Models\cEmpleadoBonos.cs" />
     <Compile Include="Models\cEmpleadoComisiones.cs" />
     <Compile Include="Models\cFormaPago.cs" />
+    <Compile Include="Models\cGeneralTotalesRPT.cs" />
     <Compile Include="Models\cHistorialDePago.cs" />
     <Compile Include="Models\cIHSSRPT.cs" />
     <Compile Include="Models\cINFOPRPT.cs" />
@@ -896,6 +897,7 @@
     <Content Include="Scripts\app\General\EmpleadoBonos.js" />
     <Content Include="Scripts\app\General\EmpleadoComisiones.js" />
     <Content Include="Scripts\app\General\FormaPago.js" />
+    <Content Include="Scripts\app\General\GeneralTotalesRPT.js" />
     <Content Include="Scripts\app\General\IHSSRPT.js" />
     <Content Include="Scripts\app\General\INFOPRPT.js" />
     <Content Include="Scripts\app\General\InstitucionesFinancierasRPT.js" />
@@ -1473,6 +1475,8 @@
     <Content Include="Views\ReportesPlanilla\_RAPModalRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\AFPIndexRPT.cshtml" />
     <Content Include="Views\ReportesPlanilla\RAPIndexRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\GeneralTotalesIndexRPT.cshtml" />
+    <Content Include="Views\ReportesPlanilla\_GeneralTotalesModalRPT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
