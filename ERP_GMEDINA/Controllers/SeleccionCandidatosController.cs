@@ -17,132 +17,272 @@ namespace ERP_GMEDINA.Controllers
         // GET: SeleccionCandidatos
         public ActionResult Index()
         {
-            var tbSeleccionCandidatos = db.tbSeleccionCandidatos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbFaseSeleccion).Include(t => t.tbPersonas).Include(t => t.tbRequisiciones);
-            return View(tbSeleccionCandidatos.ToList());
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            var tbSeleccionCandidatos = new List<tbSeleccionCandidatos> { };
+            return View(tbSeleccionCandidatos);
         }
+        public ActionResult llenarTabla()
+        {
+            try
+            {
+                //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+                //posteriormente es destruida.
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var tbSeleccionCandidatos = db.V_SeleccionCandidatos
+                        .Select(
+                        t => new
+                        {
+                          
+                            per_Identidad = t.Identidad,
+                            per_Nombres = t.Nombre,
+                            fare_Descripcion = t.Fase,
+                            req_Descripcion = t.Plaza_Disponible,
+                            scan_Fecha = t.Fecha
+                            
+                        }
+                        )
+                        .ToList();
+                    return Json(tbSeleccionCandidatos, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult ChildRowData(int? id)
+        {
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            List<V_SeleccionCandidatos> lista = new List<V_SeleccionCandidatos> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    lista = db.V_SeleccionCandidatos.Where(x => x.Id == id).ToList();
+                }
+                catch
+                {
+                }
+            }
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult llenarDropDowlist()
+        {
+            var Sucursales = new List<object> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    Sucursales.Add(new
+                    {
+                        Id = 0,
+                        Descripcion = "**Seleccione una opción**"
+                    });
+                    Sucursales.AddRange(db.tbSucursales
+                    .Select(tabla => new { Id = tabla.suc_Id, Descripcion = tabla.suc_Descripcion })
+                    .ToList());
+                }
+                catch
+                {
+                    return Json("-2", 0);
+                }
 
-        // GET: SeleccionCandidatos/Details/5
+
+
+            }
+            var result = new Dictionary<string, object>();
+            result.Add("Sucursales", Sucursales);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        // GET: Areas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbSeleccionCandidatos tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
-            if (tbSeleccionCandidatos == null)
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            tbAreas tbAreas = null;
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    tbAreas = db.tbAreas.Find(id);
+                }
+                catch
+                {
+
+
+
+                }
+            }
+            if (tbAreas == null)
             {
                 return HttpNotFound();
             }
-            return View(tbSeleccionCandidatos);
+            return View(tbAreas);
         }
-
-        // GET: SeleccionCandidatos/Create
+        // GET: Areas/Create
         public ActionResult Create()
         {
-            ViewBag.scan_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.scan_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.fare_Id = new SelectList(db.tbFaseSeleccion, "fsel_Id", "fsel_RazonInactivo");
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad");
-            ViewBag.rper_Id = new SelectList(db.tbRequisiciones, "req_Id", "req_Experiencia");
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            List<tbSucursales> Sucursales = new List<tbSucursales> { };
+            ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
             return View();
         }
-
-        // POST: SeleccionCandidatos/Create
+        // POST: Areas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "scan_Id,per_Id,fare_Id,scan_Fecha,rper_Id,scan_Estado,scan_RazonInactivo,scan_UsuarioCrea,scan_FechaCrea,scan_UsuarioModifica,scan_FechaModifica")] tbSeleccionCandidatos tbSeleccionCandidatos)
+        public ActionResult Create(tbAreas tbAreas, tbDepartamentos[] tbDepartamentos)
         {
-            if (ModelState.IsValid)
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            string result = "";
+            //en esta area ingresamos el registro con el procedimiento almacenado
+            try
             {
-                db.tbSeleccionCandidatos.Add(tbSeleccionCandidatos);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (tbAreas.suc_Id == 0 || tbAreas.tbCargos.car_Descripcion == "" || tbAreas.area_Descripcion == "")
+                {
+                    return Json("-2", JsonRequestBehavior.AllowGet);
+                }
+                foreach (var item in tbDepartamentos)
+                {
+                    if (item.depto_Descripcion == "" || item.tbCargos.car_Descripcion == "")
+                    {
+                        return Json("-2", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                var Usuario = (tbUsuario)Session["Usuario"];
+                using (var scope = new TransactionScope())
+                {
+                    using (db = new ERP_GMEDINAEntities())
+                    {
+                        var list = db.UDP_RRHH_tbAreas_Insert(
+                                                                tbAreas.suc_Id,
+                                                                tbAreas.tbCargos.car_Descripcion,
+                                                                tbAreas.area_Descripcion,
+                                                                Usuario.usu_Id,
+                                                                DateTime.Now);
+                        foreach (UDP_RRHH_tbAreas_Insert_Result item in list)
+                        {
+                            tbAreas.area_Id = int.Parse(item.MensajeError.ToString());
+                        }
+                        if (tbAreas.area_Id == -2)
+                        {
+                            return Json("-2", JsonRequestBehavior.AllowGet);
+                        }
+                        foreach (var item in tbDepartamentos)
+                        {
+
+                        }
+
+
+
+                    }
+                }
+
             }
-
-            ViewBag.scan_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioCrea);
-            ViewBag.scan_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioModifica);
-            ViewBag.fare_Id = new SelectList(db.tbFaseSeleccion, "fsel_Id", "fsel_RazonInactivo", tbSeleccionCandidatos.fare_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbSeleccionCandidatos.per_Id);
-            ViewBag.rper_Id = new SelectList(db.tbRequisiciones, "req_Id", "req_Experiencia", tbSeleccionCandidatos.rper_Id);
-            return View(tbSeleccionCandidatos);
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                result = "-2";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-        // GET: SeleccionCandidatos/Edit/5
+        // GET: Areas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbSeleccionCandidatos tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
-            if (tbSeleccionCandidatos == null)
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            tbAreas tbAreas = null;
+            using (db = new ERP_GMEDINAEntities())
+            {
+                List<tbSucursales> Sucursales = null;
+                try
+                {
+                    tbAreas = db.tbAreas.Find(id);
+                    Sucursales = db.tbSucursales.ToList();
+                    ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
+                }
+                catch
+                {
+                }
+            }
+            if (tbAreas == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.scan_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioCrea);
-            ViewBag.scan_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioModifica);
-            ViewBag.fare_Id = new SelectList(db.tbFaseSeleccion, "fsel_Id", "fsel_RazonInactivo", tbSeleccionCandidatos.fare_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbSeleccionCandidatos.per_Id);
-            ViewBag.rper_Id = new SelectList(db.tbRequisiciones, "req_Id", "req_Experiencia", tbSeleccionCandidatos.rper_Id);
-            return View(tbSeleccionCandidatos);
+            return View(new cAreas
+            {
+                suc_Id = tbAreas.suc_Id,
+                area_Descripcion = tbAreas.area_Descripcion
+            });
         }
-
-        // POST: SeleccionCandidatos/Edit/5
+        // POST: Areas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "scan_Id,per_Id,fare_Id,scan_Fecha,rper_Id,scan_Estado,scan_RazonInactivo,scan_UsuarioCrea,scan_FechaCrea,scan_UsuarioModifica,scan_FechaModifica")] tbSeleccionCandidatos tbSeleccionCandidatos)
+        public ActionResult Edit([Bind(Include = "area_Id,car_Id,suc_Id,area_Descripcion,area_Estado,area_Razoninactivo,area_Usuariocrea,area_Fechacrea,area_Usuariomodifica,area_Fechamodifica")] tbAreas tbAreas)
         {
-            if (ModelState.IsValid)
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            string result = "";
+            using (db = new ERP_GMEDINAEntities())
             {
-                db.Entry(tbSeleccionCandidatos).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    //en esta area actualizamos el registro con el procedimiento almacenado
+                }
+                catch
+                {
+                    result = "-2";
+                }
             }
-            ViewBag.scan_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioCrea);
-            ViewBag.scan_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioModifica);
-            ViewBag.fare_Id = new SelectList(db.tbFaseSeleccion, "fsel_Id", "fsel_RazonInactivo", tbSeleccionCandidatos.fare_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbSeleccionCandidatos.per_Id);
-            ViewBag.rper_Id = new SelectList(db.tbRequisiciones, "req_Id", "req_Experiencia", tbSeleccionCandidatos.rper_Id);
-            return View(tbSeleccionCandidatos);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
+        // POST: Areas/Delete/5
 
-        // GET: SeleccionCandidatos/Delete/5
+[HttpPost]
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            string result = "";
+            using (db = new ERP_GMEDINAEntities())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                try
+                {
+                    //en esta area Inavilitamos el registro con el procedimiento almacenado
+                }
+                catch
+                {
+                    result = "-2";
+                }
             }
-            tbSeleccionCandidatos tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
-            if (tbSeleccionCandidatos == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbSeleccionCandidatos);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: SeleccionCandidatos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbSeleccionCandidatos tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
-            db.tbSeleccionCandidatos.Remove(tbSeleccionCandidatos);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && db != null)
             {
-                db.Dispose();   
+                db.Dispose();
             }
             base.Dispose(disposing);
         }
     }
 }
+
+
+
+

@@ -17,12 +17,12 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbPersonas()
         {
+            this.tbSeleccionCandidatos = new HashSet<tbSeleccionCandidatos>();
             this.tbCompetenciasPersona = new HashSet<tbCompetenciasPersona>();
             this.tbEmpleados = new HashSet<tbEmpleados>();
             this.tbHabilidadesPersona = new HashSet<tbHabilidadesPersona>();
             this.tbIdiomaPersona = new HashSet<tbIdiomaPersona>();
             this.tbRequerimientosEspecialesPersona = new HashSet<tbRequerimientosEspecialesPersona>();
-            this.tbSeleccionCandidatos = new HashSet<tbSeleccionCandidatos>();
             this.tbTitulosPersona = new HashSet<tbTitulosPersona>();
         }
     
@@ -46,6 +46,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> per_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> per_FechaModifica { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -59,8 +61,6 @@ namespace ERP_GMEDINA.Models
         public virtual tbNacionalidades tbNacionalidades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbRequerimientosEspecialesPersona> tbRequerimientosEspecialesPersona { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTitulosPersona> tbTitulosPersona { get; set; }
     }

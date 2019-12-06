@@ -1,24 +1,32 @@
-﻿
-    
-var tabla = null;
+﻿var tabla = null;
+var botones = [];
 $(document).ready(function () {
     var columnas = [];
     var col = 0;
-    $("#IndexTable thead tr").find("th").each(function (indice, valor) {
-        if (valor.innerText == "") {
-            col = 1;
+    var contador = -1;
+    var head = $("#IndexTable thead tr").find("th").each(function (indice, valor) {
+        contador = contador + 1;
+        campo = valor.innerText;
+        if (campo == "") {
             columnas.push({
-                "className": 'details-control',
-                "orderable": false,
-                "data": null,
-                "defaultContent": ''
+                className: 'details-control',
+                orderable: false,
+                data: null,
+                defaultContent: ''
             });
-        } else if (valor.innerText == "Acciones") {
+            col = col + 1;
+        } else if (campo == "Acciones") {
             columnas.push({
-                "orderable": false
+                data: null,
+                orderable: false,
+                defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
+                                    "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(this)' >Detalles</a>" +
+                                    "<a class='btn btn-default btn-xs ' onclick='tablaEditar(this)'>Editar</a>" +
+                                "</div>"
             });
         } else {
-            columnas.push(null);
+            columnas.push({ data: campo });
+            botones.push(contador);
         }
     });
     tabla = $('#IndexTable').DataTable({
@@ -27,18 +35,41 @@ $(document).ready(function () {
         pageLength: 25,
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
-            { extend: 'copy' },
-            { extend: 'csv' },
-            { extend: 'excel', title: 'ExampleFile' },
-            { extend: 'pdf', title: 'ExampleFile' },
-
+            {
+                extend: 'copy',
+                exportOptions: {
+                    columns: botones
+                }
+            },
+            {
+                extend: 'csv',
+                exportOptions: {
+                    columns: botones
+                }
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: botones
+                },
+                title: 'ExampleFile'
+            },
+            {
+                extend: 'pdf',
+                exportOptions: {
+                    columns: botones
+                },
+                title: 'nadaaa'
+            },
 
             {
                 extend: 'print',
+                exportOptions: {
+                    columns: botones
+                },
                 customize: function (win) {
                     $(win.document.body).addClass('white-bg');
                     $(win.document.body).css('font-size', '10px');
-
 
                     $(win.document.body).find('table')
                             .addClass('compact')
@@ -50,7 +81,3 @@ $(document).ready(function () {
         order: [[col, 'asc']],
     });
 });
-
-
-
-

@@ -10,11 +10,15 @@
 namespace ERP_GMEDINA.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class UDP_Plani_CatalogoDeduccionesEdit_Select_Result
+    public partial class V_SeleccionCandidatos
     {
-        public int cde_IdDeducciones { get; set; }
-        public string cde_DescripcionDeduccion { get; set; }
-        public int @checked { get; set; }
+        public string Identidad { get; set; }
+        public string Nombre { get; set; }
+        public string Fase { get; set; }
+        public string Plaza_Disponible { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
+        public int Id { get; set; }
     }
 }

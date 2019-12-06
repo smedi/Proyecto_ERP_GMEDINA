@@ -17,11 +17,11 @@ namespace ERP_GMEDINA.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbRequisiciones()
         {
+            this.tbSeleccionCandidatos = new HashSet<tbSeleccionCandidatos>();
             this.tbCompetenciasRequisicion = new HashSet<tbCompetenciasRequisicion>();
             this.tbHabilidadesRequisicion = new HashSet<tbHabilidadesRequisicion>();
             this.tbIdiomasRequisicion = new HashSet<tbIdiomasRequisicion>();
             this.tbRequerimientosEspecialesRequisicion = new HashSet<tbRequerimientosEspecialesRequisicion>();
-            this.tbSeleccionCandidatos = new HashSet<tbSeleccionCandidatos>();
             this.tbTitulosRequisicion = new HashSet<tbTitulosRequisicion>();
         }
     
@@ -45,6 +45,8 @@ namespace ERP_GMEDINA.Models
         public Nullable<int> req_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> req_FechaModifica { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -55,8 +57,6 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbIdiomasRequisicion> tbIdiomasRequisicion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbRequerimientosEspecialesRequisicion> tbRequerimientosEspecialesRequisicion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
     }
