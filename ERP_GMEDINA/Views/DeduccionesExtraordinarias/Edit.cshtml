@@ -73,10 +73,48 @@
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Guardar" class="btn btn-primary" />
                             @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                            <button type="button" iddeduccionesextra="iddeduccionesextraordinarias" name="iddeduccionesextraordinarias" class="btn btn-danger" id="btnInactivarDeduccionesExtraordinarias">Inactivar</button>
                         </div>
                     </div>
                 </div>
             </div>
         }
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmDeduccionesExtraordinariasInactivar" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.dex_IdDeduccionesExtra)
+        }
     </div>
 </div>
+
+@*Modal de Inactivar*@
+<div class="modal fade" id="InactivarDeduccionesExtraordinarias" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <h4 class="modal-title">Inactivar datos</h4>
+            </div>
+            <div class="modal-body" id="Inactivar">
+                <h4>Estás seguro que deseas Inactivar este Registro?</h4>
+            </div>
+            <div class="modal-footer">
+                @*data-dismiss="modal"*@
+                <button type="button" class="btn btn-default" id="btnCerrarInactivar">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnInactivar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/izitoast")
+    @Scripts.Render("~/Scripts/app/general/DeduccionesExtraordinarias")
+}
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
+

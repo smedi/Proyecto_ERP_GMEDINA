@@ -62,20 +62,11 @@ function cargarGridDeducciones() {
 }
 
 //Modal de Inactivar
-$(document).on("click", "#tblDeduccionesExtraordinarias tbody tr td #btnInactivarDeduccionesExtraordinarias", function () {
-    var ID = $(this).attr('iddeduccionesextra');
-    $.ajax({
-        url: "/DeduccionesExtraordinarias/Inactivar/" + ID,
-        method: "GET",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ ID: ID })
-    }).done(function (data) {
-        $('#dex_IdDeduccionesExtra').val(data.dex_IdDeduccionesExtra);
+$(document).on("click", "#btnInactivarDeduccionesExtraordinarias", function () {
 
         //Mostrar el Modal de Inactivar
-        $("#InactivarDeduccionesExtraordinarias").modal();
-    });
+    $("#InactivarDeduccionesExtraordinarias").modal();
+
 });
 
 
@@ -102,6 +93,8 @@ $("#btnInactivar").click(function () {
         else {
 
             // Actualizar el Index para ver los cambios
+            location.href = "/DeduccionesExtraordinarias/Index";
+
             cargarGridDeducciones();
 
             //Ya actualizado, se oculta el Modal
