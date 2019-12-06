@@ -86,29 +86,6 @@ FROM            Plani.V_RAP_RPT</CommandText>
             </Mappings>
             <Sources />
           </TableAdapter>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_GeneralTotales_RPTTableAdapter" GeneratorDataComponentClassName="V_GeneralTotales_RPTTableAdapter" Name="V_GeneralTotales_RPT" UserDataComponentName="V_GeneralTotales_RPTTableAdapter">
-            <MainSource>
-              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.Plani.V_GeneralTotales_RPT" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        Plani.V_GeneralTotales_RPT.*
-FROM            Plani.V_GeneralTotales_RPT</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
-            </MainSource>
-            <Mappings>
-              <Mapping SourceColumn="hipa_FechaPago" DataSetColumn="hipa_FechaPago" />
-              <Mapping SourceColumn="cde_TotalISR" DataSetColumn="cde_TotalISR" />
-              <Mapping SourceColumn="cde_TotalAFP" DataSetColumn="cde_TotalAFP" />
-              <Mapping SourceColumn="cde_TotalIHSS" DataSetColumn="cde_TotalIHSS" />
-              <Mapping SourceColumn="cde_TotalRAP" DataSetColumn="cde_TotalRAP" />
-              <Mapping SourceColumn="cde_TotalINFOP" DataSetColumn="cde_TotalINFOP" />
-              <Mapping SourceColumn="cde_OtrasDeducciones" DataSetColumn="cde_OtrasDeducciones" />
-            </Mappings>
-            <Sources />
-          </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_AFP_RPTTableAdapter" GeneratorDataComponentClassName="V_AFP_RPTTableAdapter" Name="V_AFP_RPT" UserDataComponentName="V_AFP_RPTTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.Plani.V_AFP_RPT" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
@@ -214,6 +191,31 @@ FROM            Plani.V_Liquidaciones_RPT</CommandText>
               <Mapping SourceColumn="hliq_fechaLiquidacion" DataSetColumn="hliq_fechaLiquidacion" />
               <Mapping SourceColumn="hliq_PorcentajeLiquidacion" DataSetColumn="hliq_PorcentajeLiquidacion" />
               <Mapping SourceColumn="hliq_Observaciones" DataSetColumn="hliq_Observaciones" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_GeneralTotales_RPTTableAdapter" GeneratorDataComponentClassName="V_GeneralTotales_RPTTableAdapter" Name="V_GeneralTotales_RPT" UserDataComponentName="V_GeneralTotales_RPTTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ERP_GMEDINAConnectionString (Web.config)" DbObjectName="ERP_GMEDINA.Plani.V_GeneralTotales_RPT" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        Plani.V_GeneralTotales_RPT.*
+FROM            Plani.V_GeneralTotales_RPT</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="hipa_FechaPago" DataSetColumn="hipa_FechaPago" />
+              <Mapping SourceColumn="cpla_IdPlanilla" DataSetColumn="cpla_IdPlanilla" />
+              <Mapping SourceColumn="cpla_DescripcionPlanilla" DataSetColumn="cpla_DescripcionPlanilla" />
+              <Mapping SourceColumn="cde_TotalISR" DataSetColumn="cde_TotalISR" />
+              <Mapping SourceColumn="cde_TotalAFP" DataSetColumn="cde_TotalAFP" />
+              <Mapping SourceColumn="cde_TotalIHSS" DataSetColumn="cde_TotalIHSS" />
+              <Mapping SourceColumn="cde_TotalRAP" DataSetColumn="cde_TotalRAP" />
+              <Mapping SourceColumn="cde_TotalINFOP" DataSetColumn="cde_TotalINFOP" />
+              <Mapping SourceColumn="cde_OtrasDeducciones" DataSetColumn="cde_OtrasDeducciones" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -369,19 +371,6 @@ FROM            Plani.V_Liquidaciones_RPT</CommandText>
               </xs:element>
               <xs:element name="hidp_Total" msprop:Generator_ColumnVarNameInTable="columnhidp_Total" msprop:Generator_ColumnPropNameInRow="hidp_Total" msprop:Generator_ColumnPropNameInTable="hidp_TotalColumn" msprop:Generator_UserColumnName="hidp_Total" type="xs:decimal" minOccurs="0" />
               <xs:element name="hipa_FechaPago" msprop:Generator_ColumnVarNameInTable="columnhipa_FechaPago" msprop:Generator_ColumnPropNameInRow="hipa_FechaPago" msprop:Generator_ColumnPropNameInTable="hipa_FechaPagoColumn" msprop:Generator_UserColumnName="hipa_FechaPago" type="xs:dateTime" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="V_GeneralTotales_RPT" msprop:Generator_TableClassName="V_GeneralTotales_RPTDataTable" msprop:Generator_TableVarName="tableV_GeneralTotales_RPT" msprop:Generator_TablePropName="V_GeneralTotales_RPT" msprop:Generator_RowDeletingName="V_GeneralTotales_RPTRowDeleting" msprop:Generator_RowChangingName="V_GeneralTotales_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_GeneralTotales_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_GeneralTotales_RPTRowDeleted" msprop:Generator_UserTableName="V_GeneralTotales_RPT" msprop:Generator_RowChangedName="V_GeneralTotales_RPTRowChanged" msprop:Generator_RowEvArgName="V_GeneralTotales_RPTRowChangeEvent" msprop:Generator_RowClassName="V_GeneralTotales_RPTRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="hipa_FechaPago" msprop:Generator_ColumnVarNameInTable="columnhipa_FechaPago" msprop:Generator_ColumnPropNameInRow="hipa_FechaPago" msprop:Generator_ColumnPropNameInTable="hipa_FechaPagoColumn" msprop:Generator_UserColumnName="hipa_FechaPago" type="xs:dateTime" />
-              <xs:element name="cde_TotalISR" msprop:Generator_ColumnVarNameInTable="columncde_TotalISR" msprop:Generator_ColumnPropNameInRow="cde_TotalISR" msprop:Generator_ColumnPropNameInTable="cde_TotalISRColumn" msprop:Generator_UserColumnName="cde_TotalISR" type="xs:decimal" minOccurs="0" />
-              <xs:element name="cde_TotalAFP" msprop:Generator_ColumnVarNameInTable="columncde_TotalAFP" msprop:Generator_ColumnPropNameInRow="cde_TotalAFP" msprop:Generator_ColumnPropNameInTable="cde_TotalAFPColumn" msprop:Generator_UserColumnName="cde_TotalAFP" type="xs:decimal" minOccurs="0" />
-              <xs:element name="cde_TotalIHSS" msprop:Generator_ColumnVarNameInTable="columncde_TotalIHSS" msprop:Generator_ColumnPropNameInRow="cde_TotalIHSS" msprop:Generator_ColumnPropNameInTable="cde_TotalIHSSColumn" msprop:Generator_UserColumnName="cde_TotalIHSS" type="xs:decimal" minOccurs="0" />
-              <xs:element name="cde_TotalRAP" msprop:Generator_ColumnVarNameInTable="columncde_TotalRAP" msprop:Generator_ColumnPropNameInRow="cde_TotalRAP" msprop:Generator_ColumnPropNameInTable="cde_TotalRAPColumn" msprop:Generator_UserColumnName="cde_TotalRAP" type="xs:decimal" minOccurs="0" />
-              <xs:element name="cde_TotalINFOP" msprop:Generator_ColumnVarNameInTable="columncde_TotalINFOP" msprop:Generator_ColumnPropNameInRow="cde_TotalINFOP" msprop:Generator_ColumnPropNameInTable="cde_TotalINFOPColumn" msprop:Generator_UserColumnName="cde_TotalINFOP" type="xs:decimal" minOccurs="0" />
-              <xs:element name="cde_OtrasDeducciones" msprop:Generator_ColumnVarNameInTable="columncde_OtrasDeducciones" msprop:Generator_ColumnPropNameInRow="cde_OtrasDeducciones" msprop:Generator_ColumnPropNameInTable="cde_OtrasDeduccionesColumn" msprop:Generator_UserColumnName="cde_OtrasDeducciones" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -586,7 +575,32 @@ FROM            Plani.V_Liquidaciones_RPT</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="V_GeneralTotales_RPT" msprop:Generator_TableClassName="V_GeneralTotales_RPTDataTable" msprop:Generator_TableVarName="tableV_GeneralTotales_RPT" msprop:Generator_TablePropName="V_GeneralTotales_RPT" msprop:Generator_RowDeletingName="V_GeneralTotales_RPTRowDeleting" msprop:Generator_RowChangingName="V_GeneralTotales_RPTRowChanging" msprop:Generator_RowEvHandlerName="V_GeneralTotales_RPTRowChangeEventHandler" msprop:Generator_RowDeletedName="V_GeneralTotales_RPTRowDeleted" msprop:Generator_UserTableName="V_GeneralTotales_RPT" msprop:Generator_RowChangedName="V_GeneralTotales_RPTRowChanged" msprop:Generator_RowEvArgName="V_GeneralTotales_RPTRowChangeEvent" msprop:Generator_RowClassName="V_GeneralTotales_RPTRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="hipa_FechaPago" msprop:Generator_ColumnVarNameInTable="columnhipa_FechaPago" msprop:Generator_ColumnPropNameInRow="hipa_FechaPago" msprop:Generator_ColumnPropNameInTable="hipa_FechaPagoColumn" msprop:Generator_UserColumnName="hipa_FechaPago" type="xs:dateTime" />
+              <xs:element name="cpla_IdPlanilla" msprop:Generator_ColumnVarNameInTable="columncpla_IdPlanilla" msprop:Generator_ColumnPropNameInRow="cpla_IdPlanilla" msprop:Generator_ColumnPropNameInTable="cpla_IdPlanillaColumn" msprop:Generator_UserColumnName="cpla_IdPlanilla" type="xs:int" />
+              <xs:element name="cpla_DescripcionPlanilla" msprop:Generator_ColumnVarNameInTable="columncpla_DescripcionPlanilla" msprop:Generator_ColumnPropNameInRow="cpla_DescripcionPlanilla" msprop:Generator_ColumnPropNameInTable="cpla_DescripcionPlanillaColumn" msprop:Generator_UserColumnName="cpla_DescripcionPlanilla">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="cde_TotalISR" msprop:Generator_ColumnVarNameInTable="columncde_TotalISR" msprop:Generator_ColumnPropNameInRow="cde_TotalISR" msprop:Generator_ColumnPropNameInTable="cde_TotalISRColumn" msprop:Generator_UserColumnName="cde_TotalISR" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cde_TotalAFP" msprop:Generator_ColumnVarNameInTable="columncde_TotalAFP" msprop:Generator_ColumnPropNameInRow="cde_TotalAFP" msprop:Generator_ColumnPropNameInTable="cde_TotalAFPColumn" msprop:Generator_UserColumnName="cde_TotalAFP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cde_TotalIHSS" msprop:Generator_ColumnVarNameInTable="columncde_TotalIHSS" msprop:Generator_ColumnPropNameInRow="cde_TotalIHSS" msprop:Generator_ColumnPropNameInTable="cde_TotalIHSSColumn" msprop:Generator_UserColumnName="cde_TotalIHSS" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cde_TotalRAP" msprop:Generator_ColumnVarNameInTable="columncde_TotalRAP" msprop:Generator_ColumnPropNameInRow="cde_TotalRAP" msprop:Generator_ColumnPropNameInTable="cde_TotalRAPColumn" msprop:Generator_UserColumnName="cde_TotalRAP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cde_TotalINFOP" msprop:Generator_ColumnVarNameInTable="columncde_TotalINFOP" msprop:Generator_ColumnPropNameInRow="cde_TotalINFOP" msprop:Generator_ColumnPropNameInTable="cde_TotalINFOPColumn" msprop:Generator_UserColumnName="cde_TotalINFOP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cde_OtrasDeducciones" msprop:Generator_ColumnVarNameInTable="columncde_OtrasDeducciones" msprop:Generator_ColumnPropNameInRow="cde_OtrasDeducciones" msprop:Generator_ColumnPropNameInTable="cde_OtrasDeduccionesColumn" msprop:Generator_UserColumnName="cde_OtrasDeducciones" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:V_GeneralTotales_RPT" />
+      <xs:field xpath="mstns:cpla_IdPlanilla" />
+    </xs:unique>
   </xs:element>
 </xs:schema>
