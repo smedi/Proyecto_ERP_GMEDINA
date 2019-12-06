@@ -573,6 +573,7 @@
     </Content>
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
+    <Content Include="Scripts\app\General\SeleccionCandidatos\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones.js" />
     <Content Include="Scripts\app\General\Titulos\Titulos.js" />
