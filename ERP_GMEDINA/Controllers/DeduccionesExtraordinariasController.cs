@@ -23,11 +23,9 @@ namespace ERP_GMEDINA.Controllers
 
         // GET: OBTENER LA DATA Y ENVIARLA A LA VISTA EN FORMATO JSON
         public ActionResult GetData()
-        {
-            //SI SE LLEGA A DAR PROBLEMAS DE "REFERENCIAS CIRCULARES", OBTENER LA DATA DE ESTA FORMA
-            //SELECCIONANDO UNO POR UNO LOS CAMPOS QUE NECESITAREMOS
-            //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
+        {   
 
+            //Variable para Guardar el Select List que llamará el js en el FrontEnd
             var tbDeduccionesExtraordinariasD = db.tbDeduccionesExtraordinarias
                 .Select(d => new
                 {
@@ -46,7 +44,8 @@ namespace ERP_GMEDINA.Controllers
                     dex_FechaModifica = d.dex_FechaModifica
                 }).Where(d => d.dex_Activo == true).OrderBy(d => d.dex_FechaCrea)
                 .ToList();
-            //RETORNAR JSON AL LADO DEL CLIENTE
+
+            //Retornamos un Json en el FrontEnd
             return new JsonResult { Data = tbDeduccionesExtraordinariasD, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
@@ -69,6 +68,7 @@ namespace ERP_GMEDINA.Controllers
         public ActionResult Create()
         {
 
+            //Viewbag para llenar sus respectivos Dropdownlist
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion");
             ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_EquipoEmpleado");
             return View();
@@ -81,10 +81,12 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "eqem_Id,dex_MontoInicial,dex_MontoRestante,dex_ObservacionesComentarios,cde_IdDeducciones,dex_Cuota,dex_UsuarioCrea,dex_FechaCrea")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
         {
+
             //Para llenar los campos de auditoria
             tbDeduccionesExtraordinarias.dex_UsuarioCrea = 1;
             tbDeduccionesExtraordinarias.dex_FechaCrea = DateTime.Now;
-            //Variable para enviarla al lado del Cliente
+
+            //Variable para enviar y validar en el FrontEnd
             string Response = String.Empty;
             IEnumerable<object> listDeduccionesExtraordinarias = null;
             string MensajeError = "";
@@ -92,6 +94,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
+
                     //Ejecutar Procedimiento Almacenado
                     listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Insert(tbDeduccionesExtraordinarias.eqem_Id,
                                                                                                       tbDeduccionesExtraordinarias.dex_MontoInicial,
@@ -109,6 +112,7 @@ namespace ERP_GMEDINA.Controllers
 
                     if (MensajeError.StartsWith("-1"))
                     {
+
                         //En caso de un error igualamos la variable Response a "Error" para validar en el lado del Cliente
                         ModelState.AddModelError("", "No se pudo Registrar. Contacte al Administrador!");
                         Response = "Error";
@@ -118,6 +122,7 @@ namespace ERP_GMEDINA.Controllers
                 {
                     Response = Ex.Message.ToString();
                 }
+
                 //Si llega aqui significa que todo salio correctamente. Solo igualamos Response a "Exito" para validar en el lado del Cliente
                 Response = "Exito";
                 return RedirectToAction("Index");
@@ -125,10 +130,12 @@ namespace ERP_GMEDINA.Controllers
             }
             else
             {
+
                 //Si el modelo no es valido. Igualamos Response a "Error" para validar en el lado del Cliente
                 Response = "Error";
             }
 
+            //Viewbag para sus respectivos Dropdownlist
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
             ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_EquipoEmpleado", tbDeduccionesExtraordinarias.eqem_Id);
             return Json(Response, JsonRequestBehavior.AllowGet);
@@ -148,6 +155,7 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
 
+            //Viewbag para llenar sus respectivos Dropdownlist
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
             ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_EquipoEmpleado", tbDeduccionesExtraordinarias.eqem_Id);
             return View(tbDeduccionesExtraordinarias);
@@ -160,9 +168,11 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "dex_IdDeduccionesExtra,eqem_Id,dex_MontoInicial,dex_MontoRestante,dex_ObservacionesComentarios,cde_IdDeducciones,dex_Cuota,dex_UsuarioModifica,dex_FechaModifica")] tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias)
         {
+
             //Para llenar los campos de auditoria
             tbDeduccionesExtraordinarias.dex_UsuarioModifica = 1;
             tbDeduccionesExtraordinarias.dex_FechaModifica = DateTime.Now;
+
             //Variable para enviarla al lado del Cliente
             string Response = String.Empty;
             IEnumerable<object> listDeduccionesExtraordinarias = null;
@@ -199,35 +209,24 @@ namespace ERP_GMEDINA.Controllers
                 {
                     Response = Ex.Message.ToString();
                 }
+
                 //Si llega aqui significa que todo salio correctamente. Solo igualamos Response a "Exito" para validar en el lado del Cliente
                 Response = "Exito";
                 return RedirectToAction("Index");
             }
             else
             {
+
                 //Si el modelo no es valido. Igualamos Response a "Error" para validar en el lado del Cliente
                 Response = "Error";
             }
 
+            //Viewbag para sus respectivos Dropdownlist
             ViewBag.cde_IdDeducciones = new SelectList(db.tbCatalogoDeDeducciones, "cde_IdDeducciones", "cde_DescripcionDeduccion", tbDeduccionesExtraordinarias.cde_IdDeducciones);
             ViewBag.eqem_Id = new SelectList(db.V_DeduccionesExtraordinarias_EquipoEmpleado, "eqem_Id", "per_EquipoEmpleado", tbDeduccionesExtraordinarias.eqem_Id);
             return Json(Response, JsonRequestBehavior.AllowGet);
 
         }
-
-        //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
-        public JsonResult EditGetDDL()
-        {
-            //OBTENER LA DATA QUE NECESITAMOS, HACIENDOLO DE ESTA FORMA SE EVITA LA EXCEPCION POR "REFERENCIAS CIRCULARES"
-            var DDL =
-            from EqEm in db.tbEquipoEmpleados
-            join Empl in db.tbEmpleados on EqEm.emp_Id equals Empl.emp_Id
-            join Pers in db.tbPersonas on Empl.per_Id equals Pers.per_Id
-            select new { Id = EqEm.eqem_Id , Nombre = Pers.per_Nombres };
-            //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
-            return Json(DDL, JsonRequestBehavior.AllowGet);
-        }
-
 
         //GET: DeduccionesExtraordinarias/Inactivar
         public ActionResult Inactivar(int? ID)
@@ -237,7 +236,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbDeduccionesExtraordinariasJSON, JsonRequestBehavior.AllowGet);
         }
 
-
         //POST: DeduccionesExtraordinarias/Inactivar
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -245,9 +243,11 @@ namespace ERP_GMEDINA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int dex_IdDeduccionesExtra)
         {
+
             //Para llenar los campos de auditoria
             //tbDeduccionesExtraordinarias.dex_UsuarioModifica = 1;
             //tbDeduccionesExtraordinarias.dex_FechaModifica = DateTime.Now;
+
             //Variable para enviarla al lado del Cliente
             string Response = String.Empty;
             IEnumerable<object> listDeduccionesExtraordinarias = null;
@@ -256,6 +256,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
+
                     //Ejecutar Procedimiento Almacenado
                     listDeduccionesExtraordinarias = db.UDP_Plani_tbDeduccionesExtraordinarias_Inactivar(dex_IdDeduccionesExtra,
                                                                                                          1,
@@ -269,6 +270,7 @@ namespace ERP_GMEDINA.Controllers
 
                     if (MensajeError.StartsWith("-1"))
                     {
+
                         //En caso de un error igualamos la variable Response a "Error" para validar en el lado del Cliente
                         ModelState.AddModelError("", "No se pudo Inactivar. Contacte al Administrador!");
                         Response = "Error";
@@ -278,43 +280,19 @@ namespace ERP_GMEDINA.Controllers
                 {
                     Response = Ex.Message.ToString();
                 }
+
                 //Si llega aqui significa que todo salio correctamente. Solo igualamos Response a "Exito" para validar en el lado del Cliente
                 Response = "Exito";
             }
             else
             {
+
                 //Si el modelo no es valido. Igualamos Response a "Error" para validar en el lado del Cliente
                 Response = "Error";
             }
 
             return Json(Response, JsonRequestBehavior.AllowGet);
 
-        }
-
-        // GET: DeduccionesExtraordinarias/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Find(id);
-            if (tbDeduccionesExtraordinarias == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbDeduccionesExtraordinarias);
-        }
-
-        // POST: DeduccionesExtraordinarias/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbDeduccionesExtraordinarias tbDeduccionesExtraordinarias = db.tbDeduccionesExtraordinarias.Find(id);
-            db.tbDeduccionesExtraordinarias.Remove(tbDeduccionesExtraordinarias);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
