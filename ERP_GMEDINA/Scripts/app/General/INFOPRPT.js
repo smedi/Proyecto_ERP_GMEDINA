@@ -31,7 +31,7 @@ $("#btnCerrarModalRPT").click(function () {
     $("#Validation_descipcion").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
 
-    $("#dtm_FechaPago").val('');
+    $("#hipa_FechaPago").val('');
     $("#cpla_DescripcionPlanilla").val('');
 
 });
@@ -42,7 +42,7 @@ $("#IconCerrar").click(function () {
     $("#Validation_descipcion").css("display", "none");
     $("#Validation_descipcion2").css("display", "none");
 
-    $("#dtm_FechaPago").val('');
+    $("#hipa_FechaPago").val('');
     $("#cpla_DescripcionPlanilla").val('');
 });
 
