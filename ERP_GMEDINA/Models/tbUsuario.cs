@@ -31,6 +31,10 @@ namespace ERP_GMEDINA.Models
             this.tbTipoAmonestaciones1 = new HashSet<tbTipoAmonestaciones>();
             this.tbDepartamentos = new HashSet<tbDepartamentos>();
             this.tbDepartamentos1 = new HashSet<tbDepartamentos>();
+            this.tbHistorialIncapacidades = new HashSet<tbHistorialIncapacidades>();
+            this.tbHistorialIncapacidades1 = new HashSet<tbHistorialIncapacidades>();
+            this.tbTipoIncapacidades = new HashSet<tbTipoIncapacidades>();
+            this.tbTipoIncapacidades1 = new HashSet<tbTipoIncapacidades>();
         }
     
         public int usu_Id { get; set; }
@@ -72,5 +76,13 @@ namespace ERP_GMEDINA.Models
         public virtual ICollection<tbDepartamentos> tbDepartamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDepartamentos> tbDepartamentos1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialIncapacidades> tbHistorialIncapacidades1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoIncapacidades> tbTipoIncapacidades { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbTipoIncapacidades> tbTipoIncapacidades1 { get; set; }
     }
 }

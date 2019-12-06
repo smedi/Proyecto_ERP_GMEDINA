@@ -107,6 +107,26 @@
           <Property Name="aude_UsuarioModifica" Type="int" />
           <Property Name="aude_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbHistorialIncapacidades">
+          <Key>
+            <PropertyRef Name="hinc_Id" />
+          </Key>
+          <Property Name="hinc_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="ticn_Id" Type="int" Nullable="false" />
+          <Property Name="hinc_Dias" Type="int" Nullable="false" />
+          <Property Name="hinc_CentroMedico" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="hinc_Doctor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hinc_Diagnostico" Type="nvarchar" MaxLength="150" />
+          <Property Name="hinc_FechaInicio" Type="datetime" />
+          <Property Name="hinc_FechaFin" Type="datetime" />
+          <Property Name="hinc_Estado" Type="bit" Nullable="false" />
+          <Property Name="hinc_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="hinc_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="hinc_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="hinc_UsuarioModifica" Type="int" />
+          <Property Name="hinc_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbPersonas">
           <Key>
             <PropertyRef Name="per_Id" />
@@ -143,6 +163,19 @@
           <Property Name="tamo_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="tamo_UsuarioModifica" Type="int" />
           <Property Name="tamo_FechaModifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbTipoIncapacidades">
+          <Key>
+            <PropertyRef Name="ticn_Id" />
+          </Key>
+          <Property Name="ticn_Id" Type="int" Nullable="false" />
+          <Property Name="ticn_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="ticn_Estado" Type="bit" Nullable="false" />
+          <Property Name="ticn_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="ticn_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="ticn_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="ticn_UsuarioModifica" Type="int" />
+          <Property Name="ticn_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_EmpleadoAmonestaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -316,6 +349,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialIncapacidades">
+              <PropertyRef Name="hinc_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialIncapacidades">
+              <PropertyRef Name="hinc_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
           <End Role="tbPersonas" Type="Self.tbPersonas" Multiplicity="*" />
@@ -361,6 +418,30 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             </Principal>
             <Dependent Role="tbTipoAmonestaciones">
               <PropertyRef Name="tamo_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbTipoIncapacidades" Type="Self.tbTipoIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoIncapacidades">
+              <PropertyRef Name="ticn_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica">
+          <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="0..1" />
+          <End Role="tbTipoIncapacidades" Type="Self.tbTipoIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoIncapacidades">
+              <PropertyRef Name="ticn_UsuarioModifica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -424,6 +505,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
+          <End Role="tbEmpleados" Type="Self.tbEmpleados" Multiplicity="1" />
+          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialIncapacidades">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
           <End Role="tbHistorialAmonestaciones" Type="Self.tbHistorialAmonestaciones" Multiplicity="1" />
           <End Role="tbHistorialAmonestaciones1" Type="Self.tbHistorialAmonestaciones" Multiplicity="*" />
@@ -457,6 +550,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             </Principal>
             <Dependent Role="tbHistorialAmonestaciones">
               <PropertyRef Name="tamo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
+          <End Role="tbTipoIncapacidades" Type="Self.tbTipoIncapacidades" Multiplicity="1" />
+          <End Role="tbHistorialIncapacidades" Type="Self.tbHistorialIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIncapacidades">
+              <PropertyRef Name="ticn_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialIncapacidades">
+              <PropertyRef Name="ticn_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1161,8 +1266,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <EntitySet Name="tbEmpleados" EntityType="Self.tbEmpleados" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialAmonestaciones" EntityType="Self.tbHistorialAmonestaciones" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbHistorialAudienciaDescargo" EntityType="Self.tbHistorialAudienciaDescargo" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbHistorialIncapacidades" EntityType="Self.tbHistorialIncapacidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbPersonas" EntityType="Self.tbPersonas" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTipoAmonestaciones" EntityType="Self.tbTipoAmonestaciones" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="tbTipoIncapacidades" EntityType="Self.tbTipoIncapacidades" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="V_EmpleadoAmonestaciones" EntityType="Self.V_EmpleadoAmonestaciones" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_EmpleadoAmonestaciones].[emp_Id] AS [emp_Id], 
@@ -1233,6 +1340,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbHistorialAudienciaDescargo" EntitySet="tbHistorialAudienciaDescargo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
+          </AssociationSet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbPersonas_per_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbPersonas" EntitySet="tbPersonas" />
@@ -1248,6 +1363,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id" Association="Self.FK_rrhh_tbCargos_car_Id_rrhh_tbDepartamentos_car_Id">
             <End Role="tbCargos" EntitySet="tbCargos" />
@@ -1269,6 +1392,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialAudienciaDescargo" EntitySet="tbHistorialAudienciaDescargo" />
           </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" Association="Self.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
+          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior" Association="Self.FK_rrhh_tbHistorialAmonestaciones_hamo_Id_rrhh_tbHistorialAmonestaciones_hamo_AmonestacionAnterior">
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
             <End Role="tbHistorialAmonestaciones1" EntitySet="tbHistorialAmonestaciones" />
@@ -1280,6 +1407,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <AssociationSet Name="FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id" Association="Self.FK_rrhh_tbTipoAmonestaciones_tamo_Id_rrhh_tbHistorialAmonestaciones_tamo_Id">
             <End Role="tbTipoAmonestaciones" EntitySet="tbTipoAmonestaciones" />
             <End Role="tbHistorialAmonestaciones" EntitySet="tbHistorialAmonestaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" Association="Self.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
+            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
+            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -2214,6 +2345,32 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
           </AssociationSet>
           <EntitySet Name="V_EmpleadoAmonestaciones" EntityType="ERP_GMEDINAModel.V_EmpleadoAmonestaciones" />
+          <EntitySet Name="tbHistorialIncapacidades" EntityType="ERP_GMEDINAModel.tbHistorialIncapacidades" />
+          <EntitySet Name="tbTipoIncapacidades" EntityType="ERP_GMEDINAModel.tbTipoIncapacidades" />
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica">
+            <End Role="tbUsuario" EntitySet="tbUsuario" />
+            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
+            <End Role="tbEmpleados" EntitySet="tbEmpleados" />
+            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
+            <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
+            <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="UDP_Plani_CatalogoDeduccionesEdit_Select_Result">
           <Property Type="Int32" Name="cde_IdDeducciones" Nullable="false" />
@@ -2445,6 +2602,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <NavigationProperty Name="tbTipoAmonestaciones1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoAmonestaciones_tamo_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoAmonestaciones" />
           <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioCrea" FromRole="tbUsuario" ToRole="tbDepartamentos" />
           <NavigationProperty Name="tbDepartamentos1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbDepartamentos_depto_UsuarioModifica" FromRole="tbUsuario" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbHistorialIncapacidades" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" FromRole="tbUsuario" ToRole="tbHistorialIncapacidades" />
+          <NavigationProperty Name="tbHistorialIncapacidades1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" FromRole="tbUsuario" ToRole="tbHistorialIncapacidades" />
+          <NavigationProperty Name="tbTipoIncapacidades" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" FromRole="tbUsuario" ToRole="tbTipoIncapacidades" />
+          <NavigationProperty Name="tbTipoIncapacidades1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" FromRole="tbUsuario" ToRole="tbTipoIncapacidades" />
         </EntityType>
         <EntityType Name="tbCargos">
           <Key>
@@ -2494,6 +2655,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <NavigationProperty Name="tbHistorialAudienciaDescargo" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialAudienciaDescargo_emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialAudienciaDescargo" />
           <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbEmpleados_per_Id" FromRole="tbEmpleados" ToRole="tbPersonas" />
           <NavigationProperty Name="tbDepartamentos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbDepartamentos_depto_Id_rrhh_tbEmpleados_depto_Id" FromRole="tbEmpleados" ToRole="tbDepartamentos" />
+          <NavigationProperty Name="tbHistorialIncapacidades" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" FromRole="tbEmpleados" ToRole="tbHistorialIncapacidades" />
         </EntityType>
         <EntityType Name="tbHistorialAmonestaciones">
           <Key>
@@ -2912,6 +3074,118 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Property Name="depto_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbHistorialIncapacidades">
+          <Key>
+            <PropertyRef Name="hinc_Id" />
+          </Key>
+          <Property Name="hinc_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="ticn_Id" Type="Int32" Nullable="false" />
+          <Property Name="hinc_Dias" Type="Int32" Nullable="false" />
+          <Property Name="hinc_CentroMedico" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hinc_Doctor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hinc_Diagnostico" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="hinc_FechaFin" Type="DateTime" Precision="3" />
+          <Property Name="hinc_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hinc_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hinc_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="hinc_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hinc_UsuarioModifica" Type="Int32" />
+          <Property Name="hinc_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea" FromRole="tbHistorialIncapacidades" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica" FromRole="tbHistorialIncapacidades" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbEmpleados" Relationship="ERP_GMEDINAModel.FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id" FromRole="tbHistorialIncapacidades" ToRole="tbEmpleados" />
+          <NavigationProperty Name="tbTipoIncapacidades" Relationship="ERP_GMEDINAModel.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" FromRole="tbHistorialIncapacidades" ToRole="tbTipoIncapacidades" />
+        </EntityType>
+        <EntityType Name="tbTipoIncapacidades">
+          <Key>
+            <PropertyRef Name="ticn_Id" />
+          </Key>
+          <Property Name="ticn_Id" Type="Int32" Nullable="false" />
+          <Property Name="ticn_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ticn_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="ticn_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ticn_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="ticn_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ticn_UsuarioModifica" Type="Int32" />
+          <Property Name="ticn_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea" FromRole="tbTipoIncapacidades" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica" FromRole="tbTipoIncapacidades" ToRole="tbUsuario" />
+          <NavigationProperty Name="tbHistorialIncapacidades" Relationship="ERP_GMEDINAModel.FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id" FromRole="tbTipoIncapacidades" ToRole="tbHistorialIncapacidades" />
+        </EntityType>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialIncapacidades" Role="tbHistorialIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialIncapacidades">
+              <PropertyRef Name="hinc_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbHistorialIncapacidades_hinc_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialIncapacidades" Role="tbHistorialIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialIncapacidades">
+              <PropertyRef Name="hinc_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioCrea">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbTipoIncapacidades" Role="tbTipoIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoIncapacidades">
+              <PropertyRef Name="ticn_UsuarioCrea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbTipoIncapacidades_ticn_UsuarioModifica">
+          <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="0..1" />
+          <End Type="ERP_GMEDINAModel.tbTipoIncapacidades" Role="tbTipoIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuario">
+              <PropertyRef Name="usu_Id" />
+            </Principal>
+            <Dependent Role="tbTipoIncapacidades">
+              <PropertyRef Name="ticn_UsuarioModifica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbEmpleados_emp_Id_rrhh_tbHistorialIncapacidades_Emp_Id">
+          <End Type="ERP_GMEDINAModel.tbEmpleados" Role="tbEmpleados" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialIncapacidades" Role="tbHistorialIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleados">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialIncapacidades">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbTipoIncapacidades_ticn_Id_rrhh_tbHistorialIncapacidades_ticn_Id">
+          <End Type="ERP_GMEDINAModel.tbTipoIncapacidades" Role="tbTipoIncapacidades" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbHistorialIncapacidades" Role="tbHistorialIncapacidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoIncapacidades">
+              <PropertyRef Name="ticn_Id" />
+            </Principal>
+            <Dependent Role="tbHistorialIncapacidades">
+              <PropertyRef Name="ticn_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3433,6 +3707,41 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
                 <ScalarProperty Name="car_Id" ColumnName="car_Id" />
                 <ScalarProperty Name="emp_NombreCompleto" ColumnName="emp_NombreCompleto" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbHistorialIncapacidades">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbHistorialIncapacidades">
+              <MappingFragment StoreEntitySet="tbHistorialIncapacidades">
+                <ScalarProperty Name="hinc_FechaModifica" ColumnName="hinc_FechaModifica" />
+                <ScalarProperty Name="hinc_UsuarioModifica" ColumnName="hinc_UsuarioModifica" />
+                <ScalarProperty Name="hinc_FechaCrea" ColumnName="hinc_FechaCrea" />
+                <ScalarProperty Name="hinc_UsuarioCrea" ColumnName="hinc_UsuarioCrea" />
+                <ScalarProperty Name="hinc_RazonInactivo" ColumnName="hinc_RazonInactivo" />
+                <ScalarProperty Name="hinc_Estado" ColumnName="hinc_Estado" />
+                <ScalarProperty Name="hinc_FechaFin" ColumnName="hinc_FechaFin" />
+                <ScalarProperty Name="hinc_FechaInicio" ColumnName="hinc_FechaInicio" />
+                <ScalarProperty Name="hinc_Diagnostico" ColumnName="hinc_Diagnostico" />
+                <ScalarProperty Name="hinc_Doctor" ColumnName="hinc_Doctor" />
+                <ScalarProperty Name="hinc_CentroMedico" ColumnName="hinc_CentroMedico" />
+                <ScalarProperty Name="hinc_Dias" ColumnName="hinc_Dias" />
+                <ScalarProperty Name="ticn_Id" ColumnName="ticn_Id" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="hinc_Id" ColumnName="hinc_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbTipoIncapacidades">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbTipoIncapacidades">
+              <MappingFragment StoreEntitySet="tbTipoIncapacidades">
+                <ScalarProperty Name="ticn_FechaModifica" ColumnName="ticn_FechaModifica" />
+                <ScalarProperty Name="ticn_UsuarioModifica" ColumnName="ticn_UsuarioModifica" />
+                <ScalarProperty Name="ticn_FechaCrea" ColumnName="ticn_FechaCrea" />
+                <ScalarProperty Name="ticn_UsuarioCrea" ColumnName="ticn_UsuarioCrea" />
+                <ScalarProperty Name="ticn_RazonInactivo" ColumnName="ticn_RazonInactivo" />
+                <ScalarProperty Name="ticn_Estado" ColumnName="ticn_Estado" />
+                <ScalarProperty Name="ticn_Descripcion" ColumnName="ticn_Descripcion" />
+                <ScalarProperty Name="ticn_Id" ColumnName="ticn_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
