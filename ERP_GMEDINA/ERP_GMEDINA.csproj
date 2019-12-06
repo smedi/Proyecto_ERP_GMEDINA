@@ -184,7 +184,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
-    <Compile Include="Controllers\PruebasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -827,7 +826,6 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\app\General\CatalogoDeducciones.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
@@ -1332,11 +1330,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Pruebas\Datatable.cshtml" />
-    <Content Include="Views\Pruebas\Index.cshtml" />
-    <Content Include="Views\Pruebas\TemplateCreate.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable.cshtml" />
-    <Content Include="Views\Pruebas\TemplateDatatable2.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -1345,15 +1338,6 @@
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Create.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Delete.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Details.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Edit.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\Index.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_CatalogoDeDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_CreateCatalogoDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_EditCatalogoDeducciones.cshtml" />
-    <Content Include="Views\CatalogoDeDeducciones\_DetalleCatalogoDeDeducciones.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Create.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Delete.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />
