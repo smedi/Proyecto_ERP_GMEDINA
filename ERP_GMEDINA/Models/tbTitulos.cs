@@ -18,7 +18,6 @@ namespace ERP_GMEDINA.Models
         public tbTitulos()
         {
             this.tbTitulosPersona = new HashSet<tbTitulosPersona>();
-            this.tbTitulosRequisicion = new HashSet<tbTitulosRequisicion>();
         }
     
         public int titu_Id { get; set; }
@@ -34,7 +33,5 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbTitulosPersona> tbTitulosPersona { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbTitulosRequisicion> tbTitulosRequisicion { get; set; }
     }
 }

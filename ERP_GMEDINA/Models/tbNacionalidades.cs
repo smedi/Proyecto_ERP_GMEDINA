@@ -28,10 +28,11 @@ namespace ERP_GMEDINA.Models
         public System.DateTime nac_FechaCrea { get; set; }
         public Nullable<int> nac_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> nac_FechaModifica { get; set; }
-        public string nac_Pais { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
+        public virtual tbUsuario tbUsuario2 { get; set; }
+        public virtual tbUsuario tbUsuario3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbPersonas> tbPersonas { get; set; }
     }
