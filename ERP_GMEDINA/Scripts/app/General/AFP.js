@@ -69,7 +69,6 @@ $(document).on("click", "#btnAgregarAFP", function () {
     })
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
-            $(".field-validation-error").css('display', 'none');
             $("#Crear #tde_IdTipoDedu").empty();
             $("#Crear #tde_IdTipoDedu").append("<option value='0'>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
@@ -78,11 +77,23 @@ $(document).on("click", "#btnAgregarAFP", function () {
         });
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarAFP").modal();
+    $("#Crear #afp_Descripcion").val('');
+    $("#Crear #afp_AporteMinimoLps").val('');
+    $("#Crear #afp_InteresAporte").val('');
+    $("#Crear #afp_InteresAnual").val('');
 });
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAFP').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+    var val1 = $("#Crear #tde_IdTipoDedu").val();
+
+    if (val1 == "" && val1 == null && val1 == undefined) {
+        $("#Crear #tde_IdTipoDedu").css("display", "");
+    }
+    else {
+        $("#Crear #tde_IdTipoDedu").css("display", "none");
+    }
 
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCreateAFP").serializeArray();
@@ -96,6 +107,10 @@ $('#btnCreateRegistroAFP').click(function () {
         $("#AgregarAFP").modal('hide');
         //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
         if (data == "error") {
+            $("#Crear #afp_Descripcion").val('');
+            $("#Crear #afp_AporteMinimoLps").val('');
+            $("#Crear #afp_InteresAporte").val('');
+            $("#Crear #afp_InteresAnual").val('');
             iziToast.error({
                 title: 'Error',
                 message: 'No se pudo guardar el registro, contacte al administrador',
@@ -116,6 +131,15 @@ $('#btnCreateRegistroAFP').click(function () {
         return false;
     });
 
+});
+
+
+$("#btnCerrarCrear").click(function () {
+    var val1 = $("#tde_IdTipoDedu").val();
+
+    $("#val1").css("display", "none");
+
+    $("#AgregarAFP").modal('hide');
 });
 
 
