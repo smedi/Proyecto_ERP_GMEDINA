@@ -20,6 +20,7 @@ namespace ERP_GMEDINA.Models
 
         [Range(1, 9999999999999999, ErrorMessage = "Debe elegir una opción")]
         [Display(Name = "Id Equipo Empleado")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int eqem_Id { get; set; }
 
         [Range(0.01, 9999999999.99, ErrorMessage = "El Monto Inicial no puede ser menor de 0 dígitos, ni mayor de 10 dígitos")]
@@ -39,6 +40,7 @@ namespace ERP_GMEDINA.Models
 
         [Range(1, 9999999999999999, ErrorMessage = "Debe elegir una opción")]
         [Display(Name = "Id Deducción")]
+        [Required(ErrorMessage = "Campo Requerido")]
         public int cde_IdDeducciones { get; set; }
 
        /*[Display(Name = "Deducción")]

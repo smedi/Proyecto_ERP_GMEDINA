@@ -21,11 +21,11 @@ namespace ERP_GMEDINA.Models
 		[Display(Name = "Aporte en Lps")]
 		public decimal dafp_AporteLps { get; set; }
 
-		[Required(ErrorMessage = "Campo Requerido")]
+		[Required]
 		[Display(Name = "AFP")]
 		public int afp_Id { get; set; }
 
-		[Required(ErrorMessage = "Campo Requerido")]
+		[Required]
 		[Display(Name = "Empleado")]
 		public int emp_Id { get; set; }
 

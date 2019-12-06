@@ -36,7 +36,7 @@ namespace ERP_GMEDINA.Models
 		[Display(Name = "Interés Anual")]
 		public decimal afp_InteresAnual { get; set; }
 
-		[Required(ErrorMessage = "Campo Requerido")]
+		[Required]
 		[Display(Name = "Tipo Deducción")]
 		public int tde_IdTipoDedu { get; set; }
 

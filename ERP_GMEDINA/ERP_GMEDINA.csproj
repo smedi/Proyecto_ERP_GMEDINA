@@ -1369,16 +1369,10 @@
     <Content Include="Views\DeduccionesExtraordinarias\Edit.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Index.cshtml" />
     <Content Include="Views\DeduccionesExtraordinarias\Details.cshtml" />
-    <Content Include="Views\DeduccionAFP\Create.cshtml" />
-    <Content Include="Views\DeduccionAFP\Details.cshtml" />
-    <Content Include="Views\DeduccionAFP\Edit.cshtml" />
     <Content Include="Views\DeduccionAFP\Index.cshtml" />
     <Content Include="Views\DeduccionAFP\_CreateDeduccionAFP.cshtml" />
     <Content Include="Views\DeduccionAFP\_EditDeduccionAFP.cshtml" />
     <Content Include="Views\DeduccionAFP\_DetailsDeduccionAFP.cshtml" />
-    <Content Include="Views\AFP\Create.cshtml" />
-    <Content Include="Views\AFP\Details.cshtml" />
-    <Content Include="Views\AFP\Edit.cshtml" />
     <Content Include="Views\AFP\Index.cshtml" />
     <Content Include="Views\AFP\_EditAFP.cshtml" />
     <Content Include="Views\AFP\_CreateAFP.cshtml" />
