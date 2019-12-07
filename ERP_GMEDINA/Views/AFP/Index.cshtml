@@ -68,16 +68,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <button type="button" class="close" data-dismiss="modal" id="btnIconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Agregar datos</h4>
             </div>
             <div class="modal-body" id="Crear">
                 @Html.Partial("_CreateAFP", new ERP_GMEDINA.Models.tbAFP())
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" id="btnCerrarCrear">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnCreateRegistroAFP">Aceptar</button>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -88,19 +85,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <button type="button" class="close" data-dismiss="modal" id="btnIconCerrare"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Edición de datos</h4>
             </div>
             <div class="modal-body" id="Editar">
                 @*Mandamos un nuevo modelo solo para poder cargar la página *@
                 @Html.Partial("_EditAFP", new ERP_GMEDINA.Models.tbAFP())
             </div>
-            <div class="modal-footer">
-                @*data-dismiss="modal"*@
-                <button type="button" class="btn btn-white" id="btnCerrarEditar">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnEditAFP">Aceptar</button>
-                <button type="button" class="btn btn-danger" id="btnInactivarAFP">Inactivar</button>
-            </div>
+            
         </div>
     </div>
 </div>
