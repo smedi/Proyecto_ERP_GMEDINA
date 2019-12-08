@@ -55,7 +55,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_tbPersonas.OrderByDescending(x => x.Relacion).Where(x => x.per_Id == id).ToList();
+                    lista = db.V_tbPersonas.Where(x => x.per_Id == id).ToList();
                 }
                 catch(Exception ex)
                 {

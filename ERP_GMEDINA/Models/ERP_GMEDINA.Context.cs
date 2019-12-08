@@ -45,6 +45,11 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<tbFasesReclutamiento> tbFasesReclutamiento { get; set; }
         public virtual DbSet<tbSucursales> tbSucursales { get; set; }
         public virtual DbSet<V_tbPersonas> V_tbPersonas { get; set; }
+        public virtual DbSet<V_CompetenciasPersona> V_CompetenciasPersona { get; set; }
+        public virtual DbSet<V_HabilidadesPersona> V_HabilidadesPersona { get; set; }
+        public virtual DbSet<V_IdiomasPersona> V_IdiomasPersona { get; set; }
+        public virtual DbSet<V_RequerimientosEspecialesPersona> V_RequerimientosEspecialesPersona { get; set; }
+        public virtual DbSet<V_TitulosPersona> V_TitulosPersona { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

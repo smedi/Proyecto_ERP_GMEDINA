@@ -70,6 +70,11 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbSucursales_suc_UsuarioModifica" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbSucursales_suc_Id_rrhh_tbAreas_suc_Id" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.V_tbPersonas" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_CompetenciasPersona" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_HabilidadesPersona" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_IdiomasPersona" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_RequerimientosEspecialesPersona" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.V_TitulosPersona" Width="1.5" PointX="9.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
