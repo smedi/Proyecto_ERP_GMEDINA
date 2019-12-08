@@ -168,6 +168,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
+    <Compile Include="Controllers\HistorialIncapacidadesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,10 +203,16 @@
     <Compile Include="Models\tbHistorialAudienciaDescargo.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbHistorialIncapacidades.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbPersonas.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTipoAmonestaciones.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoIncapacidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbUsuario.cs">
@@ -373,6 +380,15 @@
     <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialIncapacidades_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialIncapacidades_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialIncapacidades_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoHoras_Select_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -394,7 +410,13 @@
     <Compile Include="Models\V_EmpleadoAmonestaciones.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_EmpleadoIncapacidades.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\V_HistorialAmonestacion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_HistorialIncapacidades.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1235,6 +1257,11 @@
     <Content Include="Views\HistorialAmonestaciones\Details.cshtml" />
     <Content Include="Views\HistorialAmonestaciones\Edit.cshtml" />
     <Content Include="Views\HistorialAmonestaciones\Index.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Create.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Delete.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Details.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Edit.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1288,7 +1315,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51144</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -198,6 +198,26 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_EmpleadoAmonestaciones' does no
           <Property Name="emp_Estado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_EmpleadoIncapacidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_EmpleadoIncapacidades">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_NombreCompleto" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="depto_Id" />
+            <PropertyRef Name="depto_Descripcion" />
+            <PropertyRef Name="emp_Estado" />
+          </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="emp_NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="car_Id" Type="int" Nullable="false" />
+          <Property Name="car_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="depto_Id" Type="int" Nullable="false" />
+          <Property Name="depto_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="emp_Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_HistorialAmonestacion">
           <Key>
@@ -228,6 +248,32 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Property Name="hamo_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="hamo_UsuarioModifica" Type="int" />
           <Property Name="hamo_FechaModifica" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_HistorialIncapacidades">
+          <Key>
+            <PropertyRef Name="hinc_Id" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="ticn_Id" />
+            <PropertyRef Name="ticn_Descripcion" />
+            <PropertyRef Name="hinc_Dias" />
+            <PropertyRef Name="hinc_CentroMedico" />
+            <PropertyRef Name="hinc_Doctor" />
+            <PropertyRef Name="hinc_Estado" />
+          </Key>
+          <Property Name="hinc_Id" Type="int" Nullable="false" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="ticn_Id" Type="int" Nullable="false" />
+          <Property Name="ticn_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="hinc_Dias" Type="int" Nullable="false" />
+          <Property Name="hinc_CentroMedico" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="hinc_Doctor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="hinc_Diagnostico" Type="nvarchar" MaxLength="150" />
+          <Property Name="hinc_FechaInicio" Type="datetime" />
+          <Property Name="hinc_FechaFin" Type="datetime" />
+          <Property Name="hinc_Estado" Type="bit" Nullable="false" />
+          <Property Name="hinc_RazonInactivo" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
@@ -782,7 +828,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Parameter Name="tpdd_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_tbTipoPlanillaDetalleDeduccion_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="tpdd_IdPlanillaDetDeduccion" Type="int" Mode="In" />
+          <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
+          <Parameter Name="cde_IdDeducciones" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_tbTipoPlanillaDetalleIngreso_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cin_IdIngreso" Type="int" Mode="In" />
@@ -791,7 +838,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Parameter Name="tpdi_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_tbTipoPlanillaDetalleIngreso_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
-          <Parameter Name="tpdi_IdDetallePlanillaIngreso" Type="int" Mode="In" />
+          <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
+          <Parameter Name="cin_IdIngreso" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbAreas_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="area_Id" Type="int" Mode="In" />
@@ -972,6 +1020,29 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Parameter Name="hamo_Id" Type="int" Mode="In" />
           <Parameter Name="hamo_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="hamo_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialIncapacidades_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="hinc_Id" Type="int" Mode="In" />
+          <Parameter Name="hinc_RazonInactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="hinc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="hinc_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialIncapacidades_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="Emp_Id" Type="int" Mode="In" />
+          <Parameter Name="ticn_Id" Type="int" Mode="In" />
+          <Parameter Name="hinc_Dias" Type="int" Mode="In" />
+          <Parameter Name="hinc_CentroMedico" Type="nvarchar" Mode="In" />
+          <Parameter Name="hinc_Doctor" Type="nvarchar" Mode="In" />
+          <Parameter Name="hinc_Diagnostico" Type="nvarchar" Mode="In" />
+          <Parameter Name="hinc_FechaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="hinc_FechaFin" Type="datetime" Mode="In" />
+          <Parameter Name="hinc_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="hinc_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialIncapacidades_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="hinc_Id" Type="int" Mode="In" />
+          <Parameter Name="hinc_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="hinc_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHorarios_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hor_Id" Type="int" Mode="In" />
@@ -1281,6 +1352,17 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
     [V_EmpleadoAmonestaciones].[emp_Estado] AS [emp_Estado]
     FROM [rrhh].[V_EmpleadoAmonestaciones] AS [V_EmpleadoAmonestaciones]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="V_EmpleadoIncapacidades" EntityType="Self.V_EmpleadoIncapacidades" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_EmpleadoIncapacidades].[emp_Id] AS [emp_Id], 
+    [V_EmpleadoIncapacidades].[emp_NombreCompleto] AS [emp_NombreCompleto], 
+    [V_EmpleadoIncapacidades].[car_Id] AS [car_Id], 
+    [V_EmpleadoIncapacidades].[car_Descripcion] AS [car_Descripcion], 
+    [V_EmpleadoIncapacidades].[depto_Id] AS [depto_Id], 
+    [V_EmpleadoIncapacidades].[depto_Descripcion] AS [depto_Descripcion], 
+    [V_EmpleadoIncapacidades].[emp_Estado] AS [emp_Estado]
+    FROM [rrhh].[V_EmpleadoIncapacidades] AS [V_EmpleadoIncapacidades]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_HistorialAmonestacion" EntityType="Self.V_HistorialAmonestacion" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_HistorialAmonestacion].[emp_Id] AS [emp_Id], 
@@ -1299,6 +1381,22 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
     [V_HistorialAmonestacion].[hamo_UsuarioModifica] AS [hamo_UsuarioModifica], 
     [V_HistorialAmonestacion].[hamo_FechaModifica] AS [hamo_FechaModifica]
     FROM [rrhh].[V_HistorialAmonestacion] AS [V_HistorialAmonestacion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_HistorialIncapacidades" EntityType="Self.V_HistorialIncapacidades" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_HistorialIncapacidades].[hinc_Id] AS [hinc_Id], 
+    [V_HistorialIncapacidades].[NombreCompleto] AS [NombreCompleto], 
+    [V_HistorialIncapacidades].[ticn_Id] AS [ticn_Id], 
+    [V_HistorialIncapacidades].[ticn_Descripcion] AS [ticn_Descripcion], 
+    [V_HistorialIncapacidades].[hinc_Dias] AS [hinc_Dias], 
+    [V_HistorialIncapacidades].[hinc_CentroMedico] AS [hinc_CentroMedico], 
+    [V_HistorialIncapacidades].[hinc_Doctor] AS [hinc_Doctor], 
+    [V_HistorialIncapacidades].[hinc_Diagnostico] AS [hinc_Diagnostico], 
+    [V_HistorialIncapacidades].[hinc_FechaInicio] AS [hinc_FechaInicio], 
+    [V_HistorialIncapacidades].[hinc_FechaFin] AS [hinc_FechaFin], 
+    [V_HistorialIncapacidades].[hinc_Estado] AS [hinc_Estado], 
+    [V_HistorialIncapacidades].[hinc_RazonInactivo] AS [hinc_RazonInactivo]
+    FROM [rrhh].[V_HistorialIncapacidades] AS [V_HistorialIncapacidades]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -1711,7 +1809,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <Parameter Name="tpdd_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleDeduccion_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_tbTipoPlanillaDetalleDeduccion_Update_Result)">
-          <Parameter Name="tpdd_IdPlanillaDetDeduccion" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="cde_IdDeducciones" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleIngreso_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_tbTipoPlanillaDetalleIngreso_Insert_Result)">
             <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
@@ -1720,7 +1819,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <Parameter Name="tpdi_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_tbTipoPlanillaDetalleIngreso_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_tbTipoPlanillaDetalleIngreso_Update_Result)">
-          <Parameter Name="tpdi_IdDetallePlanillaIngreso" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="cin_IdIngreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbAreas_Delete" ReturnType="Collection(Int32)">
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
@@ -2371,6 +2471,31 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <End Role="tbTipoIncapacidades" EntitySet="tbTipoIncapacidades" />
             <End Role="tbHistorialIncapacidades" EntitySet="tbHistorialIncapacidades" />
           </AssociationSet>
+          <EntitySet Name="V_EmpleadoIncapacidades" EntityType="ERP_GMEDINAModel.V_EmpleadoIncapacidades" />
+          <EntitySet Name="V_HistorialIncapacidades" EntityType="ERP_GMEDINAModel.V_HistorialIncapacidades" />
+          <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Delete_Result)">
+            <Parameter Name="hinc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hinc_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="hinc_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hinc_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Insert_Result)">
+            <Parameter Name="Emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="ticn_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hinc_Dias" Mode="In" Type="Int32" />
+            <Parameter Name="hinc_CentroMedico" Mode="In" Type="String" />
+            <Parameter Name="hinc_Doctor" Mode="In" Type="String" />
+            <Parameter Name="hinc_Diagnostico" Mode="In" Type="String" />
+            <Parameter Name="hinc_FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="hinc_FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="hinc_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="hinc_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHistorialIncapacidades_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Restore_Result)">
+            <Parameter Name="hinc_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hinc_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hinc_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="UDP_Plani_CatalogoDeduccionesEdit_Select_Result">
           <Property Type="Int32" Name="cde_IdDeducciones" Nullable="false" />
@@ -3186,6 +3311,57 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="V_EmpleadoIncapacidades">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_NombreCompleto" />
+            <PropertyRef Name="car_Id" />
+            <PropertyRef Name="car_Descripcion" />
+            <PropertyRef Name="depto_Id" />
+            <PropertyRef Name="depto_Descripcion" />
+            <PropertyRef Name="emp_Estado" />
+          </Key>
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="car_Id" Type="Int32" Nullable="false" />
+          <Property Name="car_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="depto_Id" Type="Int32" Nullable="false" />
+          <Property Name="depto_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="V_HistorialIncapacidades">
+          <Key>
+            <PropertyRef Name="hinc_Id" />
+            <PropertyRef Name="NombreCompleto" />
+            <PropertyRef Name="ticn_Id" />
+            <PropertyRef Name="ticn_Descripcion" />
+            <PropertyRef Name="hinc_Dias" />
+            <PropertyRef Name="hinc_CentroMedico" />
+            <PropertyRef Name="hinc_Doctor" />
+            <PropertyRef Name="hinc_Estado" />
+          </Key>
+          <Property Name="hinc_Id" Type="Int32" Nullable="false" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="ticn_Id" Type="Int32" Nullable="false" />
+          <Property Name="ticn_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="hinc_Dias" Type="Int32" Nullable="false" />
+          <Property Name="hinc_CentroMedico" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hinc_Doctor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hinc_Diagnostico" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="hinc_FechaFin" Type="DateTime" Precision="3" />
+          <Property Name="hinc_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="hinc_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="UDP_RRHH_tbHistorialIncapacidades_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialIncapacidades_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialIncapacidades_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3745,6 +3921,58 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="V_EmpleadoIncapacidades">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_EmpleadoIncapacidades">
+              <MappingFragment StoreEntitySet="V_EmpleadoIncapacidades">
+                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
+                <ScalarProperty Name="depto_Descripcion" ColumnName="depto_Descripcion" />
+                <ScalarProperty Name="depto_Id" ColumnName="depto_Id" />
+                <ScalarProperty Name="car_Descripcion" ColumnName="car_Descripcion" />
+                <ScalarProperty Name="car_Id" ColumnName="car_Id" />
+                <ScalarProperty Name="emp_NombreCompleto" ColumnName="emp_NombreCompleto" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_HistorialIncapacidades">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialIncapacidades">
+              <MappingFragment StoreEntitySet="V_HistorialIncapacidades">
+                <ScalarProperty Name="hinc_RazonInactivo" ColumnName="hinc_RazonInactivo" />
+                <ScalarProperty Name="hinc_Estado" ColumnName="hinc_Estado" />
+                <ScalarProperty Name="hinc_FechaFin" ColumnName="hinc_FechaFin" />
+                <ScalarProperty Name="hinc_FechaInicio" ColumnName="hinc_FechaInicio" />
+                <ScalarProperty Name="hinc_Diagnostico" ColumnName="hinc_Diagnostico" />
+                <ScalarProperty Name="hinc_Doctor" ColumnName="hinc_Doctor" />
+                <ScalarProperty Name="hinc_CentroMedico" ColumnName="hinc_CentroMedico" />
+                <ScalarProperty Name="hinc_Dias" ColumnName="hinc_Dias" />
+                <ScalarProperty Name="ticn_Descripcion" ColumnName="ticn_Descripcion" />
+                <ScalarProperty Name="ticn_Id" ColumnName="ticn_Id" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="hinc_Id" ColumnName="hinc_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialIncapacidades_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialIncapacidades_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialIncapacidades_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialIncapacidades_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialIncapacidades_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialIncapacidades_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialIncapacidades_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

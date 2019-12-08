@@ -39,6 +39,8 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_EmpleadoAmonestaciones> V_EmpleadoAmonestaciones { get; set; }
         public virtual DbSet<tbHistorialIncapacidades> tbHistorialIncapacidades { get; set; }
         public virtual DbSet<tbTipoIncapacidades> tbTipoIncapacidades { get; set; }
+        public virtual DbSet<V_EmpleadoIncapacidades> V_EmpleadoIncapacidades { get; set; }
+        public virtual DbSet<V_HistorialIncapacidades> V_HistorialIncapacidades { get; set; }
     
         public virtual ObjectResult<UDP_Plani_CatalogoDeduccionesEdit_Select_Result1> UDP_Plani_CatalogoDeduccionesEdit_Select(Nullable<int> cpla_IdPlanilla)
         {
@@ -1070,13 +1072,17 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_tbTipoPlanillaDetalleDeduccion_Insert_Result>("UDP_tbTipoPlanillaDetalleDeduccion_Insert", cde_IdDeduccionesParameter, cpla_IdPlanillaParameter, tpdd_UsuarioCreaParameter, tpdd_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_tbTipoPlanillaDetalleDeduccion_Update_Result> UDP_tbTipoPlanillaDetalleDeduccion_Update(Nullable<int> tpdd_IdPlanillaDetDeduccion)
+        public virtual ObjectResult<UDP_tbTipoPlanillaDetalleDeduccion_Update_Result> UDP_tbTipoPlanillaDetalleDeduccion_Update(Nullable<int> cpla_IdPlanilla, Nullable<int> cde_IdDeducciones)
         {
-            var tpdd_IdPlanillaDetDeduccionParameter = tpdd_IdPlanillaDetDeduccion.HasValue ?
-                new ObjectParameter("tpdd_IdPlanillaDetDeduccion", tpdd_IdPlanillaDetDeduccion) :
-                new ObjectParameter("tpdd_IdPlanillaDetDeduccion", typeof(int));
+            var cpla_IdPlanillaParameter = cpla_IdPlanilla.HasValue ?
+                new ObjectParameter("cpla_IdPlanilla", cpla_IdPlanilla) :
+                new ObjectParameter("cpla_IdPlanilla", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_tbTipoPlanillaDetalleDeduccion_Update_Result>("UDP_tbTipoPlanillaDetalleDeduccion_Update", tpdd_IdPlanillaDetDeduccionParameter);
+            var cde_IdDeduccionesParameter = cde_IdDeducciones.HasValue ?
+                new ObjectParameter("cde_IdDeducciones", cde_IdDeducciones) :
+                new ObjectParameter("cde_IdDeducciones", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_tbTipoPlanillaDetalleDeduccion_Update_Result>("UDP_tbTipoPlanillaDetalleDeduccion_Update", cpla_IdPlanillaParameter, cde_IdDeduccionesParameter);
         }
     
         public virtual ObjectResult<UDP_tbTipoPlanillaDetalleIngreso_Insert_Result> UDP_tbTipoPlanillaDetalleIngreso_Insert(Nullable<int> cin_IdIngreso, Nullable<int> cpla_IdPlanilla, Nullable<int> tpdi_UsuarioCrea, Nullable<System.DateTime> tpdi_FechaCrea)
@@ -1100,13 +1106,17 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_tbTipoPlanillaDetalleIngreso_Insert_Result>("UDP_tbTipoPlanillaDetalleIngreso_Insert", cin_IdIngresoParameter, cpla_IdPlanillaParameter, tpdi_UsuarioCreaParameter, tpdi_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_tbTipoPlanillaDetalleIngreso_Update_Result> UDP_tbTipoPlanillaDetalleIngreso_Update(Nullable<int> tpdi_IdDetallePlanillaIngreso)
+        public virtual ObjectResult<UDP_tbTipoPlanillaDetalleIngreso_Update_Result> UDP_tbTipoPlanillaDetalleIngreso_Update(Nullable<int> cpla_IdPlanilla, Nullable<int> cin_IdIngreso)
         {
-            var tpdi_IdDetallePlanillaIngresoParameter = tpdi_IdDetallePlanillaIngreso.HasValue ?
-                new ObjectParameter("tpdi_IdDetallePlanillaIngreso", tpdi_IdDetallePlanillaIngreso) :
-                new ObjectParameter("tpdi_IdDetallePlanillaIngreso", typeof(int));
+            var cpla_IdPlanillaParameter = cpla_IdPlanilla.HasValue ?
+                new ObjectParameter("cpla_IdPlanilla", cpla_IdPlanilla) :
+                new ObjectParameter("cpla_IdPlanilla", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_tbTipoPlanillaDetalleIngreso_Update_Result>("UDP_tbTipoPlanillaDetalleIngreso_Update", tpdi_IdDetallePlanillaIngresoParameter);
+            var cin_IdIngresoParameter = cin_IdIngreso.HasValue ?
+                new ObjectParameter("cin_IdIngreso", cin_IdIngreso) :
+                new ObjectParameter("cin_IdIngreso", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_tbTipoPlanillaDetalleIngreso_Update_Result>("UDP_tbTipoPlanillaDetalleIngreso_Update", cpla_IdPlanillaParameter, cin_IdIngresoParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbAreas_Delete(Nullable<int> area_Id, string area_Razoninactivo, Nullable<int> area_Usuariomodifica, Nullable<System.DateTime> area_Fechamodifica)
@@ -2934,6 +2944,89 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("aude_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_RRHH_tbHistorialAudienciaDescargo_Update", aude_IdParameter, aude_FechaAudienciaParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialIncapacidades_Delete_Result> UDP_RRHH_tbHistorialIncapacidades_Delete(Nullable<int> hinc_Id, string hinc_RazonInactivo, Nullable<int> hinc_UsuarioModifica, Nullable<System.DateTime> hinc_FechaModifica)
+        {
+            var hinc_IdParameter = hinc_Id.HasValue ?
+                new ObjectParameter("hinc_Id", hinc_Id) :
+                new ObjectParameter("hinc_Id", typeof(int));
+    
+            var hinc_RazonInactivoParameter = hinc_RazonInactivo != null ?
+                new ObjectParameter("hinc_RazonInactivo", hinc_RazonInactivo) :
+                new ObjectParameter("hinc_RazonInactivo", typeof(string));
+    
+            var hinc_UsuarioModificaParameter = hinc_UsuarioModifica.HasValue ?
+                new ObjectParameter("hinc_UsuarioModifica", hinc_UsuarioModifica) :
+                new ObjectParameter("hinc_UsuarioModifica", typeof(int));
+    
+            var hinc_FechaModificaParameter = hinc_FechaModifica.HasValue ?
+                new ObjectParameter("hinc_FechaModifica", hinc_FechaModifica) :
+                new ObjectParameter("hinc_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialIncapacidades_Delete_Result>("UDP_RRHH_tbHistorialIncapacidades_Delete", hinc_IdParameter, hinc_RazonInactivoParameter, hinc_UsuarioModificaParameter, hinc_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialIncapacidades_Insert_Result> UDP_RRHH_tbHistorialIncapacidades_Insert(Nullable<int> emp_Id, Nullable<int> ticn_Id, Nullable<int> hinc_Dias, string hinc_CentroMedico, string hinc_Doctor, string hinc_Diagnostico, Nullable<System.DateTime> hinc_FechaInicio, Nullable<System.DateTime> hinc_FechaFin, Nullable<int> hinc_UsuarioCrea, Nullable<System.DateTime> hinc_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("Emp_Id", emp_Id) :
+                new ObjectParameter("Emp_Id", typeof(int));
+    
+            var ticn_IdParameter = ticn_Id.HasValue ?
+                new ObjectParameter("ticn_Id", ticn_Id) :
+                new ObjectParameter("ticn_Id", typeof(int));
+    
+            var hinc_DiasParameter = hinc_Dias.HasValue ?
+                new ObjectParameter("hinc_Dias", hinc_Dias) :
+                new ObjectParameter("hinc_Dias", typeof(int));
+    
+            var hinc_CentroMedicoParameter = hinc_CentroMedico != null ?
+                new ObjectParameter("hinc_CentroMedico", hinc_CentroMedico) :
+                new ObjectParameter("hinc_CentroMedico", typeof(string));
+    
+            var hinc_DoctorParameter = hinc_Doctor != null ?
+                new ObjectParameter("hinc_Doctor", hinc_Doctor) :
+                new ObjectParameter("hinc_Doctor", typeof(string));
+    
+            var hinc_DiagnosticoParameter = hinc_Diagnostico != null ?
+                new ObjectParameter("hinc_Diagnostico", hinc_Diagnostico) :
+                new ObjectParameter("hinc_Diagnostico", typeof(string));
+    
+            var hinc_FechaInicioParameter = hinc_FechaInicio.HasValue ?
+                new ObjectParameter("hinc_FechaInicio", hinc_FechaInicio) :
+                new ObjectParameter("hinc_FechaInicio", typeof(System.DateTime));
+    
+            var hinc_FechaFinParameter = hinc_FechaFin.HasValue ?
+                new ObjectParameter("hinc_FechaFin", hinc_FechaFin) :
+                new ObjectParameter("hinc_FechaFin", typeof(System.DateTime));
+    
+            var hinc_UsuarioCreaParameter = hinc_UsuarioCrea.HasValue ?
+                new ObjectParameter("hinc_UsuarioCrea", hinc_UsuarioCrea) :
+                new ObjectParameter("hinc_UsuarioCrea", typeof(int));
+    
+            var hinc_FechaCreaParameter = hinc_FechaCrea.HasValue ?
+                new ObjectParameter("hinc_FechaCrea", hinc_FechaCrea) :
+                new ObjectParameter("hinc_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialIncapacidades_Insert_Result>("UDP_RRHH_tbHistorialIncapacidades_Insert", emp_IdParameter, ticn_IdParameter, hinc_DiasParameter, hinc_CentroMedicoParameter, hinc_DoctorParameter, hinc_DiagnosticoParameter, hinc_FechaInicioParameter, hinc_FechaFinParameter, hinc_UsuarioCreaParameter, hinc_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialIncapacidades_Restore_Result> UDP_RRHH_tbHistorialIncapacidades_Restore(Nullable<int> hinc_Id, Nullable<int> hinc_UsuarioModifica, Nullable<System.DateTime> hinc_FechaModifica)
+        {
+            var hinc_IdParameter = hinc_Id.HasValue ?
+                new ObjectParameter("hinc_Id", hinc_Id) :
+                new ObjectParameter("hinc_Id", typeof(int));
+    
+            var hinc_UsuarioModificaParameter = hinc_UsuarioModifica.HasValue ?
+                new ObjectParameter("hinc_UsuarioModifica", hinc_UsuarioModifica) :
+                new ObjectParameter("hinc_UsuarioModifica", typeof(int));
+    
+            var hinc_FechaModificaParameter = hinc_FechaModifica.HasValue ?
+                new ObjectParameter("hinc_FechaModifica", hinc_FechaModifica) :
+                new ObjectParameter("hinc_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialIncapacidades_Restore_Result>("UDP_RRHH_tbHistorialIncapacidades_Restore", hinc_IdParameter, hinc_UsuarioModificaParameter, hinc_FechaModificaParameter);
         }
     }
 }
