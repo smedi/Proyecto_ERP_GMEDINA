@@ -233,8 +233,28 @@ namespace ERP_GMEDINA.Controllers
         // GET: DeduccionAFP/Details/5
         public JsonResult Details(int? ID)
         {
+            var tbDeduccionAFPJSON = from tbDeduAFP in db.tbDeduccionAFP
+                            where tbDeduAFP.dafp_Activo == true && tbDeduAFP.dafp_Id == ID
+                            select new
+                            {
+                                tbDeduAFP.dafp_Id,
+                                tbDeduAFP.dafp_AporteLps,
+                                tbDeduAFP.tbEmpleados.tbPersonas.per_Nombres,
+                                tbDeduAFP.tbEmpleados.tbPersonas.per_Apellidos,
+                                tbDeduAFP.tbEmpleados.emp_CuentaBancaria,
+                                tbDeduAFP.tbAFP.afp_Descripcion,
+                                tbDeduAFP.afp_Id,
+                                tbDeduAFP.emp_Id,
+                                tbDeduAFP.dafp_Activo,
+                                tbDeduAFP.dafp_UsuarioCrea,
+                                UsuCrea = tbDeduAFP.tbUsuario.usu_NombreUsuario,
+                                tbDeduAFP.dafp_FechaCrea,
+                                tbDeduAFP.dafp_UsuarioModifica,
+                                UsuModifica = tbDeduAFP.tbUsuario1.usu_NombreUsuario,
+                                tbDeduAFP.dafp_FechaModifica
+                            };
+
             db.Configuration.ProxyCreationEnabled = false;
-            tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(ID);
             return Json(tbDeduccionAFPJSON, JsonRequestBehavior.AllowGet);
         }
         #endregion

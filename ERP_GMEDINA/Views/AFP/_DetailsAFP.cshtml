@@ -42,7 +42,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.tde_IdTipoDedu, "tde_IdTipoDedu", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.tde_IdTipoDedu, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <select id="tde_IdTipoDedu" name="tde_IdTipoDedu" class="form-control" disabled></select>
                 </div>
@@ -65,12 +65,14 @@
                             <tbody>
                                 <tr>
                                     <td>Creado</td>
-                                    <td>@Html.EditorFor(model => model.afp_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                    @Html.HiddenFor(model => model.afp_UsuarioCrea)
+                                    <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                                     <td>@Html.EditorFor(model => model.afp_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                                 </tr>
                                 <tr>
                                     <td>Modificado</td>
-                                    <td>@Html.EditorFor(model => model.afp_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                                    @Html.HiddenFor(model => model.afp_UsuarioModifica)
+                                    <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                                     <td>@Html.EditorFor(model => model.afp_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                                 </tr>
                             </tbody>

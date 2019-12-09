@@ -331,23 +331,24 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                var FechaCrea = FechaFormato(data.afp_FechaCrea);
-                var FechaModifica = FechaFormato(data.afp_FechaModifica);
+                var FechaCrea = FechaFormato(data[0].afp_FechaCrea);
+                var FechaModifica = FechaFormato(data[0].afp_FechaModifica);
                 $(".field-validation-error").css('display', 'none');
-                $("#Detalles #afp_Id").val(data.afp_Id);
-                $("#Detalles #afp_Descripcion").val(data.afp_Descripcion);
-                $("#Detalles #afp_AporteMinimoLps").val(data.afp_AporteMinimoLps);
-                $("#Detalles #afp_InteresAporte").val(data.afp_InteresAporte);
-                $("#Detalles #afp_InteresAnual").val(data.afp_InteresAnual);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data.UsuCrea);
-                $("#Detalles #afp_UsuarioCrea").val(data.afp_UsuarioCrea);
+                $("#Detalles #afp_Id").val(data[0].afp_Id);
+                $("#Detalles #afp_Descripcion").val(data[0].afp_Descripcion);
+                $("#Detalles #afp_AporteMinimoLps").val(data[0].afp_AporteMinimoLps);
+                $("#Detalles #afp_InteresAporte").val(data[0].afp_InteresAporte);
+                $("#Detalles #afp_InteresAnual").val(data[0].afp_InteresAnual);
+                $("#Detalles #tde_IdTipoDedu").val(data[0].tde_IdTipoDedu);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
+                $("#Detalles #afp_UsuarioCrea").val(data[0].afp_UsuarioCrea);
                 $("#Detalles #afp_FechaCrea").val(FechaCrea);
-                data.UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data.UsuModifica);
-                $("#Detalles #afp_UsuarioModifica").val(data.afp_UsuarioModifica);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
+                $("#Detalles #afp_UsuarioModifica").val(data[0].afp_UsuarioModifica);
                 $("#Detalles #afp_FechaModifica").val(FechaModifica);
 
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
-                var SelectedId = data.tde_IdTipoDedu;
+                var SelectedId = data[0].tde_IdTipoDedu;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST PARA EL MODAL
                 $.ajax({
                     url: "/AFP/EditGetTipoDeduccionDDL",

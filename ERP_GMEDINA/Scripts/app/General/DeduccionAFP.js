@@ -289,23 +289,23 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                var FechaCrea = FechaFormato(data.dafp_FechaCrea);
-                var FechaModifica = FechaFormato(data.dafp_FechaModifica);
-                $("#Detalles #dafp_Id").val(data.dafp_Id);
-                $("#Detalles #emp_Id").val(data.emp_Id);
-                $("#Detalles #per_Nombres + #per_Apellidos").val(data.per_Nombres + data.per_Apellidos);
-                $("#Detalles #emp_CuentaBancaria").val(data.emp_CuentaBancaria);
-                $("#Detalles #dafp_AporteLps").val(data.dafp_AporteLps);
-                $("#Detalles #afp_Id").val(data.afp_Id);
-                $("#Detalles #afp_Descripcion").val(data.afp_Descripcion);
-                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data.UsuCrea);
-                $("#Detalles #dafp_UsuarioCrea").val(data.dafp_UsuarioCrea);
+                var FechaCrea = FechaFormato(data[0].dafp_FechaCrea);
+                var FechaModifica = FechaFormato(data[0].dafp_FechaModifica);
+                $("#Detalles #dafp_Id").val(data[0].dafp_Id);
+                $("#Detalles #emp_Id").val(data[0].emp_Id);
+                $("#Detalles #per_Nombres + #per_Apellidos").val(data[0].per_Nombres + data[0].per_Apellidos);
+                $("#Detalles #emp_CuentaBancaria").val(data[0].emp_CuentaBancaria);
+                $("#Detalles #dafp_AporteLps").val(data[0].dafp_AporteLps);
+                $("#Detalles #afp_Id").val(data[0].afp_Id);
+                $("#Detalles #afp_Descripcion").val(data[0].afp_Descripcion);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data[0].UsuCrea);
+                $("#Detalles #dafp_UsuarioCrea").val(data[0].dafp_UsuarioCrea);
                 $("#Detalles #dafp_FechaCrea").val(FechaCrea);
-                data.UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data.UsuModifica);
-                $("#Detalles #dafp_UsuarioModifica").val(data.dafp_UsuarioModifica);
+                data[0].UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data[0].UsuModifica);
+                $("#Detalles #dafp_UsuarioModifica").val(data[0].dafp_UsuarioModifica);
                 $("#Detalles #dafp_FechaModifica").val(FechaModifica);
 
-                var SelectedIdEmpleado = data.emp_Id;
+                var SelectedIdEmpleado = data[0].emp_Id;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST EMPLEADO PARA EL MODAL
                 $.ajax({
                     url: "/DeduccionAFP/EditGetEmpleadoDDL",
@@ -324,7 +324,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                     });
 
 
-                var SelectedIdAFP = data.afp_Id;
+                var SelectedIdAFP = data[0].afp_Id;
                 //CARGAR INFORMACIÓN DEL DROPDOWNLIST AFP PARA EL MODAL
                 $.ajax({
                     url: "/DeduccionAFP/EditGetAFPDDL",

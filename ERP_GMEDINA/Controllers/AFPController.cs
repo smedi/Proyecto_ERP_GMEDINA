@@ -210,10 +210,27 @@ namespace ERP_GMEDINA.Controllers
 
         #region Detalles AFP
         // GET: AFP/Details/5
-        public JsonResult Details(int? id)
+        public JsonResult Details(int? ID)
         {
+            var tbAFPJSON = from tbAFP in db.tbAFP
+                            where tbAFP.afp_Activo == true && tbAFP.afp_Id == ID
+                            select new
+                            {
+                                tbAFP.afp_Id,
+                                tbAFP.afp_Descripcion,
+                                tbAFP.afp_AporteMinimoLps,
+                                tbAFP.afp_InteresAporte,
+                                tbAFP.afp_InteresAnual,
+                                tbAFP.tde_IdTipoDedu,
+                                tbAFP.afp_Activo,
+                                tbAFP.afp_UsuarioCrea,
+                                UsuCrea = tbAFP.tbUsuario.usu_NombreUsuario,
+                                tbAFP.afp_FechaCrea,
+                                tbAFP.afp_UsuarioModifica,
+                                UsuModifica = tbAFP.tbUsuario1.usu_NombreUsuario,
+                                tbAFP.afp_FechaModifica
+                            };
             db.Configuration.ProxyCreationEnabled = false;
-            tbAFP tbAFPJSON = db.tbAFP.Find(id);
             return Json(tbAFPJSON, JsonRequestBehavior.AllowGet);
         }
         #endregion

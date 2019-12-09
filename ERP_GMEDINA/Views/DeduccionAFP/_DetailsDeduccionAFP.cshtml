@@ -44,12 +44,14 @@
                     <tbody>
                         <tr>
                             <td>Creado</td>
-                            <td>@Html.EditorFor(model => model.dafp_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            @Html.HiddenFor(model => model.dafp_UsuarioCrea)
+                            <td>@Html.EditorFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                             <td>@Html.EditorFor(model => model.dafp_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                         </tr>
                         <tr>
                             <td>Modificado</td>
-                            <td>@Html.EditorFor(model => model.dafp_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
+                            @Html.HiddenFor(model => model.dafp_UsuarioModifica)
+                            <td>@Html.EditorFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                             <td>@Html.EditorFor(model => model.dafp_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</td>
                         </tr>
                     </tbody>
