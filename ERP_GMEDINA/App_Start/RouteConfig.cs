@@ -16,7 +16,7 @@ namespace ERP_GMEDINA
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "DeduccionesExtraordinarias", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "AFP", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
@@ -27,5 +27,6 @@ namespace ERP_GMEDINA
 DeduccionAFP
 DeduccionesExtraordinarias
 CatalogoDeDeducciones
+AFP
 
  */

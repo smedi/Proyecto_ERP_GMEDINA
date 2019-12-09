@@ -21,22 +21,22 @@ namespace ERP_GMEDINA.Models
 		[Display(Name = "AFP")]
 		public string afp_Descripcion { get; set; }
 
-		[Range(0.01, 9999999999999999.99, ErrorMessage = "El Aporte no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
+		[Range(0.00, 9999999999999999.99, ErrorMessage = "El Aporte no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
 		[Required(ErrorMessage = "Campo Requerido")]
-		[Display(Name = "Aporte Mínimo en Lps")]
+		[Display(Name = "Aporte Mínimo")]
 		public decimal afp_AporteMinimoLps { get; set; }
 
-		[Range(0.01, 9999999999999999.99, ErrorMessage = "El Interés por Aporte no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
+		[Range(0.00, 9999999999999999.99, ErrorMessage = "El Interés por Aporte no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
 		[Required(ErrorMessage = "Campo Requerido")]
 		[Display(Name = "Interés por Aporte")]
 		public decimal afp_InteresAporte { get; set; }
 
-		[Range(0.01, 9999999999999999.99, ErrorMessage = "El Interés Anual no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
+		[Range(0.00, 9999999999999999.99, ErrorMessage = "El Interés Anual no puede ser menor de 0 dígitos, ni mayor que 10 dígitos")]
 		[Required(ErrorMessage = "Campo Requerido")]
 		[Display(Name = "Interés Anual")]
 		public decimal afp_InteresAnual { get; set; }
 
-		[Required]
+		[Required(ErrorMessage = "Campo Requerido")]
 		[Display(Name = "Tipo Deducción")]
 		public int tde_IdTipoDedu { get; set; }
 

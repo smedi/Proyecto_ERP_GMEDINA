@@ -102,14 +102,16 @@ $(document).on("click", "#btnAgregarAFP", function () {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAFP').click(function () {
+    debugger
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var val1 = $("#Crear #tde_IdTipoDedu").val();
+    console.log(val1)
     var val2 = $("#Crear #afp_Descripcion").val();
     var val3 = $("#Crear #afp_AporteMinimoLps").val();
     var val4 = $("#Crear #afp_InteresAporte").val();
     var val5 = $("#Crear #afp_InteresAnual").val();
 
-    if (val1 == "0" || val1 == null) {
+    if (val1 == "0" || val1 == null || val1 == undefined) {
         $("#Crear #validation5").css("display", "");
     }
     else {
@@ -188,7 +190,6 @@ $("#btnCerrarEditar").click(function () {
     $("#validatione4").css("display", "none");
     $("#validatione5").css("display", "none");
     $("#EditarAFP").modal('hide');
-    $("#Crear #tde_IdTipoDedu").val("0");
 });
 
 $("#btnIconCerrare").click(function () {
@@ -198,7 +199,6 @@ $("#btnIconCerrare").click(function () {
     $("#validatione4").css("display", "none");
     $("#validatione5").css("display", "none");
     $("#EditarAFP").modal('hide');
-    $("#Crear #tde_IdTipoDedu").val("0");
 });
 
 
@@ -257,10 +257,18 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditAFP").click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+    var vale1 = $("#Editar #tde_IdTipoDedu").val();
     var vale2 = $("#Editar #afp_Descripcion").val();
     var vale3 = $("#Editar #afp_AporteMinimoLps").val();
     var vale4 = $("#Editar #afp_InteresAporte").val();
     var vale5 = $("#Editar #afp_InteresAnual").val();
+
+    if (vale1 == 0 || vale1 == "" || vale1 == undefined) {
+        $("#Editar #validatione5").css("display", "");
+    }
+    else {
+        $("#Editar #validatione5"), css("display", "none");
+    }
 
     if (vale2 == "") {
         $("#Editar #validatione1").css("display", "");
@@ -396,7 +404,7 @@ $(document).on("click", "#btnInactivarAFP", function () {
 });
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
-$("#btnInactivarRegistroAFP").click(function () {
+$("#btnInactivarAFP").click(function () {
 
     var data = $("#frmInactivarAFP").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN

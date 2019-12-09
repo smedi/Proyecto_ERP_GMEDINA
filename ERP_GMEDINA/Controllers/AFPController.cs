@@ -137,7 +137,7 @@ namespace ERP_GMEDINA.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "afp_Id,afp_Descripcion,afp_AporteMinimoLps,afp_InteresAporte,afp_InteresAnual,tde_IdTipoDedu,afp_UsuarioCrea,afp_FechaCrea,afp_UsuarioModifica,afp_FechaModifica,afp_Activo")] tbAFP tbAFP)
+        public ActionResult Edit([Bind(Include = "afp_Id,afp_Descripcion,afp_AporteMinimoLps,afp_InteresAporte,afp_InteresAnual,tde_IdTipoDedu,afp_UsuarioCrea,afp_FechaCrea,afp_UsuarioModifica,afp_FechaModifica")] tbAFP tbAFP)
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
@@ -195,8 +195,6 @@ namespace ERP_GMEDINA.Controllers
             }
 
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
-            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbAFP.tde_IdTipoDedu);
-
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
@@ -209,17 +207,9 @@ namespace ERP_GMEDINA.Controllers
             return Json(tbAFPJSON, JsonRequestBehavior.AllowGet);
         }
 
-
-        public JsonResult Inactivar(int? id)
-        {
-            db.Configuration.ProxyCreationEnabled = false;
-            tbAFP tbAFPJSON = db.tbAFP.Find(id);
-            return Json(tbAFPJSON, JsonRequestBehavior.AllowGet);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Inactivar([Bind(Include = "afp_Id,afp_UsuarioModifica,afp_FechaModifica")] tbAFP tbAFP)
+        public ActionResult Inactivar(int afp_Id)
         {
             //DATA DE AUDIOTIRIA DE CREACIÓN, PUESTA UNICAMENTE PARA QUE NO CAIGA EN EL CATCH
             //EN EL PROCEDIMIENTO ALMACENADO, ESTOS DOS CAMPOS NO SE DEBEN MODIFICAR
@@ -228,8 +218,8 @@ namespace ERP_GMEDINA.Controllers
 
 
             //LLENAR DATA DE AUDITORIA
-            tbAFP.afp_UsuarioModifica = 1;
-            tbAFP.afp_FechaModifica = DateTime.Now;
+            int afp_UsuarioModifica = 1;
+            DateTime afp_FechaModifica = DateTime.Now;
             //VARIABLE DONDE SE ALMACENARA EL RESULTADO DEL PROCESO
             string response = String.Empty;
             IEnumerable<object> listAFP = null;
@@ -240,9 +230,9 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     //EJECUTAR PROCEDIMIENTO ALMACENADO
-                    listAFP = db.UDP_Plani_tbAFP_Inactivar(tbAFP.afp_Id,
-                                                           tbAFP.afp_UsuarioModifica,
-                                                           tbAFP.afp_FechaModifica);
+                    listAFP = db.UDP_Plani_tbAFP_Inactivar(afp_Id,
+                                                           afp_UsuarioModifica,
+                                                           afp_FechaModifica);
                     //RECORRER EL TIPO COMPLEJO DEL PROCEDIMIENTO ALMACENADO PARA EVALUAR EL RESULTADO DEL SP
                     foreach (UDP_Plani_tbAFP_Inactivar_Result Resultado in listAFP)
                         MensajeError = Resultado.MensajeError;
@@ -270,8 +260,6 @@ namespace ERP_GMEDINA.Controllers
                 ModelState.AddModelError("", "No se pudo inactivar el registro, contacte al administrador.");
                 response = "error";
             }
-
-            ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbAFP.tde_IdTipoDedu);
 
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);

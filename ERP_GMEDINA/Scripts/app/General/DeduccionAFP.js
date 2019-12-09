@@ -336,7 +336,7 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
 //Inactivar//
 $(document).on("click", "#btnInactivarDeduccionAFP", function () {
         //MOSTRAR EL MODAL DE INACTIVAR
-        $("#InactivarDeduccionAFP").modal();
+    $("#InactivarDeduccionAFP").modal();
     });
 
 
