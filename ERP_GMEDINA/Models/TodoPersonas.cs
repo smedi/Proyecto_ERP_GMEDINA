@@ -13,15 +13,15 @@ namespace ERP_GMEDINA.Models
     
     public class TodoPersonas
     {
-        public List<V_CompetenciasPersona> Competencias { get; set; }
+        //public List<V_CompetenciasPersona> Competencias { get; set; }
 
-        public List<V_HabilidadesPersona> Habilidades { get; set; }
+        //public List<V_HabilidadesPersona> Habilidades { get; set; }
 
-        public List<V_IdiomasPersona> Idiomas { get; set; }
+        //public List<V_IdiomasPersona> Idiomas { get; set; }
 
-        public List<V_RequerimientosEspecialesPersona> RequerimientosEspeciales { get; set; }
+        //public List<V_RequerimientosEspecialesPersona> RequerimientosEspeciales { get; set; }
 
-        public List<V_TitulosPersona> Titulos { get; set; }
+        //public List<V_TitulosPersona> Titulos { get; set; }
 
     }
 }

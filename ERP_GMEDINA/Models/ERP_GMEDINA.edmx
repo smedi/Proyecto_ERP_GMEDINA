@@ -257,72 +257,18 @@
           <Property Name="tipe_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_CompetenciasPersona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_CompetenciasPersona">
-          <Key>
-            <PropertyRef Name="per_Id" />
-            <PropertyRef Name="cope_Id" />
-            <PropertyRef Name="Descripcion" />
-          </Key>
-          <Property Name="per_Id" Type="int" Nullable="false" />
-          <Property Name="cope_Id" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HabilidadesPersona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_HabilidadesPersona">
-          <Key>
-            <PropertyRef Name="per_Id" />
-            <PropertyRef Name="hape_Id" />
-          </Key>
-          <Property Name="per_Id" Type="int" Nullable="false" />
-          <Property Name="hape_Id" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_IdiomasPersona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_IdiomasPersona">
-          <Key>
-            <PropertyRef Name="idpe_Id" />
-          </Key>
-          <Property Name="per_Id" Type="int" />
-          <Property Name="idpe_Id" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_RequerimientosEspecialesPersona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_RequerimientosEspecialesPersona">
-          <Key>
-            <PropertyRef Name="per_Id" />
-            <PropertyRef Name="rep_Id" />
-          </Key>
-          <Property Name="per_Id" Type="int" Nullable="false" />
-          <Property Name="rep_Id" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbPersonas">
           <Key>
-            
+            <PropertyRef Name="Relacion_Id" />
+            <PropertyRef Name="Estado" />
             <PropertyRef Name="Relacion" />
           </Key>
           <Property Name="per_Id" Type="int" />
           <Property Name="Relacion_Id" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
-          <Property Name="Relacion" Type="varchar" MaxLength="24" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="V_TitulosPersona">
-          <Key>
-            <PropertyRef Name="per_Id" />
-            <PropertyRef Name="tipe_Id" />
-            <PropertyRef Name="Descripcion" />
-          </Key>
-          <Property Name="per_Id" Type="int" Nullable="false" />
-          <Property Name="tipe_Id" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Relacion" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
@@ -1169,48 +1115,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
           <EntitySet Name="tbSucursales" EntityType="Self.tbSucursales" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulos" EntityType="Self.tbTitulos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosPersona" EntityType="Self.tbTitulosPersona" Schema="rrhh" store:Type="Tables" />
-          <EntitySet Name="V_CompetenciasPersona" EntityType="Self.V_CompetenciasPersona" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_CompetenciasPersona].[per_Id] AS [per_Id], 
-    [V_CompetenciasPersona].[cope_Id] AS [cope_Id], 
-    [V_CompetenciasPersona].[Descripcion] AS [Descripcion]
-    FROM [rrhh].[V_CompetenciasPersona] AS [V_CompetenciasPersona]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_HabilidadesPersona" EntityType="Self.V_HabilidadesPersona" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_HabilidadesPersona].[per_Id] AS [per_Id], 
-    [V_HabilidadesPersona].[hape_Id] AS [hape_Id], 
-    [V_HabilidadesPersona].[Descripcion] AS [Descripcion]
-    FROM [rrhh].[V_HabilidadesPersona] AS [V_HabilidadesPersona]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_IdiomasPersona" EntityType="Self.V_IdiomasPersona" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_IdiomasPersona].[per_Id] AS [per_Id], 
-    [V_IdiomasPersona].[idpe_Id] AS [idpe_Id], 
-    [V_IdiomasPersona].[Descripcion] AS [Descripcion]
-    FROM [rrhh].[V_IdiomasPersona] AS [V_IdiomasPersona]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_RequerimientosEspecialesPersona" EntityType="Self.V_RequerimientosEspecialesPersona" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_RequerimientosEspecialesPersona].[per_Id] AS [per_Id], 
-    [V_RequerimientosEspecialesPersona].[rep_Id] AS [rep_Id], 
-    [V_RequerimientosEspecialesPersona].[Descripcion] AS [Descripcion]
-    FROM [rrhh].[V_RequerimientosEspecialesPersona] AS [V_RequerimientosEspecialesPersona]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="V_tbPersonas" EntityType="Self.V_tbPersonas" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_tbPersonas].[per_Id] AS [per_Id], 
     [V_tbPersonas].[Relacion_Id] AS [Relacion_Id], 
     [V_tbPersonas].[Descripcion] AS [Descripcion], 
+    [V_tbPersonas].[Estado] AS [Estado], 
     [V_tbPersonas].[Relacion] AS [Relacion]
     FROM [rrhh].[V_tbPersonas] AS [V_tbPersonas]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="V_TitulosPersona" EntityType="Self.V_TitulosPersona" store:Type="Views" store:Schema="rrhh">
-            <DefiningQuery>SELECT 
-    [V_TitulosPersona].[per_Id] AS [per_Id], 
-    [V_TitulosPersona].[tipe_Id] AS [tipe_Id], 
-    [V_TitulosPersona].[Descripcion] AS [Descripcion]
-    FROM [rrhh].[V_TitulosPersona] AS [V_TitulosPersona]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea" Association="Self.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
@@ -1941,12 +1853,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
             <End Role="tbAreas" EntitySet="tbAreas" />
           </AssociationSet>
           <EntitySet Name="V_tbPersonas" EntityType="ERP_GMEDINAModel.V_tbPersonas" />
-          <EntitySet Name="V_CompetenciasPersona" EntityType="ERP_GMEDINAModel.V_CompetenciasPersona" />
-          <EntitySet Name="V_HabilidadesPersona" EntityType="ERP_GMEDINAModel.V_HabilidadesPersona" />
-          <EntitySet Name="V_IdiomasPersona" EntityType="ERP_GMEDINAModel.V_IdiomasPersona" />
-          <EntitySet Name="V_RequerimientosEspecialesPersona" EntityType="ERP_GMEDINAModel.V_RequerimientosEspecialesPersona" />
-          <EntitySet Name="V_TitulosPersona" EntityType="ERP_GMEDINAModel.V_TitulosPersona" />
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -2920,60 +2827,17 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
         </Association>
         <EntityType Name="V_tbPersonas">
           <Key>
+            <PropertyRef Name="Relacion_Id" />
+            <PropertyRef Name="Estado" />
             <PropertyRef Name="Relacion" />
           </Key>
           <Property Name="per_Id" Type="Int32" />
           <Property Name="Relacion_Id" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Relacion" Type="String" Nullable="false" MaxLength="24" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Relacion" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="V_CompetenciasPersona">
-          <Key>
-            <PropertyRef Name="per_Id" />
-            <PropertyRef Name="cope_Id" />
-            <PropertyRef Name="Descripcion" />
-          </Key>
-          <Property Name="per_Id" Type="Int32" Nullable="false" />
-          <Property Name="cope_Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_HabilidadesPersona">
-          <Key>
-            <PropertyRef Name="per_Id" />
-            <PropertyRef Name="hape_Id" />
-          </Key>
-          <Property Name="per_Id" Type="Int32" Nullable="false" />
-          <Property Name="hape_Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_IdiomasPersona">
-          <Key>
-            <PropertyRef Name="idpe_Id" />
-          </Key>
-          <Property Name="per_Id" Type="Int32" />
-          <Property Name="idpe_Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_RequerimientosEspecialesPersona">
-          <Key>
-            <PropertyRef Name="per_Id" />
-            <PropertyRef Name="rep_Id" />
-          </Key>
-          <Property Name="per_Id" Type="Int32" Nullable="false" />
-          <Property Name="rep_Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="V_TitulosPersona">
-          <Key>
-            <PropertyRef Name="per_Id" />
-            <PropertyRef Name="tipe_Id" />
-            <PropertyRef Name="Descripcion" />
-          </Key>
-          <Property Name="per_Id" Type="Int32" Nullable="false" />
-          <Property Name="tipe_Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -3381,53 +3245,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbPersonas">
               <MappingFragment StoreEntitySet="V_tbPersonas">
                 <ScalarProperty Name="Relacion" ColumnName="Relacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Relacion_Id" ColumnName="Relacion_Id" />
-                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_CompetenciasPersona">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_CompetenciasPersona">
-              <MappingFragment StoreEntitySet="V_CompetenciasPersona">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="cope_Id" ColumnName="cope_Id" />
-                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_HabilidadesPersona">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HabilidadesPersona">
-              <MappingFragment StoreEntitySet="V_HabilidadesPersona">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="hape_Id" ColumnName="hape_Id" />
-                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_IdiomasPersona">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_IdiomasPersona">
-              <MappingFragment StoreEntitySet="V_IdiomasPersona">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="idpe_Id" ColumnName="idpe_Id" />
-                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_RequerimientosEspecialesPersona">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_RequerimientosEspecialesPersona">
-              <MappingFragment StoreEntitySet="V_RequerimientosEspecialesPersona">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="rep_Id" ColumnName="rep_Id" />
-                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_TitulosPersona">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_TitulosPersona">
-              <MappingFragment StoreEntitySet="V_TitulosPersona">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="tipe_Id" ColumnName="tipe_Id" />
                 <ScalarProperty Name="per_Id" ColumnName="per_Id" />
               </MappingFragment>
             </EntityTypeMapping>
