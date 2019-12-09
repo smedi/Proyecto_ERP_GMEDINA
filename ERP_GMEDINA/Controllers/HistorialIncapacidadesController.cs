@@ -21,6 +21,62 @@ namespace ERP_GMEDINA.Controllers
             return View(tbHistorialIncapacidades.ToList());
         }
 
+
+
+
+        public ActionResult llenarTabla()
+        {
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var Empleados = db.V_EmpleadoIncapacidades.Where(t => t.emp_Estado == true)
+                        .Select(
+                        t => new
+                        {
+                            emp_Id = t.emp_Id,
+                            Empleado = t.emp_NombreCompleto,
+                            Cargo = t.car_Descripcion,
+                            Departamento = t.depto_Descripcion
+                        }).ToList();
+                    return Json(Empleados, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+
+
+        public ActionResult ChildRowData(int? id)
+        {
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            List<V_HistorialIncapacidades> lista = new List<V_HistorialIncapacidades> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    lista = db.V_HistorialIncapacidades.Where(x => x.hinc_Id == id).ToList();
+                }
+                catch
+                {
+                }
+            }
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
+
         // GET: HistorialIncapacidades/Details/5
         public ActionResult Details(int? id)
         {

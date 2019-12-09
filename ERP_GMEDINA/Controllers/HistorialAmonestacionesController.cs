@@ -20,6 +20,8 @@ namespace ERP_GMEDINA.Controllers
             var tbHistorialAmonestaciones = db.tbHistorialAmonestaciones.Include(t => t.tbEmpleados).Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(tbHistorialAmonestaciones);
         }
+
+
         public ActionResult llenarTabla()
         {
             try
@@ -43,6 +45,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
