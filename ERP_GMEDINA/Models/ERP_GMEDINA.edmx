@@ -227,11 +227,11 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
             <PropertyRef Name="tamo_Id" />
             <PropertyRef Name="tamo_Descripcion" />
             <PropertyRef Name="hamo_Id" />
-            <PropertyRef Name="hamo_Fecha" />
             <PropertyRef Name="hamo_AmonestacionAnterior" />
             <PropertyRef Name="hamo_Estado" />
             <PropertyRef Name="hamo_UsuarioCrea" />
             <PropertyRef Name="hamo_FechaCrea" />
+            <PropertyRef Name="hamo_Fecha" />
           </Key>
           <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="emp_Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
@@ -239,7 +239,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Property Name="tamo_Id" Type="int" Nullable="false" />
           <Property Name="tamo_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hamo_Id" Type="int" Nullable="false" />
-          <Property Name="hamo_Fecha" Type="datetime" Nullable="false" />
+          <Property Name="hamo_Fecha" Type="date" Nullable="false" />
           <Property Name="hamo_AmonestacionAnterior" Type="int" Nullable="false" />
           <Property Name="hamo_Observacion" Type="nvarchar" MaxLength="150" />
           <Property Name="hamo_Estado" Type="bit" Nullable="false" />
@@ -272,8 +272,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Property Name="hinc_CentroMedico" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="hinc_Doctor" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="hinc_Diagnostico" Type="nvarchar" MaxLength="150" />
-          <Property Name="hinc_FechaInicio" Type="datetime" />
-          <Property Name="hinc_FechaFin" Type="datetime" />
+          <Property Name="hinc_FechaInicio" Type="date" />
+          <Property Name="hinc_FechaFin" Type="date" />
           <Property Name="hinc_Estado" Type="bit" Nullable="false" />
           <Property Name="hinc_RazonInactivo" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -644,6 +644,21 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UDP_dbo_tbFasesReclutamiento_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fare_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UDP_dbo_tbFasesReclutamiento_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fare_id" Type="int" Mode="In" />
+          <Parameter Name="fare_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="fare_Estado" Type="bit" Mode="In" />
+          <Parameter Name="usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UDP_dbo_tbFasesReclutamiento_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UDP_dbo_tbFasesReclutamiento_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fare_id" Type="int" Mode="In" />
+          <Parameter Name="fare_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="fare_UsuarioModifica" Type="int" Mode="In" />
+        </Function>
         <Function Name="UDP_Plani_CatalogoDeduccionesEdit_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
         </Function>
@@ -1022,6 +1037,14 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Parameter Name="hamo_Id" Type="int" Mode="In" />
           <Parameter Name="hamo_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="hamo_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialContrataciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="hcon_Id" Type="int" Mode="In" />
+          <Parameter Name="scan_Id" Type="int" Mode="In" />
+          <Parameter Name="depto_Id" Type="int" Mode="In" />
+          <Parameter Name="hcon_FechaContratado" Type="date" Mode="In" />
+          <Parameter Name="hcon_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="hcon_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHistorialIncapacidades_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hinc_Id" Type="int" Mode="In" />
@@ -3107,7 +3130,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Property Name="tamo_Id" Type="Int32" Nullable="false" />
           <Property Name="tamo_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hamo_Id" Type="Int32" Nullable="false" />
-          <Property Name="hamo_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hamo_Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="hamo_AmonestacionAnterior" Type="Int32" Nullable="false" />
           <Property Name="hamo_Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="hamo_Estado" Type="Boolean" Nullable="false" />
@@ -3352,8 +3375,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Property Name="hinc_CentroMedico" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="hinc_Doctor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hinc_Diagnostico" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="3" />
-          <Property Name="hinc_FechaFin" Type="DateTime" Precision="3" />
+          <Property Name="hinc_FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="hinc_FechaFin" Type="DateTime" Precision="0" />
           <Property Name="hinc_Estado" Type="Boolean" Nullable="false" />
           <Property Name="hinc_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="emp_Id" Type="Int32" Nullable="false" />

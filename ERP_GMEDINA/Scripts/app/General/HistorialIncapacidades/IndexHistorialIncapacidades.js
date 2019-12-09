@@ -1,11 +1,25 @@
 ﻿function format(obj) {
-var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5></div><div class="ibox-content"><div class="row"> <table class="table table-striped table-bordered table-hover dataTables-example" > <thead> <tr> <th>  Incapacidad  </th> <th>Dias de retiro</th>  <th>Centro Medico</th>     </tr> </thead> ';
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Agregar Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
+        +'<table class="table table-striped table-bordered table-hover dataTables-example" >'
+        +'<thead>'
+        +'<tr> <th>  Incapacidad  </th>'
+        +'<th>Dias de retiro</th>'
+        + '<th>Centro Medico</th> '
+         + '<th>Diagnostico</th> '
+         + '<th>Fecha Inicio</th> '
+         + '<th>Fecha Fin</th> '
+         + '<th>Acciones</th> '
+        +'</tr> </thead> ';
     obj.forEach(function (index, value) {
         div = div +
             '<tbody>' + '<tr>'
                 + '<td>' + index.ticn_Descripcion + '</td>'
                 + '<td>' + index.hinc_Dias + '</td>'
-                + '<td>' + index.hinc_CentroMedico + '</td>' 
+                + '<td>' + index.hinc_CentroMedico + '</td>'
+                + '<td>' + index.hinc_Diagnostico + '</td>'
+                + '<td>' + index.hinc_FechaInicio + '</td>'
+                + '<td>' + index.hinc_FechaFin + '</td>'
+                + '<td>' + '<button type="button" class="btn btn-primary btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button> <button type="button" class="btn btn-default btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
                 + '</tr>' + '</tbody>'
             '</table>'
     });
