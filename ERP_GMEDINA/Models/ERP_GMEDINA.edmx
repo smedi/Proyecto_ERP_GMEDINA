@@ -9181,46 +9181,6 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbAcumuladosISR' is referenced by a rel
           <Property Name="cpla_IdPlanilla" Type="Int32" Nullable="false" />
           <Property Name="cpla_DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="V_DeduccionesExtraordinarias_Detalles">
-          <Key>
-            <PropertyRef Name="dex_IdDeduccionesExtra" />
-            <PropertyRef Name="eqem_Id" />
-            <PropertyRef Name="per_Empleado" />
-            <PropertyRef Name="car_Cargo" />
-            <PropertyRef Name="depto_Departamento" />
-            <PropertyRef Name="area_Area" />
-            <PropertyRef Name="eqtra_Id" />
-            <PropertyRef Name="eqtra_Codigo" />
-            <PropertyRef Name="dex_MontoInicial" />
-            <PropertyRef Name="dex_MontoRestante" />
-            <PropertyRef Name="dex_Cuota" />
-            <PropertyRef Name="cde_IdDeducciones" />
-            <PropertyRef Name="cde_DescripcionDeduccion" />
-            <PropertyRef Name="dex_UsuarioCrea" />
-            <PropertyRef Name="dex_FechaCrea" />
-            <PropertyRef Name="dex_Activo" />
-          </Key>
-          <Property Name="dex_IdDeduccionesExtra" Type="Int32" Nullable="false" />
-          <Property Name="eqem_Id" Type="Int32" Nullable="false" />
-          <Property Name="per_Empleado" Type="String" MaxLength="101" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="car_Cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="depto_Departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="area_Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="dex_ObservacionesComentarios" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="eqtra_Id" Type="Int32" Nullable="false" />
-          <Property Name="eqtra_Codigo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="eqtra_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="dex_MontoInicial" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="dex_MontoRestante" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="dex_Cuota" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="cde_IdDeducciones" Type="Int32" Nullable="false" />
-          <Property Name="cde_DescripcionDeduccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="dex_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="dex_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="dex_UsuarioModifica" Type="Int32" />
-          <Property Name="dex_FechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="dex_Activo" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="V_DeduccionesExtraordinarias_EquipoEmpleado">
           <Key>
             <PropertyRef Name="eqem_Id" />
@@ -12986,7 +12946,6 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbAcumuladosISR' is referenced by a rel
           <EntitySet Name="V_DecimoCuartoMes_RPT" EntityType="Self.V_DecimoCuartoMes_RPT" />
           <EntitySet Name="V_DecimoTercerMes" EntityType="Self.V_DecimoTercerMes" />
           <EntitySet Name="V_DecimoTercerMes_RPT" EntityType="Self.V_DecimoTercerMes_RPT" />
-          <EntitySet Name="V_DeduccionesExtraordinarias_Detalles" EntityType="Self.V_DeduccionesExtraordinarias_Detalles" />
           <EntitySet Name="V_DeduccionesExtraordinarias_EquipoEmpleado" EntityType="Self.V_DeduccionesExtraordinarias_EquipoEmpleado" />
           <EntitySet Name="V_DeduccionesExtrasColaboradores" EntityType="Self.V_DeduccionesExtrasColaboradores" />
           <EntitySet Name="V_DeduccionesInstitucionesFinancierasColaboradres" EntityType="Self.V_DeduccionesInstitucionesFinancierasColaboradres" />
@@ -16038,32 +15997,6 @@ error 6004: The table 'ERP_GMEDINA.Plani.tbAcumuladosISR' is referenced by a rel
                 <ScalarProperty Name="dtm_CodigoPago" ColumnName="dtm_CodigoPago" />
                 <ScalarProperty Name="cpla_IdPlanilla" ColumnName="cpla_IdPlanilla" />
                 <ScalarProperty Name="cpla_DescripcionPlanilla" ColumnName="cpla_DescripcionPlanilla" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_DeduccionesExtraordinarias_Detalles">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_DeduccionesExtraordinarias_Detalles">
-              <MappingFragment StoreEntitySet="V_DeduccionesExtraordinarias_Detalles">
-                <ScalarProperty Name="dex_IdDeduccionesExtra" ColumnName="dex_IdDeduccionesExtra" />
-                <ScalarProperty Name="eqem_Id" ColumnName="eqem_Id" />
-                <ScalarProperty Name="per_Empleado" ColumnName="per_Empleado" />
-                <ScalarProperty Name="car_Cargo" ColumnName="car_Cargo" />
-                <ScalarProperty Name="depto_Departamento" ColumnName="depto_Departamento" />
-                <ScalarProperty Name="area_Area" ColumnName="area_Area" />
-                <ScalarProperty Name="dex_ObservacionesComentarios" ColumnName="dex_ObservacionesComentarios" />
-                <ScalarProperty Name="eqtra_Id" ColumnName="eqtra_Id" />
-                <ScalarProperty Name="eqtra_Codigo" ColumnName="eqtra_Codigo" />
-                <ScalarProperty Name="eqtra_Descripcion" ColumnName="eqtra_Descripcion" />
-                <ScalarProperty Name="dex_MontoInicial" ColumnName="dex_MontoInicial" />
-                <ScalarProperty Name="dex_MontoRestante" ColumnName="dex_MontoRestante" />
-                <ScalarProperty Name="dex_Cuota" ColumnName="dex_Cuota" />
-                <ScalarProperty Name="cde_IdDeducciones" ColumnName="cde_IdDeducciones" />
-                <ScalarProperty Name="cde_DescripcionDeduccion" ColumnName="cde_DescripcionDeduccion" />
-                <ScalarProperty Name="dex_UsuarioCrea" ColumnName="dex_UsuarioCrea" />
-                <ScalarProperty Name="dex_FechaCrea" ColumnName="dex_FechaCrea" />
-                <ScalarProperty Name="dex_UsuarioModifica" ColumnName="dex_UsuarioModifica" />
-                <ScalarProperty Name="dex_FechaModifica" ColumnName="dex_FechaModifica" />
-                <ScalarProperty Name="dex_Activo" ColumnName="dex_Activo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
