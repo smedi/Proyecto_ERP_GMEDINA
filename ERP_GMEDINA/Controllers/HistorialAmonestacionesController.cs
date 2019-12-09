@@ -63,6 +63,9 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
+
+
+
         // GET: HistorialAmonestaciones/Details/5
         public ActionResult Details(int? id)
         {

@@ -61,7 +61,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    lista = db.V_HistorialIncapacidades.Where(x => x.hinc_Id == id).ToList();
+                    lista = db.V_HistorialIncapacidades.Where(x => x.emp_Id == id).ToList();
                 }
                 catch
                 {

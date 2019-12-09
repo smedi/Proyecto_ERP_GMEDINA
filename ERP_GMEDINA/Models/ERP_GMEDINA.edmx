@@ -253,6 +253,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_HistorialIncapacidades">
           <Key>
+            <PropertyRef Name="emp_Id" />
             <PropertyRef Name="hinc_Id" />
             <PropertyRef Name="NombreCompleto" />
             <PropertyRef Name="ticn_Id" />
@@ -262,6 +263,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
             <PropertyRef Name="hinc_Doctor" />
             <PropertyRef Name="hinc_Estado" />
           </Key>
+          <Property Name="emp_Id" Type="int" Nullable="false" />
           <Property Name="hinc_Id" Type="int" Nullable="false" />
           <Property Name="NombreCompleto" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="ticn_Id" Type="int" Nullable="false" />
@@ -1384,6 +1386,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           </EntitySet>
           <EntitySet Name="V_HistorialIncapacidades" EntityType="Self.V_HistorialIncapacidades" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
+    [V_HistorialIncapacidades].[emp_Id] AS [emp_Id], 
     [V_HistorialIncapacidades].[hinc_Id] AS [hinc_Id], 
     [V_HistorialIncapacidades].[NombreCompleto] AS [NombreCompleto], 
     [V_HistorialIncapacidades].[ticn_Id] AS [ticn_Id], 
@@ -3339,6 +3342,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
             <PropertyRef Name="hinc_CentroMedico" />
             <PropertyRef Name="hinc_Doctor" />
             <PropertyRef Name="hinc_Estado" />
+            <PropertyRef Name="emp_Id" />
           </Key>
           <Property Name="hinc_Id" Type="Int32" Nullable="false" />
           <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
@@ -3352,6 +3356,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Property Name="hinc_FechaFin" Type="DateTime" Precision="3" />
           <Property Name="hinc_Estado" Type="Boolean" Nullable="false" />
           <Property Name="hinc_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <ComplexType Name="UDP_RRHH_tbHistorialIncapacidades_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
@@ -3937,6 +3942,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <EntitySetMapping Name="V_HistorialIncapacidades">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialIncapacidades">
               <MappingFragment StoreEntitySet="V_HistorialIncapacidades">
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="hinc_RazonInactivo" ColumnName="hinc_RazonInactivo" />
                 <ScalarProperty Name="hinc_Estado" ColumnName="hinc_Estado" />
                 <ScalarProperty Name="hinc_FechaFin" ColumnName="hinc_FechaFin" />
