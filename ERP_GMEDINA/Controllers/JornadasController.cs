@@ -39,12 +39,12 @@ namespace ERP_GMEDINA.Controllers
         // GET: Jornadas/Create
         public ActionResult Create()
         {
-            ViewBag.jor_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.jor_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            List<tbJornadas> Jornadas = new List<tbJornadas> { };
+            ViewBag.jor_Id = new SelectList(Jornadas, "jor_Id", "jor_Descripcion");
+            //ViewBag.jor_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            //ViewBag.jor_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             return View();
         }
-
-
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -64,7 +64,6 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json("-2", JsonRequestBehavior.AllowGet);
         }
-
         public ActionResult llenarTabla()
         {
             try
@@ -90,6 +89,29 @@ namespace ERP_GMEDINA.Controllers
                 ex.Message.ToString();
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
+        }
+        public ActionResult llenarDropDownlist()
+        {
+            var Jornadas = new List<object> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    Jornadas.Add(new
+                    {
+                        Id = 0,
+                        Descripcion = "** Seleccione una Opción"
+                    });
+                    Jornadas.AddRange(db.tbJornadas.Select(tabla => new { Id = tabla.jor_Id, Descripcion = tabla.jor_Descripcion }).ToList());
+                }
+                catch
+                {
+                    return Json("-2", 0);                    
+                }
+            }
+            var result = new Dictionary<string, object>();
+            result.Add("Jornadas", Jornadas);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Jornadas/Create
