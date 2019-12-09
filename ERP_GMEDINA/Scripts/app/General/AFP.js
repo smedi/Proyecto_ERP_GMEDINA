@@ -103,17 +103,11 @@ $(document).on("click", "#btnAgregarAFP", function () {
 $('#btnCreateRegistroAFP').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var val1 = $("#Crear #tde_IdTipoDedu").val();
+    console.log(val1)
     var val2 = $("#Crear #afp_Descripcion").val();
     var val3 = $("#Crear #afp_AporteMinimoLps").val();
     var val4 = $("#Crear #afp_InteresAporte").val();
     var val5 = $("#Crear #afp_InteresAnual").val();
-
-    if (val1 == "0" || val1 == null || val1 == undefined) {
-        $("#Crear #validation5").css("display", "");
-    }
-    else {
-        $("#Crear #validation5").css("display", "none");
-    }
 
     if (val2 == "") {
         $("#Crear #validation1").css("display", "");
@@ -151,7 +145,7 @@ $('#btnCreateRegistroAFP').click(function () {
         data: data
     }).done(function (data) {
         
-        //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
+        //VALIDAR RESPUESTA OBTENIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
         if (data != "error") {
 
             cargarGridDeducciones();
@@ -185,7 +179,6 @@ $("#btnCerrarEditar").click(function () {
     $("#validatione2").css("display", "none");
     $("#validatione3").css("display", "none");
     $("#validatione4").css("display", "none");
-    $("#validatione5").css("display", "none");
     $("#EditarAFP").modal('hide');
 });
 
@@ -194,7 +187,6 @@ $("#btnIconCerrare").click(function () {
     $("#validatione2").css("display", "none");
     $("#validatione3").css("display", "none");
     $("#validatione4").css("display", "none");
-    $("#validatione5").css("display", "none");
     $("#EditarAFP").modal('hide');
 });
 
@@ -254,18 +246,11 @@ $(document).on("click", "#tblAFP tbody tr td #btnEditarAFP", function () {
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditAFP").click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
-    var vale1 = $("#Editar #tde_IdTipoDedu").val();
     var vale2 = $("#Editar #afp_Descripcion").val();
     var vale3 = $("#Editar #afp_AporteMinimoLps").val();
     var vale4 = $("#Editar #afp_InteresAporte").val();
     var vale5 = $("#Editar #afp_InteresAnual").val();
 
-    if (vale1 == 0 || vale1 == "" || vale1 == undefined) {
-        $("#Editar #validatione5").css("display", "");
-    }
-    else {
-        $("#Editar #validatione5"), css("display", "none");
-    }
 
     if (vale2 == "") {
         $("#Editar #validatione1").css("display", "");
@@ -317,7 +302,6 @@ $("#btnEditAFP").click(function () {
                 message: 'El registro fue editado de forma exitosa!',
             });
 
-            $("#Crear #tde_IdTipoDedu").val("0");
         }
     });
 

@@ -50,7 +50,9 @@ namespace ERP_GMEDINA.Controllers
         // GET: AFP/Create
         public ActionResult Create()
         {
+            /*
             ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion");
+            */
             return View();
         }
 
