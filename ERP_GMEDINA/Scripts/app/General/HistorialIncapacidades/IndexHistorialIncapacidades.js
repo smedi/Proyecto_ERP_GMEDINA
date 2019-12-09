@@ -1,5 +1,11 @@
 ﻿function format(obj) {
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Agregar Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
+    var EmpID = 0;
+    if (obj.length > 1)
+        EmpID = obj[0].emp_Id;
+    else
+        EmpID = obj.emp_Id;
+        
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><a href="Create/'+ EmpID +'" type="button" class="btn btn-primary btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Agregar Incapacidad</a> </div> </div><div class="ibox-content"><div class="row">'
         +'<table class="table table-striped table-bordered table-hover dataTables-example" >'
         +'<thead>'
         +'<tr> <th>  Incapacidad  </th>'
@@ -17,9 +23,9 @@
                 + '<td>' + index.hinc_Dias + '</td>'
                 + '<td>' + index.hinc_CentroMedico + '</td>'
                 + '<td>' + index.hinc_Diagnostico + '</td>'
-                + '<td>' + index.hinc_FechaInicio + '</td>'
-                + '<td>' + index.hinc_FechaFin + '</td>'
-                + '<td>' + '<button type="button" class="btn btn-primary btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Editar</button> <button type="button" class="btn btn-default btn-xs" id="btnDetalle" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
+                + '<td>' + FechaFormato(index.hinc_FechaInicio).substring(0,10) + '</td>'
+                + '<td>' + FechaFormato(index.hinc_FechaFin).substring(0,10) + '</td>'
+                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete()" data-id="@item.cin_IdIngreso">Eliminar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle()" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
                 + '</tr>' + '</tbody>'
             '</table>'
     });
@@ -68,3 +74,20 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
             });
     }
 });
+
+
+function Llamarmodaldelete() {
+
+    var modalnuevo = $("#ModalInhabilitar");
+    modalnuevo.modal('show');
+
+
+}
+
+function Llamarmodaldetalle() {
+
+    var modalnuevo = $("#ModalDetalles");
+    modalnuevo.modal('show');
+
+
+}

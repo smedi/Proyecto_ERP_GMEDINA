@@ -717,6 +717,8 @@
     <Content Include="CodeTemplates\MvcView\List.cs.t4" />
     <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <Content Include="Scripts\api\spanish.json" />
+    <Content Include="CodeTemplates\MvcView\_Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Detalles.cs.t4" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1263,6 +1265,8 @@
     <Content Include="Views\HistorialIncapacidades\Details.cshtml" />
     <Content Include="Views\HistorialIncapacidades\Edit.cshtml" />
     <Content Include="Views\HistorialIncapacidades\Index.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\_Delete.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
