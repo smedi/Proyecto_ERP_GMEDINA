@@ -55,7 +55,16 @@ function cargarGridDeducciones() {
         });
 }
 
+$("#btnCerrarCrear").click(function () {
+    $("#validation1").css("display", "none");
+    $("#AgregarDeduccionAFP").modal('hide');
+});
 
+$("#btnIconCerrar").click(function () {
+    $("#validation1").css("display", "none");
+    $("#AgregarDeduccionAFP").modal('hide');
+    $("#EditarDeduccionAFP").modal('hide');
+});
 
 //Agregar//
 //FUNCION: PRIMERA FASE DE AGREGAR UN NUEVO REGISTRO, MOSTRAR MODAL DE CREATE
@@ -72,7 +81,6 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
             //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
             $("#Crear #emp_Id").empty();
             //LLENAR EL DROPDOWNLIST
-            $("#Crear #emp_Id").append("<option value = 0>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
                 $("#Crear #emp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
@@ -89,7 +97,6 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
             //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
             $("#Crear #afp_Id").empty();
             //LLENAR EL DROPDOWNLIST
-            $("#Crear #afp_Id").append("<option value = 0>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
                 $("#Crear #afp_Id").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
@@ -98,12 +105,23 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
 
     //MOSTRAR EL MODAL DE AGREGAR
     $("#AgregarDeduccionAFP").modal();
+    $("#Crear #dafp_AporteLps").val('');
 });
 
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroDeduccionAFP').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+    var val1 = $("#Crear #dafp_AporteLps").val();
+    debugger
+    console.log(val1)
+
+    if (val1 == "") {
+        $("#Crear #validation1").css("display", "");
+    }
+    else {
+        $("#Crear #validation1").css("display", "none");
+    }
 
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
     var data = $("#frmCreateDeduccionAFP").serializeArray();
@@ -124,6 +142,10 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
         }
         else {
             cargarGridDeducciones();
+
+
+            $("#Crear #dafp_AporteLps").val('');
+
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',
@@ -150,7 +172,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
         .done(function (data) {
             //SI SE OBTIENE DATA, LLENAR LOS CAMPOS DEL MODAL CON ELLA
             if (data) {
-                console.log('Hla')
                 $("#Editar #dafp_Id").val(data.dafp_Id);
                 $("#Editar #dafp_AporteLps").val(data.dafp_AporteLps);
                 //GUARDAR EL ID DEL DROPDOWNLIST (QUE ESTA EN EL REGISTRO SELECCIONADO) QUE NECESITAREMOS PONER SELECTED EN EL DDL DEL MODAL DE EDICION
@@ -169,7 +190,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #emp_Id").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Editar #emp_Id").append("<option value = 0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
                             $("#Editar #emp_Id").append("<option" + (iter.Id == SelectedIdEmpleado ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
@@ -189,7 +209,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Editar #afp_Id").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Editar #afp_Id").append("<option value = 0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
                             $("#Editar #afp_Id").append("<option" + (iter.Id == SelectedIdAFP ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });
@@ -210,10 +229,19 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnEditarDeduccionAFP", f
 
 //EJECUTAR EDICIÓN DEL REGISTRO EN EL MODAL
 $("#btnEditDeduccionAFP").click(function () {
+    // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
+    var vale1 = $("#Editar #dafp_AporteLps").val();
+    debugger
+    console.log(vale1)
+    if (vale1 == "") {
+        $("#Editar #validatione1").css("display", "");
+    }
+    else {
+        $("#Editar #validatione1").css("display", "none");
+    }
+
     //SERIALIZAR EL FORMULARIO (QUE ESTÁ EN LA VISTA PARCIAL) DEL MODAL, SE PARSEA A FORMATO JSON
     var data = $("#frmEditDeduccionAFP").serializeArray();
-    
-    console.log("Adios")
 
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN
     $.ajax({
@@ -243,7 +271,14 @@ $("#btnEditDeduccionAFP").click(function () {
 });
 
 //FUNCION: OCULTAR MODAL DE EDICIÓN
+
 $("#btnCerrarEditar").click(function () {
+    $("#validatione1").css("display", "none");
+    $("#EditarDeduccionAFP").modal('hide');
+});
+
+$("#btnIconCerrare").click(function () {
+    $("#validatione1").css("display", "none");
     $("#EditarDeduccionAFP").modal('hide');
 });
 
@@ -291,7 +326,6 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                         //LIMPIAR EL DROPDOWNLIST ANTES DE VOLVER A LLENARLO
                         $("#Detalles #emp_Id").empty();
                         //LLENAR EL DROPDOWNLIST
-                        $("#Detalles #emp_Id").append("<option value = 0>Selecione una opción...</option>");
                         $.each(data, function (i, iter) {
                             $("#Detalles #emp_Id").append("<option" + (iter.Id == SelectedIdEmpleado ? " selected" : " ") + " value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
                         });

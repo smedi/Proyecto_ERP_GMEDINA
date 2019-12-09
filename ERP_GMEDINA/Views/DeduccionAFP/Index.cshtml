@@ -60,14 +60,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <button type="button" class="close" id="btnIconCerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Agregar datos</h4>
             </div>
             <div class="modal-body" id="Crear">
                 @Html.Partial("_CreateDeduccionAFP", new ERP_GMEDINA.Models.tbDeduccionAFP())
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-white" id="btnCerrarCrear">Cerrar</button>
                 <button type="button" class="btn btn-primary" id="btnCreateRegistroDeduccionAFP">Aceptar</button>
             </div>
         </div>
@@ -80,7 +80,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <button type="button" class="close" id="btnIconCerrare"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
                 <h4 class="modal-title">Edición de datos</h4>
             </div>
             <div class="modal-body" id="Editar">
@@ -142,3 +142,5 @@
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
 }
+
+

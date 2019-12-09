@@ -87,7 +87,6 @@ $(document).on("click", "#btnAgregarAFP", function () {
         //LLENAR EL DROPDONWLIST DEL MODAL CON LA DATA OBTENIDA
         .done(function (data) {
             $("#Crear #tde_IdTipoDedu").empty();
-            $("#Crear #tde_IdTipoDedu").append("<option value=0>Selecione una opción...</option>");
             $.each(data, function (i, iter) {
                 $("#Crear #tde_IdTipoDedu").append("<option value='" + iter.Id + "'>" + iter.Descripcion + "</option>");
             });
@@ -102,10 +101,8 @@ $(document).on("click", "#btnAgregarAFP", function () {
 
 //FUNCION: CREAR EL NUEVO REGISTRO
 $('#btnCreateRegistroAFP').click(function () {
-    debugger
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var val1 = $("#Crear #tde_IdTipoDedu").val();
-    console.log(val1)
     var val2 = $("#Crear #afp_Descripcion").val();
     var val3 = $("#Crear #afp_AporteMinimoLps").val();
     var val4 = $("#Crear #afp_InteresAporte").val();

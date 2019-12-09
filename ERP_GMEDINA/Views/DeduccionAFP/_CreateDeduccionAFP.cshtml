@@ -15,8 +15,8 @@
                   <div class="form-group">
                     @Html.LabelFor(model => model.dafp_AporteLps, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                      @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control" } })
-                      @Html.ValidationMessageFor(model => model.dafp_AporteLps, "", new { @class = "text-danger" })
+                      @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control", @id = "dafp_AporteLps" } })
+                      @Html.ValidationMessageFor(model => model.dafp_AporteLps, "", new { @class = "text-danger", @id = "validation1" })
                     </div>
                   </div>
 
