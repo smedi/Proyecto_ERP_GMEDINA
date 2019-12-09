@@ -113,14 +113,12 @@ $(document).on("click", "#btnAgregarDeduccionAFP", function () {
 $('#btnCreateRegistroDeduccionAFP').click(function () {
     // SIEMPRE HACER LAS RESPECTIVAS VALIDACIONES DEL LADO DEL CLIENTE
     var val1 = $("#Crear #dafp_AporteLps").val();
-    debugger
-    console.log(val1)
 
     if (val1 == "") {
-        $("#Crear #validation1").css("display", "");
+        $("#Crear #validation1d").css("display", "");
     }
     else {
-        $("#Crear #validation1").css("display", "none");
+        $("#Crear #validation1d").css("display", "none");
     }
 
     //SERIALIZAR EL FORMULARIO DEL MODAL (ESTÁ EN LA VISTA PARCIAL)
@@ -131,26 +129,22 @@ $('#btnCreateRegistroDeduccionAFP').click(function () {
         method: "POST",
         data: data
     }).done(function (data) {
-        //CERRAR EL MODAL DE AGREGAR
-        $("#AgregarDeduccionAFP").modal('hide');
+        
         //VALIDAR RESPUESTA OBETNIDA DEL SERVIDOR, SI LA INSERCIÓN FUE EXITOSA O HUBO ALGÚN ERROR
-        if (data == "error") {
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo guardar el registro, contacte al administrador',
-            });
-        }
-        else {
+        if (data != "error") {
+            
             cargarGridDeducciones();
 
-
-            $("#Crear #dafp_AporteLps").val('');
+            //CERRAR EL MODAL DE AGREGAR
+            $("#AgregarDeduccionAFP").modal('hide');
 
             // Mensaje de exito cuando un registro se ha guardado bien
             iziToast.success({
                 title: 'Exito',
                 message: 'El registro fue registrado de forma exitosa!',
             });
+
+            $("#Crear #dafp_AporteLps").val('');
         }
     });
 });
@@ -308,8 +302,10 @@ $(document).on("click", "#tblDeduccionAFP tbody tr td #btnDetalleDeduccionAFP", 
                 $("#Detalles #dafp_AporteLps").val(data.dafp_AporteLps);
                 $("#Detalles #afp_Id").val(data.afp_Id);
                 $("#Detalles #afp_Descripcion").val(data.afp_Descripcion);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data.UsuCrea);
                 $("#Detalles #dafp_UsuarioCrea").val(data.dafp_UsuarioCrea);
                 $("#Detalles #dafp_FechaCrea").val(FechaCrea);
+                data.UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data.UsuModifica);
                 $("#Detalles #dafp_UsuarioModifica").val(data.dafp_UsuarioModifica);
                 $("#Detalles #dafp_FechaModifica").val(FechaModifica);
 

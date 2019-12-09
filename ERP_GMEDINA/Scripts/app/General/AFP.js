@@ -339,8 +339,10 @@ $(document).on("click", "#tblAFP tbody tr td #btnDetalleAFP", function () {
                 $("#Detalles #afp_AporteMinimoLps").val(data.afp_AporteMinimoLps);
                 $("#Detalles #afp_InteresAporte").val(data.afp_InteresAporte);
                 $("#Detalles #afp_InteresAnual").val(data.afp_InteresAnual);
+                $("#Detalles #tbUsuario_usu_NombreUsuario").val(data.UsuCrea);
                 $("#Detalles #afp_UsuarioCrea").val(data.afp_UsuarioCrea);
                 $("#Detalles #afp_FechaCrea").val(FechaCrea);
+                data.UsuModifica == null ? $("#Detalles #tbUsuario1_usu_NombreUsuario").val('Sin modificaciones') : $("#Detalles #tbUsuario1_usu_NombreUsuario").val(data.UsuModifica);
                 $("#Detalles #afp_UsuarioModifica").val(data.afp_UsuarioModifica);
                 $("#Detalles #afp_FechaModifica").val(FechaModifica);
 

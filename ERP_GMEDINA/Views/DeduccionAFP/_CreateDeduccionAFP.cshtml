@@ -13,11 +13,11 @@
                   </div>
 
                   <div class="form-group">
-                    @Html.LabelFor(model => model.dafp_AporteLps, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                      @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control", @id = "dafp_AporteLps" } })
-                      @Html.ValidationMessageFor(model => model.dafp_AporteLps, "", new { @class = "text-danger", @id = "validation1" })
-                    </div>
+                      @Html.LabelFor(model => model.dafp_AporteLps, htmlAttributes: new { @class = "control-label col-md-2" })
+                      <div class="col-md-10">
+                          @Html.EditorFor(model => model.dafp_AporteLps, new { htmlAttributes = new { @class = "form-control", @id = "dafp_AporteLps" } })
+                          @Html.ValidationMessageFor(model => model.dafp_AporteLps, "", new { @class = "text-danger", @id = "validation1d" })
+                      </div>
                   </div>
 
                   <div class="form-group">
@@ -27,6 +27,11 @@
                     </div>
                   </div>
 
+
                 </div>
-          }
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" id="btnCerrarCrear">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" id="btnCreateRegistroDeduccionAFP">Aceptar</button>
+                </div>
+}
 
