@@ -243,18 +243,14 @@ $("#btnEditDeduccionAFP").click(function () {
         method: "POST",
         data: data
     }).done(function (data) {
-        if (data == "error") {
-            //Cuando traiga un error del backend al guardar la edicion
-            iziToast.error({
-                title: 'Error',
-                message: 'No se pudo editar el registro, contacte al administrador',
-            });
-        }
-        else {
+        if (data != "error") {
+
             // REFRESCAR UNICAMENTE LA TABLA
             cargarGridDeducciones();
+
             //UNA VEZ REFRESCADA LA TABLA, SE OCULTA EL MODAL
             $("#EditarDeduccionAFP").modal('hide');
+
             //Mensaje de exito de la edicion
             iziToast.success({
                 title: 'Exito',

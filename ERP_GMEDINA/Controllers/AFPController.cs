@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
+        #region Index AFP
         // GET: AFP
         public ActionResult Index()
         {
@@ -47,6 +48,10 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
+
+        #endregion
+
+        #region Crear AFP
         // GET: AFP/Create
         public ActionResult Create()
         {
@@ -113,8 +118,9 @@ namespace ERP_GMEDINA.Controllers
             ViewBag.tde_IdTipoDedu = new SelectList(db.tbTipoDeduccion, "tde_IdTipoDedu", "tde_Descripcion", tbAFP.tde_IdTipoDedu);
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
+        #region Dropdownlist
         //Función: Para llenar los Dropdownlist para Agregar y Editar
         public JsonResult EditGetTipoDeduccionDDL()
         {
@@ -124,8 +130,9 @@ namespace ERP_GMEDINA.Controllers
         
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
+        #region Editar AFP
         // GET: AFP/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -199,8 +206,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
+        #region Detalles AFP
         // GET: AFP/Details/5
         public JsonResult Details(int? id)
         {
@@ -208,7 +216,9 @@ namespace ERP_GMEDINA.Controllers
             tbAFP tbAFPJSON = db.tbAFP.Find(id);
             return Json(tbAFPJSON, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Inactivar AFP
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int afp_Id)
@@ -266,36 +276,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
-        /*        
-                // GET: AFP/Delete/5
-                public ActionResult Delete(int? id)
-                {
-                    if (id == null)
-                    {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    }
-                    tbAFP tbAFP = db.tbAFP.Find(id);
-                    if (tbAFP == null)
-                    {
-                        return HttpNotFound();
-                    }
-                    return View(tbAFP);
-                }
-
-                // POST: AFP/Delete/5
-                [HttpPost, ActionName("Delete")]
-                [ValidateAntiForgeryToken]
-                public ActionResult DeleteConfirmed(int id)
-                {
-                    tbAFP tbAFP = db.tbAFP.Find(id);
-                    db.tbAFP.Remove(tbAFP);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-        */
-
+        #region Ejecutable AFP
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -304,5 +287,7 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+
     }
 }

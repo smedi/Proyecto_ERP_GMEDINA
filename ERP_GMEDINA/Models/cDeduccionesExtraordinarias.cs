@@ -19,7 +19,7 @@ namespace ERP_GMEDINA.Models
 
 
         [Range(1, 9999999999999999, ErrorMessage = "Debe elegir una opción")]
-        [Display(Name = "Id Equipo Empleado")]
+        [Display(Name = "Equipo Empleado")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int eqem_Id { get; set; }
 
@@ -39,7 +39,7 @@ namespace ERP_GMEDINA.Models
         public string dex_ObservacionesComentarios { get; set; }
 
         [Range(1, 9999999999999999, ErrorMessage = "Debe elegir una opción")]
-        [Display(Name = "Id Deducción")]
+        [Display(Name = "Deducción")]
         [Required(ErrorMessage = "Campo Requerido")]
         public int cde_IdDeducciones { get; set; }
 

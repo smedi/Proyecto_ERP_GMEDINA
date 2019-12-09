@@ -387,7 +387,7 @@ $(document).on("click", "#btnInactivarAFP", function () {
 });
 
 //EJECUTAR INACTIVACION DEL REGISTRO EN EL MODAL
-$("#btnInactivarAFP").click(function () {
+$("#btnInactivarRegistroAFP").click(function () {
 
     var data = $("#frmInactivarAFP").serializeArray();
     //SE ENVIA EL JSON AL SERVIDOR PARA EJECUTAR LA EDICIÓN

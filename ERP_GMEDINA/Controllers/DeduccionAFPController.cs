@@ -14,6 +14,7 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
+        #region Index Deducción AFP
         // GET: DeduccionAFP
         public ActionResult Index()
         {
@@ -29,25 +30,27 @@ namespace ERP_GMEDINA.Controllers
             //DE LO CONTRARIO, HACERLO DE LA FORMA CONVENCIONAL (EJEMPLO: db.tbCatalogoDeDeducciones.ToList(); )
             var tbDeduccionAFP1 = db.tbDeduccionAFP
                         .Select(t => new { dafp_Id = t.dafp_Id,
-                                           per_Nombres = t.tbEmpleados.tbPersonas.per_Nombres,
-                                           per_Apellidos = t.tbEmpleados.tbPersonas.per_Apellidos,
-                                           emp_CuentaBancaria = t.tbEmpleados.emp_CuentaBancaria,
-                                           dafp_AporteLps = t.dafp_AporteLps,
-                                           afp_Id = t.afp_Id,
-                                           afp_Descripcion = t.tbAFP.afp_Descripcion,
-                                           emp_Id = t.emp_Id,
-                                           dafp_UsuarioCrea = t.dafp_UsuarioCrea,
-                                           dafp_UsuarioModifica = t.dafp_UsuarioModifica,
-                                           dafp_FechaCrea = t.dafp_FechaCrea,
-                                           dafp_FechaModifica = t.dafp_FechaModifica,
-                                           dafp_Activo = t.dafp_Activo
-                                         })
+                            per_Nombres = t.tbEmpleados.tbPersonas.per_Nombres,
+                            per_Apellidos = t.tbEmpleados.tbPersonas.per_Apellidos,
+                            emp_CuentaBancaria = t.tbEmpleados.emp_CuentaBancaria,
+                            dafp_AporteLps = t.dafp_AporteLps,
+                            afp_Id = t.afp_Id,
+                            afp_Descripcion = t.tbAFP.afp_Descripcion,
+                            emp_Id = t.emp_Id,
+                            dafp_UsuarioCrea = t.dafp_UsuarioCrea,
+                            dafp_UsuarioModifica = t.dafp_UsuarioModifica,
+                            dafp_FechaCrea = t.dafp_FechaCrea,
+                            dafp_FechaModifica = t.dafp_FechaModifica,
+                            dafp_Activo = t.dafp_Activo
+                        })
                         .Where(t => t.dafp_Activo == true)
                         .ToList();
             //RETORNAR JSON AL LADO DEL CLIENTE
             return new JsonResult { Data = tbDeduccionAFP1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+        #endregion
 
+        #region Crear Deducción AFP
         // GET: DeduccionAFP/Create
         public ActionResult Create()
         {
@@ -119,8 +122,9 @@ namespace ERP_GMEDINA.Controllers
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
+        #region Dropdownlists
         //FUNCIÓN: OBETENER LA DATA PARA LLENAR LOS DROPDOWNLIST DE EDICIÓN Y CREACIÓN
         public JsonResult EditGetEmpleadoDDL()
         {
@@ -143,8 +147,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR LA DATA EN FORMATO JSON AL CLIENTE 
             return Json(DDL, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
+        #region Editar Deducción AFP
         // GET: DeduccionAFP/Edit/5
         public JsonResult Edit(int? id)
         {
@@ -214,7 +219,7 @@ namespace ERP_GMEDINA.Controllers
             }
 
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
-            
+
             /*
             ViewBag.afp_Id = new SelectList(db.tbAFP, "afp_Id", "afp_Descripcion", db.tbAFP.Include(d => d.afp_Id));
             ViewBag.emp_Id = new SelectList(db.tbPersonas, "emp_Id", "per_Nombres" + ' ' + "per_Apellidos", db.tbEmpleados.Include(d => d.emp_Id));
@@ -222,7 +227,9 @@ namespace ERP_GMEDINA.Controllers
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Detalles Deducción AFP
         // GET: DeduccionAFP/Details/5
         public JsonResult Details(int? ID)
         {
@@ -230,8 +237,9 @@ namespace ERP_GMEDINA.Controllers
             tbDeduccionAFP tbDeduccionAFPJSON = db.tbDeduccionAFP.Find(ID);
             return Json(tbDeduccionAFPJSON, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
+        #region Inactivar Deducción AFP
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Inactivar(int dafp_Id)
@@ -290,36 +298,9 @@ namespace ERP_GMEDINA.Controllers
             //RETORNAR MENSAJE AL LADO DEL CLIENTE
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-
-        /*
-        // GET: DeduccionAFP/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbDeduccionAFP tbDeduccionAFP = db.tbDeduccionAFP.Find(id);
-            if (tbDeduccionAFP == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbDeduccionAFP);
-        }
-
-        // POST: DeduccionAFP/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbDeduccionAFP tbDeduccionAFP = db.tbDeduccionAFP.Find(id);
-            db.tbDeduccionAFP.Remove(tbDeduccionAFP);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        */
-
+        #region Ejecutable Deducción AFP
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -328,5 +309,7 @@ namespace ERP_GMEDINA.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+
     }
 }
