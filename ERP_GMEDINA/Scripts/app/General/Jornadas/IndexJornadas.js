@@ -2,13 +2,13 @@
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
     id = row.data().Id;
-    $(location).attr('href', "/Jornadas/Edit/" + id);
+    $(location).attr('href', "/Areas/Edit/" + id);
 }
 function tablaEditar(btn) {
     var tr = $(btn).closest("tr");
     var row = tabla.row(tr);
     id = row.data().Id;
-    $(location).attr('href', "/Jornadas/Edit/" + id);
+    $(location).attr('href', "/Areas/Edit/" + id);
 }
 function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Horarios</h5></div><div class="ibox-content"><div class="row">';
