@@ -180,6 +180,7 @@
     <Compile Include="Controllers\HabilidadesController.cs" />
     <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
     <Compile Include="Controllers\HistorialCargosController.cs" />
+    <Compile Include="Controllers\HistorialContratacionesController.cs" />
     <Compile Include="Controllers\HistorialHorasTrabajadasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdiomasController.cs" />
@@ -1126,6 +1127,7 @@
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialCargos\HistorialCargos.js" />
+    <Content Include="Scripts\app\General\HistorialContrataciones\HistorialContrataciones.js" />
     <Content Include="Scripts\app\General\HistorialHorasTrabajadas\HistorialHorasTrabajadas.js" />
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
@@ -1751,6 +1753,7 @@
     <Content Include="Views\Jornadas\Details.cshtml" />
     <Content Include="Views\Jornadas\Edit.cshtml" />
     <Content Include="Views\Jornadas\Index.cshtml" />
+    <Content Include="Views\HistorialContrataciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1786,35 +1789,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>8</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Excel">
-      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>9</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="VBIDE">
-      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>3</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

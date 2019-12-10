@@ -30,16 +30,15 @@ namespace ERP_GMEDINA.Controllers
                 //posteriormente es destruida.
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var HistorialCargos = db.tbHistorialCargos
+                    var HistorialCargos = db.V_HistorialCargos
                         .Select(
                         t => new
                         {
                             hcar_Id = t.hcar_Id,
-                            Encargado = t.tbCargos.tbEmpleados
-                                .Select(p => p.tbPersonas.per_Nombres + " " + p.tbPersonas.per_Apellidos),
-                            car_Anterior = t.tbCargos.car_Descripcion,
-                            car_Nuevo = t.tbCargos.car_Descripcion,
-                            hcar_Fecha = t.hcar_Fecha
+                            Encargado = t.Nombre_Completo,
+                            car_Anterior = t.CargoAnterior,
+                            car_Nuevo = t.CargoNuevo,
+                            hcar_Fecha = t.Fecha_de_Historial
 
                         }
                         )

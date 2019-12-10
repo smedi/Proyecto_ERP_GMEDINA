@@ -112,7 +112,7 @@ $("#InActivar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["car_Descripcion", "car_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Exito!", "Se ha Inactivado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }

@@ -9,7 +9,7 @@ function llenarTabla() {
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.htra_Id,
-                   Colaborador: value.Colaborador.length == 0 ? 'Sin Asignar' : value.Colaborador[0],
+                   Colaborador: value.Colaborador,
                    Jornada: value.jor_Descripcion,
                    Recargo: value.tiho_Recargo,
                    Descripcion: value.tiho_Descripcion
