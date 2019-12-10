@@ -71,3 +71,11 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
     }
 
 });
+
+
+$("#btnAgregar").click(function () {
+    var modalnuevo = $('#ModalNuevo');
+    modalnuevo.modal('show');
+    $(modalnuevo).find("#jor_Descripcion").val("");
+    $(modalnuevo).find("#jor_Descripcion").focus();
+})

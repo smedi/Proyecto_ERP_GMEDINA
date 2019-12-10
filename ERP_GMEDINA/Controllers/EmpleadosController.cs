@@ -80,7 +80,7 @@ namespace ERP_GMEDINA.Controllers
         public void ArchivoEmpleados()
         {
             List<ExcelEmpleados> ExcelEmpleados = new List<ExcelEmpleados>();
-            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "5", per_Apellidos = "Jan", per_FechaNacimiento = "2019", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", car_Id = db.tbCargos.Select(x=>x.car_Descripcion), area_Id = "", depto_Id = "", jor_Id = "" });
+            ExcelEmpleados.Add(new ExcelEmpleados() { per_Identidad = "", per_Nombres = "5", per_Apellidos = "Jan", per_FechaNacimiento = "2019", per_Sexo = "", nac_Id = "", per_Direccion = "", per_Telefono = "", per_CorreoElectronico = "", per_EstadoCivil = "", per_TipoSangre = "", car_Id = db.tbCargos.Select(x=>x.car_Descripcion).ToString(), area_Id = "", depto_Id = "", jor_Id = "" });
             ExcelPackage Ep = new ExcelPackage();
             ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("ArchivoEmpleados");
             Sheet.Cells["A1"].Value = "Identidad";

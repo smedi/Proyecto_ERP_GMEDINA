@@ -1,0 +1,23 @@
+﻿@model ERP_GMEDINA.Models.tbJornadas
+                @using (Html.BeginForm(null, null, FormMethod.Post, new {id= "FormNuevo" }))
+                {
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+							@Html.LabelFor(model => model.jor_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
+							<div class="col-md-8">
+								@Html.EditorFor(model => model.jor_Descripcion, new { htmlAttributes = new { @class = "form-contro required valid" } })
+								@Html.ValidationMessageFor(model => model.jor_Descripcion, "", new { @class = "text-danger", @id = "errorjor_Descripcion" })
+                            </div>
+                        </div>
+					</div>
+				}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary pull-left" id="btnGuardar">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
