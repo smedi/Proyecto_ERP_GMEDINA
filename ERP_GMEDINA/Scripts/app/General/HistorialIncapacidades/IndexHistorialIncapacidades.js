@@ -93,7 +93,7 @@ function Llamarmodaldetalle() {
 
 function Llamarmodalcreate() {
 
-    var modalnuevo = $("#ModalCreate");
+    var modalnuevo = $("#ModalNuevo");
     modalnuevo.modal('show');
 
 
