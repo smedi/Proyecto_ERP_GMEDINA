@@ -22,10 +22,12 @@
                 <div class="ibox-title">
                     <h5>Listado de Personas</h5>
                     <div class="ibox-tools">
-                        <input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar Personas" />
+                        @*<input type="button" id="btnAgregar" class="btn btn-primary btn-xs" value="Registrar Personas" />*@
+                        @Html.ActionLink("Nuevo", "Create")
+                        <a type="button"  href="~/Views/Personas/Create.cshtml" id="btnAgregar" class="btn btn-primary btn-xs" >Registrar Personas </a>
                     </div>
                 </div>
-                <div class="ibox-content">
+                <div class="ibox-content">  
                   <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
                     <thead>
                         <tr role="row">

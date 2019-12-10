@@ -50,12 +50,17 @@ namespace ERP_GMEDINA.Controllers
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
+            
             List<V_tbPersonas> lista = new List<V_tbPersonas> { };
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
                     lista = db.V_tbPersonas.Where(x => x.per_Id == id).ToList();
+                    if(lista.Count == 0)
+                    {
+                        lista.Add(new V_tbPersonas { per_Id = id,Relacion_Id =0,Descripcion ="",Relacion = "" });
+                    }
                 }
                 catch(Exception ex)
                 {
