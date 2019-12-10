@@ -2403,6 +2403,23 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HorariosDetalles' does not have
           <Property Name="hor_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_SeleccionCandidatos">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Fase" />
+            <PropertyRef Name="Plaza_Disponible" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="Fase" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Plaza_Disponible" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbEmpleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbEmpleados">
           <Key>
@@ -5421,18 +5438,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_rrhh_tbFaseSeleccion_fsel_Id_rrhh_tbSeleccionCandidatos_fare_Id">
-          <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="1" />
-          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbFaseSeleccion">
-              <PropertyRef Name="fsel_Id" />
-            </Principal>
-            <Dependent Role="tbSeleccionCandidatos">
-              <PropertyRef Name="fare_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbFaseSeleccion_fare_Id">
           <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="1" />
           <End Role="tbFaseSeleccion" Type="Self.tbFaseSeleccion" Multiplicity="*" />
@@ -5441,6 +5446,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               <PropertyRef Name="fare_Id" />
             </Principal>
             <Dependent Role="tbFaseSeleccion">
+              <PropertyRef Name="fare_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
+          <End Role="tbFasesReclutamiento" Type="Self.tbFasesReclutamiento" Multiplicity="1" />
+          <End Role="tbSeleccionCandidatos" Type="Self.tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFasesReclutamiento">
+              <PropertyRef Name="fare_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
               <PropertyRef Name="fare_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -6730,6 +6747,34 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Parameter Name="resp_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="resp_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbSeleccionCandidatos_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="scan_Id" Type="int" Mode="In" />
+          <Parameter Name="scan_RazonInactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="scan_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="scan_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbSeleccionCandidatos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="per_Id" Type="int" Mode="In" />
+          <Parameter Name="fare_Id" Type="int" Mode="In" />
+          <Parameter Name="scan_Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="rper_Id" Type="int" Mode="In" />
+          <Parameter Name="scan_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="scan_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbSeleccionCandidatos_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="scan_Id" Type="int" Mode="In" />
+          <Parameter Name="scan_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="scan_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbSeleccionCandidatos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="scan_Id" Type="int" Mode="In" />
+          <Parameter Name="per_Id" Type="int" Mode="In" />
+          <Parameter Name="fare_Id" Type="int" Mode="In" />
+          <Parameter Name="scan_Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="rper_Id" Type="int" Mode="In" />
+          <Parameter Name="scan_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="scan_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbTipoAmonestaciones_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="tamo_Id" Type="int" Mode="In" />
           <Parameter Name="tamo_razon_Inactivo" Type="nvarchar" Mode="In" />
@@ -7646,6 +7691,16 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
     [V_HorariosDetalles].[hor_UsuarioModifica] AS [hor_UsuarioModifica], 
     [V_HorariosDetalles].[hor_FechaModifica] AS [hor_FechaModifica]
     FROM [rrhh].[V_HorariosDetalles] AS [V_HorariosDetalles]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_SeleccionCandidatos" EntityType="Self.V_SeleccionCandidatos" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_SeleccionCandidatos].[Id] AS [Id], 
+    [V_SeleccionCandidatos].[Identidad] AS [Identidad], 
+    [V_SeleccionCandidatos].[Nombre] AS [Nombre], 
+    [V_SeleccionCandidatos].[Fase] AS [Fase], 
+    [V_SeleccionCandidatos].[Plaza_Disponible] AS [Plaza_Disponible], 
+    [V_SeleccionCandidatos].[Fecha] AS [Fecha]
+    FROM [rrhh].[V_SeleccionCandidatos] AS [V_SeleccionCandidatos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_tbEmpleados" EntityType="Self.V_tbEmpleados" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -8702,13 +8757,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <End Role="tbEquipoTrabajo" EntitySet="tbEquipoTrabajo" />
             <End Role="tbEquipoEmpleados" EntitySet="tbEquipoEmpleados" />
           </AssociationSet>
-          <AssociationSet Name="FK_rrhh_tbFaseSeleccion_fsel_Id_rrhh_tbSeleccionCandidatos_fare_Id" Association="Self.FK_rrhh_tbFaseSeleccion_fsel_Id_rrhh_tbSeleccionCandidatos_fare_Id">
-            <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
-            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
-          </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbFaseSeleccion_fare_Id" Association="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbFaseSeleccion_fare_Id">
             <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
             <End Role="tbFaseSeleccion" EntitySet="tbFaseSeleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" Association="Self.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
+            <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesPersona_habi_Id" Association="Self.FK_rrhh_tbHabilidades_habi_Id_rrhh_tbHabilidadesPersona_habi_Id">
             <End Role="tbHabilidades" EntitySet="tbHabilidades" />
@@ -10625,7 +10680,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
           <FunctionImport Name="UDP_Plani_DecimoTercerMes_RPT" ReturnType="Collection(ERP_GMEDINAModel.UDP_Plani_DecimoTercerMes_RPT_Result)">
-            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+          <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Plani_EmpleadoComisiones_Activar" ReturnType="Collection(String)">
             <Parameter Name="cc_Id" Mode="In" Type="Int32" />
@@ -10909,7 +10964,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="depto_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEmpresas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpresas_Select_Result)">
-            <Parameter Name="empr_Id" Mode="In" Type="Int32" />
+          <Parameter Name="empr_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbEquipoTrabajo_Delete" ReturnType="Collection(Int32)">
             <Parameter Name="eqtra_Id" Mode="In" Type="Int32" />
@@ -11120,7 +11175,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="tiho_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoMonedas_Select" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbTipoMonedas_Select_Result)">
-            <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
+          <Parameter Name="tmon_Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbTipoPermisos_Delete" ReturnType="Collection(String)">
             <Parameter Name="tper_Id" Mode="In" Type="Int32" />
@@ -11166,6 +11221,39 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="tsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_SeleccionCandidatos" EntityType="ERP_GMEDINAModel.V_SeleccionCandidatos" />
+          <FunctionImport Name="UDP_RRHH_tbSeleccionCandidatos_Delete" ReturnType="Collection(String)">
+            <Parameter Name="scan_Id" Mode="In" Type="Int32" />
+            <Parameter Name="scan_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="scan_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="scan_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbSeleccionCandidatos_Insert" ReturnType="Collection(String)">
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="fare_Id" Mode="In" Type="Int32" />
+            <Parameter Name="scan_Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="rper_Id" Mode="In" Type="Int32" />
+            <Parameter Name="scan_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="scan_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbSeleccionCandidatos_Restore" ReturnType="Collection(String)">
+            <Parameter Name="scan_Id" Mode="In" Type="Int32" />
+            <Parameter Name="scan_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="scan_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbSeleccionCandidatos_Update" ReturnType="Collection(String)">
+            <Parameter Name="scan_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="fare_Id" Mode="In" Type="Int32" />
+            <Parameter Name="scan_Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="rper_Id" Mode="In" Type="Int32" />
+            <Parameter Name="scan_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="scan_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <AssociationSet Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" Association="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
+            <End Role="tbFasesReclutamiento" EntitySet="tbFasesReclutamiento" />
+            <End Role="tbSeleccionCandidatos" EntitySet="tbSeleccionCandidatos" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -12460,6 +12548,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <NavigationProperty Name="tbUsuario" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioCrea" FromRole="tbFasesReclutamiento" ToRole="tbUsuario" />
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbFasesReclutamiento_fare_UsuarioModifica" FromRole="tbFasesReclutamiento" ToRole="tbUsuario" />
           <NavigationProperty Name="tbFaseSeleccion" Relationship="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbFaseSeleccion_fare_Id" FromRole="tbFasesReclutamiento" ToRole="tbFaseSeleccion" />
+          <NavigationProperty Name="tbSeleccionCandidatos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" FromRole="tbFasesReclutamiento" ToRole="tbSeleccionCandidatos" />
         </EntityType>
         <EntityType Name="tbHabilidades">
           <Key>
@@ -13010,6 +13099,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <NavigationProperty Name="tbHistorialContrataciones" Relationship="ERP_GMEDINAModel.FK_rrhh_tbSeleccionCandidatos_scan_Id_rrhh_tbHistorialContrataciones_scan_Id" FromRole="tbSeleccionCandidatos" ToRole="tbHistorialContrataciones" />
           <NavigationProperty Name="tbPersonas" Relationship="ERP_GMEDINAModel.FK_rrhh_tbPersonas_per_Id_rrhh_tbSeleccionCandidatos_per_Id" FromRole="tbSeleccionCandidatos" ToRole="tbPersonas" />
           <NavigationProperty Name="tbRequisiciones" Relationship="ERP_GMEDINAModel.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbSeleccionCandidatos_rper_Id" FromRole="tbSeleccionCandidatos" ToRole="tbRequisiciones" />
+          <NavigationProperty Name="tbFasesReclutamiento" Relationship="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" FromRole="tbSeleccionCandidatos" ToRole="tbFasesReclutamiento" />
         </EntityType>
         <EntityType Name="tbSucursales">
           <Key>
@@ -17765,6 +17855,33 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
         <ComplexType Name="UDP_RRHH_tbRequerimientosEspeciales_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <EntityType Name="V_SeleccionCandidatos">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Identidad" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Fase" />
+            <PropertyRef Name="Plaza_Disponible" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Identidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="Fase" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Plaza_Disponible" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id">
+          <End Type="ERP_GMEDINAModel.tbFasesReclutamiento" Role="tbFasesReclutamiento" Multiplicity="1" />
+          <End Type="ERP_GMEDINAModel.tbSeleccionCandidatos" Role="tbSeleccionCandidatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbFasesReclutamiento">
+              <PropertyRef Name="fare_Id" />
+            </Principal>
+            <Dependent Role="tbSeleccionCandidatos">
+              <PropertyRef Name="fare_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -20672,6 +20789,22 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="V_SeleccionCandidatos">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_SeleccionCandidatos">
+              <MappingFragment StoreEntitySet="V_SeleccionCandidatos">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Plaza_Disponible" ColumnName="Plaza_Disponible" />
+                <ScalarProperty Name="Fase" ColumnName="Fase" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSeleccionCandidatos_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSeleccionCandidatos_Delete" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSeleccionCandidatos_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSeleccionCandidatos_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSeleccionCandidatos_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSeleccionCandidatos_Restore" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbSeleccionCandidatos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbSeleccionCandidatos_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

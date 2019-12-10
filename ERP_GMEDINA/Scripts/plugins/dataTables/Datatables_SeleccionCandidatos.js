@@ -30,28 +30,19 @@ $(document).ready(function () {
             col = col + 1;
         }
 
-        //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
+            //Si la columa tiene el nombre de "Acciones", automaticamente insertara los botones de Detalles y Editar
         else if (campo == "Acciones") {
             columnas.push({
                 data: null,
                 orderable: false,
                 defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-                                    "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
-                                    "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Editar</a>" +                         
+                                    "<a class='btn btn-primary btn-xs' style= 'min-width: 70px;' onclick='CallDetalles(this)' >Detalles</a>" +
+                                    "<a class='btn btn-default btn-xs' style= 'min-width: 70px;' onclick='CallEditar(this)'>Editar</a>" +
+                                    "<a class='btn btn-success btn-xs ' style= 'min-width: 70px;' href='#'>Contratar</a>" +
+                                    "<a class='btn btn-danger btn-xs ' style= 'min-width: 70px;' href='#'>Inhabilitar</a>" +
                                 "</div>"
             });
-        }    
-                          
-        //else if (campo == "Reportes") {
-        //    columnas.push({
-        //        data: null,
-        //        orderable: false,
-        //        defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
-        //                            "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Horas Trabajadas</a>" +
-        //                            "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Perfil Profesional</a>" +
-        //                        "</div>"
-        //    });
-        //}
+        }
         else {
             columnas.push({ data: campo });
             botones.push(contador);

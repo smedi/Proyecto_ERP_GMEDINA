@@ -24,14 +24,28 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Fase Reclutamiento")]
         public int fare_Id { get; set; }
 
+        [Display(Name = "Fecha")]
         public Nullable<System.DateTime> scan_Fecha { get; set; }
 
+        [Display(Name = "Plaza Disponible")]
         public int rper_Id { get; set; }
+
+        [Display(Name = "Estado")]
         public bool scan_Estado { get; set; }
+
+        [Display(Name = "Razón Inactivo")]
         public string scan_RazonInactivo { get; set; }
+
+        [Display(Name = "Usuario Crea")]
         public int scan_UsuarioCrea { get; set; }
+
+        [Display(Name = "Fecha Crea")]
         public System.DateTime scan_FechaCrea { get; set; }
+
+        [Display(Name = "Usuario Modifica")]
         public Nullable<int> scan_UsuarioModifica { get; set; }
+
+        [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> scan_FechaModifica { get; set; }
 
     }

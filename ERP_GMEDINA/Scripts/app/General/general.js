@@ -1,3 +1,4 @@
+/// <reference path="general.js" />
 //
 var modal = ["ModalNuevo", "ModalEditar", "ModalInhabilitar", "ModalDetalles"];
 var formularios = ["FormNuevo", "FormEditar", "FormInactivar"];
@@ -162,3 +163,6 @@ formularios.forEach(function (formulario) {
   e.preventDefault();
  });
 });
+
+
+

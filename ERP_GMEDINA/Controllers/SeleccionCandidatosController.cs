@@ -14,126 +14,54 @@ namespace ERP_GMEDINA.Controllers
     {
         private ERP_GMEDINAEntities db = new ERP_GMEDINAEntities();
 
-        // GET: SeleccionCandidatos
         public ActionResult Index()
         {
-            var tbSeleccionCandidatos = db.tbSeleccionCandidatos.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbFaseSeleccion).Include(t => t.tbPersonas).Include(t => t.tbRequisiciones);
-            return View(tbSeleccionCandidatos.ToList());
-        }
-
-        // GET: SeleccionCandidatos/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbSeleccionCandidatos tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
-            if (tbSeleccionCandidatos == null)
-            {
-                return HttpNotFound();
-            }
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            List<tbSeleccionCandidatos> tbSeleccionCandidatos = new List<tbSeleccionCandidatos> { };
             return View(tbSeleccionCandidatos);
         }
 
-        // GET: SeleccionCandidatos/Create
-        public ActionResult Create()
+        public ActionResult llenarTabla()
         {
-            ViewBag.scan_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.scan_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
-            ViewBag.fare_Id = new SelectList(db.tbFaseSeleccion, "fsel_Id", "fsel_RazonInactivo");
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad");
-            ViewBag.rper_Id = new SelectList(db.tbRequisiciones, "req_Id", "req_Experiencia");
-            return View();
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var candidatos = db.V_SeleccionCandidatos
+                        .Select(
+                        t => new
+                        {
+                            Identidad = t.Identidad,
+                            Nombre = t.Nombre,
+                            Fase = t.Fase,
+                            Plaza_Disponible = t.Plaza_Disponible,
+                            Fecha = t.Fecha
+                        }).ToList();
+                    return Json(candidatos, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
         }
 
-        // POST: SeleccionCandidatos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "scan_Id,per_Id,fare_Id,scan_Fecha,rper_Id,scan_Estado,scan_RazonInactivo,scan_UsuarioCrea,scan_FechaCrea,scan_UsuarioModifica,scan_FechaModifica")] tbSeleccionCandidatos tbSeleccionCandidatos)
+        public ActionResult ChildRowData(int? id)
         {
-            if (ModelState.IsValid)
+            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
+            //posteriormente es destruida.
+            List<V_SeleccionCandidatos> lista = new List<V_SeleccionCandidatos> { };
+            using (db = new ERP_GMEDINAEntities())
             {
-                db.tbSeleccionCandidatos.Add(tbSeleccionCandidatos);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    lista = db.V_SeleccionCandidatos.Where(x => x.Id == id).ToList();
+                }
+                catch
+                {
+                }
             }
-
-            ViewBag.scan_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioCrea);
-            ViewBag.scan_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioModifica);
-            ViewBag.fare_Id = new SelectList(db.tbFaseSeleccion, "fsel_Id", "fsel_RazonInactivo", tbSeleccionCandidatos.fare_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbSeleccionCandidatos.per_Id);
-            ViewBag.rper_Id = new SelectList(db.tbRequisiciones, "req_Id", "req_Experiencia", tbSeleccionCandidatos.rper_Id);
-            return View(tbSeleccionCandidatos);
-        }
-
-        // GET: SeleccionCandidatos/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbSeleccionCandidatos tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
-            if (tbSeleccionCandidatos == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.scan_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioCrea);
-            ViewBag.scan_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioModifica);
-            ViewBag.fare_Id = new SelectList(db.tbFaseSeleccion, "fsel_Id", "fsel_RazonInactivo", tbSeleccionCandidatos.fare_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbSeleccionCandidatos.per_Id);
-            ViewBag.rper_Id = new SelectList(db.tbRequisiciones, "req_Id", "req_Experiencia", tbSeleccionCandidatos.rper_Id);
-            return View(tbSeleccionCandidatos);
-        }
-
-        // POST: SeleccionCandidatos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "scan_Id,per_Id,fare_Id,scan_Fecha,rper_Id,scan_Estado,scan_RazonInactivo,scan_UsuarioCrea,scan_FechaCrea,scan_UsuarioModifica,scan_FechaModifica")] tbSeleccionCandidatos tbSeleccionCandidatos)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbSeleccionCandidatos).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.scan_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioCrea);
-            ViewBag.scan_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbSeleccionCandidatos.scan_UsuarioModifica);
-            ViewBag.fare_Id = new SelectList(db.tbFaseSeleccion, "fsel_Id", "fsel_RazonInactivo", tbSeleccionCandidatos.fare_Id);
-            ViewBag.per_Id = new SelectList(db.tbPersonas, "per_Id", "per_Identidad", tbSeleccionCandidatos.per_Id);
-            ViewBag.rper_Id = new SelectList(db.tbRequisiciones, "req_Id", "req_Experiencia", tbSeleccionCandidatos.rper_Id);
-            return View(tbSeleccionCandidatos);
-        }
-
-        // GET: SeleccionCandidatos/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbSeleccionCandidatos tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
-            if (tbSeleccionCandidatos == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbSeleccionCandidatos);
-        }
-
-        // POST: SeleccionCandidatos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbSeleccionCandidatos tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
-            db.tbSeleccionCandidatos.Remove(tbSeleccionCandidatos);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(lista, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
