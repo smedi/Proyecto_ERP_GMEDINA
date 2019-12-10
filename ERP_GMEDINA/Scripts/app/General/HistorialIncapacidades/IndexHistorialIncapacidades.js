@@ -1,5 +1,6 @@
-﻿function format(obj) {  
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" onclick="LlamarmodalNuevo()" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
+﻿function format(obj) {
+   
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalcreate()" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
         +'<table class="table table-striped table-bordered table-hover dataTables-example" >'
         +'<thead>'
         +'<tr> <th>  Incapacidad  </th>'
@@ -11,17 +12,21 @@
          + '<th>Acciones</th> '
         +'</tr> </thead> ';
     obj.forEach(function (index, value) {
-        div = div +
-            '<tbody>' + '<tr>'
-                + '<td>' + index.ticn_Descripcion + '</td>'
-                + '<td>' + index.hinc_Dias + '</td>'
-                + '<td>' + index.hinc_CentroMedico + '</td>'
-                + '<td>' + index.hinc_Diagnostico + '</td>'
-                + '<td>' + FechaFormato(index.hinc_FechaInicio).substring(0,10) + '</td>'
-                + '<td>' + FechaFormato(index.hinc_FechaFin).substring(0,10) + '</td>'
-                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete()" data-id="@item.cin_IdIngreso">Eliminar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle()" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
-                + '</tr>' + '</tbody>'
+       
+       
+            div = div +
+                '<tbody>' + '<tr>'
+                    + '<td>' + index.ticn_Descripcion + '</td>'
+                    + '<td>' + index.hinc_Dias + '</td>'
+                    + '<td>' + index.hinc_CentroMedico + '</td>'
+                    + '<td>' + index.hinc_Diagnostico + '</td>'
+                    + '<td>' + FechaFormato(index.hinc_FechaInicio).substring(0, 10) + '</td>'
+                    + '<td>' + FechaFormato(index.hinc_FechaFin).substring(0, 10) + '</td>'
+                    + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete()" data-id="@item.cin_IdIngreso">Eliminar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle()" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
+                    + '</tr>' + '</tbody>'
             '</table>'
+            
+        
     });
     return div + '</div></div>';
 }
@@ -81,6 +86,14 @@ function Llamarmodaldelete() {
 function Llamarmodaldetalle() {
 
     var modalnuevo = $("#ModalDetalles");
+    modalnuevo.modal('show');
+
+
+}
+
+function Llamarmodalcreate() {
+
+    var modalnuevo = $("#ModalCreate");
     modalnuevo.modal('show');
 
 

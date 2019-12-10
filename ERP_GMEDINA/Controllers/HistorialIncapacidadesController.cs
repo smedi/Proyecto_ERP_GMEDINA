@@ -65,18 +65,12 @@ namespace ERP_GMEDINA.Controllers
                 }
                 catch
                 {
+
                 }
+               
             }
-            if(lista.Count == 0)
-            {
-                V_HistorialIncapacidades Empty = new V_HistorialIncapacidades();
-                Empty.emp_Id = Convert.ToInt32(id);
-                return Json(Empty, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
+           
                 return Json(lista, JsonRequestBehavior.AllowGet);
-            }
         }
 
 
