@@ -1,11 +1,5 @@
-﻿function format(obj) {
-    var EmpID = 0;
-    if (obj.length > 1)
-        EmpID = obj[0].emp_Id;
-    else
-        EmpID = obj.emp_Id;
-        
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><a href="Create/'+ EmpID +'" type="button" class="btn btn-primary btn-xs" id="btnEditarIngreso" data-id="@item.cin_IdIngreso">Agregar Incapacidad</a> </div> </div><div class="ibox-content"><div class="row">'
+﻿function format(obj) {  
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" onclick="LlamarmodalNuevo()" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
         +'<table class="table table-striped table-bordered table-hover dataTables-example" >'
         +'<thead>'
         +'<tr> <th>  Incapacidad  </th>'
