@@ -29,6 +29,15 @@ namespace ERP_GMEDINA.Models
     
         public virtual DbSet<tbUsuario> tbUsuario { get; set; }
         public virtual DbSet<tbRazonSalidas> tbRazonSalidas { get; set; }
+        public virtual DbSet<tbCompetencias> tbCompetencias { get; set; }
+        public virtual DbSet<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
+        public virtual DbSet<tbSeleccionCandidatos> tbSeleccionCandidatos { get; set; }
+        public virtual DbSet<V_HistorialContrataciones> V_HistorialContrataciones { get; set; }
+        public virtual DbSet<tbAreas> tbAreas { get; set; }
+        public virtual DbSet<tbCargos> tbCargos { get; set; }
+        public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
+        public virtual DbSet<tbEmpleados> tbEmpleados { get; set; }
+        public virtual DbSet<tbPersonas> tbPersonas { get; set; }
     
         public virtual ObjectResult<UDP_RRHH_tbRazonSalida_Update_Result> UDP_RRHH_tbRazonSalida_Update(Nullable<int> rsal_Id, string rsal_Descripcion, Nullable<int> rsal_UsuarioModifica, Nullable<System.DateTime> rsal_FechaModifica)
         {
@@ -104,6 +113,98 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("rsal_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbRazonSalidas_Restore_Result>("UDP_RRHH_tbRazonSalidas_Restore", rsal_IdParameter, rsal_UsuarioModificaParameter, rsal_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_RRHH_tbHistorialContrataciones_Delete(Nullable<int> hcon_Id, string hcon_RazonInactivo, Nullable<int> hcon_UsuarioModifica, Nullable<System.DateTime> hcon_FechaModifica)
+        {
+            var hcon_IdParameter = hcon_Id.HasValue ?
+                new ObjectParameter("hcon_Id", hcon_Id) :
+                new ObjectParameter("hcon_Id", typeof(int));
+    
+            var hcon_RazonInactivoParameter = hcon_RazonInactivo != null ?
+                new ObjectParameter("hcon_RazonInactivo", hcon_RazonInactivo) :
+                new ObjectParameter("hcon_RazonInactivo", typeof(string));
+    
+            var hcon_UsuarioModificaParameter = hcon_UsuarioModifica.HasValue ?
+                new ObjectParameter("hcon_UsuarioModifica", hcon_UsuarioModifica) :
+                new ObjectParameter("hcon_UsuarioModifica", typeof(int));
+    
+            var hcon_FechaModificaParameter = hcon_FechaModifica.HasValue ?
+                new ObjectParameter("hcon_FechaModifica", hcon_FechaModifica) :
+                new ObjectParameter("hcon_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialContrataciones_Delete", hcon_IdParameter, hcon_RazonInactivoParameter, hcon_UsuarioModificaParameter, hcon_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_RRHH_tbHistorialContrataciones_Insert(Nullable<int> scan_Id, Nullable<int> depto_Id, Nullable<System.DateTime> hcon_FechaContratado, Nullable<int> hcon_UsuarioCrea, Nullable<System.DateTime> hcon_FechaCrea)
+        {
+            var scan_IdParameter = scan_Id.HasValue ?
+                new ObjectParameter("scan_Id", scan_Id) :
+                new ObjectParameter("scan_Id", typeof(int));
+    
+            var depto_IdParameter = depto_Id.HasValue ?
+                new ObjectParameter("depto_Id", depto_Id) :
+                new ObjectParameter("depto_Id", typeof(int));
+    
+            var hcon_FechaContratadoParameter = hcon_FechaContratado.HasValue ?
+                new ObjectParameter("hcon_FechaContratado", hcon_FechaContratado) :
+                new ObjectParameter("hcon_FechaContratado", typeof(System.DateTime));
+    
+            var hcon_UsuarioCreaParameter = hcon_UsuarioCrea.HasValue ?
+                new ObjectParameter("hcon_UsuarioCrea", hcon_UsuarioCrea) :
+                new ObjectParameter("hcon_UsuarioCrea", typeof(int));
+    
+            var hcon_FechaCreaParameter = hcon_FechaCrea.HasValue ?
+                new ObjectParameter("hcon_FechaCrea", hcon_FechaCrea) :
+                new ObjectParameter("hcon_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialContrataciones_Insert", scan_IdParameter, depto_IdParameter, hcon_FechaContratadoParameter, hcon_UsuarioCreaParameter, hcon_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_RRHH_tbHistorialContrataciones_Restore(Nullable<int> hcon_Id, Nullable<int> hcon_UsuarioModifica, Nullable<System.DateTime> hcon_FechaModifica)
+        {
+            var hcon_IdParameter = hcon_Id.HasValue ?
+                new ObjectParameter("hcon_Id", hcon_Id) :
+                new ObjectParameter("hcon_Id", typeof(int));
+    
+            var hcon_UsuarioModificaParameter = hcon_UsuarioModifica.HasValue ?
+                new ObjectParameter("hcon_UsuarioModifica", hcon_UsuarioModifica) :
+                new ObjectParameter("hcon_UsuarioModifica", typeof(int));
+    
+            var hcon_FechaModificaParameter = hcon_FechaModifica.HasValue ?
+                new ObjectParameter("hcon_FechaModifica", hcon_FechaModifica) :
+                new ObjectParameter("hcon_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialContrataciones_Restore", hcon_IdParameter, hcon_UsuarioModificaParameter, hcon_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_RRHH_tbHistorialContrataciones_Update(Nullable<int> hcon_Id, Nullable<int> scan_Id, Nullable<int> depto_Id, Nullable<System.DateTime> hcon_FechaContratado, Nullable<int> hcon_UsuarioModifica, Nullable<System.DateTime> hcon_FechaModifica)
+        {
+            var hcon_IdParameter = hcon_Id.HasValue ?
+                new ObjectParameter("hcon_Id", hcon_Id) :
+                new ObjectParameter("hcon_Id", typeof(int));
+    
+            var scan_IdParameter = scan_Id.HasValue ?
+                new ObjectParameter("scan_Id", scan_Id) :
+                new ObjectParameter("scan_Id", typeof(int));
+    
+            var depto_IdParameter = depto_Id.HasValue ?
+                new ObjectParameter("depto_Id", depto_Id) :
+                new ObjectParameter("depto_Id", typeof(int));
+    
+            var hcon_FechaContratadoParameter = hcon_FechaContratado.HasValue ?
+                new ObjectParameter("hcon_FechaContratado", hcon_FechaContratado) :
+                new ObjectParameter("hcon_FechaContratado", typeof(System.DateTime));
+    
+            var hcon_UsuarioModificaParameter = hcon_UsuarioModifica.HasValue ?
+                new ObjectParameter("hcon_UsuarioModifica", hcon_UsuarioModifica) :
+                new ObjectParameter("hcon_UsuarioModifica", typeof(int));
+    
+            var hcon_FechaModificaParameter = hcon_FechaModifica.HasValue ?
+                new ObjectParameter("hcon_FechaModifica", hcon_FechaModifica) :
+                new ObjectParameter("hcon_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHistorialContrataciones_Update", hcon_IdParameter, scan_IdParameter, depto_IdParameter, hcon_FechaContratadoParameter, hcon_UsuarioModificaParameter, hcon_FechaModificaParameter);
         }
     }
 }
