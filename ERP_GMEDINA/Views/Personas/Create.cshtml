@@ -15,173 +15,145 @@
     <div class="form-horizontal">
         <h4>tbPersonas</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.per_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_Identidad, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_Identidad, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_Identidad, "", new { @class = "text-danger" })
-            </div>
-        </div>
+}
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_Nombres, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_Nombres, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_Nombres, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_Apellidos, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_Apellidos, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_Apellidos, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_FechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_FechaNacimiento, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_FechaNacimiento, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_Sexo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_Sexo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_Sexo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_Edad, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_Edad, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_Edad, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.nac_Id, "nac_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("nac_Id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.nac_Id, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.per_Direccion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_Direccion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_Direccion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_Telefono, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_Telefono, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_CorreoElectronico, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_CorreoElectronico, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_CorreoElectronico, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_EstadoCivil, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_EstadoCivil, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_EstadoCivil, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_TipoSangre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_TipoSangre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_TipoSangre, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.per_Estado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.per_Estado)
-                    @Html.ValidationMessageFor(model => model.per_Estado, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_RazonInactivo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_RazonInactivo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_RazonInactivo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_UsuarioCrea, "per_UsuarioCrea", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("per_UsuarioCrea", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.per_UsuarioCrea, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_FechaCrea, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_FechaCrea, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_FechaCrea, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_UsuarioModifica, "per_UsuarioModifica", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("per_UsuarioModifica", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.per_UsuarioModifica, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.per_FechaModifica, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.per_FechaModifica, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.per_FechaModifica, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>Wizard with Validation</h5>
+        <div class="ibox-tools">
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a href="#" class="dropdown-item">Config option 1</a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-item">Config option 2</a>
+                </li>
+            </ul>
+            <a class="close-link">
+                <i class="fa fa-times"></i>
+            </a>
         </div>
     </div>
-}
+    <div class="ibox-content">
+        <h2>
+            Validation Wizard Form
+        </h2>
+        <p>
+            This example show how to use Steps with jQuery Validation plugin.
+        </p>
+
+        <form id="Persona" action="#" class="wizard-big wizard clearfix" role="application" novalidate="novalidate">
+            <div class="steps clearfix">
+                <ul role="tablist">
+                    <li role="tab" class="first current" aria-disabled="false" aria-selected="true">
+                        <a id="form-t-0" href="#form-h-0" aria-controls="form-p-0">
+                            <span class="number">1.</span> Datos Personales</a>
+                    </li>
+                    <li role="tab" class="disabled" aria-disabled="true">
+                        <a id="form-t-1" href="#form-h-1" aria-controls="form-p-1">
+                            <span class="number">2.</span> Habilidades </a>
+                    </li>
+                    <li role="tab" class="disabled" aria-disabled="true">
+                        <a id="form-t-2" href="#form-h-2" aria-controls="form-p-2"><span class="number">3.</span> Competencias</a>
+                    </li>
+                    <li role="tab" class="disabled last" aria-disabled="true">
+                        <a id="form-t-3" href="#form-h-3" aria-controls="form-p-3"><span class="number">4.</span> Titulos </a>
+                    </li>
+                    <li role="tab" class="disabled last" aria-disabled="true">
+                        <a id="form-t-4" href="#form-h-4" aria-controls="form-p-4"><span class="number">4.</span> Idiomas </a>
+                    </li>
+                    <li role="tab" class="disabled last" aria-disabled="true">
+                        <a id="form-t-5" href="#form-h-5" aria-controls="form-p-5"><span class="number">4.</span> Otros </a>
+                    </li>
+                    <li role="tab" class="disabled last" aria-disabled="true">
+                        <a id="form-t-6" href="#form-h-6" aria-controls="form-p-6"><span class="number">4.</span> Terminos y Condiciones </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content clearfix">
+                <h1 id="form-h-0" tabindex="-1" class="title current">Account</h1>
+                <fieldset id="form-p-0" role="tabpanel" aria-labelledby="form-h-0" class="body current" aria-hidden="false">
+                    <h2>Account Information</h2>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label>Username *</label>
+                                <input id="userName" name="userName" type="text" class="form-control required" aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label>Password *</label>
+                                <input id="password" name="password" type="text" class="form-control required" aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password *</label>
+                                <input id="confirm" name="confirm" type="text" class="form-control required" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="text-center">
+                                <div style="margin-top: 20px">
+                                    <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <h1 id="form-h-1" tabindex="-1" class="title">Profile</h1>
+                <fieldset id="form-p-1" role="tabpanel" aria-labelledby="form-h-1" class="body" aria-hidden="true" style="display: none;">
+                    <h2>Profile Information</h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>First name *</label>
+                                <input id="name" name="name" type="text" class="form-control required" aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label>Last name *</label>
+                                <input id="surname" name="surname" type="text" class="form-control required" aria-required="true">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input id="email" name="email" type="text" class="form-control required email" aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label>Address *</label>
+                                <input id="address" name="address" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <h1 id="form-h-2" tabindex="-1" class="title">Warning</h1>
+                <fieldset id="form-p-2" role="tabpanel" aria-labelledby="form-h-2" class="body" aria-hidden="true" style="display: none;">
+                    <div class="text-center" style="margin-top: 120px">
+                        <h2>You did it Man :-)</h2>
+                    </div>
+                </fieldset>
+
+                <h1 id="form-h-3" tabindex="-1" class="title">Finish</h1>
+                <fieldset id="form-p-3" role="tabpanel" aria-labelledby="form-h-3" class="body" aria-hidden="true" style="display: none;">
+                    <h2>Terms and Conditions</h2>
+                    <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required" aria-required="true"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+                </fieldset>
+            </div><div class="actions clearfix"><ul role="menu" aria-label="Pagination"><li class="disabled" aria-disabled="true"><a href="#previous" role="menuitem">Previous</a></li><li aria-hidden="false" aria-disabled="false"><a href="#next" role="menuitem">Next</a></li><li aria-hidden="true" style="display: none;"><a href="#finish" role="menuitem">Finish</a></li></ul></div>
+        </form>
+    </div>
+</div>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<script src="~/Scripts/app/General/Personas/StepsPersonas.js"></script>
+<script src="~/Scripts/plugins/pace/pace.min.js"></script>

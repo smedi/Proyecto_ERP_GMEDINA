@@ -528,7 +528,7 @@
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
-    <Content Include="Scripts\app\General\Personas\Personas.js" />
+    <Content Include="Scripts\app\General\Personas\StepsPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />

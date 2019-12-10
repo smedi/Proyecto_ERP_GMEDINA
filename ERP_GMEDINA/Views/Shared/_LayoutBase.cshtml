@@ -9,6 +9,7 @@
     <title>INSPINIA | @ViewBag.Title</title>
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href="~/Content/plugins/steps/jquery.steps.css" rel="stylesheet" />
     <!-- Add local styles, mostly for plugins css file -->
     @if (IsSectionDefined("Styles"))
         {@RenderSection("Styles", required: false)}
@@ -16,6 +17,9 @@
     <!-- Add jQuery Style direct - used for jQGrid plugin -->
     <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
 
+    <!-- Steps-->
+    <link href="@Url.Content("~/Content/plugins/steps/jquery.steps.css")" rel="stylesheet" type="text/css" />
+    
     <!-- Primary Inspinia style -->     
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")

@@ -10,35 +10,34 @@
         debugger
         Id = index.per_Id.toString();
         if(index.Relacion == "Competencias") 
-            Comp += index.Descripcion.toString() + '<br>';
+            Comp += '<label>'+index.Descripcion.toString() + '</label><br>';
         else if(index.Relacion == "Habilidades")
-            Hab +=  index.Descripcion.toString() + '<br>' ;
+            Hab += '<label>' + index.Descripcion.toString() + '</label><br>';
         else if(index.Relacion == "Idiomas")
-            Idi += index.Descripcion.toString() + '<br>';
-        else if (index.Relacion == "Requerimientos_Especiales")
-            ReEs += index.Descripcion.toString() + '<br>' ;
+            Idi += '<label>' + index.Descripcion.toString() + '</label><br>';
+        else if (index.Relacion == "Requerimientoss_Especiales")
+            ReEs += '<label>' + index.Descripcion.toString() + '</label><br>';
         else if (index.Relacion == "Titulos")
-            Tit += index.Descripcion.toString() + '<br>';
+            Tit += '<label>' + index.Descripcion.toString() + '</label><br>';
     });
     if (Comp.length == 0)
-        Comp += 'Sin Datos.';
+        Comp += '<label>Sin Datos.</label>';
     if (Hab.length == 0)
-        Hab += 'Sin Datos.';
+        Hab += '<label>Sin Datos.</label>';
     if (Idi.length == 0)
-        Idi += 'Sin Datos.';
+        Idi += '<label>Sin Datos.</label>';
     if (ReEs.length == 0)
-        ReEs += 'Sin Datos.';
+        ReEs += '<label>Sin Datos.</label>';
     if (Tit.length == 0)
-        Tit += 'Sin Datos.';
+        Tit += '<label>Sin Datos.</label>';
     var TodoPersona = [Comp, Hab, Idi, ReEs, Tit];
     var Encabezados = ['Competencias', 'Habilidades', 'Idiomas', 'Requerimientos_Especiales', 'Titulos'];
     for (i = 0 ; i < TodoPersona.length ; i++) {
-        Encabezados[i]
         div += '<div class="panel panel-default">';
-        div += '<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#' + Encabezados[i] + Id + '" class="collapsed" aria-expanded="false">';
-        div += '<h5 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#' + Encabezados[i] + Id + '" class="collapsed" aria-expanded="false">' + Encabezados[i] + '</a></h5>';
+        div += '<div class="panel-heading" data-toggle="collapse" data-parent="#accordion' + Id + '" href="#' + Encabezados[i] + Id + '" class="collapsed" aria-expanded="false">';
+        div += '<h5 class="panel-title"><a >' + Encabezados[i].replace("_", " "); + '</a></h5>';
         div += '</div>';
-        div += '<div id="' + Encabezados[i] + Id + '" class="panel-collapse in collapse" style="">';
+        div += '<div id="' + Encabezados[i] + Id + '" class="panel-collapse in collapse" style="true">';
         div += '<div class="panel-body">';
         div += '' + TodoPersona[i] + '';
         div += '</div>';
@@ -60,12 +59,8 @@ function llenarTabla() {
                tabla.row.add({
                    Id: value.Id,
                    Identidad: value.Identidad,
-                   NombreCompleto: value.Nombre,//length == 0 ? 'Desconocido' : value.NombreCompleto[0],
-                   //Sexo: value.Sexo,
-                   //Direccion: value.Direccion,
-                   //Nacionalidad: value.Nacionalidad,
-                   CorreoElectronico: value.CorreoElectronico,
-                   //Telefono: value.Telefono //.length == 0 ? 'Desconocido' : value.per_Telefono[0]
+                   NombreCompleto: value.Nombre,
+                   CorreoElectronico: value.CorreoElectronico
                });
            });
            tabla.draw();
@@ -96,6 +91,4 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
                 }
             });
     }
-
-
 });
