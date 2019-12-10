@@ -17,7 +17,10 @@ namespace ERP_GMEDINA.Controllers
         // GET: HistorialIncapacidades
         public ActionResult Index()
         {
-            var tbHistorialIncapacidades = db.tbHistorialIncapacidades.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados).Include(t => t.tbTipoIncapacidades);
+            
+       ViewBag.ticn_Id = new SelectList(db.tbTipoIncapacidades, "ticn_Id", "ticn_Descripcion");
+
+        var tbHistorialIncapacidades = db.tbHistorialIncapacidades.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados).Include(t => t.tbTipoIncapacidades);
             return View(tbHistorialIncapacidades.ToList());
         }
 
@@ -62,6 +65,7 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     lista = db.V_HistorialIncapacidades.Where(x => x.emp_Id == id).ToList();
+
                 }
                 catch
                 {
@@ -74,26 +78,85 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
+        public ActionResult LlenarDropdownlist ()
+        {
 
+            var tipoIncapacidad = new List<object> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
 
+                try
+                {
 
+                    tipoIncapacidad.Add(new
+                    {
+                        Id = 0,
+                        Descripcion = "**Seleccione una opción**"
+                    });
+                    tipoIncapacidad.AddRange(db.tbTipoIncapacidades
+                        .Select(tabla => new { id = tabla.ticn_Id, Descripcion = tabla.ticn_Descripcion })
+                        .ToList()
+                        );
+                }
 
+                catch
+                {
+                    return Json("-2", 0);
+                }
 
+            }
 
+            var result = new Dictionary<string, object>();
+            result.Add("tipoIncapacidad", tipoIncapacidad);
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
+
+       
         // GET: HistorialIncapacidades/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                tbHistorialIncapacidades tbincapacidades = null;
+               
+                try
+                {
+                    tbincapacidades = db.tbHistorialIncapacidades.Find(id);
+                    if (tbincapacidades == null || !tbincapacidades.hinc_Estado)
+                    {
+                        return HttpNotFound();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    return HttpNotFound();
+                }
+                Session["id"] = id;
+                var incapacidades = new tbHistorialIncapacidades
+              
+                {
+                    hinc_Id = tbincapacidades.hinc_Id,
+                   tbTipoIncapacidades= new tbTipoIncapacidades { ticn_Descripcion = tbincapacidades.tbTipoIncapacidades.ticn_Descripcion },
+                    hinc_Dias = tbincapacidades.hinc_Dias,
+                    hinc_CentroMedico = tbincapacidades.hinc_CentroMedico,
+                    hinc_Doctor = tbincapacidades.hinc_Doctor,
+                    hinc_Diagnostico = tbincapacidades.hinc_Diagnostico,
+                    hinc_FechaInicio = tbincapacidades.hinc_FechaInicio,
+                    hinc_FechaFin = tbincapacidades.hinc_FechaFin,
+                    tbUsuario = new tbUsuario { usu_NombreUsuario = tbincapacidades.tbUsuario.usu_NombreUsuario },
+                    tbUsuario1 = new tbUsuario { usu_NombreUsuario = tbincapacidades.tbUsuario1.usu_NombreUsuario }
+                };
+
+                return Json(incapacidades, JsonRequestBehavior.AllowGet);
             }
-            tbHistorialIncapacidades tbHistorialIncapacidades = db.tbHistorialIncapacidades.Find(id);
-            if (tbHistorialIncapacidades == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbHistorialIncapacidades);
         }
+
 
         // GET: HistorialIncapacidades/Create
         public ActionResult Create()
