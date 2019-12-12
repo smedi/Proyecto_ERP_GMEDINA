@@ -3,7 +3,7 @@
 function format(obj) {
 
     
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalcreate(' + idEmpleado + ')" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalcreate('+ idEmpleado+ ')" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
         +'<table class="table table-striped table-bordered table-hover dataTables-example" >'
         +'<thead>'
         +'<tr> <th>  Incapacidad  </th>'
@@ -57,6 +57,8 @@ function llenarTabla() {
            tabla.draw();
        });
 }
+
+
 $(document).ready(function () {
     llenarTabla();
 });
@@ -106,12 +108,11 @@ function Llamarmodaldetalle() {
 function Llamarmodalcreate() {
 
     var modalnuevo = $("#ModalNuevo");
-    $("#ModalNuevo").find("#id")["0"].innerText = idEmpleado;
-
+    $("#ModalNuevo").find("#emp_Id").val(idEmpleado);
     modalnuevo.modal('show');
-
-
 }
+
+
 
 
 
@@ -137,18 +138,28 @@ function tablaDetalles(ID) {
 
 
 
-function llenarDropDownList() {
-    _ajax(null,
-       '/HistorialIncapacidades/llenarDropDowlist',
-       'POST',
-       function (result) {
-           $.each(result, function (id, Lista) {
-               Lista.forEach(function (value, index) {
-                   $("#" + id).append(new Option(value.Descripcion, value.Id));
-               });
-           });
-       });
-}
+$("#btnGuardar").click(function () {
+    var data = $("#FormNuevo").serializeArray();
+    data = serializar(data);
+    if (data != null) {
+        data = JSON.stringify({ tbHistorialIncapacidades: data });
+        _ajax(data,
+            '/HistorialIncapacidades/Create',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["emp_Id", "ticn_Id", "hinc_Dias", "hinc_CentroMedico", "hinc_Doctor", "hinc_Diagnostico", "hinc_FechaInicio", "hinc_FechaFin"]);
+                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
 
 
 
