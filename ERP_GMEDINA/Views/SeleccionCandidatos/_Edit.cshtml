@@ -18,18 +18,18 @@
 								@Html.ValidationMessageFor(model => model.per_Id, "", new { @class = "text-danger", @id = "errorper_Id" })
                             </div>
                         </div>*@
-                        <div class="form-group">
+                        @*<div class="form-group">
 							@Html.LabelFor(model => model.fare_Id, "fare_Id", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
 							@Html.DropDownList("fare_Id", null, htmlAttributes: new { @class = "form-control" })
 								@Html.ValidationMessageFor(model => model.fare_Id, "", new { @class = "text-danger", @id = "errorfare_Id" })
                             </div>
-                        </div>
+                        </div>*@
                         <div class="form-group">
-							@Html.LabelFor(model => model.scan_Fecha, htmlAttributes: new { @class = "control-label col-md-3" })
+							@Html.LabelFor(model => model.fare_Id, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.scan_Fecha, new { htmlAttributes = new { @class = "form-control required valid" } })
-								@Html.ValidationMessageFor(model => model.scan_Fecha, "", new { @class = "text-danger", @id = "errorscan_Fecha" })
+								@Html.EditorFor(model => model.fare_Id, new { htmlAttributes = new { @class = "form-control required valid" } })
+								@Html.ValidationMessageFor(model => model.fare_Id, "", new { @class = "text-danger", @id = "errorscan_Fecha" })
                             </div>
                         </div>
                         @*<div class="form-group">

@@ -1137,7 +1137,6 @@
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
-    <Content Include="Scripts\app\General\SeleccionCandidatos1\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SeleccionCandidatos\IndexSeleccionCandidatos.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
@@ -1783,17 +1782,11 @@
     <Content Include="Views\Jornadas\Details.cshtml" />
     <Content Include="Views\Jornadas\Edit.cshtml" />
     <Content Include="Views\Jornadas\Index.cshtml" />
-    <Content Include="Views\tbSeleccionCandidatos\Index.cshtml" />
-    <Content Include="Views\tbSeleccionCandidatos\_Create.cshtml" />
-    <Content Include="Views\tbSeleccionCandidatos\_Edit.cshtml" />
-    <Content Include="Views\tbSeleccionCandidatos\_Delete.cshtml" />
-    <Content Include="Views\tbSeleccionCandidatos\_Detalles.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\Index.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Create.cshtml" />
     <Content Include="Views\SeleccionCandidatos\_Edit.cshtml" />
-    <Content Include="Views\SeleccionCandidatos1\Index.cshtml" />
-    <Content Include="Views\SeleccionCandidatos1\_Create.cshtml" />
-    <Content Include="Views\SeleccionCandidatos1\_Edit.cshtml" />
-    <Content Include="Views\SeleccionCandidatos1\_Delete.cshtml" />
-    <Content Include="Views\SeleccionCandidatos1\_Detelles.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Delete.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
