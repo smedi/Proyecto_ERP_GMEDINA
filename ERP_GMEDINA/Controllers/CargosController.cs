@@ -122,11 +122,7 @@ namespace ERP_GMEDINA.Controllers
 
             return Json(Cargos, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
+        
 
         [HttpPost]
         public JsonResult Edit(tbCargos tbCargos)
