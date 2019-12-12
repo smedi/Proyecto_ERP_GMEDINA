@@ -17,6 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas
         public ActionResult Index()
         {
+            
             var tbPersonas = new List<tbPersonas> { };
             return View(tbPersonas);
         }
@@ -125,10 +126,29 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas/Create
         public ActionResult Create()
         {
+            //List<tbNacionalidades> list = new List<tbNacionalidades>();
+
+            //for(int i =0; i<3; i++)
+            //{
+
+            //    tbNacionalidades Nacio = new tbNacionalidades();
+            //    Nacio.nac_Id = 1+i;
+            //    Nacio.nac_Descripcion = "Hola"+i;
+            //    list.Add(Nacio);
+            //}
+            var lista = db.tbNacionalidades.Select(x => new
+            {
+                nac_Id = x.nac_Id,
+                nac_Descripcion = x.nac_Descripcion
+            }).ToList(); ; 
+
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            List<tbSucursales> Sucursales = new List<tbSucursales> { };
-            ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
+            //ViewBag.nac_Id = new SelectList(db.tbNacionalidades, "nac_Id", "nac_Descripcion");
+
+            ViewBag.nac_Id = new SelectList(lista, "nac_Id", "nac_Descripcion");
+            //List<tbSucursales> Sucursales = new List<tbSucursales> { };
+            //ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
             return View();
         }
         // POST: Areas/Create

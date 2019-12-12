@@ -16,7 +16,8 @@ namespace ERP_GMEDINA.Models
     {
         public int hcar_Id { get; set; }
         public int emp_Id { get; set; }
-        public int car_Id { get; set; }
+        public Nullable<int> car_IdAnterior { get; set; }
+        public int car_IdNuevo { get; set; }
         public Nullable<System.DateTime> hcar_Fecha { get; set; }
         public bool hcar_Estado { get; set; }
         public string hcar_RazonInactivo { get; set; }

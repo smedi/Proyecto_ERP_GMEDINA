@@ -483,7 +483,8 @@ namespace ERP_GMEDINA
 
             //Steps
             bundles.Add(new ScriptBundle("~/Scripts/plugins/validate").Include(
-                "~/Scripts/plugins/validate/jquery.validate.min.js"));
+                "~/Scripts/plugins/validate/jquery.validate.min.js",
+                "~/Scripts/plugins/staps/jquery.steps.min.js"));
 
 
             //OPTIMIZATION

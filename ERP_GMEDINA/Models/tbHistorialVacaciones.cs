@@ -12,22 +12,24 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbEquipoEmpleados
+    public partial class tbHistorialVacaciones
     {
-        public int eqem_Id { get; set; }
+        public int hvac_Id { get; set; }
         public int emp_Id { get; set; }
-        public int eqtra_Id { get; set; }
-        public System.DateTime eqem_Fecha { get; set; }
-        public bool eqem_Estado { get; set; }
-        public string eqem_RazonInactivo { get; set; }
-        public int eqem_UsuarioCrea { get; set; }
-        public System.DateTime eqem_FechaCrea { get; set; }
-        public Nullable<int> eqem_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> eqem_FechaModifica { get; set; }
+        public System.DateTime hvac_FechaInicio { get; set; }
+        public System.DateTime hvac_FechaFin { get; set; }
+        public bool hvac_DiasTomados { get; set; }
+        public int hvac_MesVacaciones { get; set; }
+        public int hvac_AnioVacaciones { get; set; }
+        public bool hvac_Estado { get; set; }
+        public string hvac_RazonInactivo { get; set; }
+        public int hvac_UsuarioCrea { get; set; }
+        public System.DateTime hvac_FechaCrea { get; set; }
+        public Nullable<int> hvac_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> hvac_FechaModifica { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbEmpleados tbEmpleados { get; set; }
-        public virtual tbEquipoTrabajo tbEquipoTrabajo { get; set; }
     }
 }

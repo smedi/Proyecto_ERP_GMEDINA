@@ -12,33 +12,32 @@ namespace ERP_GMEDINA.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbDepartamentos
+    public partial class tbJornadas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbDepartamentos()
+        public tbJornadas()
         {
             this.tbEmpleados = new HashSet<tbEmpleados>();
-            this.tbHistorialContrataciones = new HashSet<tbHistorialContrataciones>();
+            this.tbHistorialHorasTrabajadas = new HashSet<tbHistorialHorasTrabajadas>();
+            this.tbHorarios = new HashSet<tbHorarios>();
         }
     
-        public int depto_Id { get; set; }
-        public int area_Id { get; set; }
-        public int car_Id { get; set; }
-        public string depto_Descripcion { get; set; }
-        public bool depto_Estado { get; set; }
-        public string depto_RazonInactivo { get; set; }
-        public int depto_UsuarioCrea { get; set; }
-        public System.DateTime depto_Fechacrea { get; set; }
-        public Nullable<int> depto_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> depto_FechaModifica { get; set; }
+        public int jor_Id { get; set; }
+        public string jor_Descripcion { get; set; }
+        public bool jor_Estado { get; set; }
+        public string jor_RazonInactivo { get; set; }
+        public int jor_UsuarioCrea { get; set; }
+        public System.DateTime jor_FechaCrea { get; set; }
+        public Nullable<int> jor_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> jor_FechaModifica { get; set; }
     
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
-        public virtual tbAreas tbAreas { get; set; }
-        public virtual tbCargos tbCargos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialContrataciones> tbHistorialContrataciones { get; set; }
+        public virtual ICollection<tbHistorialHorasTrabajadas> tbHistorialHorasTrabajadas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHorarios> tbHorarios { get; set; }
     }
 }

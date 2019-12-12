@@ -18,6 +18,7 @@ namespace ERP_GMEDINA.Models
         public tbIdiomas()
         {
             this.tbIdiomaPersona = new HashSet<tbIdiomaPersona>();
+            this.tbIdiomasRequisicion = new HashSet<tbIdiomasRequisicion>();
         }
     
         public int idi_Id { get; set; }
@@ -33,5 +34,7 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbIdiomaPersona> tbIdiomaPersona { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbIdiomasRequisicion> tbIdiomasRequisicion { get; set; }
     }
 }
