@@ -16,6 +16,7 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.fare_Id = new SelectList(db.tbFasesReclutamiento, "fare_Id", "fare_Descripcion");
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             List<tbSeleccionCandidatos> tbSeleccionCandidatos = new List<tbSeleccionCandidatos> { };
             return View(tbSeleccionCandidatos);

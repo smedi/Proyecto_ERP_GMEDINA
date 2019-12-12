@@ -101,3 +101,13 @@ function btnAgregar() {
     var modalnuevo = $("#ModalNuevo");
     modalnuevo.modal('show');
 }
+
+function btnInactivar() {
+    var modalnuevo = $("#ModalInactivar");
+    modalnuevo.modal('show');
+}
+
+function btnContratar() {
+    var modalnuevo = $("#ModalContratar");
+    modalnuevo.modal('show');
+}
