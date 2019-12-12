@@ -217,30 +217,44 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // GET: HistorialIncapacidades/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpPost]
+        public ActionResult Delete(tbHistorialIncapacidades tbHistorialIncapacidades)
         {
-            if (id == null)
+            string msj = "";
+            if (tbHistorialIncapacidades.hinc_Id != 0 && tbHistorialIncapacidades.hinc_RazonInactivo != "")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Delete(tbHistorialIncapacidades.hinc_Id, tbHistorialIncapacidades.hinc_RazonInactivo, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialIncapacidades_Delete_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
             }
-            tbHistorialIncapacidades tbHistorialIncapacidades = db.tbHistorialIncapacidades.Find(id);
-            if (tbHistorialIncapacidades == null)
+            else
             {
-                return HttpNotFound();
+                msj = "-3";
             }
-            return View(tbHistorialIncapacidades);
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
-
         // POST: HistorialIncapacidades/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbHistorialIncapacidades tbHistorialIncapacidades = db.tbHistorialIncapacidades.Find(id);
-            db.tbHistorialIncapacidades.Remove(tbHistorialIncapacidades);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    tbHistorialIncapacidades tbHistorialIncapacidades = db.tbHistorialIncapacidades.Find(id);
+        //    db.tbHistorialIncapacidades.Remove(tbHistorialIncapacidades);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

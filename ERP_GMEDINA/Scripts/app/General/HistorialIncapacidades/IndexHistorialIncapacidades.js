@@ -23,7 +23,7 @@ function format(obj) {
                     + '<td>' + index.hinc_Diagnostico + '</td>'
                     + '<td>' + FechaFormato(index.hinc_FechaInicio).substring(0, 10) + '</td>'
                     + '<td>' + FechaFormato(index.hinc_FechaFin).substring(0, 10) + '</td>'
-                    + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete()" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle()" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
+                    + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete('+ index.hinc_Id+')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle('+index.hinc_Id+')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
                     + '</tr>' + '</tbody>'
             '</table>'
             
@@ -89,9 +89,10 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 });
 
 
-function Llamarmodaldelete() {
+function Llamarmodaldelete(ID) {
 
     var modalnuevo = $("#ModalInhabilitar");
+    $("#ModalInhabilitar").find("#hinc_Id").val(ID);
     modalnuevo.modal('show');
 
 
@@ -161,6 +162,30 @@ $("#btnGuardar").click(function () {
     }
 });
 
+$("#InActivar").click(function () {
+    var data = $("#FormInactivar").serializeArray();
+    data = serializar(data);
+    debugger 
+    if (data != null) {
+        data = JSON.stringify({ tbHistorialIncapacidades: data });
+        _ajax(data,
+            '/HistorialIncapacidades/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    debugger
+                    llenarTabla();
+                    LimpiarControles(["hinc_Id", "hinc_RazonInactivo"]);
+                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
 
 
 
