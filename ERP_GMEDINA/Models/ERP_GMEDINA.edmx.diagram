@@ -421,6 +421,9 @@
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTipoMonedas_tmon_Id_rrhh_tbSueldos_tmon_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosPersona_titu_Id" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeDeducciones_cde_IdDeducciones_Plani_tbHistorialDeduccionPago_cde_IdDeducciones" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_Plani_tbCatalogoDeIngresos_cin_IdIngreso_Plani_tbHistorialDeIngresosPago_cin_IdIngreso" />
+        <AssociationConnector Association="ERP_GMEDINAModel.FK_rrhh_tbFasesReclutamiento_fare_Id_rrhh_tbSeleccionCandidatos_fare_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
