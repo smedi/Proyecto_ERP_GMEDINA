@@ -20,30 +20,13 @@ namespace ERP_GMEDINA.Controllers
             //var tbJornadas = db.tbJornadas.Include(t => t.tbUsuario).Include(t => t.tbUsuario1);
             return View(new List<tbJornadas> { });
         }
-
-        // GET: Jornadas/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbJornadas tbJornadas = db.tbJornadas.Find(id);
-            if (tbJornadas == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbJornadas);
-        }
-
-        // GET: Jornadas/Create
+        
         public ActionResult Create()
         {
             ViewBag.jor_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.jor_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             return View();
         }
-
 
         public ActionResult ChildRowData(int? id)
         {
@@ -95,20 +78,35 @@ namespace ERP_GMEDINA.Controllers
         // POST: Jornadas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "jor_Id,jor_Descripcion,jor_Estado,jor_RazonInactivo,jor_UsuarioCrea,jor_FechaCrea,jor_UsuarioModifica,jor_FechaModifica")] tbJornadas tbJornadas)
+        [HttpPost]        
+        public ActionResult Create(tbJornadas tbJornadas)
         {
-            if (ModelState.IsValid)
+            string msj = "...";
+            if (tbJornadas.jor_Descripcion != "")
             {
-                db.tbJornadas.Add(tbJornadas);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbJornadas_Insert(tbJornadas.jor_Descripcion, Usuario.usu_Id, DateTime.Now);
+                    foreach (UDP_RRHH_tbJornadas_Insert_Result item in list)
+                    {
+                        msj = item.MensajeError;
+                        return Json(msj, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                    return Json(msj, JsonRequestBehavior.AllowGet);
+                }
             }
 
-            ViewBag.jor_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbJornadas.jor_UsuarioCrea);
-            ViewBag.jor_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbJornadas.jor_UsuarioModifica);
-            return View(tbJornadas);
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         //public ActionResult ChildRowData(int? id)
@@ -117,7 +115,7 @@ namespace ERP_GMEDINA.Controllers
         //    {
         //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         //    }
-            
+
         //    try
         //    {
         //        var Horarios = db.tbHorarios.Where(x => x.jor_Id == id).ToList();
@@ -142,20 +140,64 @@ namespace ERP_GMEDINA.Controllers
         //}
 
         // GET: Jornadas/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbJornadas tbJornadas = db.tbJornadas.Find(id);
-            if (tbJornadas == null)
+
+            tbJornadas tbJornadas = null;
+            try
             {
+                tbJornadas = db.tbJornadas.Find(id);
+                if (tbJornadas == null || !tbJornadas.jor_Estado)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
                 return HttpNotFound();
             }
-            ViewBag.jor_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbJornadas.jor_UsuarioCrea);
-            ViewBag.jor_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbJornadas.jor_UsuarioModifica);
-            return View(tbJornadas);
+
+            Session["id"] = id;
+            var jornada = new tbJornadas
+            {
+                //empr_Id = tbEmpresas.empr_Id,
+                //empr_Nombre = tbEmpresas.empr_Nombre,
+                //empr_Estado = tbEmpresas.empr_Estado,
+                //empr_RazonInactivo = tbEmpresas.empr_RazonInactivo,
+                //empr_UsuarioCrea = tbEmpresas.empr_UsuarioCrea,
+                //empr_FechaCrea = tbEmpresas.empr_FechaCrea,
+                //empr_UsuarioModifica = tbEmpresas.empr_UsuarioModifica,
+                //empr_FechaModifica = tbEmpresas.empr_FechaModifica,
+                jor_Id = tbJornadas.jor_Id,
+                jor_Descripcion = tbJornadas.jor_Descripcion,
+                jor_Estado = tbJornadas.jor_Estado,
+                jor_RazonInactivo = tbJornadas.jor_RazonInactivo,
+                jor_UsuarioCrea = tbJornadas.jor_UsuarioCrea,
+                jor_FechaCrea = tbJornadas.jor_FechaCrea,
+                jor_UsuarioModifica = tbJornadas.jor_UsuarioModifica,
+                jor_FechaModifica = tbJornadas.jor_FechaModifica,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbJornadas.tbUsuario).usu_NombreUsuario },
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbJornadas.tbUsuario1).usu_NombreUsuario }
+            };
+            return Json(jornada, JsonRequestBehavior.AllowGet);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //tbJornadas tbJornadas = db.tbJornadas.Find(id);
+            //if (tbJornadas == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //ViewBag.jor_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbJornadas.jor_UsuarioCrea);
+            //ViewBag.jor_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbJornadas.jor_UsuarioModifica);
+            //return View(tbJornadas);
         }
 
         // POST: Jornadas/Edit/5
@@ -202,6 +244,18 @@ namespace ERP_GMEDINA.Controllers
             return RedirectToAction("Index");
         }
 
+        protected tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
