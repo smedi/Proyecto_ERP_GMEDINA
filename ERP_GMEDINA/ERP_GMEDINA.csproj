@@ -629,6 +629,7 @@
     <Content Include="Scripts\app\General\FasesReclutamiento\FasesReclutamiento.js" />
     <Content Include="Scripts\app\General\general.js" />
     <Content Include="Scripts\app\General\Habilidades\Habilidades.js" />
+    <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
     <Content Include="Scripts\app\General\Personas\StepsPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas.js" />
@@ -1161,6 +1162,11 @@
     <Content Include="Views\Personas\Index.cshtml" />
     <Content Include="Views\Personas\_Detalles.cshtml" />
     <Content Include="Views\Personas\_Create.cshtml" />
+    <Content Include="Views\Personas\_CreateCompetencias.cshtml" />
+    <Content Include="Views\Personas\_CreateHabilidades.cshtml" />
+    <Content Include="Views\Personas\_CreateIdiomas.cshtml" />
+    <Content Include="Views\Personas\_CreateTitulos.cshtml" />
+    <Content Include="Views\Personas\_CreateRequerimientosEspeciales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

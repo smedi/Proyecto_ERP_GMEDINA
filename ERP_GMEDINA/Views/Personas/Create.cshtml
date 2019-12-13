@@ -18,7 +18,7 @@
 }
 
 <div class="ibox">
-    
+
     <div class="ibox-content">
 
         <div class="form-group">
@@ -29,26 +29,163 @@
                 </a>
             </div>
         </div>
-           
+
         <form id="Persona" action="#" class="wizard-big wizard clearfix" role="application" novalidate="novalidate">
             <h1>Datos Personales</h1>
             <div>
-            @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPersonas())</div>
+                @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPersonas())
+            </div>
 
             <h1>Competencias</h1>
-            <div>juejue</div>
+            <div>
+                <div class="ibox col-lg-12">
+                    <div class="ibox-title">
+                        <h5>Competencias</h5>
+                        <div class="ibox-tools">
+
+                        </div>
+                    </div>
+                    <div class="ibox-content" style="">
+                        <div class="row">
+                            <div class="col-md-4 b-r">
+                                @Html.Partial("_CreateCompetencias", new ERP_GMEDINA.Models.tbCompetenciasPersona())
+                            </div>
+                            <div class="col-lg-8">
+                                <table class="table" id="ChildDataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Descripcion</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <h1>Habilidades</h1>
-            <div>juejue</div>
+            <div>
+                <div class="ibox col-lg-12">
+                    <div class="ibox-title">
+                        <h5>Habilidades</h5>
+                        <div class="ibox-tools">
+
+                        </div>
+                    </div>
+                    <div class="ibox-content" style="">
+                        <div class="row">
+                            <div class="col-md-4 b-r">
+                                @Html.Partial("_CreateHabilidades", new ERP_GMEDINA.Models.tbHabilidadesPersona())
+                            </div>
+                            <div class="col-lg-8">
+                                <table class="table" id="ChildDataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Descripcion</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <h1>Idiomas</h1>
-            <div>juejue</div>
+            <div>
+                <div class="ibox col-lg-12">
+                    <div class="ibox-title">
+                        <h5>Idiomas</h5>
+                        <div class="ibox-tools">
+
+                        </div>
+                    </div>
+                    <div class="ibox-content" style="">
+                        <div class="row">
+                            <div class="col-md-4 b-r">
+                                @Html.Partial("_CreateIdiomas", new ERP_GMEDINA.Models.tbIdiomaPersona())
+                            </div>
+                            <div class="col-lg-8">
+                                <table class="table" id="ChildDataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Descripcion</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <h1>Titulos</h1>
-            <div>juejue</div>
+            <div>
+                <div class="ibox col-lg-12">
+                    <div class="ibox-title">
+                        <h5>Titulos</h5>
+                        <div class="ibox-tools">
+
+                        </div>
+                    </div>
+                    <div class="ibox-content" style="">
+                        <div class="row">
+                            <div class="col-md-4 b-r">
+                                @Html.Partial("_CreateTitulos", new ERP_GMEDINA.Models.tbTitulosPersona())
+                            </div>
+                            <div class="col-lg-8">
+                                <table class="table" id="ChildDataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Descripcion</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
  
             <h1>Otros</h1>
-            <div>juejue</div>
+            <div>
+                <div class="ibox col-lg-12">
+                    <div class="ibox-title">
+                        <h5>Titulos</h5>
+                        <div class="ibox-tools">
+
+                        </div>
+                    </div>
+                    <div class="ibox-content" style="">
+                        <div class="row">
+                            <div class="col-md-4 b-r">
+                                @Html.Partial("_CreateRequerimientosEspeciales", new ERP_GMEDINA.Models.tbRequerimientosEspecialesPersona())
+                            </div>
+                            <div class="col-lg-8">
+                                <table class="table" id="ChildDataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Descripcion</th>
+                                            <th>Año</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <h1>Terminos y Condiciones</h1>
             <div>juejue</div>

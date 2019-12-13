@@ -136,17 +136,29 @@ namespace ERP_GMEDINA.Controllers
             //    Nacio.nac_Descripcion = "Hola"+i;
             //    list.Add(Nacio);
             //}
-            var lista = db.tbNacionalidades.Select(x => new
-            {
-                nac_Id = x.nac_Id,
-                nac_Descripcion = x.nac_Descripcion
-            }).ToList(); ; 
+            //var lista = db.tbNacionalidades.Select(x => new
+            //{
+            //    nac_Id = x.nac_Id,
+            //    nac_Descripcion = x.nac_Descripcion
+            //}).ToList(); ; 
 
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             //ViewBag.nac_Id = new SelectList(db.tbNacionalidades, "nac_Id", "nac_Descripcion");
+            List<tbCompetencias> Competencias = new List<tbCompetencias> { };
+            ViewBag.comp_Id = new SelectList(Competencias, "comp_Id", "comp_Descripcion");
 
-            ViewBag.nac_Id = new SelectList(lista, "nac_Id", "nac_Descripcion");
+            List<tbHabilidades> Habilidades = new List<tbHabilidades> { };
+            ViewBag.habi = new SelectList(Habilidades, "habi_Id", "habi_Descripcion");
+
+            //List<tbIdiomas> Idiomas = new List<tbIdiomas> { };
+            //ViewBag.idi_Id = new SelectList(Idiomas, "idi_Id", "idi_Descripcion");
+
+            //List<tbTitulos> Titulod = new List<tbTitulos> { };
+            //ViewBag.titu_Id = new SelectList(Titulod, "titu_Id", "titu_Descripcion");
+
+            //List<tbRequerimientosEspeciales> RequerimientosEspeciales = new List<tbRequerimientosEspeciales> { };
+            //ViewBag.resp_Id = new SelectList(RequerimientosEspeciales, "resp_Id", "resp_Descripcion");
             //List<tbSucursales> Sucursales = new List<tbSucursales> { };
             //ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
             return View();
