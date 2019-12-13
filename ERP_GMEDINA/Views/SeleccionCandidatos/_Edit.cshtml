@@ -25,13 +25,20 @@
 								@Html.ValidationMessageFor(model => model.fare_Id, "", new { @class = "text-danger", @id = "errorfare_Id" })
                             </div>
                         </div>*@
-                        <div class="form-group">
-							@Html.LabelFor(model => model.fare_Id, htmlAttributes: new { @class = "control-label col-md-3" })
-							<div class="col-md-8">
-								@Html.EditorFor(model => model.fare_Id, new { htmlAttributes = new { @class = "form-control required valid" } })
-								@Html.ValidationMessageFor(model => model.fare_Id, "", new { @class = "text-danger", @id = "errorscan_Fecha" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.fare_Id, "Fase", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("fare_Id", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.fare_Id, "", new { @class = "text-danger", @id = "errorfare_Id" })
+                                </div>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="scan_Fecha">Fecha</label>
+                                <div class="col-md-8 has-error">
+                                    <input class="form-contro required valid text-box single-line" data-val="true" data-val-date="The field scan_Fecha must be a date." id="scan_Fecha" name="scan_Fecha" type="date" value="">
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="scan_Fecha" data-valmsg-replace="true" id="errorscan_Fecha"></span>
+                                </div>
+                            </div>
                         @*<div class="form-group">
 							@Html.LabelFor(model => model.rper_Id, "rper_Id", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
@@ -45,7 +52,6 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
 				<button type="button" class="btn btn-primary pull-left" id="btnActualizar">Actualizar</button>
-				<button type="button" class="btn btn-danger pull-left" id="btnInhabilitar">Inhabilitar</button>
 			</div>
 		</div>
 	</div>
