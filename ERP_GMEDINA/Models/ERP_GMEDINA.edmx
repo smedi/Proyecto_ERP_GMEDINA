@@ -1039,7 +1039,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Parameter Name="hamo_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHistorialContrataciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="hcon_Id" Type="int" Mode="In" />
           <Parameter Name="scan_Id" Type="int" Mode="In" />
           <Parameter Name="depto_Id" Type="int" Mode="In" />
           <Parameter Name="hcon_FechaContratado" Type="date" Mode="In" />
@@ -1128,10 +1127,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Parameter Name="jor_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbJornadas_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="jor_Id" Type="int" Mode="In" />
           <Parameter Name="jor_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="jor_Estado" Type="bit" Mode="In" />
-          <Parameter Name="jor_RazonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="jor_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="jor_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -2098,10 +2094,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
             <Parameter Name="jor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbJornadas_Insert" ReturnType="Collection(String)">
-            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="jor_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="jor_Estado" Mode="In" Type="Boolean" />
-            <Parameter Name="jor_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="jor_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="jor_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
