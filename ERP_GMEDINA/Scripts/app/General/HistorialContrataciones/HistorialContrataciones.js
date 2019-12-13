@@ -8,7 +8,7 @@
            $.each(Lista, function (index, value) {
                tabla.row.add({
                    Id: value.hcon_Id,
-                   Colaborador: value.Colaborador,
+                   Colaborador: value.Colaborador.length == 0 ? 'Sin Asignar' : value.Colaborador[0],
                    Departamento: value.dep_Descripcion,
                    Area: value.area_Descripcion,
                    Cargo: value.car_Descripcion,
