@@ -17,7 +17,7 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas
         public ActionResult Index()
         {
-            
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             var tbPersonas = new List<tbPersonas> { };
             return View(tbPersonas);
         }
@@ -72,18 +72,18 @@ namespace ERP_GMEDINA.Controllers
         }
         public ActionResult llenarDropDowlist()
         {
-            var Sucursales = new List<object> { };
+            var Nacionalidades = new List<object> { };
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    Sucursales.Add(new
+                    Nacionalidades.Add(new
                     {
                         Id = 0,
                         Descripcion = "**Seleccione una opción**"
                     });
-                    Sucursales.AddRange(db.tbSucursales
-                    .Select(tabla => new { Id = tabla.suc_Id, Descripcion = tabla.suc_Descripcion })
+                    Nacionalidades.AddRange(db.tbNacionalidades
+                    .Select(tabla => new { Id = tabla.nac_Id, Descripcion = tabla.nac_Descripcion })
                     .ToList());
                 }
                 catch
@@ -93,7 +93,7 @@ namespace ERP_GMEDINA.Controllers
 
             }
             var result = new Dictionary<string, object>();
-            result.Add("Sucursales", Sucursales);
+            result.Add("Sucursales", Nacionalidades);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         // GET: Areas/Details/5
@@ -144,12 +144,12 @@ namespace ERP_GMEDINA.Controllers
 
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
-            //ViewBag.nac_Id = new SelectList(db.tbNacionalidades, "nac_Id", "nac_Descripcion");
+            //ViewBag.nacionalidades = new SelectList(db.V_tbNacionalidades, "nac_Id", "nac_Descripcion");
             List<tbCompetencias> Competencias = new List<tbCompetencias> { };
             ViewBag.comp_Id = new SelectList(Competencias, "comp_Id", "comp_Descripcion");
 
-            List<tbHabilidades> Habilidades = new List<tbHabilidades> { };
-            ViewBag.habi = new SelectList(Habilidades, "habi_Id", "habi_Descripcion");
+            //List<tbHabilidades> Habilidades = new List<tbHabilidades> { };
+            //ViewBag.habi = new SelectList(Habilidades, "habi_Id", "habi_Descripcion");
 
             //List<tbIdiomas> Idiomas = new List<tbIdiomas> { };
             //ViewBag.idi_Id = new SelectList(Idiomas, "idi_Id", "idi_Descripcion");
@@ -167,17 +167,19 @@ namespace ERP_GMEDINA.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(tbAreas tbAreas, tbDepartamentos[] tbDepartamentos)
+        public ActionResult Create(tbPersonas tbPersonas)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
             using (db = new ERP_GMEDINAEntities())
             {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
                 //en esta area ingresamos el registro con el procedimiento almacenado
                 try
                 {
-
+                    var lista = db.rrhh_tbPersonas_Insert(tbPersonas.per_Identidad,tbPersonas.per_Nombres, tbPersonas.per_Apellidos, tbPersonas.per_FechaNacimiento, tbPersonas.per_Sexo, tbPersonas.per_Edad, tbPersonas.nac_Id, tbPersonas.per_Direccion, tbPersonas.per_Telefono, tbPersonas.per_CorreoElectronico, tbPersonas.per_EstadoCivil, tbPersonas.per_TipoSangre,id,DateTime.Now);
                 }
                 catch
                 {

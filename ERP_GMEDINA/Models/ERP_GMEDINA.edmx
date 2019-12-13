@@ -788,6 +788,16 @@
           <Property Name="treq_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbNacionalidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_tbNacionalidades">
+          <Key>
+            <PropertyRef Name="nac_Id" />
+            <PropertyRef Name="nac_Descripcion" />
+          </Key>
+          <Property Name="nac_Id" Type="int" Nullable="false" />
+          <Property Name="nac_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbPersonas">
           <Key>
@@ -3119,6 +3129,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <EntitySet Name="tbTitulos" EntityType="Self.tbTitulos" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosPersona" EntityType="Self.tbTitulosPersona" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbTitulosRequisicion" EntityType="Self.tbTitulosRequisicion" Schema="rrhh" store:Type="Tables" />
+          <EntitySet Name="V_tbNacionalidades" EntityType="Self.V_tbNacionalidades" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_tbNacionalidades].[nac_Id] AS [nac_Id], 
+    [V_tbNacionalidades].[nac_Descripcion] AS [nac_Descripcion]
+    FROM [rrhh].[V_tbNacionalidades] AS [V_tbNacionalidades]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_tbPersonas" EntityType="Self.V_tbPersonas" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
     [V_tbPersonas].[per_Id] AS [per_Id], 
@@ -4837,7 +4853,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="idpe_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="idpe_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="rrhh_tbPersonas_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="rrhh_tbPersonas_Insert" ReturnType="Collection(ERP_GMEDINAModel.rrhh_tbPersonas_Insert_Result)">
             <Parameter Name="per_Identidad" Mode="In" Type="String" />
             <Parameter Name="per_Nombres" Mode="In" Type="String" />
             <Parameter Name="per_Apellidos" Mode="In" Type="String" />
@@ -4866,6 +4882,7 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="tipe_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="tipe_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="V_tbNacionalidades" EntityType="ERP_GMEDINAModel.V_tbNacionalidades" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -8005,6 +8022,17 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <Property Name="Estado" Type="Boolean" Nullable="false" />
           <Property Name="Relacion" Type="String" Nullable="false" MaxLength="26" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="V_tbNacionalidades">
+          <Key>
+            <PropertyRef Name="nac_Id" />
+            <PropertyRef Name="nac_Descripcion" />
+          </Key>
+          <Property Name="nac_Id" Type="Int32" Nullable="false" />
+          <Property Name="nac_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="rrhh_tbPersonas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8988,9 +9016,23 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <FunctionImportMapping FunctionImportName="rrhh_tbCompetenciasPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbCompetenciasPersona_Insert" />
           <FunctionImportMapping FunctionImportName="rrhh_tbHabilidadesPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbHabilidadesPersona_Insert" />
           <FunctionImportMapping FunctionImportName="rrhh_tbIdiomasPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbIdiomasPersona_Insert" />
-          <FunctionImportMapping FunctionImportName="rrhh_tbPersonas_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbPersonas_Insert" />
+          <FunctionImportMapping FunctionImportName="rrhh_tbPersonas_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbPersonas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.rrhh_tbPersonas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="rrhh_tbRequerimientosEspecialesPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbRequerimientosEspecialesPersona_Insert" />
           <FunctionImportMapping FunctionImportName="rrhh_tbTitulosPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbTitulosPersona_Insert" />
+          <EntitySetMapping Name="V_tbNacionalidades">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbNacionalidades">
+              <MappingFragment StoreEntitySet="V_tbNacionalidades">
+                <ScalarProperty Name="nac_Descripcion" ColumnName="nac_Descripcion" />
+                <ScalarProperty Name="nac_Id" ColumnName="nac_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

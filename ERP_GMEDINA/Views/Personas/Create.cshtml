@@ -12,8 +12,6 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
-   
 
 }
 
@@ -33,6 +31,7 @@
         <form id="Persona" action="#" class="wizard-big wizard clearfix" role="application" novalidate="novalidate">
             <h1>Datos Personales</h1>
             <div>
+                
                 @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPersonas())
             </div>
 
@@ -78,7 +77,7 @@
                     <div class="ibox-content" style="">
                         <div class="row">
                             <div class="col-md-4 b-r">
-                                @Html.Partial("_CreateHabilidades", new ERP_GMEDINA.Models.tbHabilidadesPersona())
+                                @*@Html.Partial("_CreateHabilidades", new ERP_GMEDINA.Models.tbHabilidadesPersona())*@
                             </div>
                             <div class="col-lg-8">
                                 <table class="table" id="ChildDataTable">
@@ -108,7 +107,7 @@
                     <div class="ibox-content" style="">
                         <div class="row">
                             <div class="col-md-4 b-r">
-                                @Html.Partial("_CreateIdiomas", new ERP_GMEDINA.Models.tbIdiomaPersona())
+                                @*@Html.Partial("_CreateIdiomas", new ERP_GMEDINA.Models.tbIdiomaPersona())*@
                             </div>
                             <div class="col-lg-8">
                                 <table class="table" id="ChildDataTable">
@@ -138,7 +137,7 @@
                     <div class="ibox-content" style="">
                         <div class="row">
                             <div class="col-md-4 b-r">
-                                @Html.Partial("_CreateTitulos", new ERP_GMEDINA.Models.tbTitulosPersona())
+                                @*@Html.Partial("_CreateTitulos", new ERP_GMEDINA.Models.tbTitulosPersona())*@
                             </div>
                             <div class="col-lg-8">
                                 <table class="table" id="ChildDataTable">
@@ -168,7 +167,7 @@
                     <div class="ibox-content" style="">
                         <div class="row">
                             <div class="col-md-4 b-r">
-                                @Html.Partial("_CreateRequerimientosEspeciales", new ERP_GMEDINA.Models.tbRequerimientosEspecialesPersona())
+                                @*@Html.Partial("_CreateRequerimientosEspeciales", new ERP_GMEDINA.Models.tbRequerimientosEspecialesPersona())*@
                             </div>
                             <div class="col-lg-8">
                                 <table class="table" id="ChildDataTable">
