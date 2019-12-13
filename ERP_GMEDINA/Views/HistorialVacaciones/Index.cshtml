@@ -43,12 +43,17 @@
     </div>
  </div>
     
+@Html.Partial("_Create", new ERP_GMEDINA.Models.tbHistorialVacaciones())
+@Html.Partial("_Delete", new ERP_GMEDINA.Models.tbHistorialVacaciones())
+@Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbHistorialVacaciones())
+
+
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
 }
 
 @section Scripts {
+@Scripts.Render("~/plugins/dataTables")
   @Scripts.Render("~/Scripts/app/General")
-  @Scripts.Render("~/plugins/dataTables")
   @Scripts.Render("~/Scripts/app/General/IndexHistorialVacaciones")
 }

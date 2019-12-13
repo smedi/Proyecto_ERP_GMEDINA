@@ -75,7 +75,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 
 function llamarmodal() {
     var modalnuevo = $("#ModalNuevo");
-    $("#ModalNuevo").find("#Id")["0"].innerText = IdEmpleado;
+    $("#ModalNuevo").find("#emp_Id").val(IdEmpleado);
     modalnuevo.modal('show');
 }
 function llamarmodaldelete() {
@@ -87,20 +87,24 @@ function llamarmodaldetalles() {
     var modaldetalle = $("#ModalDetalles");
     id = IdEmpleado;
     debugger
-    _ajax(null,
-        '/HistorialAmonestaciones/Edit/' + id,
+    _ajax({id: parseInt(id)},
+        '/HistorialVacaciones/Edit',
         'GET',
         function (obj) {
+            $('#ModalDetalles').modal('show');
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#hamo_AmonestacionAnterior")["0"].innerText = obj.hamo_AmonestacionAnterior;
-                $("#ModalDetalles").find("#hamo_Observacion")["0"].innerText = obj.hamo_Observacion;
-                $("#ModalDetalles").find("#tbTipoAmonestaciones")["0"].innerText = obj.tbTipoAmonestaciones.tamo_Descripcion;
+                $("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = obj.hvac_FechaInicio;
+                $("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = obj.hvac_FechaFin;
+                $("#ModalDetalles").find("#hvac_CantDias")["0"].innerText = obj.hvac_CantDias;
+                $("#ModalDetalles").find("#hvac_DiasPagados")["0"].innerText = obj.hvac_DiasPagados;
+                $("#ModalDetalles").find("#hvac_MesVacaciones")["0"].innerText = obj.hvac_MesVacaciones;
+                $("#ModalDetalles").find("#hvac_AnioVacaciones")["0"].innerText = obj.hvac_AnioVacaciones;
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#hamo_FechaCrea")["0"].innerText = obj.hamo_FechaCrea;
+                $("#ModalDetalles").find("#hvac_FechaCrea")["0"].innerText = obj.hvac_FechaCrea;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#hamo_FechaModifica")["0"].innerText = obj.hamo_FechaModifica;
+                $("#ModalDetalles").find("#hvac_FechaModifica")["0"].innerText = obj.hvac_FechaModifica;
                 debugger
-                $('#ModalDetalles').modal('show');
+                
             }
         });
 }
@@ -140,6 +144,28 @@ function llenarDropDownList() {
            });
        });
 }
-
+$("#btnGuardar").click(function () {
+    var data = $("#FormNuevo").serializeArray();
+    data = serializar(data);
+    debugger
+    if (data != null) {
+        data = JSON.stringify({ tbHistorialVacaciones: data });
+        _ajax(data,
+            '/HistorialVacaciones/Create',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
+                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
 
 

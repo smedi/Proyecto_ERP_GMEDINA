@@ -7,17 +7,20 @@
                 <h4 class="modal-title">Agregar Vacaciones</h4>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm(null, null, FormMethod.Post, new {id= "FormNuevo" }))
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormNuevo" }))
                 {
+                    <div  class="col-md-8">
+                        <input id="emp_Id" name="emp_Id" type="text" value="">
+                    </div>
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
+                        @*<div class="form-group">
 							@Html.LabelFor(model => model.emp_Id, "Vacaciones", htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
 							@Html.DropDownList("hvac_Id", null, htmlAttributes: new { @class = "form-control" })
 								@Html.ValidationMessageFor(model => model.hvac_Id, "", new { @class = "text-danger", @id = "Id" })
                             </div>
-                        </div>
+                        </div>*@
                         <div class="form-group">
 							@Html.LabelFor(model => model.hvac_FechaInicio, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
@@ -32,14 +35,14 @@
 								@Html.ValidationMessageFor(model => model.hvac_FechaFin, "", new { @class = "text-danger", @id = "errorhvac_FechaFin" })
                             </div>
                         </div>
-                        <div class="form-group">
+                        @*<div class="form-group">
 							@Html.LabelFor(model => model.hvac_CantDias, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
 								@Html.EditorFor(model => model.hvac_CantDias, new { htmlAttributes = new { @class = "form-contro required valid" } })
 								@Html.ValidationMessageFor(model => model.hvac_CantDias, "", new { @class = "text-danger", @id = "errorhvac_CantDias" })
                             </div>
-                        </div>
-                        <div class="form-group">
+                        </div>*@
+                        @*<div class="form-group">
 							@Html.LabelFor(model => model.hvac_DiasPagados, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
 								<div class="checkbox">
@@ -47,8 +50,8 @@
     								@Html.ValidationMessageFor(model => model.hvac_DiasPagados, "", new { @class = "text-danger", @id = "errorhvac_DiasPagados" })
 									</div>
                             </div>
-                        </div>
-                        <div class="form-group">
+                        </div>*@
+                        @*<div class="form-group">
 							@Html.LabelFor(model => model.hvac_MesVacaciones, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
 								@Html.EditorFor(model => model.hvac_MesVacaciones, new { htmlAttributes = new { @class = "form-contro required valid" } })
@@ -61,7 +64,7 @@
 								@Html.EditorFor(model => model.hvac_AnioVacaciones, new { htmlAttributes = new { @class = "form-contro required valid" } })
 								@Html.ValidationMessageFor(model => model.hvac_AnioVacaciones, "", new { @class = "text-danger", @id = "errorhvac_AnioVacaciones" })
                             </div>
-                        </div>
+                        </div>*@
 					</div>
 				}
             </div>

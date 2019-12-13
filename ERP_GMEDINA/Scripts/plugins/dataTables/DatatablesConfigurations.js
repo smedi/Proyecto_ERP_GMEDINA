@@ -6,7 +6,9 @@ $(document).ready(function () {
     var contador = -1;
     var head = $("#IndexTable thead tr").find("th").each(function (indice, valor) {
         contador = contador + 1;
+        
         campo = valor.innerText;
+        campo =campo.replace(" ", "");
         if (campo == "") {
             columnas.push({
                 className: 'details-control',

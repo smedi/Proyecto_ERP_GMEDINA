@@ -173,6 +173,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Models\CHistorialVacaciones.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <DependentUpon>ERP_GMEDINA.Context.tt</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -375,6 +376,15 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialVacaciones_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialVacaciones_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialVacaciones_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoHoras_Select_Result.cs">
@@ -1260,6 +1270,8 @@
     <Content Include="Views\HistorialVacaciones\Edit.cshtml" />
     <Content Include="Views\HistorialVacaciones\Index.cshtml" />
     <Content Include="Views\HistorialVacaciones\_Create.cshtml" />
+    <Content Include="Views\HistorialVacaciones\_Delete.cshtml" />
+    <Content Include="Views\HistorialVacaciones\_Detalles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

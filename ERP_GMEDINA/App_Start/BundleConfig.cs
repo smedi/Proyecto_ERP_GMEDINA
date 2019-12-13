@@ -509,9 +509,7 @@ namespace ERP_GMEDINA
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/HistorialAmonestaciones").Include(
                 "~/Scripts/app/General/CreateHistorialAmonestaciones.js"));
-
-            bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialAmonestaciones").Include(
-               "~/Scripts/app/General/HistorialAmonestaciones/IndexHistorialAmonestaciones.js"));
+            
 
             bundles.Add(new ScriptBundle("~/Scripts/app/General/IndexHistorialVacaciones").Include(
                "~/Scripts/app/General/HistorialVacaciones/IndexHistorialVacaciones.js"));

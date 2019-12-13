@@ -970,6 +970,24 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
           <Parameter Name="hcon_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hcon_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbHistorialVacaciones_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="hvac_Id" Type="int" Mode="In" />
+          <Parameter Name="hvac_RazonInactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="hvac_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="hvac_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialVacaciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="hvac_FechaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="hvac_FechaFin" Type="datetime" Mode="In" />
+          <Parameter Name="hvac_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="hvac_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialVacaciones_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="hvac_Id" Type="int" Mode="In" />
+          <Parameter Name="hvac_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="hvac_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbHorarios_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="hor_Id" Type="int" Mode="In" />
           <Parameter Name="hor_RazonInactivo" Type="nvarchar" Mode="In" />
@@ -2377,6 +2395,24 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
             <End Role="tbHistorialVacaciones" EntitySet="tbHistorialVacaciones" />
           </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Delete" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Delete_Result)">
+            <Parameter Name="hvac_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="hvac_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="hvac_FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="hvac_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHistorialVacaciones_Restore" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Restore_Result)">
+            <Parameter Name="hvac_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="hvac_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="UDP_Plani_CatalogoDeduccionesEdit_Select_Result">
           <Property Type="Int32" Name="cde_IdDeducciones" Nullable="false" />
@@ -3186,6 +3222,15 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_RRHH_tbHistorialVacaciones_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialVacaciones_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialVacaciones_Restore_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3765,6 +3810,27 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HVacacionesEmpleados' does not 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialVacaciones_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialVacaciones_Restore" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialVacaciones_Restore_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
