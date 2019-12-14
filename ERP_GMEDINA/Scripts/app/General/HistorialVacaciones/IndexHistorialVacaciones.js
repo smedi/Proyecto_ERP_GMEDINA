@@ -93,16 +93,20 @@ function llamarmodaldetalles() {
         function (obj) {
             $('#ModalDetalles').modal('show');
             if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = obj.hvac_FechaInicio;
-                $("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = obj.hvac_FechaFin;
+                $("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = FechaFormato(obj.hvac_FechaInicio).substring(0, 10);
+                $("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = FechaFormato(obj.hvac_FechaFin).substring(0, 10);
+                //$("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = obj.hvac_FechaInicio;
+                //$("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = obj.hvac_FechaFin;
                 $("#ModalDetalles").find("#hvac_CantDias")["0"].innerText = obj.hvac_CantDias;
                 $("#ModalDetalles").find("#hvac_DiasPagados")["0"].innerText = obj.hvac_DiasPagados;
                 $("#ModalDetalles").find("#hvac_MesVacaciones")["0"].innerText = obj.hvac_MesVacaciones;
                 $("#ModalDetalles").find("#hvac_AnioVacaciones")["0"].innerText = obj.hvac_AnioVacaciones;
+                $("#ModalDetalles").find("#hvac_Estado")["0"].innerText = obj.hvac_Estado;
+                $("#ModalDetalles").find("#hvac_RazonInactivo")["0"].innerText = obj.hvac_RazonInactivo;
+                $("#ModalDetalles").find("#hvac_FechaCrea")["0"].innerText = FechaFormato(obj.hvac_FechaCrea).substring(0, 10);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#hvac_FechaCrea")["0"].innerText = obj.hvac_FechaCrea;
                 $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
-                $("#ModalDetalles").find("#hvac_FechaModifica")["0"].innerText = obj.hvac_FechaModifica;
+                $("#ModalDetalles").find("#hvac_FechaModifica")["0"].innerText = FechaFormato(obj.hvac_FechaModifica).substring(0, 10);
                 debugger
                 
             }
@@ -132,33 +136,24 @@ function Remove(Id, lista) {
     });
     return list;
 }
-function llenarDropDownList() {
-    _ajax(null,
-       '/HistorialAmonestaciones/llenarDropDowlist',
-       'POST',
-       function (result) {
-           $.each(result, function (id, Lista) {
-               Lista.forEach(function (value, index) {
-                   $("#" + id).append(new Option(value.Descripcion, value.Id));
-               });
-           });
-       });
-}
+
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
     debugger
+    console.log("paso1");
     if (data != null) {
         data = JSON.stringify({ tbHistorialVacaciones: data });
+        console.log("paso2");
         _ajax(data,
             '/HistorialVacaciones/Create',
-            'POST',
+            'GET',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
@@ -167,5 +162,31 @@ $("#btnGuardar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
+$("#InActivar").click(function () {
+    var data = $("#FormInactivar").serializeArray();
+    data = serializar(data);
+    debugger
+    if (data != null) {
+        data = JSON.stringify({ tbHistorialVacaciones : data });
+        _ajax(data,
+            '/HistorialVacaciones/Delete',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    debugger
+                    llenarTabla();
+                    LimpiarControles( ["emp_id","hvac_RazonInactivo"]);
+                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});
+
 
 

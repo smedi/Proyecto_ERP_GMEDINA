@@ -1216,9 +1216,9 @@
     <Content Include="Views\FormaPago\Index.cshtml" />
     <Content Include="Views\FormaPago\_Create.cshtml" />
     <Content Include="Views\FormaPago\_Edit.cshtml" />
-    <Content Include="Views\TipoDeducciones\Index.cshtml" />
-    <Content Include="Views\TipoDeducciones\_CreateTipoDeduccion.cshtml" />
-    <Content Include="Views\TipoDeducciones\_EditTipoDeduccion.cshtml" />
+    <Content Include="Views\Planilla\TipoDeducciones\Index.cshtml" />
+    <Content Include="Views\Planilla\TipoDeducciones\_CreateTipoDeduccion.cshtml" />
+    <Content Include="Views\Planilla\TipoDeducciones\_EditTipoDeduccion.cshtml" />
     <Content Include="Views\DecimoTercerMes\FechaEspecifica.cshtml" />
     <Content Include="Views\DecimoTercerMes\Index.cshtml" />
     <Content Include="Views\DecimoTercerMes\_FechasDecimoTercer.cshtml" />
@@ -1275,6 +1275,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\HistorialVacacionesController2\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
