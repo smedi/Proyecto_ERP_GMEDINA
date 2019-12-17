@@ -165,6 +165,7 @@ namespace ERP_GMEDINA.Controllers
                     hvac_AnioVacaciones = item.hvac_AnioVacaciones,
                     hvac_Estado = item.hvac_Estado,
                     hvac_RazonInactivo = item.hvac_RazonInactivo,
+                    hvac_UsuarioCrea = item.hvac_UsuarioCrea,
                     hvac_FechaCrea = item.hvac_FechaCrea,
                     hvac_FechaModifica = item.hvac_FechaModifica,
                     //tbUsuario = item.tbUsuario,

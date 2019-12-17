@@ -95,8 +95,6 @@ function llamarmodaldetalles() {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = FechaFormato(obj.hvac_FechaInicio).substring(0, 10);
                 $("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = FechaFormato(obj.hvac_FechaFin).substring(0, 10);
-                //$("#ModalDetalles").find("#hvac_FechaInicio")["0"].innerText = obj.hvac_FechaInicio;
-                //$("#ModalDetalles").find("#hvac_FechaFin")["0"].innerText = obj.hvac_FechaFin;
                 $("#ModalDetalles").find("#hvac_CantDias")["0"].innerText = obj.hvac_CantDias;
                 $("#ModalDetalles").find("#hvac_DiasPagados")["0"].innerText = obj.hvac_DiasPagados;
                 $("#ModalDetalles").find("#hvac_MesVacaciones")["0"].innerText = obj.hvac_MesVacaciones;
@@ -104,8 +102,8 @@ function llamarmodaldetalles() {
                 $("#ModalDetalles").find("#hvac_Estado")["0"].innerText = obj.hvac_Estado;
                 $("#ModalDetalles").find("#hvac_RazonInactivo")["0"].innerText = obj.hvac_RazonInactivo;
                 $("#ModalDetalles").find("#hvac_FechaCrea")["0"].innerText = FechaFormato(obj.hvac_FechaCrea).substring(0, 10);
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                $("#ModalDetalles").find("#hvac_UsuarioCrea")["0"].innerText = obj.hvac_UsuarioCrea;
+                $("#ModalDetalles").find("#hvac_UsuarioModifica")["0"].innerText = obj.hvac_UsuarioModifica;
                 $("#ModalDetalles").find("#hvac_FechaModifica")["0"].innerText = FechaFormato(obj.hvac_FechaModifica).substring(0, 10);
                 debugger
                 
