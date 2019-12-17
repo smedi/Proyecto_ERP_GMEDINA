@@ -135,23 +135,46 @@ function Remove(Id, lista) {
     return list;
 }
 
+//$("#btnGuardar").click(function () {
+//    var data = $("#FormNuevo").serializeArray();
+//    data = serializar(data);
+//    debugger
+//    console.log("paso1");
+//    if (data != null) {
+//        data = JSON.stringify({ tbHistorialVacaciones: data });
+//        console.log("paso2");
+//        _ajax(data,
+//            '/HistorialVacaciones/Create',
+//            'POST',
+//            function (obj) {
+//                if (obj != "-1" && obj != "-2" && obj != "-3") {
+//                    CierraPopups();
+//                    llenarTabla();
+//                    LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
+//                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
+//                } else {
+//                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+//                }
+//            });
+//    } else {
+//        MsgError("Error", "por favor llene todas las cajas de texto");
+//    }
+//});
+//-----------------------------------------------------
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
-    debugger
-    console.log("paso1");
     if (data != null) {
         data = JSON.stringify({ tbHistorialVacaciones: data });
-        console.log("paso2");
         _ajax(data,
             '/HistorialVacaciones/Create',
-            'GET',
+            'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["emp_Id", "hvac_FechaInicio", "hvac_FechaFin"]);
-                    MsgSuccess("¡Exito!", "Se ha agregado el registro");
+                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
@@ -160,6 +183,7 @@ $("#btnGuardar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+//-----------------------------------------------------
 
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
