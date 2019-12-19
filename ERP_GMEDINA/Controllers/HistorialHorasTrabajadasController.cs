@@ -35,6 +35,9 @@ namespace ERP_GMEDINA.Controllers
                         {
                             htra_Id = t.Id,
                             Colaborador = t.Nombre_Completo,
+                            dep_Descripcion = t.Departamento,
+                            area_Descripcion = t.Area,
+                            car_Descripcion = t.Cargo,
                             jor_Descripcion = t.Jornada,
                             tiho_Recargo = t.Recargo,
                             tiho_Descripcion = t.Tipo_Horas
