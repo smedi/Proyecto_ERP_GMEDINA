@@ -178,48 +178,68 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: HistorialIncapacidades/Edit/5
-        public ActionResult Edit(int? id)
+      
+         public ActionResult Edit(int? ID)
         {
-            if (id == null)
+            if (ID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List<tbHistorialIncapacidades> tbHistorialIncapacidades = null;
+
+            tbHistorialIncapacidades tbHistIncapacidades = null;
             try
             {
-                tbHistorialIncapacidades = new List<Models.tbHistorialIncapacidades> { };
-                tbHistorialIncapacidades = db.tbHistorialIncapacidades.Where(x => x.emp_Id == id).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
-
+                tbHistIncapacidades = db.tbHistorialIncapacidades.Find(ID);
+                if (tbHistIncapacidades == null || !tbHistIncapacidades.hinc_Estado)
+                {
+                    return HttpNotFound();
+                }
             }
             catch (Exception ex)
             {
                 ex.Message.ToString();
                 return HttpNotFound();
             }
-            Session["id"] = id;
-            var vacaciones = new tbHistorialIncapacidades();
-            foreach (var item in tbHistorialIncapacidades)
+            Session["id"] = ID;
+            var Incapacidades = new tbHistorialIncapacidades
             {
-                vacaciones = new tbHistorialIncapacidades
-                {
-                    hinc_Id = item.hinc_Id,
-                    //emp_Id = item.tbEmpleados.tbPersonas.per_Nombres,
-                    //ticn_Descripcion = item.tbTipoIncapacidades.ticn_Descripcion,
-                    hinc_Dias = item.hinc_Dias,
-                    hinc_CentroMedico = item.hinc_CentroMedico,
-                    hinc_Diagnostico = item.hinc_Diagnostico,
-                    hinc_FechaInicio = item.hinc_FechaInicio,
-                    hinc_FechaFin = item.hinc_FechaFin,
-                    hinc_UsuarioCrea = item.hinc_UsuarioCrea,
-                    hinc_FechaCrea = item.hinc_FechaCrea,
-                    hinc_FechaModifica = item.hinc_FechaModifica,
-                    //tbUsuario = item.tbUsuario,
-                    //tbUsuario1 = item.tbUsuario1
-                };
+                hinc_Dias = tbHistIncapacidades.hinc_Dias,
+                tbTipoIncapacidades = new tbTipoIncapacidades { ticn_Descripcion = IsNull(tbHistIncapacidades.tbTipoIncapacidades).ticn_Descripcion },
+                hinc_CentroMedico = tbHistIncapacidades.hinc_CentroMedico,
+                hinc_Diagnostico = tbHistIncapacidades.hinc_Diagnostico,
+                hinc_FechaInicio = tbHistIncapacidades.hinc_FechaInicio,
+                hinc_FechaFin = tbHistIncapacidades.hinc_FechaFin,
+                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbHistIncapacidades.tbUsuario).usu_NombreUsuario },
+                hinc_FechaCrea = tbHistIncapacidades.hinc_FechaCrea
+            };
 
-            }
-            return Json(vacaciones, JsonRequestBehavior.AllowGet);
+            return Json(Incapacidades, JsonRequestBehavior.AllowGet);
         }
+
+        private tbTipoIncapacidades IsNull(tbTipoIncapacidades valor)
+        {
+           if(valor != null)
+            {
+                return valor;
+            }
+           else
+            {
+                return new tbTipoIncapacidades { ticn_Descripcion = "" };
+            }
+        }
+
+        private tbUsuario IsNull(tbUsuario valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbUsuario { usu_NombreUsuario = "" };
+            }
+        }
+
 
 
 
