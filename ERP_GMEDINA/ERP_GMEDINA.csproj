@@ -1167,7 +1167,6 @@
     <Content Include="Views\Personas\Edit.cshtml" />
     <Content Include="Views\Personas\Index.cshtml" />
     <Content Include="Views\Personas\_Detalles.cshtml" />
-    <Content Include="Views\Personas\_Create.cshtml" />
     <Content Include="Views\Personas\_CreateCompetencias.cshtml" />
     <Content Include="Views\Personas\_CreateHabilidades.cshtml" />
     <Content Include="Views\Personas\_CreateIdiomas.cshtml" />

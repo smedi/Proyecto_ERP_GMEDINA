@@ -8,10 +8,13 @@
             </div>
             <div class="modal-body">
                 <dl class="dl-horizontal">
-					<dt>@Html.DisplayNameFor(model => model.per_Identidad)</dt>
+                    <dt>Id</dt>
+                    <dd id="per_Id"></dd>
+
+					<dt>Identidad</dt>
                     <dd id="per_Identidad"></dd>
 
-					<dt>@Html.DisplayNameFor(model => model.per_Nombres)</dt>
+					@*<dt>@Html.DisplayNameFor(model => model.per_Nombres)</dt>
                     <dd id="per_Nombres"></dd>
 
 					<dt>@Html.DisplayNameFor(model => model.per_Apellidos)</dt>
@@ -25,6 +28,9 @@
 
 					<dt>@Html.DisplayNameFor(model => model.per_Edad)</dt>
                     <dd id="per_Edad"></dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.tbNacionalidades.nac_Descripcion)</dt>
+                    <dd id="tbNacionalidades"></dd>
 
 					<dt>@Html.DisplayNameFor(model => model.per_Direccion)</dt>
                     <dd id="per_Direccion"></dd>
@@ -57,16 +63,14 @@
                     <dd id="tbUsuario_usu_NombreUsuario"></dd>
 
 					<dt>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</dt>
-                    <dd id="tbUsuario1_usu_NombreUsuario"></dd>
+                    <dd id="tbUsuario1_usu_NombreUsuario"></dd>*@
 
-					<dt>@Html.DisplayNameFor(model => model.tbNacionalidades.nac_Descripcion)</dt>
-                    <dd id="tbNacionalidades"></dd>
 
 				</dl>
             </div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-white pull-right" data-dismiss="modal">Cerrar</button>
-				<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>
+				@*<button type="button" class="btn btn-primary pull-left" data-id="" id="btnEditar">Editar</button>*@
 			</div>
 		</div>
 	</div>

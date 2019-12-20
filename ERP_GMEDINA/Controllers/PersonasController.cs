@@ -47,6 +47,7 @@ namespace ERP_GMEDINA.Controllers
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
         }
+        
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -70,7 +71,7 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult llenarDropDowlist()
+        public ActionResult llenarDropDowlistNacionalidades()
         {
             var Nacionalidades = new List<object> { };
             using (db = new ERP_GMEDINAEntities())
@@ -83,7 +84,7 @@ namespace ERP_GMEDINA.Controllers
                         Descripcion = "**Seleccione una opción**"
                     });
                     Nacionalidades.AddRange(db.tbNacionalidades
-                    .Select(tabla => new { Id = tabla.nac_Id, Descripcion = tabla.nac_Descripcion })
+                    .Select(tabla => new { id = tabla.nac_Id, Descripcion = tabla.nac_Descripcion })
                     .ToList());
                 }
                 catch
@@ -93,7 +94,34 @@ namespace ERP_GMEDINA.Controllers
 
             }
             var result = new Dictionary<string, object>();
-            result.Add("Sucursales", Nacionalidades);
+            result.Add("nac_Id", Nacionalidades);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        //Competencias
+        public ActionResult llenarDropDowlistCompetencias()
+        {
+            var Competencias = new List<object> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    Competencias.Add(new
+                    {
+                        Id = 0,
+                        Descripcion = "**Seleccione una opción**"
+                    });
+                    Competencias.AddRange(db.tbCompetencias
+                    .Select(tabla => new { Id = tabla.comp_Id, Descripcion = tabla.comp_Descripcion})
+                    .ToList());
+                }
+                catch
+                {
+                    return Json("-2", 0);
+                }
+
+            }
+            var result = new Dictionary<string, object>();
+            result.Add("comp_Id", Competencias);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         // GET: Areas/Details/5
@@ -126,41 +154,61 @@ namespace ERP_GMEDINA.Controllers
         // GET: Areas/Create
         public ActionResult Create()
         {
-            //List<tbNacionalidades> list = new List<tbNacionalidades>();
+            Session["Usuario"] = new tbUsuario { usu_Id = 1 };
+            //Ddl Sexo
+            var Sexo = new List<object> { };
+                    Sexo.Add(new
+                    {
+                        Id = 0,
+                        Descripcion = "**Seleccione una opción**"
+                    });
+                    Sexo.Add(new
+                    {
+                        Id = "F",
+                        Descripcion = "Femenino"
+                    });
+                    Sexo.Add(new
+                    {
+                        Id = "M",
+                        Descripcion = "Masculino"
+                    });
+            ViewBag.sexo = new SelectList(Sexo, "Id", "Descripcion");
+            //Ddl EstadoCivil
+            var EstadoCivil = new List<object> { };
+            EstadoCivil.Add(new
+            {  Id = 0,   Descripcion = "**Seleccione una opción**",
+            });
+            EstadoCivil.Add(new
+            {  Id = "S", Descripcion = "Soltero"
+            });
+            EstadoCivil.Add(new
+            {  Id = "C", Descripcion = "Casado"
+            });
+            ViewBag.EstadoCivil = new SelectList(EstadoCivil, "Id", "Descripcion");
+            //ddl TipoSangre
+            var TipoSangre = new List<object> { };
+            TipoSangre.Add(new
+            {Id = 0, Descripcion = "**Seleccione una opción**",
+            });
+            TipoSangre.Add(new
+            { Id = "O+", Descripcion = "O+"
+            });
+            TipoSangre.Add(new
+            { Id = "O-",Descripcion = "O-"
+            });
+            TipoSangre.Add(new
+            {Id = "A",Descripcion = "A+"
+            });
+            TipoSangre.Add(new
+            {Id = "A-",Descripcion = "A-"
+            });
+            ViewBag.TipoSangre = new SelectList(TipoSangre, "Id", "Descripcion");
+            
+            List<V_tbNacionalidades> Nacionalidades = new List<V_tbNacionalidades> { };
+            ViewBag.nac_Id = new SelectList(Nacionalidades, "nac_Id", "nac_Descripcion");
 
-            //for(int i =0; i<3; i++)
-            //{
-
-            //    tbNacionalidades Nacio = new tbNacionalidades();
-            //    Nacio.nac_Id = 1+i;
-            //    Nacio.nac_Descripcion = "Hola"+i;
-            //    list.Add(Nacio);
-            //}
-            //var lista = db.tbNacionalidades.Select(x => new
-            //{
-            //    nac_Id = x.nac_Id,
-            //    nac_Descripcion = x.nac_Descripcion
-            //}).ToList(); ; 
-
-            //declaramos la variable de coneccion solo para recuperar los datos necesarios.
-            //posteriormente es destruida.
-            //ViewBag.nacionalidades = new SelectList(db.V_tbNacionalidades, "nac_Id", "nac_Descripcion");
             List<tbCompetencias> Competencias = new List<tbCompetencias> { };
             ViewBag.comp_Id = new SelectList(Competencias, "comp_Id", "comp_Descripcion");
-
-            //List<tbHabilidades> Habilidades = new List<tbHabilidades> { };
-            //ViewBag.habi = new SelectList(Habilidades, "habi_Id", "habi_Descripcion");
-
-            //List<tbIdiomas> Idiomas = new List<tbIdiomas> { };
-            //ViewBag.idi_Id = new SelectList(Idiomas, "idi_Id", "idi_Descripcion");
-
-            //List<tbTitulos> Titulod = new List<tbTitulos> { };
-            //ViewBag.titu_Id = new SelectList(Titulod, "titu_Id", "titu_Descripcion");
-
-            //List<tbRequerimientosEspeciales> RequerimientosEspeciales = new List<tbRequerimientosEspeciales> { };
-            //ViewBag.resp_Id = new SelectList(RequerimientosEspeciales, "resp_Id", "resp_Descripcion");
-            //List<tbSucursales> Sucursales = new List<tbSucursales> { };
-            //ViewBag.suc_Id = new SelectList(Sucursales, "suc_Id", "suc_Descripcion");
             return View();
         }
         // POST: Areas/Create
@@ -172,14 +220,16 @@ namespace ERP_GMEDINA.Controllers
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
             //posteriormente es destruida.
             string result = "";
+            
             using (db = new ERP_GMEDINAEntities())
             {
-                var id = (int)Session["id"];
+                var id = 1;
                 var Usuario = (tbUsuario)Session["Usuario"];
                 //en esta area ingresamos el registro con el procedimiento almacenado
                 try
                 {
                     var lista = db.rrhh_tbPersonas_Insert(tbPersonas.per_Identidad,tbPersonas.per_Nombres, tbPersonas.per_Apellidos, tbPersonas.per_FechaNacimiento, tbPersonas.per_Sexo, tbPersonas.per_Edad, tbPersonas.nac_Id, tbPersonas.per_Direccion, tbPersonas.per_Telefono, tbPersonas.per_CorreoElectronico, tbPersonas.per_EstadoCivil, tbPersonas.per_TipoSangre,id,DateTime.Now);
+                    Response.Redirect("Index");
                 }
                 catch
                 {
@@ -196,14 +246,12 @@ namespace ERP_GMEDINA.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            tbPersonas tbPersonas = null;
+            List<tbPersonas> tbPersonas = null;
             try
             {
-                tbPersonas = db.tbPersonas.Find(id);
-                if (tbPersonas == null || !tbPersonas.per_Estado)
-                {
-                    return HttpNotFound();
-                }
+                tbPersonas = new List<Models.tbPersonas> { };
+                tbPersonas = db.tbPersonas.Where(x => x.per_Id == id).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+
             }
             catch (Exception ex)
             {
@@ -211,24 +259,29 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             Session["id"] = id;
-            var Personas = new tbPersonas
+            var Personas = new tbPersonas();
+            foreach (var item in tbPersonas)
             {
-                per_Id = tbPersonas.per_Id,
-                per_Identidad = tbPersonas.per_Identidad,
-                per_Nombres = tbPersonas.per_Nombres,
-                per_Apellidos = tbPersonas.per_Apellidos,
-                per_Sexo = tbPersonas.per_Sexo,
-                per_Edad = tbPersonas.per_Edad,
-                per_Direccion = tbPersonas.per_Direccion,
-                per_Estado = tbPersonas.per_Estado,
-                per_RazonInactivo = tbPersonas.per_RazonInactivo,
-                per_UsuarioCrea = tbPersonas.per_UsuarioCrea,
-                per_FechaCrea = tbPersonas.per_FechaCrea,
-                per_UsuarioModifica = tbPersonas.per_UsuarioModifica,
-                per_FechaModifica = tbPersonas.per_FechaModifica,
-                tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbPersonas.tbUsuario).usu_NombreUsuario },
-                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbPersonas.tbUsuario1).usu_NombreUsuario }
-            };
+                Personas = new tbPersonas()
+                {
+                    per_Id = item.per_Id,
+                    per_Identidad = item.per_Identidad
+                    //per_Nombres = tbPersonas.per_Nombres,
+                    //per_Apellidos = tbPersonas.per_Apellidos,
+                    //per_Sexo = tbPersonas.per_Sexo,
+                    //per_Edad = tbPersonas.per_Edad,
+                    //per_Direccion = tbPersonas.per_Direccion,
+                    //per_Estado = tbPersonas.per_Estado,
+                    //per_RazonInactivo = tbPersonas.per_RazonInactivo,
+                    //per_UsuarioCrea = tbPersonas.per_UsuarioCrea,
+                    //per_FechaCrea = tbPersonas.per_FechaCrea,
+                    //per_UsuarioModifica = tbPersonas.per_UsuarioModifica,
+                    //per_FechaModifica = tbPersonas.per_FechaModifica,
+                    //tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbPersonas.tbUsuario).usu_NombreUsuario },
+                    //tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbPersonas.tbUsuario1).usu_NombreUsuario }
+                };
+
+            }
             return Json(Personas, JsonRequestBehavior.AllowGet);
         }
         // POST: Areas/Edit/5

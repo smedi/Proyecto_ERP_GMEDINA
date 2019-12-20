@@ -5,200 +5,161 @@
     Layout = "~/Views/Shared/_LayoutBase.cshtml";
 }
 
+<h2>Create</h2>
 
-<h2>Persona</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <div class="col-md-offset-11">
+        @Html.ActionLink("Regresar", "Index")
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="float-e-margins">
+
+
+
+                    <div id="Persona">
+                        <h1>Datos Personales</h1>
+                        <div class="form-horizontal">
+
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.per_Identidad, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.per_Identidad, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.per_Identidad, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.per_Nombres, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.per_Nombres, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.per_Nombres, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.per_Apellidos, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.per_Apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.per_Apellidos, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.per_FechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.per_FechaNacimiento, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.per_FechaNacimiento, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.per_Sexo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("Sexo", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.per_Sexo, "", new { @class = "text-danger" , @onchange="OnSelectionChange" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.per_Edad, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.per_Edad, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.per_Edad, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.nac_Id, "nac_Id", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("nac_Id", null, htmlAttributes: new { @class = "form-control" , @name="NacionalidadesDual"})
+                                    @Html.ValidationMessageFor(model => model.nac_Id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.per_Direccion, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.per_Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.per_Direccion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.per_Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.per_Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.per_Telefono, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.per_CorreoElectronico, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.per_CorreoElectronico, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.per_CorreoElectronico, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.per_EstadoCivil, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("EstadoCivil", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.per_EstadoCivil, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.per_TipoSangre, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("TipoSangre", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.per_TipoSangre, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!--Competencias-->
+                        <h1>Competencias</h1>
+                        <div>
+                            @Html.Partial("_CreateCompetencias", new ERP_GMEDINA.Models.tbCompetenciasPersona())
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br /><br />
+        <br />
+    </div>
 
 }
 
-<div class="ibox">
-
-    <div class="ibox-content">
-
-        <div class="form-group">
-            <div class="ibox-tools">
-
-                <a class="close-link">
-                    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary btn-xs" })
-                </a>
-            </div>
-        </div>
-
-        <form id="Persona" action="#" class="wizard-big wizard clearfix" role="application" novalidate="novalidate">
-            <h1>Datos Personales</h1>
-            <div>
-                
-                @Html.Partial("_Create", new ERP_GMEDINA.Models.tbPersonas())
-            </div>
-
-            <h1>Competencias</h1>
-            <div>
-                <div class="ibox col-lg-12">
-                    <div class="ibox-title">
-                        <h5>Competencias</h5>
-                        <div class="ibox-tools">
-
-                        </div>
-                    </div>
-                    <div class="ibox-content" style="">
-                        <div class="row">
-                            <div class="col-md-4 b-r">
-                                @Html.Partial("_CreateCompetencias", new ERP_GMEDINA.Models.tbCompetenciasPersona())
-                            </div>
-                            <div class="col-lg-8">
-                                <table class="table" id="ChildDataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Descripcion</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h1>Habilidades</h1>
-            <div>
-                <div class="ibox col-lg-12">
-                    <div class="ibox-title">
-                        <h5>Habilidades</h5>
-                        <div class="ibox-tools">
-
-                        </div>
-                    </div>
-                    <div class="ibox-content" style="">
-                        <div class="row">
-                            <div class="col-md-4 b-r">
-                                @*@Html.Partial("_CreateHabilidades", new ERP_GMEDINA.Models.tbHabilidadesPersona())*@
-                            </div>
-                            <div class="col-lg-8">
-                                <table class="table" id="ChildDataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Descripcion</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <h1>Idiomas</h1>
-            <div>
-                <div class="ibox col-lg-12">
-                    <div class="ibox-title">
-                        <h5>Idiomas</h5>
-                        <div class="ibox-tools">
-
-                        </div>
-                    </div>
-                    <div class="ibox-content" style="">
-                        <div class="row">
-                            <div class="col-md-4 b-r">
-                                @*@Html.Partial("_CreateIdiomas", new ERP_GMEDINA.Models.tbIdiomaPersona())*@
-                            </div>
-                            <div class="col-lg-8">
-                                <table class="table" id="ChildDataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Descripcion</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <h1>Titulos</h1>
-            <div>
-                <div class="ibox col-lg-12">
-                    <div class="ibox-title">
-                        <h5>Titulos</h5>
-                        <div class="ibox-tools">
-
-                        </div>
-                    </div>
-                    <div class="ibox-content" style="">
-                        <div class="row">
-                            <div class="col-md-4 b-r">
-                                @*@Html.Partial("_CreateTitulos", new ERP_GMEDINA.Models.tbTitulosPersona())*@
-                            </div>
-                            <div class="col-lg-8">
-                                <table class="table" id="ChildDataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Descripcion</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
- 
-            <h1>Otros</h1>
-            <div>
-                <div class="ibox col-lg-12">
-                    <div class="ibox-title">
-                        <h5>Titulos</h5>
-                        <div class="ibox-tools">
-
-                        </div>
-                    </div>
-                    <div class="ibox-content" style="">
-                        <div class="row">
-                            <div class="col-md-4 b-r">
-                                @*@Html.Partial("_CreateRequerimientosEspeciales", new ERP_GMEDINA.Models.tbRequerimientosEspecialesPersona())*@
-                            </div>
-                            <div class="col-lg-8">
-                                <table class="table" id="ChildDataTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Descripcion</th>
-                                            <th>Año</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h1>Terminos y Condiciones</h1>
-            <div>juejue</div>
-            
-        </form>
-        
-    </div>
-   
-</div>
-<br>
 
 
-
-
-
-@*<script src="~/Scripts/app/General/Personas/StepsPersonas.js"></script>*@
 <script src="~/Scripts/plugins/pace/pace.min.js"></script>
+
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Content/plugins/izitoast/iziToast")
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/general")
+    @Scripts.Render("~/plugins/duallist")
+}
+<script src="~/Scripts/app/General/Personas/CreatePersonas.js"></script>

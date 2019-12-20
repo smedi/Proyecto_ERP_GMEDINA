@@ -10,7 +10,7 @@ $(document).ready(function () {
         campo = valor.innerText;
         //Quita los espacios del enacabezado.
         //El nombre del campo en el Json sera el DisplayName de la clase parcial SIN espacios, respetando mayusculas.
-        campo = campo.replace(/\s/g, '');
+        campo = campo.replace(' ', '');
         //Si la primera columna no tiene encabezado, sera la columna de botones de expandir
         if (campo == "") {
             columnas.push({

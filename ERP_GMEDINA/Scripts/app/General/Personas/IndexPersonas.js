@@ -57,7 +57,7 @@ function llenarTabla() {
            tabla.draw();
            $.each(Lista, function (index, value) {
                tabla.row.add({
-                   Id: value.Id,
+                   ID: value.Id,
                    Identidad: value.Identidad,
                    NombreCompleto: value.Nombre,
                    CorreoElectronico: value.CorreoElectronico
@@ -92,3 +92,18 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
             });
     }
 });
+
+function tablaDetalles(ID) {
+    id = ID;
+    _ajax(null,
+        '/Personas/Edit/' + ID,
+        'GET',
+        function (obj) {
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                $("#ModalDetalles").find("#per_Id")["0"].innerText = obj.per_Id;
+                $("#ModalDetalles").find("#per_Identidad")["0"].innerText = obj.per_Identidad;
+
+                $('#ModalDetalles').modal('show');
+            }
+        });
+}
