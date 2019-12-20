@@ -184,37 +184,44 @@ namespace ERP_GMEDINA.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbHistorialIncapacidades tbHistorialIncapacidades = db.tbHistorialIncapacidades.Find(id);
-            if (tbHistorialIncapacidades == null)
+            List<tbHistorialIncapacidades> tbHistorialIncapacidades = null;
+            try
             {
+                tbHistorialIncapacidades = new List<Models.tbHistorialIncapacidades> { };
+                tbHistorialIncapacidades = db.tbHistorialIncapacidades.Where(x => x.emp_Id == id).Include(t => t.tbUsuario).Include(t => t.tbUsuario1).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
                 return HttpNotFound();
             }
-            ViewBag.hinc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialIncapacidades.hinc_UsuarioCrea);
-            ViewBag.hinc_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialIncapacidades.hinc_UsuarioModifica);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialIncapacidades.emp_Id);
-            ViewBag.ticn_Id = new SelectList(db.tbTipoIncapacidades, "ticn_Id", "ticn_Descripcion", tbHistorialIncapacidades.ticn_Id);
-            return View(tbHistorialIncapacidades);
+            Session["id"] = id;
+            var vacaciones = new tbHistorialIncapacidades();
+            foreach (var item in tbHistorialIncapacidades)
+            {
+                vacaciones = new tbHistorialIncapacidades
+                {
+                    hinc_Id = item.hinc_Id,
+                    //emp_Id = item.tbEmpleados.tbPersonas.per_Nombres,
+                    //ticn_Descripcion = item.tbTipoIncapacidades.ticn_Descripcion,
+                    hinc_Dias = item.hinc_Dias,
+                    hinc_CentroMedico = item.hinc_CentroMedico,
+                    hinc_Diagnostico = item.hinc_Diagnostico,
+                    hinc_FechaInicio = item.hinc_FechaInicio,
+                    hinc_FechaFin = item.hinc_FechaFin,
+                    hinc_UsuarioCrea = item.hinc_UsuarioCrea,
+                    hinc_FechaCrea = item.hinc_FechaCrea,
+                    hinc_FechaModifica = item.hinc_FechaModifica,
+                    //tbUsuario = item.tbUsuario,
+                    //tbUsuario1 = item.tbUsuario1
+                };
+
+            }
+            return Json(vacaciones, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: HistorialIncapacidades/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "hinc_Id,emp_Id,ticn_Id,hinc_Dias,hinc_CentroMedico,hinc_Doctor,hinc_Diagnostico,hinc_FechaInicio,hinc_FechaFin,hinc_Estado,hinc_RazonInactivo,hinc_UsuarioCrea,hinc_FechaCrea,hinc_UsuarioModifica,hinc_FechaModifica")] tbHistorialIncapacidades tbHistorialIncapacidades)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbHistorialIncapacidades).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.hinc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialIncapacidades.hinc_UsuarioCrea);
-            ViewBag.hinc_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialIncapacidades.hinc_UsuarioModifica);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialIncapacidades.emp_Id);
-            ViewBag.ticn_Id = new SelectList(db.tbTipoIncapacidades, "ticn_Id", "ticn_Descripcion", tbHistorialIncapacidades.ticn_Id);
-            return View(tbHistorialIncapacidades);
-        }
+
 
         // GET: HistorialIncapacidades/Delete/5
         [HttpPost]

@@ -101,10 +101,60 @@ function Llamarmodaldelete(ID) {
 function Llamarmodaldetalle() {
 
     var modalnuevo = $("#ModalDetalles");
-    modalnuevo.modal('show');
+    id = idEmpleado;
+    _ajax({ id: parseInt(id) },
+        '/HistorialIncapacidades/Edit',
+        'GET',
+        function (obj) {
+            $('#ModalDetalles').modal('show');
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
+                $("#ModalDetalles").find("#hinc_Dias")["0"].innerText = obj.hinc_Dias;
+                $("#ModalDetalles").find("#hinc_CentroMedico")["0"].innerText = obj.hinc_CentroMedico;
+                $("#ModalDetalles").find("#hinc_Diagnostico")["0"].innerText = obj.hinc_Diagnostico;
+                $("#ModalDetalles").find("#hinc_FechaInicio")["0"].innerText = FechaFormato(obj.hinc_FechaInicio).substring(0, 10);
+                $("#ModalDetalles").find("#hinc_FechaFin")["0"].innerText = FechaFormato(obj.hinc_FechaFin).substring(0, 10);
+                $("#ModalDetalles").find("#hinc_FechaCrea")["0"].innerText = FechaFormato(obj.hinc_FechaCrea).substring(0, 10);
+                $("#ModalDetalles").find("#hinc_UsuarioCrea")["0"].innerText = obj.hinc_UsuarioCrea;
+                $("#ModalDetalles").find("#hinc_UsuarioModifica")["0"].innerText = obj.hinc_UsuarioModifica;
+                $("#ModalDetalles").find("#hinc_FechaModifica")["0"].innerText = FechaFormato(obj.hinc_FechaModifica).substring(0, 10);
+                
 
-
+            }
+        });
+    
 }
+
+
+function llamarmodaldetalles() {
+    var modaldetalle = $("#ModalDetalles");
+    id = idEmpleado;
+    
+    _ajax({ id: parseInt(id) },
+        '/HistorialIncapacidades/Edit',
+        'GET',
+        function (obj) {
+            $('#ModalDetalles').modal('show');
+            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                $("#ModalDetalles").find("#hinc_Dias")["0"].innerText = obj.hinc_Dias;
+                $("#ModalDetalles").find("#hinc_CentroMedico")["0"].innerText = obj.hinc_CentroMedico;
+                $("#ModalDetalles").find("#hinc_Diagnostico")["0"].innerText = obj.hinc_Diagnostico;
+                $("#ModalDetalles").find("#hinc_FechaInicio")["0"].innerText = FechaFormato(obj.hinc_FechaInicio).substring(0, 10);
+                $("#ModalDetalles").find("#hinc_FechaFin")["0"].innerText = FechaFormato(obj.hinc_FechaFin).substring(0, 10);
+                $("#ModalDetalles").find("#hinc_FechaCrea")["0"].innerText = FechaFormato(obj.hinc_FechaCrea).substring(0, 10);
+                $("#ModalDetalles").find("#hinc_UsuarioCrea")["0"].innerText = obj.hinc_UsuarioCrea;
+                $("#ModalDetalles").find("#hinc_UsuarioModifica")["0"].innerText = obj.hinc_UsuarioModifica;
+                $("#ModalDetalles").find("#hinc_FechaModifica")["0"].innerText = FechaFormato(obj.hinc_FechaModifica).substring(0, 10);
+                debugger
+
+            }
+        });
+}
+
+
+
+
+
 
 function Llamarmodalcreate() {
 
@@ -117,25 +167,7 @@ function Llamarmodalcreate() {
 
 
 
-function tablaDetalles(ID) {
-    id = ID;
-    _ajax(null,
-        '/HistorialIncapacidades/Details/' + ID,
-        'GET',
-        function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
-                $("#ModalDetalles").find("#hinc_Descripcion")["0"].innerText = obj.hinc_Descripcion;
-                $("#ModalDetalles").find("#ticn_Descripcion")["0"].innerText = obj.ticn_Descripcion;
-                $("#ModalDetalles").find("#hinc_Dias")["0"].innerText = obj.hinc_Dias;
-                $("#ModalDetalles").find("#hinc_CentroMedico")["0"].innerText = FechaFormato(obj.hinc_CentroMedico);
-                $("#ModalDetalles").find("#hinc_Doctor")["0"].innerText = FechaFormato(obj.hinc_Doctor);
-                $("#ModalDetalles").find("#hinc_Diagnostico")["0"].innerText = obj.hinc_Diagnostico;
-                $("#ModalDetalles").find("#hinc_FechaInicio")["0"].innerText = obj.hinc_FechaInicio;
-                $("#ModalDetalles").find("#hinc_FechaFin")["0"].innerText = obj.hinc_FechaFin;
-                $('#ModalDetalles').modal('show');
-            }
-        });
-}
+
 
 
 
