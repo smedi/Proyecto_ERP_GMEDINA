@@ -79,7 +79,7 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
         tr.removeClass('shown');
     }
     else {
-        id = row.data().Id;
+        id = row.data().ID;
        hola = row.data().hola;
         _ajax({ id: parseInt(id) },
             '/Personas/ChildRowData',

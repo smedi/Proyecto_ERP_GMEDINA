@@ -801,15 +801,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbNacionalidades' does not have
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_tbPersonas">
           <Key>
-            <PropertyRef Name="Relacion_Id" />
-            <PropertyRef Name="Estado" />
             <PropertyRef Name="Relacion" />
           </Key>
           <Property Name="per_Id" Type="int" />
-          <Property Name="Relacion_Id" Type="int" Nullable="false" />
+          <Property Name="Relacion_Id" Type="int" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
-          <Property Name="Estado" Type="bit" Nullable="false" />
-          <Property Name="Relacion" Type="varchar" MaxLength="26" Nullable="false" />
+          <Property Name="Relacion" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
           <End Role="tbUsuario" Type="Self.tbUsuario" Multiplicity="1" />
@@ -3140,7 +3137,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
     [V_tbPersonas].[per_Id] AS [per_Id], 
     [V_tbPersonas].[Relacion_Id] AS [Relacion_Id], 
     [V_tbPersonas].[Descripcion] AS [Descripcion], 
-    [V_tbPersonas].[Estado] AS [Estado], 
     [V_tbPersonas].[Relacion] AS [Relacion]
     FROM [rrhh].[V_tbPersonas] AS [V_tbPersonas]</DefiningQuery>
           </EntitySet>
@@ -4131,6 +4127,53 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <Parameter Name="suc_usuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="suc_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="rrhh_tbCompetenciasPersona_Insert" ReturnType="Collection(String)">
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="comp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cope_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="cope_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="rrhh_tbHabilidadesPersona_Insert" ReturnType="Collection(String)">
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="habi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hape_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="hape_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="rrhh_tbIdiomasPersona_Insert" ReturnType="Collection(String)">
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="idi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="idpe_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="idpe_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="rrhh_tbPersonas_Insert" ReturnType="Collection(ERP_GMEDINAModel.rrhh_tbPersonas_Insert_Result)">
+            <Parameter Name="per_Identidad" Mode="In" Type="String" />
+            <Parameter Name="per_Nombres" Mode="In" Type="String" />
+            <Parameter Name="per_Apellidos" Mode="In" Type="String" />
+            <Parameter Name="per_FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="per_Sexo" Mode="In" Type="String" />
+            <Parameter Name="per_Edad" Mode="In" Type="Int32" />
+            <Parameter Name="nac_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Direccion" Mode="In" Type="String" />
+            <Parameter Name="per_Telefono" Mode="In" Type="String" />
+            <Parameter Name="per_CorreoElectronico" Mode="In" Type="String" />
+            <Parameter Name="per_EstadoCivil" Mode="In" Type="String" />
+            <Parameter Name="per_TipoSangre" Mode="In" Type="String" />
+            <Parameter Name="per_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="per_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="rrhh_tbRequerimientosEspecialesPersona_Insert" ReturnType="Collection(String)">
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="resp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="rep_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="rep_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="rrhh_tbTitulosPersona_Insert" ReturnType="Collection(String)">
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="titu_Id" Mode="In" Type="Int32" />
+            <Parameter Name="titu_Anio" Mode="In" Type="Int32" />
+            <Parameter Name="tipe_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="tipe_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <EntitySet Name="tbUsuario" EntityType="ERP_GMEDINAModel.tbUsuario" />
           <EntitySet Name="tbAreas" EntityType="ERP_GMEDINAModel.tbAreas" />
           <EntitySet Name="tbCargos" EntityType="ERP_GMEDINAModel.tbCargos" />
@@ -4182,6 +4225,8 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <EntitySet Name="tbTitulos" EntityType="ERP_GMEDINAModel.tbTitulos" />
           <EntitySet Name="tbTitulosPersona" EntityType="ERP_GMEDINAModel.tbTitulosPersona" />
           <EntitySet Name="tbTitulosRequisicion" EntityType="ERP_GMEDINAModel.tbTitulosRequisicion" />
+          <EntitySet Name="V_tbNacionalidades" EntityType="ERP_GMEDINAModel.V_tbNacionalidades" />
+          <EntitySet Name="V_tbPersonas" EntityType="ERP_GMEDINAModel.V_tbPersonas" />
           <AssociationSet Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea" Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
             <End Role="tbUsuario" EntitySet="tbUsuario" />
             <End Role="tbAreas" EntitySet="tbAreas" />
@@ -4834,55 +4879,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             <End Role="tbTitulos" EntitySet="tbTitulos" />
             <End Role="tbTitulosRequisicion" EntitySet="tbTitulosRequisicion" />
           </AssociationSet>
-          <EntitySet Name="V_tbPersonas" EntityType="ERP_GMEDINAModel.V_tbPersonas" />
-          <FunctionImport Name="rrhh_tbCompetenciasPersona_Insert" ReturnType="Collection(String)">
-            <Parameter Name="per_Id" Mode="In" Type="Int32" />
-            <Parameter Name="comp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="cope_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="cope_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="rrhh_tbHabilidadesPersona_Insert" ReturnType="Collection(String)">
-            <Parameter Name="per_Id" Mode="In" Type="Int32" />
-            <Parameter Name="habi_Id" Mode="In" Type="Int32" />
-            <Parameter Name="hape_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="hape_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="rrhh_tbIdiomasPersona_Insert" ReturnType="Collection(String)">
-            <Parameter Name="per_Id" Mode="In" Type="Int32" />
-            <Parameter Name="idi_Id" Mode="In" Type="Int32" />
-            <Parameter Name="idpe_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="idpe_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="rrhh_tbPersonas_Insert" ReturnType="Collection(ERP_GMEDINAModel.rrhh_tbPersonas_Insert_Result)">
-            <Parameter Name="per_Identidad" Mode="In" Type="String" />
-            <Parameter Name="per_Nombres" Mode="In" Type="String" />
-            <Parameter Name="per_Apellidos" Mode="In" Type="String" />
-            <Parameter Name="per_FechaNacimiento" Mode="In" Type="DateTime" />
-            <Parameter Name="per_Sexo" Mode="In" Type="String" />
-            <Parameter Name="per_Edad" Mode="In" Type="Int32" />
-            <Parameter Name="nac_Id" Mode="In" Type="Int32" />
-            <Parameter Name="per_Direccion" Mode="In" Type="String" />
-            <Parameter Name="per_Telefono" Mode="In" Type="String" />
-            <Parameter Name="per_CorreoElectronico" Mode="In" Type="String" />
-            <Parameter Name="per_EstadoCivil" Mode="In" Type="String" />
-            <Parameter Name="per_TipoSangre" Mode="In" Type="String" />
-            <Parameter Name="per_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="per_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="rrhh_tbRequerimientosEspecialesPersona_Insert" ReturnType="Collection(String)">
-            <Parameter Name="per_Id" Mode="In" Type="Int32" />
-            <Parameter Name="resp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="rep_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="rep_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="rrhh_tbTitulosPersona_Insert" ReturnType="Collection(String)">
-            <Parameter Name="per_Id" Mode="In" Type="Int32" />
-            <Parameter Name="titu_Id" Mode="In" Type="Int32" />
-            <Parameter Name="titu_Anio" Mode="In" Type="Int32" />
-            <Parameter Name="tipe_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="tipe_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <EntitySet Name="V_tbNacionalidades" EntityType="ERP_GMEDINAModel.V_tbNacionalidades" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -4945,6 +4941,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
         </ComplexType>
         <ComplexType Name="UDP_RRHH_tbRequerimientosEspeciales_Restore_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="rrhh_tbPersonas_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
         <EntityType Name="tbUsuario">
           <Key>
@@ -6053,6 +6052,23 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
           <NavigationProperty Name="tbUsuario1" Relationship="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbTitulosRequisicion_treq_UsuarioModifica" FromRole="tbTitulosRequisicion" ToRole="tbUsuario" />
           <NavigationProperty Name="tbRequisiciones" Relationship="ERP_GMEDINAModel.FK_rrhh_tbRequisiciones_req_Id_rrhh_tbTitulosRequisicion_req_Id" FromRole="tbTitulosRequisicion" ToRole="tbRequisiciones" />
           <NavigationProperty Name="tbTitulos" Relationship="ERP_GMEDINAModel.FK_rrhh_tbTitulos_titu_Id_rrhh_tbTitulosRequisicion_titu_Id" FromRole="tbTitulosRequisicion" ToRole="tbTitulos" />
+        </EntityType>
+        <EntityType Name="V_tbNacionalidades">
+          <Key>
+            <PropertyRef Name="nac_Id" />
+            <PropertyRef Name="nac_Descripcion" />
+          </Key>
+          <Property Name="nac_Id" Type="Int32" Nullable="false" />
+          <Property Name="nac_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_tbPersonas">
+          <Key>
+            <PropertyRef Name="Relacion" />
+          </Key>
+          <Property Name="per_Id" Type="Int32" />
+          <Property Name="Relacion_Id" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Relacion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Acce_tbUsuario_usu_Id_rrhh_tbAreas_area_Usuariocrea">
           <End Type="ERP_GMEDINAModel.tbUsuario" Role="tbUsuario" Multiplicity="1" />
@@ -8010,29 +8026,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="V_tbPersonas">
-          <Key>
-            <PropertyRef Name="Relacion_Id" />
-            <PropertyRef Name="Estado" />
-            <PropertyRef Name="Relacion" />
-          </Key>
-          <Property Name="per_Id" Type="Int32" />
-          <Property Name="Relacion_Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="Relacion" Type="String" Nullable="false" MaxLength="26" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="V_tbNacionalidades">
-          <Key>
-            <PropertyRef Name="nac_Id" />
-            <PropertyRef Name="nac_Descripcion" />
-          </Key>
-          <Property Name="nac_Id" Type="Int32" Nullable="false" />
-          <Property Name="nac_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <ComplexType Name="rrhh_tbPersonas_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8169,6 +8162,18 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="rrhh_tbCompetenciasPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbCompetenciasPersona_Insert" />
+          <FunctionImportMapping FunctionImportName="rrhh_tbHabilidadesPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbHabilidadesPersona_Insert" />
+          <FunctionImportMapping FunctionImportName="rrhh_tbIdiomasPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbIdiomasPersona_Insert" />
+          <FunctionImportMapping FunctionImportName="rrhh_tbPersonas_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbPersonas_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.rrhh_tbPersonas_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="rrhh_tbRequerimientosEspecialesPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbRequerimientosEspecialesPersona_Insert" />
+          <FunctionImportMapping FunctionImportName="rrhh_tbTitulosPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbTitulosPersona_Insert" />
           <EntitySetMapping Name="tbUsuario">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.tbUsuario">
               <MappingFragment StoreEntitySet="tbUsuario">
@@ -9002,34 +9007,21 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_tbPersonas' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_tbPersonas">
-            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbPersonas">
-              <MappingFragment StoreEntitySet="V_tbPersonas">
-                <ScalarProperty Name="Relacion" ColumnName="Relacion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Relacion_Id" ColumnName="Relacion_Id" />
-                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="rrhh_tbCompetenciasPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbCompetenciasPersona_Insert" />
-          <FunctionImportMapping FunctionImportName="rrhh_tbHabilidadesPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbHabilidadesPersona_Insert" />
-          <FunctionImportMapping FunctionImportName="rrhh_tbIdiomasPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbIdiomasPersona_Insert" />
-          <FunctionImportMapping FunctionImportName="rrhh_tbPersonas_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbPersonas_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.rrhh_tbPersonas_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="rrhh_tbRequerimientosEspecialesPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbRequerimientosEspecialesPersona_Insert" />
-          <FunctionImportMapping FunctionImportName="rrhh_tbTitulosPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.rrhh_tbTitulosPersona_Insert" />
           <EntitySetMapping Name="V_tbNacionalidades">
             <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbNacionalidades">
               <MappingFragment StoreEntitySet="V_tbNacionalidades">
                 <ScalarProperty Name="nac_Descripcion" ColumnName="nac_Descripcion" />
                 <ScalarProperty Name="nac_Id" ColumnName="nac_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_tbPersonas">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_tbPersonas">
+              <MappingFragment StoreEntitySet="V_tbPersonas">
+                <ScalarProperty Name="Relacion" ColumnName="Relacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Relacion_Id" ColumnName="Relacion_Id" />
+                <ScalarProperty Name="per_Id" ColumnName="per_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
