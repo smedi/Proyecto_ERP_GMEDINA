@@ -51,20 +51,22 @@ $(document).ready(function () {
             var SlctReqEspeciales = $(".SlctReqEspeciales");
             var SlctTitulos = $(".SlctTitulos");
             
-            var data = JSON.stringify({ Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() });
-
-            var Form = $("#tbRequisiciones").find("select, textarea, input").serializeArray();
-            
+            var data = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
+            var Form = $("#tbRequisiciones").find("select, textarea, input:not(:hidden)").serializeArray();
             Form = serializarPro(Form);
-           
-            Form = JSON.stringify({ TbRequisicion : [Form]});
-
-            var obj = $.extend({}, Form, data);
-
-
-            console.log(data);
+            Form = JSON.stringify({ tbRequisiciones: Form, DatosProfesionales: data });
             console.log(Form);
-            console.log(obj);
+
+            _ajax(Form,
+            '/Requisiciones/Create',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
         },
     });
 });
