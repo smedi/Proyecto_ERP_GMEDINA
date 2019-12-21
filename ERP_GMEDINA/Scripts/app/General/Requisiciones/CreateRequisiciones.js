@@ -53,12 +53,18 @@ $(document).ready(function () {
             
             var data = JSON.stringify({ Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() });
 
-            var Form = $("#FormRequisicion").serializeArray();
+            var Form = $("#tbRequisiciones").find("select, textarea, input").serializeArray();
             
-            Form = serializar(Form);
+            Form = serializarPro(Form);
            
-            console.log(JSON.stringify({ TbRequisicion : Form}));
+            Form = JSON.stringify({ TbRequisicion : [Form]});
 
+            var obj = $.extend({}, Form, data);
+
+
+            console.log(data);
+            console.log(Form);
+            console.log(obj);
         },
     });
 });

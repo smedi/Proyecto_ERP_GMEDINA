@@ -39,6 +39,20 @@ function serializar(data) {
     }
 }
 
+function serializarPro(data) {
+    var Data = new Object();
+    $.each(data, function (index, valor) {
+        var value = valor.value.trim();
+        if (value != "") {
+            Data[valor.name] = value;
+        } else {
+            Data[valor.name] = "";
+        }
+    });
+
+    return Data;
+}
+
 function FechaFormato(pFecha) {
     if (pFecha != null && pFecha != undefined) {
         var fechaString = pFecha.substr(6);
