@@ -33,7 +33,7 @@ namespace ERP_GMEDINA.Models
 					per_Id = x.per_Id,
 					fare_Id = x.fare_Id,
 					scan_Fecha = x.scan_Fecha,
-					rper_Id = x.rper_Id
+                    req_Id = x.req_Id
 				});
             }
             return Json(tbSeleccionCandidatos, JsonRequestBehavior.AllowGet);

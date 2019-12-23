@@ -14,21 +14,16 @@ namespace ERP_GMEDINA.Models
     }
 
     public class cSeleccionCandidatos
-    {
-        [Display(Name= "Id")]
+    { 
+
+        [Display(Name = "Id")]
         public int scan_Id { get; set; }
 
         [Display(Name = "Persona")]
         public int per_Id { get; set; }
 
-        [Display(Name = "Fase Reclutamiento")]
-        public int fare_Id { get; set; }
-
         [Display(Name = "Fecha")]
         public Nullable<System.DateTime> scan_Fecha { get; set; }
-
-        [Display(Name = "Plaza Disponible")]
-        public int rper_Id { get; set; }
 
         [Display(Name = "Estado")]
         public bool scan_Estado { get; set; }
@@ -48,5 +43,10 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> scan_FechaModifica { get; set; }
 
+        [Display(Name = "Fase Reclutamiento")]
+        public int fare_Id { get; set; }
+
+        [Display(Name = "Plaza Solicitada")]
+        public int req_Id { get; set; }
     }
 }

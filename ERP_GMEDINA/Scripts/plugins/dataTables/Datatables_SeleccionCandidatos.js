@@ -38,8 +38,8 @@ $(document).ready(function () {
                 defaultContent: "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>" +
                                     "<a class='btn btn-primary btn-xs' style= 'min-width: 70px;' onclick='CallDetalles(this)' >Detalles</a>" +
                                     "<a class='btn btn-default btn-xs' style= 'min-width: 70px;' onclick='CallEditar(this)'>Editar</a>" +
-                                    "<a class='btn btn-success btn-xs ' style= 'min-width: 70px;' href='#'>Contratar</a>" +
-                                    "<a class='btn btn-danger btn-xs ' style= 'min-width: 70px;' href='#'>Inhabilitar</a>" +
+                                    "<a class='btn btn-success btn-xs ' style= 'min-width: 70px;' onclick='CallContratar(this)'>Contratar</a>" +
+                                    "<a class='btn btn-danger btn-xs ' style= 'min-width: 70px;'  onclick='CallEliminar(this)'>Inhabilitar</a>" +
                                 "</div>"
             });
         }
@@ -108,14 +108,13 @@ function CallDetalles(btn) {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
     var id = row.data().ID;
-
     tablaDetalles(id);
 }
 
-function CallEditar(btn) {
-    var tr = $(btn).closest('tr');
-    var row = tabla.row(tr);
-    var id = row.data().ID;
-
-    tablaEditar(id);
-}
+//function CallEditar(btn) {
+//    var tr = $(btn).closest('tr');
+//    var row = tabla.row(tr);
+//    var id = row.data().ID;
+//    debugger
+//    tablaEditar(id);
+//}
