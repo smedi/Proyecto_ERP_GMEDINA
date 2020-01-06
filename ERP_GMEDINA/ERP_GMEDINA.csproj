@@ -225,6 +225,7 @@
     <Compile Include="Models\cTitulos.cs" />
     <Compile Include="Models\cUsuarios.cs" />
     <Compile Include="Models\DatosProfesionalesArray.cs" />
+    <Compile Include="Models\DatosProfessionalesEdit.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1229,7 +1230,7 @@
     <Content Include="Scripts\app\General\Jornadas\IndexJornadas.js" />
     <Content Include="Scripts\app\General\Nacionalidades\Nacionalidades.js" />
     <Content Include="Scripts\app\General\Personas\CreatePersonas.js" />
-    <Content Include="Scripts\app\General\Personas\FinalPersonas.js" />
+    <Content Include="Scripts\app\General\Personas\EditPersonas.js" />
     <Content Include="Scripts\app\General\Personas\IndexPersonas.js" />
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />

@@ -98,6 +98,7 @@ function llenarTabla() {
 
 $(document).ready(function () {
     llenarTabla();
+    sessionStorage.clear();
 });
 $('#IndexTable tbody').on('click', 'td.details-control', function () {
     var tr = $(this).closest('tr');
@@ -145,4 +146,16 @@ function tablaDetalles(ID) {
                 $('#ModalDetalles').modal('show');
             }
         });
+}
+function tablaEditar(ID) {
+    id = ID;
+    sessionStorage.setItem("IdPersona", id);
+    window.location.href = "Personas/Edit";
+    //_ajax(null,
+    //    '/Personas/Edit/',
+    //    'GET',
+    //    function (obj) {
+    //        if (obj != "-1" && obj != "-2" && obj != "-3") {
+    //        }
+    //    });
 }
