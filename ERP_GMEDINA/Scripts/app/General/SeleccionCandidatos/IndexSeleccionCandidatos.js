@@ -214,9 +214,6 @@ $("#InActivar").click(function () {
 });
 
 
-
-
-
 function btnInactivar() {
     var modalnuevo = $("#ModalInactivar");
     modalnuevo.modal('show');
@@ -256,17 +253,15 @@ function CallContratar(btn) {
         '/SeleccionCandidatos/Contratar/' + id,
         'GET',
         function (obj) {
+            $("#ModalContratar").find("#Candidato").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
+            
         });
-
-
 
     $('#ModalContratar').modal('show');
 
 
 
 }
-
-
 
 
 $("#btnContratar").click(function () {
