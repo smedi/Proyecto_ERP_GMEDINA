@@ -10,8 +10,8 @@
                 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "FormNuevo" }))
                 {
                     <div class="col-md-8">
-                        <input id="emp_Id" name="emp_Id" type="text" value="">
-                    </div>
+                        <input hidden="hidden" id="emp_Id" name="emp_Id" type="text" value="">
+                    </div><br>
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         @*<div class="form-group">
