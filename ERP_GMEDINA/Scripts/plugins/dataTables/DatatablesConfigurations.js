@@ -1,12 +1,20 @@
 ﻿var tabla = null;
 var botones = [];
-var htmlSpiner = '<div class="ibox-content sk-loading">' +
-'<div class="sk-spinner sk-spinner-double-bounce">' +
-'<div class="sk-double-bounce1"></div>' +
-'<div class="sk-double-bounce2"></div>' +
-'</div>' +
-'<h1 class="title">Cargando...</h1>'
-'</div>'
+var htmlSpiner =
+    '<div class="ibox" id="ibox1">' +
+        '<div class="ibox-content" >' +
+            '<div class="ibox-content sk-loading">' +
+                '<div class="sk-spinner sk-spinner-double-bounce">' +
+                    '<div class="sk-double-bounce1"></div>' +
+                    '<div class="sk-double-bounce2"></div>' +
+                '</div>' +
+                '<div class="sortable-list connectList agile-list ui-sortable" id="todo">' +
+                    '<h1 class="title">Cargando...</h1>' +
+                '</div>' +
+            '</div>' +
+        '</div>' +
+    '</div>';
+
 $(document).ready(function () {
     var columnas = [];
     var col = 0;
@@ -110,5 +118,6 @@ $(document).ready(function () {
         ],
         columns: columnas,
         order: [[col, 'asc']],
-    });   
+    });
+    $('#ibox1').children('.ibox-content').toggleClass('sk-loading');
 });
