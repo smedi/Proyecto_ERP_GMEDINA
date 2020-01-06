@@ -343,21 +343,21 @@ namespace ERP_GMEDINA.Controllers
                 {
                     if (empleados.Count == 0)
                     {
-                        var list = db.UDP_RRHH_tbEmpleados_Insert(scan_id, per_id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
+                        var list = db.UDP_RRHH_tbEmpleados_Contratar(scan_id, per_id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
                         tbEmpleados.emp_CuentaBancaria, false, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
-                        foreach (UDP_RRHH_tbEmpleados_Insert_Result item in list)
+                        foreach (UDP_RRHH_tbEmpleados_Contratar_Result item in list)
                         {
                             msj = item.MensajeError + " ";
                         }
                     }
                     else
                     {
-                        var list = db.UDP_RRHH_tbEmpleados_Recontratacion(scan_id, per_id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
+                        var list = db.UDP_RRHH_tbEmpleados_Recontratar(scan_id, per_id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
                         tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
                         tbEmpleados.emp_CuentaBancaria, true, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
 
-                        foreach (UDP_RRHH_tbEmpleados_Recontratacion_Result item in list)
+                        foreach (UDP_RRHH_tbEmpleados_Recontratar_Result item in list)
                         {
                             msj = item.MensajeError + " ";
                         }
