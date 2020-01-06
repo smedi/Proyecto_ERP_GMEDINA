@@ -42,6 +42,7 @@
                             <th>@Html.DisplayNameFor(model => model.req_Vacantes)</th>
                             <th>@Html.DisplayNameFor(model => model.req_FechaRequisicion)</th>
                             <th>@Html.DisplayNameFor(model => model.req_FechaContratacion)</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,10 +53,10 @@
         </div>
     </div>
  </div>
-@*@Html.Partial("_Create", new ERP_GMEDINA.Models.tbRequisiciones())
-@Html.Partial("_Delete", new ERP_GMEDINA.Models.tbRequisiciones())
-@Html.Partial("_Edit", new ERP_GMEDINA.Models.tbRequisiciones())
-@Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbRequisiciones())*@
+
+
+    @Html.Partial("_Delete", new ERP_GMEDINA.Models.tbRequisiciones())
+    @Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbRequisiciones())
     
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")

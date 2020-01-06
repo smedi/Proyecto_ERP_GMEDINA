@@ -46,22 +46,123 @@ namespace ERP_GMEDINA.Controllers
             return View();
         }
 
+
+        public ActionResult Detalles(int? id)
+        {
+            try
+            {
+                using (db = new ERP_GMEDINAEntities())
+                {
+                    var tbRequisiciones = db.tbRequisiciones.Select(x => new
+                    {
+                        req_Id = x.req_Id,
+                        req_Experiencia = x.req_Experiencia,
+                        req_Sexo = x.req_Sexo,
+                        req_Descripcion = x.req_Descripcion,
+                        req_EdadMinima = x.req_EdadMinima,
+                        req_EdadMaxima = x.req_EdadMaxima,
+                        req_EstadoCivil = x.req_EstadoCivil,
+                        req_EducacionSuperior = x.req_EducacionSuperior,
+                        req_Permanente = x.req_Permanente,
+                        req_Duracion = x.req_Duracion,
+                        req_Vacantes = x.req_Vacantes,
+                        req_FechaRequisicion = x.req_FechaRequisicion,
+                        req_FechaContratacion = x.req_FechaContratacion,
+                        req_UsuarioCrea = x.req_UsuarioCrea,
+                        req_FechaCrea = x.req_FechaCrea,
+                        req_UsuarioModifica = x.req_UsuarioModifica,
+                        req_FechaModifica = x.req_FechaModifica
+                    }).Where(x => x.req_Id == id).ToList();
+                    return Json(tbRequisiciones, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch
+            {
+                return Json("-2", JsonRequestBehavior.AllowGet);
+            }
+        }
+
         // POST: Requisiciones/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public JsonResult Create(tbRequisiciones tbRequisiciones, DatosProfesionalesArray DatosProfesionales)
         {
+           
             string msj = "...";
-            if (tbRequisiciones.req_Descripcion != "")
+            if (tbRequisiciones != null)
             {
-                var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbRequisiciones_Insert(tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, Usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbRequisiciones_Insert_Result item in list)
+                    using (db = new ERP_GMEDINAEntities())
                     {
-                        msj = item.MensajeError + "";
+
+                        var List = db.UDP_RRHH_tbRequisiciones_Insert(tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, 1, DateTime.Now);
+
+                        foreach (UDP_RRHH_tbRequisiciones_Insert_Result item in List)
+                        {
+                            msj = item.MensajeError + "";
+                            //Competencias
+                            if (DatosProfesionales.Competencias != null & msj != "-1")
+                            {
+                                for (int i = 0; i < DatosProfesionales.Competencias.Length; i++)
+                                {
+                                    var Competencias = db.rrhh_tbCompetenciasRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Competencias[i], 1, DateTime.Now);
+                                    foreach (rrhh_tbCompetenciasRequisicion_Insert_Result comp in Competencias)
+                                    {
+                                        var result = comp.MensajeError + "";
+                                    }
+                                }
+                            }
+                            //Habilidades
+                            if (DatosProfesionales.Habilidades != null & msj != "-1")
+                            {
+                                for (int i = 0; i < DatosProfesionales.Habilidades.Length; i++)
+                                {
+                                    var Habilidades = db.rrhh_tbHabilidadesRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Habilidades[i], 1, DateTime.Now);
+                                    foreach (rrhh_tbHabilidadesRequisicion_Insert_Result hab in Habilidades)
+                                    {
+                                        var result = hab.MensajeError + "";
+                                    }
+                                }
+                            }
+                            //Idiomas
+                            if (DatosProfesionales.Idiomas != null & msj != "-1")
+                            {
+                                for (int i = 0; i < DatosProfesionales.Idiomas.Length; i++)
+                                {
+                                    var Idiomas = db.rrhh_tbIdiomasRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Idiomas[i], 1, DateTime.Now);
+                                    foreach (rrhh_tbIdiomasRequisicion_Insert_Result idi in Idiomas)
+                                    {
+                                        var result = idi.MensajeError + "";
+                                    }
+                                }
+                            }
+                            //Requerimientos Especiales
+                            if (DatosProfesionales.ReqEspeciales != null & msj != "-1")
+                            {
+                                for (int i = 0; i < DatosProfesionales.ReqEspeciales.Length; i++)
+                                {
+                                    var ReqEspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.ReqEspeciales[i], 1, DateTime.Now);
+                                    foreach (rrhh_tbRequerimientosEspecialesRequisicion_Insert_Result rep in ReqEspeciales)
+                                    {
+                                        var result = rep.MensajeError + "";
+                                    }
+                                }
+                            }
+                            //Titulos
+                            if (DatosProfesionales.Titulos != null & msj != "-1")
+                            {
+                                for (int i = 0; i < DatosProfesionales.Titulos.Length; i++)
+                                {
+                                    var Titulos = db.rrhh_tbTitulosRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Titulos[i], 1, DateTime.Now);
+                                    foreach (rrhh_tbTitulosRequisicion_Insert_Result rep in Titulos)
+                                    {
+                                        var result = rep.MensajeError + "";
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -75,32 +176,7 @@ namespace ERP_GMEDINA.Controllers
                 msj = "-3";
             }
             return Json(msj, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult llenarTabla()
-        {
-            List<tbRequisiciones> tbRequisiciones =
-                new List<Models.tbRequisiciones> { };
-            foreach (tbRequisiciones x in db.tbRequisiciones.ToList().Where(x => x.req_Estado == true))
-            {
-                tbRequisiciones.Add(new tbRequisiciones
-                {
-                    req_Id = x.req_Id,
-                    req_Experiencia = x.req_Experiencia,
-                    req_Sexo = x.req_Sexo,
-                    req_Descripcion = x.req_Descripcion,
-                    req_EdadMinima = x.req_EdadMinima,
-                    req_EdadMaxima = x.req_EdadMaxima,
-                    req_EstadoCivil = x.req_EstadoCivil,
-                    req_EducacionSuperior = x.req_EducacionSuperior,
-                    req_Permanente = x.req_Permanente,
-                    req_Duracion = x.req_Duracion,
-                    req_Vacantes = x.req_Vacantes,
-                    req_FechaRequisicion = x.req_FechaRequisicion,
-                    req_FechaContratacion = x.req_FechaContratacion
-                });
-            }
-            return Json(tbRequisiciones, JsonRequestBehavior.AllowGet);
+            
         }
 
         public ActionResult ChildRowData(int? id)
@@ -160,6 +236,34 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json("-2", JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult llenarTabla()
+        {
+            List<tbRequisiciones> tbRequisiciones =
+                new List<Models.tbRequisiciones> { };
+            foreach (tbRequisiciones x in db.tbRequisiciones.ToList().Where(x => x.req_Estado == true))
+            {
+                tbRequisiciones.Add(new tbRequisiciones
+                {
+                    req_Id = x.req_Id,
+                    req_Experiencia = x.req_Experiencia,
+                    req_Sexo = x.req_Sexo,
+                    req_Descripcion = x.req_Descripcion,
+                    req_EdadMinima = x.req_EdadMinima,
+                    req_EdadMaxima = x.req_EdadMaxima,
+                    req_EstadoCivil = x.req_EstadoCivil,
+                    req_EducacionSuperior = x.req_EducacionSuperior,
+                    req_Permanente = x.req_Permanente,
+                    req_Duracion = x.req_Duracion,
+                    req_Vacantes = x.req_Vacantes,
+                    req_FechaRequisicion = x.req_FechaRequisicion,
+                    req_FechaContratacion = x.req_FechaContratacion
+                });
+            }
+            return Json(tbRequisiciones, JsonRequestBehavior.AllowGet);
+
+        }
+
 
         public ActionResult DualListBoxData()
         {
@@ -274,15 +378,28 @@ namespace ERP_GMEDINA.Controllers
         }
 
         // POST: Requisiciones/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult Delete(tbRequisiciones Requisicion)
         {
-            tbRequisiciones tbRequisiciones = db.tbRequisiciones.Find(id);
-            db.tbRequisiciones.Remove(tbRequisiciones);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            string msj = "";
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    var _list = db.UDP_RRHH_tbRequisiciones_Delete(Requisicion.req_Id, Requisicion.req_RazonInactivo, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbRequisiciones_Delete_Result item in _list)
+                    {
+                        msj = item.MensajeError + "";                        
+                    }
+                }
+                catch
+                {
+                    msj = "-2";
+                }
+            }
+            return Json(msj, JsonRequestBehavior.AllowGet);
         }
+
 
         protected override void Dispose(bool disposing)
         {

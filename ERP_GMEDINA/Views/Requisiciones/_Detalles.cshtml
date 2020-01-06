@@ -1,0 +1,150 @@
+﻿@model ERP_GMEDINA.Models.tbRequisiciones
+<div class="modal inmodal" id="ModalDetalles" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Editar habilidad</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ibox-content">
+<div class="ibox-content">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Experiencia)
+        </dt>
+
+        <dd id="req_Experiencia">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Sexo)
+        </dt>
+
+        <dd id="req_Sexo">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Descripcion)
+        </dt>
+
+        <dd id="req_Descripcion">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_EdadMinima)
+        </dt>
+
+        <dd id="req_EdadMinima">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_EdadMaxima)
+        </dt>
+
+        <dd id="req_EdadMaxima">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_EstadoCivil)
+        </dt>
+
+        <dd id="req_EstadoCivil">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_EducacionSuperior)
+        </dt>
+
+        <dd id="req_EducacionSuperior">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Permanente)
+        </dt>
+
+        <dd id="req_Permanente">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Duracion)
+        </dt>
+
+        <dd id="req_Duracion">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Estado)
+        </dt>
+
+        <dd id="req_Estado">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_RazonInactivo)
+        </dt>
+
+        <dd id="req_RazonInactivo">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_Vacantes)
+        </dt>
+
+        <dd id="req_Vacantes">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_FechaRequisicion)
+        </dt>
+
+        <dd id="req_FechaRequisicion">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_FechaContratacion)
+        </dt>
+
+        <dd id="req_FechaContratacion">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_FechaCrea)
+        </dt>
+
+        <dd id="req_FechaCrea">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_FechaModifica)
+        </dt>
+
+        <dd id="req_FechaModifica">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_UsuarioCrea)
+        </dt>
+
+        <dd id="req_UsuarioCrea">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_UsuarioModifica)
+        </dt>
+
+        <dd id="req_UsuarioModifica">
+        </dd>
+
+    </dl>
+</div>
+</div>
+</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white pull-right" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary pull-left" id="btnActualizar">Actualizar</button>
+                <button type="button" class="btn btn-danger pull-left" id="btnInhabilitar">Inhabilitar</button>
+            </div>
+        </div>
+    </div>
+</div>

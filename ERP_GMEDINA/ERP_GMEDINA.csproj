@@ -241,6 +241,36 @@
     </Compile>
     <Compile Include="Models\ExcelEmpleados.cs" />
     <Compile Include="Models\DatosProfesionales.cs" />
+    <Compile Include="Models\rrhh_tbCompetenciasRequisicion_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbCompetenciasRequisicion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbHabilidadesRequisicion_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbHabilidadesRequisicion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbIdiomasRequisicion_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbIdiomasRequisicion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbRequerimientosEspecialesRequisicion_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbRequerimientosEspecialesRequisicion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbTitulosRequisicion_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rrhh_tbTitulosRequisicion_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
@@ -1772,6 +1802,8 @@
     <Content Include="Views\Requisiciones\Details.cshtml" />
     <Content Include="Views\Requisiciones\Edit.cshtml" />
     <Content Include="Views\Requisiciones\Index.cshtml" />
+    <Content Include="Views\Requisiciones\_Detalles.cshtml" />
+    <Content Include="Views\Requisiciones\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
