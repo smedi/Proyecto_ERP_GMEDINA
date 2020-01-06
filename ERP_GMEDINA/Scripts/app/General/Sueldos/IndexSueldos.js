@@ -97,7 +97,7 @@ function tablaDetalles(ID) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetalles").find("#sue_Cantidad")["0"].innerText = obj.sue_Cantidad;
                 $("#ModalDetalles").find("#sue_Estado")["0"].innerText = obj.sue_Estado;
-                $("#ModalDetalles").find("#sue_RazonInactivo")["0"].innerText = obj.sue_RazonInactivo;
+                //$("#ModalDetalles").find("#sue_RazonInactivo")["0"].innerText = obj.sue_RazonInactivo;
                 $("#ModalDetalles").find("#sue_UsuarioCrea")["0"].innerText = obj.sue_UsuarioCrea;
                 $("#ModalDetalles").find("#sue_FechaCrea")["0"].innerText = FechaFormato(obj.sue_FechaCrea);
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
