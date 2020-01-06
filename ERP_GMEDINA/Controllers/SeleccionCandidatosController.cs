@@ -24,6 +24,16 @@ namespace ERP_GMEDINA.Controllers
                 per_descripcion = t.Identidad + " - " + t.Nombre
             }).ToList();
 
+            var empleadosddl = db.tbEmpleados.Where(x => x.emp_Estado).Include(t => t.tbPersonas)
+                .Select(
+                t => new
+                {
+                    per_Id = t.per_Id,
+                    per_descripcion = t.tbPersonas.per_Identidad + " - " + t.tbPersonas.per_Nombres + " " + t.tbPersonas.per_Apellidos
+                }).ToList();
+
+
+
             var personasddl = db.tbPersonas.Where(x => x.per_Estado)
                 .Select(
                 t => new
@@ -31,8 +41,10 @@ namespace ERP_GMEDINA.Controllers
                     per_Id = t.per_Id,
                     per_descripcion = t.per_Identidad + " - " + t.per_Nombres + " " + t.per_Apellidos
                 }).ToList();
-      
-             personasddl = personasddl.Except(candidatosddl).ToList();
+
+            personasddl = personasddl.Except(candidatosddl).ToList();
+            personasddl = personasddl.Except(empleadosddl).ToList();
+ 
  
             //CARGAR DDL DE SELECCION CANDIDATOS
             ViewBag.fare_Id = new SelectList(db.tbFasesReclutamiento, "fare_Id", "fare_Descripcion");
@@ -278,13 +290,15 @@ namespace ERP_GMEDINA.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbEmpleados tbEmpleados = null;
+            tbSeleccionCandidatos tbSeleccionCandidatos = null;
+
+
 
 
             try
             {
-                tbEmpleados = db.tbEmpleados.Find(id);
-                if (tbEmpleados == null || !tbEmpleados.emp_Estado)
+                tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
+                if (tbSeleccionCandidatos == null || !tbSeleccionCandidatos.scan_Estado)
                 {
                     return HttpNotFound();
                 }
@@ -294,40 +308,68 @@ namespace ERP_GMEDINA.Controllers
                 ex.Message.ToString();
                 return HttpNotFound();
             }
-            Session["id"] = id;
-            var SeleccionCandidatos = new tbEmpleados
+            Session["scan_id"] = id;
+            var SeleccionCandidatos = new tbSeleccionCandidatos
             {
-                per_Id = tbEmpleados.per_Id,
-                tbPersonas = new tbPersonas { per_Identidad = IsNull(tbEmpleados.tbPersonas).per_Identidad, per_Nombres = IsNull(tbEmpleados.tbPersonas).per_Nombres, per_Apellidos = IsNull(tbEmpleados.tbPersonas).per_Apellidos }
-               
+                per_Id = tbSeleccionCandidatos.per_Id,
+
+
+
             };
+            Session["per_id"] = SeleccionCandidatos.per_Id;
             return Json(SeleccionCandidatos, JsonRequestBehavior.AllowGet);
         }
+
+
 
         [HttpPost]
         public JsonResult Contratar(tbEmpleados tbEmpleados)
         {
             string msj = "";
-            if (tbEmpleados.emp_Id != 0)
+            if (tbEmpleados.car_Id != 0)
             {
-                var id = (int)Session["id"];
+                int scan_id = (int)Session["scan_id"];
+                int per_id = (int)Session["per_id"];
                 var usuario = (tbUsuario)Session["Usuario"];
+
+                var empleados = db.tbEmpleados.Where(x => x.per_Id == per_id)
+               .Select(
+               t => new
+               {
+                   per_Id = t.per_Id
+               }).ToList();
+
                 try
                 {
-                    var list = db.UDP_RRHH_tbEmpleados_Insert(tbEmpleados.per_Id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
-                        tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago, 
-                        tbEmpleados.emp_CuentaBancaria, false, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
-                    foreach (UDP_RRHH_tbEmpleados_Insert_Result item in list)
+                    if (empleados.Count == 0)
                     {
-                        msj = item.MensajeError + " ";
+                        var list = db.UDP_RRHH_tbEmpleados_Insert(scan_id, per_id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
+                        tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
+                        tbEmpleados.emp_CuentaBancaria, false, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
+                        foreach (UDP_RRHH_tbEmpleados_Insert_Result item in list)
+                        {
+                            msj = item.MensajeError + " ";
+                        }
                     }
+                    else
+                    {
+                        var list = db.UDP_RRHH_tbEmpleados_Recontratacion(scan_id, per_id, tbEmpleados.car_Id, tbEmpleados.area_Id, tbEmpleados.depto_Id,
+                        tbEmpleados.jor_Id, tbEmpleados.cpla_IdPlanilla, tbEmpleados.fpa_IdFormaPago,
+                        tbEmpleados.emp_CuentaBancaria, true, tbEmpleados.emp_Fechaingreso, usuario.usu_Id, DateTime.Now);
+
+                        foreach (UDP_RRHH_tbEmpleados_Recontratacion_Result item in list)
+                        {
+                            msj = item.MensajeError + " ";
+                        }
+                    }
+
+                    Session.Remove("id");
                 }
                 catch (Exception ex)
                 {
                     msj = "-2";
                     ex.Message.ToString();
                 }
-                Session.Remove("id");
             }
             else
             {

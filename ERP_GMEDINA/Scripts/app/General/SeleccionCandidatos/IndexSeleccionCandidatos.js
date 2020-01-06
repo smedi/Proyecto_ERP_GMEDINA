@@ -251,31 +251,28 @@ function CallContratar(btn) {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
     var id = row.data().ID;
-    debugger
-    $('#ModalContratar').modal('show');
-    //tablaContratar(id);
-}
-
-function tablaContratar(id) {
-    scan_Id = id;
+    ;
     _ajax(null,
         '/SeleccionCandidatos/Contratar/' + id,
-       'GET',
-       function (obj) {
-           if (obj != "-1" && obj != "-2" && obj != "-3") {
-               CierraPopups();
-               $("#ModalContratar").find("#tbPersonas_per_Identidad").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);                        
+        'GET',
+        function (obj) {
+        });
 
-           }
-       });
+
+
+    $('#ModalContratar').modal('show');
+
+
 
 }
+
+
 
 
 $("#btnContratar").click(function () {
     var data = $("#FormContratar").serializeArray();
     data = serializar(data);
-    debugger
+
     if (data != null) {
         data = JSON.stringify({ tbEmpleados: data });
         _ajax(data,
@@ -283,11 +280,14 @@ $("#btnContratar").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
+                    $("#ModalContratar").modal('hide');//ocultamos el modal
+                    $('body').removeClass('modal-open');//eliminamos la clase del body para poder hacer scroll
+                    $('.modal-backdrop').remove();//eliminamos el backdrop del modal 
                     llenarTabla();
-                    LimpiarControles(["emp_Fechaingreso"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    LimpiarControles(["emp_FechaInreso", "emp_CuentaBancaria"]);
+                    MsgSuccess("¡Exito!", "Se ah Guardado el cambio");
                 } else {
+
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
             });

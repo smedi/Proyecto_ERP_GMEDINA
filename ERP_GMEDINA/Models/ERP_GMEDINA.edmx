@@ -2874,6 +2874,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' no t
           </ReferentialConstraint>
         </Association>
         <Function Name="UDP_RRHH_tbEmpleados_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="scan_Id" Type="int" Mode="In" />
           <Parameter Name="per_Id" Type="int" Mode="In" />
           <Parameter Name="car_Id" Type="int" Mode="In" />
           <Parameter Name="area_Id" Type="int" Mode="In" />
@@ -2884,6 +2885,21 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' no t
           <Parameter Name="emp_CuentaBancaria" Type="nvarchar" Mode="In" />
           <Parameter Name="emp_Reingreso" Type="bit" Mode="In" />
           <Parameter Name="emp_Fechaingreso" Type="datetime" Mode="In" />
+          <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="emp_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbEmpleados_Recontratacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="scan_Id" Type="int" Mode="In" />
+          <Parameter Name="per_Id" Type="int" Mode="In" />
+          <Parameter Name="car_Id" Type="int" Mode="In" />
+          <Parameter Name="area_Id" Type="int" Mode="In" />
+          <Parameter Name="depto_Id" Type="int" Mode="In" />
+          <Parameter Name="jor_Id" Type="int" Mode="In" />
+          <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
+          <Parameter Name="fpa_IdFormaPago" Type="int" Mode="In" />
+          <Parameter Name="emp_CuentaBancaria" Type="nvarchar" Mode="In" />
+          <Parameter Name="emp_Reingreso" Type="bit" Mode="In" />
+          <Parameter Name="emp_Fechareingreso" Type="datetime" Mode="In" />
           <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="emp_FechaCrea" Type="datetime" Mode="In" />
         </Function>
@@ -4608,6 +4624,7 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' no t
           </FunctionImport>
           <EntitySet Name="V_SeleccionCandidatos" EntityType="ERP_GMEDINAModel.V_SeleccionCandidatos" />
           <FunctionImport Name="UDP_RRHH_tbEmpleados_Insert" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Insert_Result)">
+            <Parameter Name="scan_Id" Mode="In" Type="Int32" />
             <Parameter Name="per_Id" Mode="In" Type="Int32" />
             <Parameter Name="car_Id" Mode="In" Type="Int32" />
             <Parameter Name="area_Id" Mode="In" Type="Int32" />
@@ -4647,6 +4664,21 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' no t
             <End Role="tbFormaPago" EntitySet="tbFormaPago" />
             <End Role="tbEmpleados" EntitySet="tbEmpleados" />
           </AssociationSet>
+          <FunctionImport Name="UDP_RRHH_tbEmpleados_Recontratacion" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Recontratacion_Result)">
+            <Parameter Name="scan_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="car_Id" Mode="In" Type="Int32" />
+            <Parameter Name="area_Id" Mode="In" Type="Int32" />
+            <Parameter Name="depto_Id" Mode="In" Type="Int32" />
+            <Parameter Name="jor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="cpla_IdPlanilla" Mode="In" Type="Int32" />
+            <Parameter Name="fpa_IdFormaPago" Mode="In" Type="Int32" />
+            <Parameter Name="emp_CuentaBancaria" Mode="In" Type="String" />
+            <Parameter Name="emp_Reingreso" Mode="In" Type="Boolean" />
+            <Parameter Name="emp_Fechareingreso" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="emp_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="tbPersonas">
           <Key>
@@ -7647,6 +7679,9 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' no t
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_RRHH_tbEmpleados_Recontratacion_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8563,6 +8598,13 @@ advertencia 6002: La tabla o vista 'ERP_GMEDINA.rrhh.V_SeleccionCandidatos' no t
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbEmpleados_Recontratacion" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbEmpleados_Recontratacion" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbEmpleados_Recontratacion_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
