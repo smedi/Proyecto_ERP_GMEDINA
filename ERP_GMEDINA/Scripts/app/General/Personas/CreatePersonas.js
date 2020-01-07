@@ -16,24 +16,22 @@ function ListFill(obj) {
     var SlctIdiomas = $(".SlctIdiomas");
     var SlctReqEspeciales = $(".SlctReqEspeciales");
     var SlctTitulos = $(".SlctTitulos");
-    obj.Competencias.forEach(function (index, value) {
-        SlctCompetencias.append('<option value="' + index.comp_Id + '">' + index.comp_Descripcion + '</option>');
-    });
-
-    obj.Habilidades.forEach(function (index, value) {
-        SlctHabilidades.append('<option value="' + index.habi_Id + '">' + index.habi_Descripcion + '</option>');
-    });
-
-    obj.Idiomas.forEach(function (index, value) {
-        SlctIdiomas.append('<option value="' + index.idi_Id + '">' + index.idi_Descripcion + '</option>');
-    });
-
-    obj.ReqEspeciales.forEach(function (index, value) {
-        SlctReqEspeciales.append('<option value="' + index.resp_Id + '">' + index.resp_Descripcion + '</option>');
-    });
-
-    obj.Titulos.forEach(function (index, value) {
-        SlctTitulos.append('<option value="' + index.titu_Id + '">' + index.titu_Descripcion + '</option>');
+    obj.forEach(function (index, value) {
+        if (index.TipoDato == "C") {
+                SlctCompetencias.append('<option value="' + index.Id + '">' + index.Descripcion + '</option>');
+        }
+        if (index.TipoDato == "H") {
+                SlctHabilidades.append('<option value="' + index.Id + '">' + index.Descripcion + '</option>');
+        }
+        if (index.TipoDato == "I") {
+                SlctIdiomas.append('<option value="' + index.Id + '">' + index.Descripcion + '</option>');
+        }
+        if (index.TipoDato == "R") {
+                SlctReqEspeciales.append('<option value="' + index.Id + '">' + index.Descripcion + '</option>');
+        }
+        if (index.TipoDato == "T") {
+                SlctTitulos.append('<option value="' + index.Id + '">' + index.Descripcion + '</option>');
+        }
     });
 
     SlctCompetencias.bootstrapDualListbox({ selectorMinimalHeight: 160 });
@@ -64,11 +62,11 @@ $(document).ready(function () {
 
             var DatosProfesionalesArray = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
             var Form = $("#tbPersonas").find("select, textarea, input").serializeArray();
-            tbPersonas = serializarPro(Form);
+            tbPersonas = serializar(Form);
             data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
             console.log(data);
 
-            if (Form != null)
+            if (tbPersonas != null)
             {
                 _ajax(data,
                 '/Personas/Create',
@@ -76,15 +74,15 @@ $(document).ready(function () {
                 function (obj) {
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
                         MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                        window.location.href = "Index";
                     } else {
                         MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                     }
                 });
             }
             else {
-                MsgError("Error", "por favor llene todas las cajas de texto");
+                MsgError("Error", "por favor llene todos los datos de texto");
             }
-
         },
     });
 });

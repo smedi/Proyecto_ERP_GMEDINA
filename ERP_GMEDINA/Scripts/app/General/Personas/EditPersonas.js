@@ -48,7 +48,6 @@ function ListFill(obj) {
             else
                 SlctTitulos.append('<option value="' + index.Id + '" selected="selected">' + index.Descripcion + '</option>');
         }
-
     });
 
     SlctCompetencias.bootstrapDualListbox({ selectorMinimalHeight: 160 });
@@ -58,7 +57,6 @@ function ListFill(obj) {
     SlctTitulos.bootstrapDualListbox({ selectorMinimalHeight: 160 });
 };
 $(document).ready(function () {
-
     llenarDropDownList();
     id = sessionStorage.getItem("IdPersona");
     _ajax(null,
@@ -109,7 +107,7 @@ $(document).ready(function () {
             data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
             console.log(data);
 
-            if (Form != null) {
+            if (tbPersonas != null) {
                 _ajax(data,
                 '/Personas/Edit',
                 'POST',
@@ -122,7 +120,7 @@ $(document).ready(function () {
                 });
             }
             else {
-                MsgError("Error", "por favor llene todas las cajas de texto");
+                MsgError("Error", "por favor llene todos los datos de texto");
             }
 
         },

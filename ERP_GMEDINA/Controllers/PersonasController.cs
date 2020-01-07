@@ -77,7 +77,6 @@ namespace ERP_GMEDINA.Controllers
                 {
                     return Json("-2", 0);
                 }
-
             }
             var result = new Dictionary<string, object>();
             result.Add("nac_Id", Nacionalidades);
@@ -92,7 +91,7 @@ namespace ERP_GMEDINA.Controllers
             Sexo.Add(new
             {
                 Id = "",
-                Descripcion = "**Seleccione una opción**"
+                Descripcion = "**Seleccione una opción**",
             });
             Sexo.Add(new
             {
@@ -186,7 +185,6 @@ namespace ERP_GMEDINA.Controllers
         // GET : Personas/ChildRowData
         public ActionResult ChildRowData(int? id)
         {
-            
             using (db = new ERP_GMEDINAEntities())
             {
                 List<V_tbPersonas> lista = null;
@@ -194,50 +192,38 @@ namespace ERP_GMEDINA.Controllers
                 try
                 {
                     lista =new List<V_tbPersonas> { };     
-                    var Competencias = db.tbCompetenciasPersona.Select(c => new { cope_Id = c.cope_Id, per_Id = c.per_Id , Descripcion = c.tbCompetencias.comp_Descripcion}).ToList();
+                    var Competencias = db.tbCompetenciasPersona.Select(c => new { cope_Id = c.cope_Id, per_Id = c.per_Id , Descripcion = c.tbCompetencias.comp_Descripcion , Estado = c.cope_Estado}).Where(c => c.Estado == true).ToList();
                     foreach (var X in Competencias)
                     {
                         if(X.per_Id == id)
-                        {
                             lista.Add(new V_tbPersonas { per_Id = X.per_Id, Relacion_Id = X.cope_Id, Descripcion = X.Descripcion, Relacion = "Competencias" });
-                        }
                     }
-                    var Habilidades = db.tbHabilidadesPersona.Select(h => new { hape_Id = h.hape_Id, per_Id = h.per_Id, Descripcion = h.tbHabilidades.habi_Descripcion }).ToList();
+                    var Habilidades = db.tbHabilidadesPersona.Select(h => new { hape_Id = h.hape_Id, per_Id = h.per_Id, Descripcion = h.tbHabilidades.habi_Descripcion, Estado = h.hape_Estado }).Where(h => h.Estado == true).ToList();
                     foreach (var X in Habilidades)
                     {
                         if(X.per_Id == id)
-                        {
                             lista.Add(new V_tbPersonas { per_Id = X.per_Id, Relacion_Id = X.hape_Id, Descripcion = X.Descripcion, Relacion = "Habilidades" });
-                        }
                     }
-                    var Idiomas = db.tbIdiomaPersona.Select(i => new { idpe_Id = i.idpe_Id, per_Id = i.per_Id, Descripcion = i.tbIdiomas.idi_Descripcion }).ToList();
+                    var Idiomas = db.tbIdiomaPersona.Select(i => new { idpe_Id = i.idpe_Id, per_Id = i.per_Id, Descripcion = i.tbIdiomas.idi_Descripcion, Estado = i.idpe_Estado }).Where(i => i.Estado == true).ToList();
                     foreach (var X in Idiomas)
                     {
                         if (X.per_Id == id)
-                        {
                             lista.Add(new V_tbPersonas { per_Id = X.per_Id.Value, Relacion_Id = X.idpe_Id, Descripcion = X.Descripcion, Relacion = "Idiomas" });
-                        }
                     }
-                    var ReEspeciales = db.tbRequerimientosEspecialesPersona.Select(rep => new { rep_Id = rep.rep_Id, per_Id = rep.per_Id, Descripcion = rep.tbRequerimientosEspeciales.resp_Descripcion }).ToList();
+                    var ReEspeciales = db.tbRequerimientosEspecialesPersona.Select(rep => new { rep_Id = rep.rep_Id, per_Id = rep.per_Id, Descripcion = rep.tbRequerimientosEspeciales.resp_Descripcion, Estado = rep.rep_Estado }).Where(rep => rep.Estado == true).ToList();
                     foreach (var X in ReEspeciales)
                     {
                         if (X.per_Id == id)
-                        {
                             lista.Add(new V_tbPersonas { per_Id = X.per_Id, Relacion_Id = X.rep_Id, Descripcion = X.Descripcion, Relacion = "Requerimientos_Especiales" });
-                        }
                     }
-                    var Titulos = db.tbTitulosPersona.Select(t => new { tipe_Id = t.tipe_Id, per_Id = t.per_Id, Descripcion = t.tbTitulos.titu_Descripcion }).ToList();
+                    var Titulos = db.tbTitulosPersona.Select(t => new { tipe_Id = t.tipe_Id, per_Id = t.per_Id, Descripcion = t.tbTitulos.titu_Descripcion, Estado = t.tipe_Estado }).Where(t => t.Estado == true).ToList();
                     foreach (var X in Titulos)
                     {
                         if (X.per_Id == id)
-                        {
                             lista.Add(new V_tbPersonas { per_Id = X.per_Id, Relacion_Id = X.tipe_Id, Descripcion = X.Descripcion, Relacion = "Titulos" });
-                        }
                     }
                         if (lista.Count == 0)
-                    {
-                        lista.Add(new V_tbPersonas { per_Id = id.Value, Relacion_Id = 0, Descripcion = "", Relacion = "" });
-                    }
+                            lista.Add(new V_tbPersonas { per_Id = id.Value, Relacion_Id = 0, Descripcion = "", Relacion = "" });
 
                     return Json(lista, JsonRequestBehavior.AllowGet);
                 }
@@ -247,7 +233,6 @@ namespace ERP_GMEDINA.Controllers
                 }
                 return Json(lista, JsonRequestBehavior.AllowGet);
             }
-
         }
         // GET : Personas/Create
         public ActionResult DualListBoxData(int? id)
@@ -256,55 +241,6 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    if(id == null)
-                    {
-                        var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
-                        DatosProfesionales Data = new DatosProfesionales();
-                        foreach (var X in lista)
-                        {
-                            switch (X.TipoDato)
-                            {
-                                case "C":
-                                    tbCompetencias Comp = new tbCompetencias();
-                                    Comp.comp_Descripcion = X.Descripcion;
-                                    Comp.comp_Id = X.Id;
-                                    Data.Competencias.Add(Comp);
-                                    break;
-
-                                case "H":
-                                    tbHabilidades Habi = new tbHabilidades();
-                                    Habi.habi_Descripcion = X.Descripcion;
-                                    Habi.habi_Id = X.Id;
-                                    Data.Habilidades.Add(Habi);
-                                    break;
-
-                                case "I":
-                                    tbIdiomas Idi = new tbIdiomas();
-                                    Idi.idi_Descripcion = X.Descripcion;
-                                    Idi.idi_Id = X.Id;
-                                    Data.Idiomas.Add(Idi);
-                                    break;
-
-                                case "T":
-                                    tbTitulos Titu = new tbTitulos();
-                                    Titu.titu_Descripcion = X.Descripcion;
-                                    Titu.titu_Id = X.Id;
-                                    Data.Titulos.Add(Titu);
-                                    break;
-
-                                case "R":
-                                    tbRequerimientosEspeciales Reqs = new tbRequerimientosEspeciales();
-                                    Reqs.resp_Descripcion = X.Descripcion;
-                                    Reqs.resp_Id = X.Id;
-                                    Data.ReqEspeciales.Add(Reqs);
-                                    break;
-                            }
-                        }
-
-                        return Json(Data, JsonRequestBehavior.AllowGet);
-                    }
-                    else
-                    {
                         List<DatosProfessionalesEdit> Data = new List<DatosProfessionalesEdit> { };
                         var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
                         foreach(var X in lista)
@@ -367,8 +303,6 @@ namespace ERP_GMEDINA.Controllers
                             }
                         }
                         return Json(Data, JsonRequestBehavior.AllowGet);
-                    }
-                    
                 }
                 catch (Exception ex)
                 {
@@ -409,7 +343,7 @@ namespace ERP_GMEDINA.Controllers
                             //Habilidades
                             if (DatosProfesionalesArray.Habilidades != null & msj != "-1")
                             {
-                                for (int i = 0; i < DatosProfesionalesArray.Competencias.Length; i++)
+                                for (int i = 0; i < DatosProfesionalesArray.Habilidades.Length; i++)
                                 {
                                     var Habilidades = db.UDP_RRHH_tbHabilidadesPersona_Insert(Int32.Parse(msj), DatosProfesionalesArray.Habilidades[i], 1, DateTime.Now);
                                     foreach (UDP_RRHH_tbHabilidadesPersona_Insert_Result hab in Habilidades)
@@ -476,9 +410,6 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    
-
-
                     var Sexo = new List<object> { };
                     Sexo.Add(new
                     {
@@ -581,26 +512,56 @@ namespace ERP_GMEDINA.Controllers
                 ex.Message.ToString();
                 return Json("-2", JsonRequestBehavior.AllowGet);
             }
-          
-
         }
         // POST: Areas/Edit/5
         [HttpPost]
         public ActionResult Edit(Personas tbPersonas, DatosProfesionalesArray DatosProfesionalesArray)
         {
-            string result = "";
+            var msj = "";
             using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    //en esta area actualizamos el registro con el procedimiento almacenado
+                    
+                    string Insertar = "";
+                    string Eliminar = "";
+                    string nada = "";
+                    var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
+                    foreach (var X in lista)
+                    {
+                        string Nuevo = null;
+                        switch (X.TipoDato)
+                        {
+                            case "C":
+                                var CompV = db.tbCompetenciasPersona.Select(c => new { comp_Id = c.comp_Id, Descripcion = c.tbCompetencias.comp_Descripcion, per_Id = c.per_Id , cope_Id = c.cope_Id }).Where(c => c.per_Id == tbPersonas.per_Id && c.comp_Id == X.Id).ToList();
+                                if(DatosProfesionalesArray.Competencias != null)
+                                {
+                                    foreach (var x in DatosProfesionalesArray.Competencias)
+                                    {
+                                        if (x == X.Id)
+                                            Nuevo = "1";
+                                        else if (Nuevo != "1")
+                                            Nuevo = null;
+                                    }
+                                }
+                                if (CompV.Count == 0 && Nuevo == "1")
+                                    Insertar += " " + X.Id; //pa insert
+                                if (CompV.Count == 1 && Nuevo == "1")
+                                    nada += " " + X.Id; //pa delete
+                                if (CompV.Count == 1 && Nuevo == null)
+                                    Eliminar += " " + X.Id;
+
+                                break;
+                        }
+                    }
                 }
-                catch
+                catch(Exception ex)
                 {
-                    result = "-2";
+                    ex.Message.ToString();
+                    msj = "-2";
                 }
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(msj, JsonRequestBehavior.AllowGet);
         }
         // POST: Areas/Delete/5
         [HttpPost]

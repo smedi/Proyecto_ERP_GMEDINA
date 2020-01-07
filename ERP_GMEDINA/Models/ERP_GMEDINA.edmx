@@ -6821,6 +6821,23 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
           <Parameter Name="per_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="per_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbPersonas_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="per_Id" Type="int" Mode="In" />
+          <Parameter Name="per_Identidad" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_Nombres" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_Apellidos" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_FechaNacimiento" Type="date" Mode="In" />
+          <Parameter Name="per_Sexo" Type="char" Mode="In" />
+          <Parameter Name="per_Edad" Type="int" Mode="In" />
+          <Parameter Name="nac_Id" Type="int" Mode="In" />
+          <Parameter Name="per_Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_Telefono" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_CorreoElectronico" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_EstadoCivil" Type="char" Mode="In" />
+          <Parameter Name="per_TipoSangre" Type="nvarchar" Mode="In" />
+          <Parameter Name="per_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="per_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbRazonSalida_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="rsal_Id" Type="int" Mode="In" />
           <Parameter Name="rsal_Descripcion" Type="nvarchar" Mode="In" />
@@ -11973,6 +11990,23 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
             <Parameter Name="tipe_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="tipe_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tipe_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbPersonas_Update" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Update_Result)">
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Identidad" Mode="In" Type="String" />
+            <Parameter Name="per_Nombres" Mode="In" Type="String" />
+            <Parameter Name="per_Apellidos" Mode="In" Type="String" />
+            <Parameter Name="per_FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="per_Sexo" Mode="In" Type="String" />
+            <Parameter Name="per_Edad" Mode="In" Type="Int32" />
+            <Parameter Name="nac_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Direccion" Mode="In" Type="String" />
+            <Parameter Name="per_Telefono" Mode="In" Type="String" />
+            <Parameter Name="per_CorreoElectronico" Mode="In" Type="String" />
+            <Parameter Name="per_EstadoCivil" Mode="In" Type="String" />
+            <Parameter Name="per_TipoSangre" Mode="In" Type="String" />
+            <Parameter Name="per_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="per_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -18716,6 +18750,9 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
         <ComplexType Name="UDP_RRHH_tbTitulosPersona_Inactivar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbPersonas_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -21734,6 +21771,13 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbTitulosPersona_Inactivar" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbTitulosPersona_Inactivar" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbTitulosPersona_Inactivar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPersonas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPersonas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

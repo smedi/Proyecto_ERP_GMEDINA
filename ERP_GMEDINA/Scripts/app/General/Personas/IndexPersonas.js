@@ -21,15 +21,15 @@
             Tit += '<label>' + index.Descripcion.toString() + '</label><br>';
     });
     if (Comp.length == 0)
-        Comp += '<label>Sin Datos.</label>';
+        Comp += '<label>Sin datos que mostrar.*</label>';
     if (Hab.length == 0)
-        Hab += '<label>Sin Datos.</label>';
+        Hab += '<label>Sin datos que mostrar.*</label>';
     if (Idi.length == 0)
-        Idi += '<label>Sin Datos.</label>';
+        Idi += '<label>Sin datos que mostrar.*</label>';
     if (ReEs.length == 0)
-        ReEs += '<label>Sin Datos.</label>';
+        ReEs += '<label>Sin datos que mostrar.*</label>';
     if (Tit.length == 0)
-        Tit += '<label>Sin Datos.</label>';
+        Tit += '<label>Sin datos que mostrar.*</label>';
     var TodoPersona = [Comp, Hab, Idi, ReEs, Tit];
     var Encabezados = ['Competencias', 'Habilidades', 'Idiomas', 'Requerimientos_Especiales', 'Titulos'];
     for (i = 0 ; i < TodoPersona.length ; i++) {
@@ -150,7 +150,7 @@ function tablaDetalles(ID) {
 function tablaEditar(ID) {
     id = ID;
     sessionStorage.setItem("IdPersona", id);
-    window.location.href = "Personas/Edit";
+    window.location.href = "/Personas/Edit";
     //_ajax(null,
     //    '/Personas/Edit/',
     //    'GET',
