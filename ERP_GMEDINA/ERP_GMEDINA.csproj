@@ -224,6 +224,7 @@
     <Compile Include="Models\cTitulos.cs" />
     <Compile Include="Models\cUsuarios.cs" />
     <Compile Include="Models\DatosProfesionalesArray.cs" />
+    <Compile Include="Models\DatosProfessionalesEdit.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1174,6 +1175,7 @@
     <Content Include="Scripts\app\General\RazonSalidas\RazonSalidas.js" />
     <Content Include="Scripts\app\General\RequerimientosEspeciales\RequerimientosEspeciales.js" />
     <Content Include="Scripts\app\General\Requisiciones\CreateRequisiciones.js" />
+    <Content Include="Scripts\app\General\Requisiciones\EditRequisiciones.js" />
     <Content Include="Scripts\app\General\Requisiciones\IndexRequisiciones.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TipoAmonestaciones\TipoAmonestaciones.js" />
@@ -1800,10 +1802,10 @@
     <Content Include="Views\Requisiciones\Create.cshtml" />
     <Content Include="Views\Requisiciones\Delete.cshtml" />
     <Content Include="Views\Requisiciones\Details.cshtml" />
-    <Content Include="Views\Requisiciones\Edit.cshtml" />
     <Content Include="Views\Requisiciones\Index.cshtml" />
     <Content Include="Views\Requisiciones\_Detalles.cshtml" />
     <Content Include="Views\Requisiciones\_Delete.cshtml" />
+    <Content Include="Views\Requisiciones\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
