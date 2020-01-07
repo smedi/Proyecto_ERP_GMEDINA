@@ -71,8 +71,10 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: HistorialAmonestaciones/Create
+        //[HttpPost]
         public JsonResult Create(tbHistorialVacaciones tbHistorialVacaciones)
         {
+
             string msj = "";
             try
             {
@@ -168,7 +170,7 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
-        // GET: HistorialVacaciones/Create
+        //GET: HistorialVacaciones/Create
         //public ActionResult Create()
         //{
         //    ViewBag.hvac_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");

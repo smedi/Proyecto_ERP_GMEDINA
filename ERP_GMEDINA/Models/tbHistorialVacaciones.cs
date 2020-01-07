@@ -14,7 +14,7 @@ namespace ERP_GMEDINA.Models
     
     public partial class tbHistorialVacaciones
     {
-        public int hvac_Id { get; set; }
+        public int? hvac_Id { get; set; }
         public int emp_Id { get; set; }
         public System.DateTime hvac_FechaInicio { get; set; }
         public System.DateTime hvac_FechaFin { get; set; }
