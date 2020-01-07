@@ -522,10 +522,8 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    
-                    string Insertar = "";
-                    string Eliminar = "";
-                    string nada = "";
+                    string ResultI = "";
+                    string ResultE = "";
                     var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
                     foreach (var X in lista)
                     {
@@ -545,12 +543,24 @@ namespace ERP_GMEDINA.Controllers
                                     }
                                 }
                                 if (CompV.Count == 0 && Nuevo == "1")
-                                    Insertar += " " + X.Id; //pa insert
-                                if (CompV.Count == 1 && Nuevo == "1")
-                                    nada += " " + X.Id; //pa delete
+                                {
+                                    var Competencias = db.UDP_RRHH_tbCompetenciasPersona_Insert(tbPersonas.per_Id,X.Id,1,DateTime.Now);
+                                    foreach(UDP_RRHH_tbCompetenciasPersona_Insert_Result Com in Competencias)
+                                    {
+                                        ResultI = Com.MensajeError + "";
+                                    }
+                                }
                                 if (CompV.Count == 1 && Nuevo == null)
-                                    Eliminar += " " + X.Id;
-
+                                {
+                                    foreach(var c in CompV)
+                                    {
+                                        var Competencias = db.UDP_RRHH_tbCompetenciasPersona_Inactivar(c.cope_Id,"Persona Editada", 1, DateTime.Now);
+                                        foreach (UDP_RRHH_tbCompetenciasPersona_Inactivar_Result Com in Competencias)
+                                        {
+                                            ResultI = Com.MensajeError + "";
+                                        }
+                                    }
+                                }
                                 break;
                         }
                     }

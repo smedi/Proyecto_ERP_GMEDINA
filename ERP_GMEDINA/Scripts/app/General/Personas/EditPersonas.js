@@ -113,7 +113,9 @@ $(document).ready(function () {
                 'POST',
                 function (obj) {
                     if (obj != "-1" && obj != "-2" && obj != "-3") {
-                        MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                        MsgSuccess("¡Exito!", "Se ah editado el registro");
+                        setTimeout(function () { window.location.href = "/Personas/Index"; }, 5000);
+                        //$("#NombreBtn").attr("disabled", "disabled")
                     } else {
                         MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                     }
