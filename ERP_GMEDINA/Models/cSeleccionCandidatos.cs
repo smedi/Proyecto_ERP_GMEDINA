@@ -28,7 +28,10 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Estado")]
         public bool scan_Estado { get; set; }
 
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo \"{0}\"es requerido")]
         [Display(Name = "Razón Inactivo")]
+        [MaxLength(50, ErrorMessage = "Excedió el número máximo de carácteres")]
         public string scan_RazonInactivo { get; set; }
 
         [Display(Name = "Usuario Crea")]

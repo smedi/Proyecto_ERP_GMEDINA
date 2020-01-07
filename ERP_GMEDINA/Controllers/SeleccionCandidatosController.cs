@@ -47,17 +47,17 @@ namespace ERP_GMEDINA.Controllers
  
  
             //CARGAR DDL DE SELECCION CANDIDATOS
-            ViewBag.fare_Id = new SelectList(db.tbFasesReclutamiento, "fare_Id", "fare_Descripcion");
+            ViewBag.fare_Id = new SelectList(db.tbFasesReclutamiento.Where(x => x.fare_Estado), "fare_Id", "fare_Descripcion");
             ViewBag.per_Id = new SelectList(personasddl, "per_Id", "per_descripcion");
-            ViewBag.req_Id = new SelectList(db.tbRequisiciones, "req_Id", "req_Descripcion");
+            ViewBag.req_Id = new SelectList(db.tbRequisiciones.Where(x => x.req_Estado), "req_Id", "req_Descripcion");
 
             //CARGAR DDL DE EMPLEADOS
-            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion");
-            ViewBag.area_Id = new SelectList(db.tbAreas, "area_Id", "area_Descripcion");
-            ViewBag.depto_Id = new SelectList(db.tbDepartamentos, "depto_Id", "depto_Descripcion");
-            ViewBag.jor_Id = new SelectList(db.tbJornadas, "jor_Id", "jor_Descripcion");
-            ViewBag.cpla_IdPlanilla = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
-            ViewBag.fpa_IdFormaPago = new SelectList(db.tbFormaPago, "fpa_IdFormaPago", "fpa_Descripcion");
+            ViewBag.car_Id = new SelectList(db.tbCargos.Where(x => x.car_Estado), "car_Id", "car_Descripcion");
+            ViewBag.area_Id = new SelectList(db.tbAreas.Where(x => x.area_Estado), "area_Id", "area_Descripcion");
+            ViewBag.depto_Id = new SelectList(db.tbDepartamentos.Where(x => x.depto_Estado), "depto_Id", "depto_Descripcion");
+            ViewBag.jor_Id = new SelectList(db.tbJornadas.Where(x => x.jor_Estado), "jor_Id", "jor_Descripcion");
+            ViewBag.cpla_IdPlanilla = new SelectList(db.tbCatalogoDePlanillas.Where(x => x.cpla_Activo), "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+            ViewBag.fpa_IdFormaPago = new SelectList(db.tbFormaPago.Where(x => x.fpa_Activo), "fpa_IdFormaPago", "fpa_Descripcion");
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             List<tbSeleccionCandidatos> tbSeleccionCandidatos = new List<tbSeleccionCandidatos> { };
             return View(tbSeleccionCandidatos);
@@ -170,6 +170,8 @@ namespace ERP_GMEDINA.Controllers
                 scan_Fecha = tbSeleccionCandidatos.scan_Fecha,
                 scan_FechaCrea = tbSeleccionCandidatos.scan_FechaCrea,
                 scan_FechaModifica = tbSeleccionCandidatos.scan_FechaModifica,
+                scan_Estado = tbSeleccionCandidatos.scan_Estado,
+                scan_RazonInactivo = tbSeleccionCandidatos.scan_RazonInactivo,
                 tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbSeleccionCandidatos.tbUsuario).usu_NombreUsuario },
                 tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbSeleccionCandidatos.tbUsuario1).usu_NombreUsuario }
             };
