@@ -24,6 +24,9 @@ namespace ERP_GMEDINA.Models
         public int hvac_AnioVacaciones { get; set; }
         public bool hvac_Estado { get; set; }
         public string hvac_RazonInactivo { get; set; }
+
+        //private string _hvac_RazonInactivo;
+
         public int hvac_UsuarioCrea { get; set; }
         public System.DateTime hvac_FechaCrea { get; set; }
         public Nullable<int> hvac_UsuarioModifica { get; set; }
@@ -32,5 +35,18 @@ namespace ERP_GMEDINA.Models
         public virtual tbUsuario tbUsuario { get; set; }
         public virtual tbUsuario tbUsuario1 { get; set; }
         public virtual tbEmpleados tbEmpleados { get; set; }
+
+        //public string hvac_RazonInactivo
+        //{
+        //    get
+        //    {
+        //        return _hvac_RazonInactivo;
+        //    }
+
+        //    set
+        //    {
+        //        _hvac_RazonInactivo = value;
+        //    }
+        //}
     }
 }

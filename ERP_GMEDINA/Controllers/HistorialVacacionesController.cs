@@ -235,11 +235,7 @@ namespace ERP_GMEDINA.Controllers
         //    ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialVacaciones.emp_Id);
         //    return View(tbHistorialVacaciones);
         //}
-
-        // GET: HistorialVacaciones/Delete/5
-
-
-        // POST: HistorialVacaciones/Delete/5
+        
         public ActionResult Detalles(int? id)
         {
             try
