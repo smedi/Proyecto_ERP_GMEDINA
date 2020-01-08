@@ -18,6 +18,5 @@ namespace ERP_GMEDINA.Models
         public string TipoDato { get; set; }
         public int Data_Id { get; set; }
         public int req_Id { get; set; }
-        public int xreq_Id { get; set; }
     }
 }

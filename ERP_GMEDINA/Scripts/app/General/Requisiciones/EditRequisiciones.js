@@ -103,6 +103,10 @@ $(document).ready(function () {
                 $("#tbRequisiciones").find("#req_FechaRequisicion").val(FechaFormatoSimple(obj[0].req_FechaRequisicion));
                 $("#tbRequisiciones").find("#req_FechaContratacion").val(FechaFormatoSimple(obj[0].req_FechaContratacion));
 
+                if(obj[0].req_Permanente == true)
+                {
+                    $("#tbRequisiciones").find("#req_Permanente").prop("disabled", false);
+                }
             }
         });
     
@@ -115,14 +119,15 @@ $(document).ready(function () {
             var SlctReqEspeciales = $(".SlctReqEspeciales");
             var SlctTitulos = $(".SlctTitulos");
 
-            var DatosProfesionalesArray = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
-            var Form = $("#tbPersonas").find("select, textarea, input").serializeArray();
-            tbPersonas = serializarPro(Form);
-            data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
-            console.log(data);
+            var data = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
+            var Form = $("#tbRequisiciones").find("select, textarea, input").not("input[type='hidden']").serializeArray();
+            tbRequisicion = serializar(Form);
+            tbRequisicion.req_Id = id;
+            Form = JSON.stringify({ tbRequisiciones: tbRequisicion, DatosProfesionales: data });
+            console.log(Form);
 
-            if (Form != null) {
-                _ajax(data,
+            if (tbRequisicion != null) {
+                _ajax(Form,
                 '/Requisiciones/Edit',
                 'POST',
                 function (obj) {
@@ -134,9 +139,8 @@ $(document).ready(function () {
                 });
             }
             else {
-                MsgError("Error", "por favor llene todas las cajas de texto");
+                MsgError("Error", "por favor llene todos los campos de texto.");
             }
-
         },
     });
 });

@@ -329,7 +329,7 @@ namespace ERP_GMEDINA.Controllers
                             switch (X.TipoDato)
                             {
                                 case "C":
-                                    var Comp = db.tbCompetenciasRequisicion.Select(c => new { comp_Id = c.comp_Id, Descripcion = c.tbCompetencias.comp_Descripcion, req_Id = c.req_Id }).Where(c => c.req_Id == id && c.comp_Id == X.Id).ToList();
+                                    var Comp = db.tbCompetenciasRequisicion.Select(c => new { comp_Id = c.comp_Id, Descripcion = c.tbCompetencias.comp_Descripcion, req_Id = c.req_Id, creq_Estado = c.creq_Estado }).Where(c => c.req_Id == id && c.comp_Id == X.Id && c.creq_Estado == true).ToList();
                                     foreach (var cmp in Comp)
                                     {
                                         Data.Add(new DatosProfessionalesEdit { Id = cmp.comp_Id, Descripcion = cmp.Descripcion, TipoDato = "C", Seleccionado = 1 });
@@ -339,7 +339,7 @@ namespace ERP_GMEDINA.Controllers
                                     break;
 
                                 case "H":
-                                    var Hab = db.tbHabilidadesRequisicion.Select(h => new { habi_Id = h.habi_Id, Descripcion = h.tbHabilidades.habi_Descripcion, req_Id = h.req_Id }).Where(h => h.req_Id == id && h.habi_Id == X.Id).ToList();
+                                    var Hab = db.tbHabilidadesRequisicion.Select(h => new { habi_Id = h.habi_Id, Descripcion = h.tbHabilidades.habi_Descripcion, req_Id = h.req_Id, hreq_Estado = h.hreq_Estado }).Where(h => h.req_Id == id && h.habi_Id == X.Id && h.hreq_Estado == true).ToList();
                                     foreach (var habi in Hab)
                                     {
                                         if (X.Id == habi.habi_Id)
@@ -350,7 +350,7 @@ namespace ERP_GMEDINA.Controllers
                                     break;
 
                                 case "I":
-                                    var Idi = db.tbIdiomasRequisicion.Select(i => new { idi_Id = i.idi_Id, Descripcion = i.tbIdiomas.idi_Descripcion, req_Id = i.req_Id }).Where(i => i.req_Id == id && i.idi_Id == X.Id).ToList();
+                                    var Idi = db.tbIdiomasRequisicion.Select(i => new { idi_Id = i.idi_Id, Descripcion = i.tbIdiomas.idi_Descripcion, req_Id = i.req_Id, ireq_Estado = i.ireq_Estado }).Where(i => i.req_Id == id && i.idi_Id == X.Id && i.ireq_Estado == true).ToList();
                                     foreach (var idm in Idi)
                                     {
                                         if (X.Id == idm.idi_Id)
@@ -361,7 +361,7 @@ namespace ERP_GMEDINA.Controllers
                                     break;
 
                                 case "T":
-                                    var Tit = db.tbTitulosRequisicion.Select(t => new { titu_Id = t.titu_Id, Descripcion = t.tbTitulos.titu_Descripcion, req_Id = t.req_Id }).Where(t => t.req_Id == id && t.titu_Id == X.Id).ToList();
+                                    var Tit = db.tbTitulosRequisicion.Select(t => new { titu_Id = t.titu_Id, Descripcion = t.tbTitulos.titu_Descripcion, req_Id = t.req_Id, treq_Estado = t.treq_Estado }).Where(t => t.req_Id == id && t.titu_Id == X.Id && t.treq_Estado == true).ToList();
                                     foreach (var Titu in Tit)
                                     {
                                         if (X.Id == Titu.titu_Id)
@@ -372,7 +372,7 @@ namespace ERP_GMEDINA.Controllers
                                     break;
 
                                 case "R":
-                                    var Reqs = db.tbRequerimientosEspecialesRequisicion.Select(re => new { resp_Id = re.resp_Id, Descripcion = re.tbRequerimientosEspeciales.resp_Descripcion, req_Id = re.req_Id }).Where(re => re.req_Id == id && re.resp_Id == X.Id).ToList();
+                                    var Reqs = db.tbRequerimientosEspecialesRequisicion.Select(re => new { resp_Id = re.resp_Id, Descripcion = re.tbRequerimientosEspeciales.resp_Descripcion, req_Id = re.req_Id, resp_Estado = re.rer_Estado }).Where(re => re.req_Id == id && re.resp_Id == X.Id && re.resp_Estado == true).ToList();
                                     foreach (var ReEs in Reqs)
                                     {
                                         if (X.Id == ReEs.resp_Id)
@@ -441,96 +441,196 @@ namespace ERP_GMEDINA.Controllers
         [HttpPost]
         public ActionResult Edit(tbRequisiciones tbRequisiciones, DatosProfesionalesArray DatosProfesionales)
         {
-            string msj = "...";
-            if (tbRequisiciones != null)
+            var msj = "";
+            using (db = new ERP_GMEDINAEntities())
             {
                 try
                 {
-                    using (db = new ERP_GMEDINAEntities())
+                    string ResultI = "";
+                    string ResultE = "";
+                    var _list = db.UDP_RRHH_tbRequisiciones_Update(tbRequisiciones.req_Id, tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbRequisiciones_Update_Result Update in _list)
                     {
-
-                        var List = db.UDP_RRHH_tbRequisiciones_Insert(tbRequisiciones.req_Experiencia, tbRequisiciones.req_Sexo, tbRequisiciones.req_Descripcion, tbRequisiciones.req_EdadMinima, tbRequisiciones.req_EdadMaxima, tbRequisiciones.req_EstadoCivil, tbRequisiciones.req_EducacionSuperior, tbRequisiciones.req_Permanente, tbRequisiciones.req_Duracion, tbRequisiciones.req_Vacantes, tbRequisiciones.req_FechaRequisicion, tbRequisiciones.req_FechaContratacion, 1, DateTime.Now);
-
-                        //Items que no estan en la lista vieja pero si en la lista nueva
-
-                        foreach (UDP_RRHH_tbRequisiciones_Insert_Result item in List)
+                        msj = Update.MensajeError + "";
+                        if (msj != "")
                         {
-                            msj = item.MensajeError + "";
-
-
-
-                            //Competencias
-                            if (DatosProfesionales.Competencias != null & msj != "-1")
+                            var lista = db.V_DatosProfesionales.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
+                            foreach (var X in lista)
                             {
-                                for (int i = 0; i < DatosProfesionales.Competencias.Length; i++)
+                                string Nuevo = null;
+                                switch (X.TipoDato)
                                 {
-                                    var Competencias = db.rrhh_tbCompetenciasRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Competencias[i], 1, DateTime.Now);
-                                    foreach (rrhh_tbCompetenciasRequisicion_Insert_Result comp in Competencias)
-                                    {
-                                        var result = comp.MensajeError + "";
-                                    }
-                                }
-                            }
-                            //Habilidades
-                            if (DatosProfesionales.Habilidades != null & msj != "-1")
-                            {
-                                for (int i = 0; i < DatosProfesionales.Habilidades.Length; i++)
-                                {
-                                    var Habilidades = db.rrhh_tbHabilidadesRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Habilidades[i], 1, DateTime.Now);
-                                    foreach (rrhh_tbHabilidadesRequisicion_Insert_Result hab in Habilidades)
-                                    {
-                                        var result = hab.MensajeError + "";
-                                    }
-                                }
-                            }
-                            //Idiomas
-                            if (DatosProfesionales.Idiomas != null & msj != "-1")
-                            {
-                                for (int i = 0; i < DatosProfesionales.Idiomas.Length; i++)
-                                {
-                                    var Idiomas = db.rrhh_tbIdiomasRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Idiomas[i], 1, DateTime.Now);
-                                    foreach (rrhh_tbIdiomasRequisicion_Insert_Result idi in Idiomas)
-                                    {
-                                        var result = idi.MensajeError + "";
-                                    }
-                                }
-                            }
-                            //Requerimientos Especiales
-                            if (DatosProfesionales.ReqEspeciales != null & msj != "-1")
-                            {
-                                for (int i = 0; i < DatosProfesionales.ReqEspeciales.Length; i++)
-                                {
-                                    var ReqEspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.ReqEspeciales[i], 1, DateTime.Now);
-                                    foreach (rrhh_tbRequerimientosEspecialesRequisicion_Insert_Result rep in ReqEspeciales)
-                                    {
-                                        var result = rep.MensajeError + "";
-                                    }
-                                }
-                            }
-                            //Titulos
-                            if (DatosProfesionales.Titulos != null & msj != "-1")
-                            {
-                                for (int i = 0; i < DatosProfesionales.Titulos.Length; i++)
-                                {
-                                    var Titulos = db.rrhh_tbTitulosRequisicion_Insert(Int32.Parse(msj), DatosProfesionales.Titulos[i], 1, DateTime.Now);
-                                    foreach (rrhh_tbTitulosRequisicion_Insert_Result rep in Titulos)
-                                    {
-                                        var result = rep.MensajeError + "";
-                                    }
+                                    case "C":
+                                        var CompV = db.tbCompetenciasRequisicion.Select(c => new { comp_Id = c.comp_Id, Descripcion = c.tbCompetencias.comp_Descripcion, req_Id = c.req_Id, creq_Id = c.creq_Id, creq_Estado = c.creq_Estado }).Where(c => c.req_Id == tbRequisiciones.req_Id && c.comp_Id == X.Id && c.creq_Estado == true).ToList();
+                                        if (DatosProfesionales.Competencias != null)
+                                        {
+                                            foreach (var x in DatosProfesionales.Competencias)
+                                            {
+                                                if (x == X.Id)
+                                                    Nuevo = "1";
+                                                else if (Nuevo != "1")
+                                                    Nuevo = null;
+                                            }
+                                        }
+                                        if (CompV.Count == 0 && Nuevo == "1")
+                                        {
+                                            var Competencias = db.rrhh_tbCompetenciasRequisicion_Insert(tbRequisiciones.req_Id, X.Id, 1, DateTime.Now);
+                                            foreach (rrhh_tbCompetenciasRequisicion_Insert_Result Com in Competencias)
+                                            {
+                                                ResultI = Com.MensajeError + "";
+                                            }
+                                        }
+                                        if (CompV.Count == 1 && Nuevo == null)
+                                        {
+                                            foreach (var c in CompV)
+                                            {
+                                                var Competencias = db.rrhh_tbCompetenciasRequisicion_Delete(c.creq_Id, 1, DateTime.Now);
+                                                foreach (rrhh_tbCompetenciasRequisicion_Delete_Result Com in Competencias)
+                                                {
+                                                    ResultE = Com.MensajeError + "";
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "H":
+                                        var habV = db.tbHabilidadesRequisicion.Select(h => new { habi_Id = h.habi_Id, Descripcion = h.tbHabilidades.habi_Descripcion, req_Id = h.req_Id, hreq_Id = h.hreq_Id, hreq_Estado = h.hreq_Estado }).Where(h => h.req_Id == tbRequisiciones.req_Id && h.hreq_Id == X.Id && h.hreq_Estado == true).ToList();
+                                        if (DatosProfesionales.Habilidades != null)
+                                        {
+                                            foreach (var x in DatosProfesionales.Habilidades)
+                                            {
+                                                if (x == X.Id)
+                                                    Nuevo = "1";
+                                                else if (Nuevo != "1")
+                                                    Nuevo = null;
+                                            }
+                                        }
+                                        if (habV.Count == 0 && Nuevo == "1")
+                                        {
+                                            var Habilidades = db.rrhh_tbHabilidadesRequisicion_Insert(tbRequisiciones.req_Id, X.Id, 1, DateTime.Now);
+                                            foreach (rrhh_tbHabilidadesRequisicion_Insert_Result hab in Habilidades)
+                                            {
+                                                ResultI = hab.MensajeError + "";
+                                            }
+                                        }
+                                        if (habV.Count == 1 && Nuevo == null)
+                                        {
+                                            foreach (var h in habV)
+                                            {
+                                                var Habilidades = db.rrhh_tbHabilidadesRequisicion_Delete(h.hreq_Id,  1, DateTime.Now);
+                                                foreach (rrhh_tbHabilidadesRequisicion_Delete_Result Com in Habilidades)
+                                                {
+                                                    ResultE = Com.MensajeError + "";
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "I":
+                                        var IdiV = db.tbIdiomasRequisicion.Select(i => new { idi_Id = i.idi_Id, Descripcion = i.tbIdiomas.idi_Descripcion, req_Id = i.req_Id, idpe_Id = i.ireq_Id, ireq_Estado = i.ireq_Estado }).Where(i => i.req_Id == tbRequisiciones.req_Id && i.idpe_Id == X.Id && i.ireq_Estado == true).ToList();
+                                        if (DatosProfesionales.Idiomas != null)
+                                        {
+                                            foreach (var x in DatosProfesionales.Idiomas)
+                                            {
+                                                if (x == X.Id)
+                                                    Nuevo = "1";
+                                                else if (Nuevo != "1")
+                                                    Nuevo = null;
+                                            }
+                                        }
+                                        if (IdiV.Count == 0 && Nuevo == "1")
+                                        {
+                                            var Idiomas = db.rrhh_tbIdiomasRequisicion_Insert(tbRequisiciones.req_Id, X.Id, 1, DateTime.Now);
+                                            foreach (rrhh_tbIdiomasRequisicion_Insert_Result idi in Idiomas)
+                                            {
+                                                ResultI = idi.MensajeError + "";
+                                            }
+                                        }
+                                        if (IdiV.Count == 1 && Nuevo == null)
+                                        {
+                                            foreach (var i in IdiV)
+                                            {
+                                                var Idiomas = db.rrhh_tbIdiomasRequisicion_Delete(i.idpe_Id,  1, DateTime.Now);
+                                                foreach (rrhh_tbIdiomasRequisicion_Delete_Result idio in Idiomas)
+                                                {
+                                                    ResultE = idio.MensajeError + "";
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "T":
+                                        var TitV = db.tbTitulosRequisicion.Select(t => new { titu_Id = t.titu_Id, Descripcion = t.tbTitulos.titu_Descripcion, req_Id = t.req_Id, tipe_Id = t.treq_Id, treq_Estado = t.treq_Estado }).Where(t => t.req_Id == tbRequisiciones.req_Id && t.tipe_Id == X.Id && t.treq_Estado == true).ToList();
+                                        if (DatosProfesionales.Titulos != null)
+                                        {
+                                            foreach (var x in DatosProfesionales.Titulos)
+                                            {
+                                                if (x == X.Id)
+                                                    Nuevo = "1";
+                                                else if (Nuevo != "1")
+                                                    Nuevo = null;
+                                            }
+                                        }
+                                        if (TitV.Count == 0 && Nuevo == "1")
+                                        {
+                                            var Titulos = db.rrhh_tbTitulosRequisicion_Insert(tbRequisiciones.req_Id, X.Id, 1, DateTime.Now);
+                                            foreach (rrhh_tbTitulosRequisicion_Insert_Result titu in Titulos)
+                                            {
+                                                ResultI = titu.MensajeError + "";
+                                            }
+                                        }
+                                        if (TitV.Count == 1 && Nuevo == null)
+                                        {
+                                            foreach (var t in TitV)
+                                            {
+                                                var Titulos = db.rrhh_tbTitulosRequisicion_Delete(t.tipe_Id,  1, DateTime.Now);
+                                                foreach (rrhh_tbTitulosRequisicion_Delete_Result titu in Titulos)
+                                                {
+                                                    ResultE = titu.MensajeError + "";
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "R":
+                                        var RepV = db.tbRequerimientosEspecialesRequisicion.Select(r => new { resp_Id = r.resp_Id, Descripcion = r.tbRequerimientosEspeciales.resp_Descripcion, req_Id = r.req_Id, rer_Id = r.rer_Id, rer_Estado = r.rer_Estado }).Where(r => r.req_Id == tbRequisiciones.req_Id && r.rer_Id == X.Id && r.rer_Estado == true).ToList();
+                                        if (DatosProfesionales.ReqEspeciales != null)
+                                        {
+                                            foreach (var x in DatosProfesionales.Titulos)
+                                            {
+                                                if (x == X.Id)
+                                                    Nuevo = "1";
+                                                else if (Nuevo != "1")
+                                                    Nuevo = null;
+                                            }
+                                        }
+                                        if (RepV.Count == 0 && Nuevo == "1")
+                                        {
+                                            var REspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Insert(tbRequisiciones.req_Id, X.Id, 1, DateTime.Now);
+                                            foreach (rrhh_tbRequerimientosEspecialesRequisicion_Insert_Result resp in REspeciales)
+                                            {
+                                                ResultI = resp.MensajeError + "";
+                                            }
+                                        }
+                                        if (RepV.Count == 1 && Nuevo == null)
+                                        {
+                                            foreach (var r in RepV)
+                                            {
+                                                var ReqEspeciales = db.rrhh_tbRequerimientosEspecialesRequisicion_Delete(r.rer_Id,  1, DateTime.Now);
+                                                foreach (rrhh_tbRequerimientosEspecialesRequisicion_Delete_Result resp in ReqEspeciales)
+                                                {
+                                                    ResultE = resp.MensajeError + "";
+                                                }
+                                            }
+                                        }
+                                        break;
                                 }
                             }
                         }
                     }
+
                 }
                 catch (Exception ex)
                 {
-                    msj = "-2";
                     ex.Message.ToString();
+                    msj = "-2";
                 }
-            }
-            else
-            {
-                msj = "-3";
             }
             return Json(msj, JsonRequestBehavior.AllowGet);
         }

@@ -88,27 +88,27 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.req_EducacionSuperior, htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                <div class="checkbox">
+                                                
                                                     @Html.EditorFor(model => model.req_EducacionSuperior)
                                                     @Html.ValidationMessageFor(model => model.req_EducacionSuperior, "", new { @class = "text-danger" })
-                                                </div>
+                                                
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.req_Permanente, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.LabelFor(model => model.req_Permanente, htmlAttributes: new { @class = "control-label col-md-2", @onclick = "Req_check()"})
                                             <div class="col-md-10">
-                                                <div class="checkbox">
-                                                    @Html.EditorFor(model => model.req_Permanente)
+                                                
+                                                    @Html.CheckBoxFor(model => model.req_Permanente, htmlAttributes: new { @onclick = "Req_check()" })
                                                     @Html.ValidationMessageFor(model => model.req_Permanente, "", new { @class = "text-danger" })
-                                                </div>
+                                                
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.req_Duracion, htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.req_Duracion, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.EditorFor(model => model.req_Duracion, new { htmlAttributes = new { @class = "form-control", @Value = "N/A", @disabled = "disabled" } })
                                                 @Html.ValidationMessageFor(model => model.req_Duracion, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
