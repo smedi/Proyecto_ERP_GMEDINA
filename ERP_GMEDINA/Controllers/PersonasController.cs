@@ -323,9 +323,9 @@ namespace ERP_GMEDINA.Controllers
                 {
                     using (db = new ERP_GMEDINAEntities())
                     {
-                        var List = db.UDP_RRHH_tbPersonas_Insert(tbPersonas.per_Identidad, tbPersonas.per_Nombres, tbPersonas.per_Apellidos, tbPersonas.per_FechaNacimiento, tbPersonas.per_Sexo, tbPersonas.per_Edad, tbPersonas.nac_Id, tbPersonas.per_Direccion, tbPersonas.per_Telefono, tbPersonas.per_CorreoElectronico, tbPersonas.per_EstadoCivil, tbPersonas.per_TipoSangre, 1, DateTime.Now);
+                        var List = db.UDP_RRHH_tbPersonas_Insert1(tbPersonas.per_Identidad, tbPersonas.per_Nombres, tbPersonas.per_Apellidos, tbPersonas.per_FechaNacimiento, tbPersonas.per_Sexo, tbPersonas.nac_Id, tbPersonas.per_Direccion, tbPersonas.per_Telefono, tbPersonas.per_CorreoElectronico, tbPersonas.per_EstadoCivil, tbPersonas.per_TipoSangre, 1, DateTime.Now);
 
-                        foreach (UDP_RRHH_tbPersonas_Insert_Result item in List)
+                        foreach (UDP_RRHH_tbPersonas_Insert1_Result item in List)
                         {
                             msj = item.MensajeError + "";
                             //Competencias
@@ -524,174 +524,183 @@ namespace ERP_GMEDINA.Controllers
                 {
                     string ResultI = "";
                     string ResultE = "";
-                    var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
-                    foreach (var X in lista)
+                    var _list = db.UDP_RRHH_tbPersonas_Update1(tbPersonas.per_Id,tbPersonas.per_Identidad,tbPersonas.per_Nombres,tbPersonas.per_Apellidos,tbPersonas.per_FechaNacimiento,tbPersonas.per_Sexo,tbPersonas.nac_Id,tbPersonas.per_Direccion,tbPersonas.per_Telefono,tbPersonas.per_CorreoElectronico,tbPersonas.per_EstadoCivil,tbPersonas.per_TipoSangre,1,DateTime.Now);
+                    foreach(UDP_RRHH_tbPersonas_Update1_Result Update in _list)
                     {
-                        string Nuevo = null;
-                        switch (X.TipoDato)
+                        msj = Update.MensajeError + "";
+                        if(msj != "")
                         {
-                            case "C":
-                                var CompV = db.tbCompetenciasPersona.Select(c => new { comp_Id = c.comp_Id, Descripcion = c.tbCompetencias.comp_Descripcion, per_Id = c.per_Id , cope_Id = c.cope_Id }).Where(c => c.per_Id == tbPersonas.per_Id && c.comp_Id == X.Id).ToList();
-                                if(DatosProfesionalesArray.Competencias != null)
+                            var lista = db.V_DatosProfesionalesP.Select(tabla => new { TipoDato = tabla.TipoDato, Id = tabla.Data_Id, Descripcion = tabla.Descripcion }).ToList();
+                            foreach (var X in lista)
+                            {
+                                string Nuevo = null;
+                                switch (X.TipoDato)
                                 {
-                                    foreach (var x in DatosProfesionalesArray.Competencias)
-                                    {
-                                        if (x == X.Id)
-                                            Nuevo = "1";
-                                        else if (Nuevo != "1")
-                                            Nuevo = null;
-                                    }
-                                }
-                                if (CompV.Count == 0 && Nuevo == "1")
-                                {
-                                    var Competencias = db.UDP_RRHH_tbCompetenciasPersona_Insert(tbPersonas.per_Id,X.Id,1,DateTime.Now);
-                                    foreach(UDP_RRHH_tbCompetenciasPersona_Insert_Result Com in Competencias)
-                                    {
-                                        ResultI = Com.MensajeError + "";
-                                    }
-                                }
-                                if (CompV.Count == 1 && Nuevo == null)
-                                {
-                                    foreach(var c in CompV)
-                                    {
-                                        var Competencias = db.UDP_RRHH_tbCompetenciasPersona_Inactivar(c.cope_Id,"Persona Editada", 1, DateTime.Now);
-                                        foreach (UDP_RRHH_tbCompetenciasPersona_Inactivar_Result Com in Competencias)
+                                    case "C":
+                                        var CompV = db.tbCompetenciasPersona.Select(c => new { comp_Id = c.comp_Id, Descripcion = c.tbCompetencias.comp_Descripcion, per_Id = c.per_Id, cope_Id = c.cope_Id }).Where(c => c.per_Id == tbPersonas.per_Id && c.comp_Id == X.Id).ToList();
+                                        if (DatosProfesionalesArray.Competencias != null)
                                         {
-                                            ResultE = Com.MensajeError + "";
+                                            foreach (var x in DatosProfesionalesArray.Competencias)
+                                            {
+                                                if (x == X.Id)
+                                                    Nuevo = "1";
+                                                else if (Nuevo != "1")
+                                                    Nuevo = null;
+                                            }
                                         }
-                                    }
-                                }
-                                break;
-                            case "H":
-                                var habV = db.tbHabilidadesPersona.Select(h => new { habi_Id = h.habi_Id, Descripcion = h.tbHabilidades.habi_Descripcion, per_Id = h.per_Id, hape_Id = h.hape_Id }).Where(h => h.per_Id == tbPersonas.per_Id && h.hape_Id == X.Id).ToList();
-                                if (DatosProfesionalesArray.Habilidades != null)
-                                {
-                                    foreach (var x in DatosProfesionalesArray.Habilidades)
-                                    {
-                                        if (x == X.Id)
-                                            Nuevo = "1";
-                                        else if (Nuevo != "1")
-                                            Nuevo = null;
-                                    }
-                                }
-                                if (habV.Count == 0 && Nuevo == "1")
-                                {
-                                    var Habilidades = db.UDP_RRHH_tbHabilidadesPersona_Insert(tbPersonas.per_Id, X.Id, 1, DateTime.Now);
-                                    foreach (UDP_RRHH_tbHabilidadesPersona_Insert_Result hab in Habilidades)
-                                    {
-                                        ResultI = hab.MensajeError + "";
-                                    }
-                                }
-                                if (habV.Count == 1 && Nuevo == null)
-                                {
-                                    foreach (var h in habV)
-                                    {
-                                        var Habilidades = db.UDP_RRHH_tbHabilidadesPersona_Inactivar(h.hape_Id, "Persona Editada", 1, DateTime.Now);
-                                        foreach (UDP_RRHH_tbHabilidadesPersona_Inactivar_Result Com in Habilidades)
+                                        if (CompV.Count == 0 && Nuevo == "1")
                                         {
-                                            ResultE = Com.MensajeError + "";
+                                            var Competencias = db.UDP_RRHH_tbCompetenciasPersona_Insert(tbPersonas.per_Id, X.Id, 1, DateTime.Now);
+                                            foreach (UDP_RRHH_tbCompetenciasPersona_Insert_Result Com in Competencias)
+                                            {
+                                                ResultI = Com.MensajeError + "";
+                                            }
                                         }
-                                    }
-                                }
-                                break;
-                            case "I":
-                                var IdiV = db.tbIdiomaPersona.Select(i => new { idi_Id = i.idi_Id, Descripcion = i.tbIdiomas.idi_Descripcion, per_Id = i.per_Id, idpe_Id = i.idpe_Id }).Where(i => i.per_Id == tbPersonas.per_Id && i.idpe_Id == X.Id).ToList();
-                                if (DatosProfesionalesArray.Habilidades != null)
-                                {
-                                    foreach (var x in DatosProfesionalesArray.Idiomas)
-                                    {
-                                        if (x == X.Id)
-                                            Nuevo = "1";
-                                        else if (Nuevo != "1")
-                                            Nuevo = null;
-                                    }
-                                }
-                                if (IdiV.Count == 0 && Nuevo == "1")
-                                {
-                                    var Idiomas = db.UDP_RRHH_tbIdiomasPersona_Insert(tbPersonas.per_Id, X.Id, 1, DateTime.Now);
-                                    foreach (UDP_RRHH_tbIdiomasPersona_Insert_Result idi in Idiomas)
-                                    {
-                                        ResultI = idi.MensajeError + "";
-                                    }
-                                }
-                                if (IdiV.Count == 1 && Nuevo == null)
-                                {
-                                    foreach (var i in IdiV)
-                                    {
-                                        var Idiomas = db.UDP_RRHH_tbIdiomasPersona_Inactivar(i.idpe_Id, "Persona Editada", 1, DateTime.Now);
-                                        foreach (UDP_RRHH_tbIdiomasPersona_Inactivar_Result idio in Idiomas)
+                                        if (CompV.Count == 1 && Nuevo == null)
                                         {
-                                            ResultE = idio.MensajeError + "";
+                                            foreach (var c in CompV)
+                                            {
+                                                var Competencias = db.UDP_RRHH_tbCompetenciasPersona_Inactivar(c.cope_Id, "Persona Editada", 1, DateTime.Now);
+                                                foreach (UDP_RRHH_tbCompetenciasPersona_Inactivar_Result Com in Competencias)
+                                                {
+                                                    ResultE = Com.MensajeError + "";
+                                                }
+                                            }
                                         }
-                                    }
-                                }
-                                break;
-                            case "T":
-                                var TitV = db.tbTitulosPersona.Select(t => new { titu_Id = t.titu_Id, Descripcion = t.tbTitulos.titu_Descripcion, per_Id = t.per_Id, tipe_Id = t.tipe_Id }).Where(t => t.per_Id == tbPersonas.per_Id && t.tipe_Id == X.Id).ToList();
-                                if (DatosProfesionalesArray.Habilidades != null)
-                                {
-                                    foreach (var x in DatosProfesionalesArray.Titulos)
-                                    {
-                                        if (x == X.Id)
-                                            Nuevo = "1";
-                                        else if (Nuevo != "1")
-                                            Nuevo = null;
-                                    }
-                                }
-                                if (TitV.Count == 0 && Nuevo == "1")
-                                {
-                                    var Titulos = db.UDP_RRHH_tbTitulosPersona_Insert(tbPersonas.per_Id, X.Id,2019, 1, DateTime.Now);
-                                    foreach (UDP_RRHH_tbTitulosPersona_Insert_Result titu in Titulos)
-                                    {
-                                        ResultI = titu.MensajeError + "";
-                                    }
-                                }
-                                if (TitV.Count == 1 && Nuevo == null)
-                                {
-                                    foreach (var t in TitV)
-                                    {
-                                        var Titulos = db.UDP_RRHH_tbTitulosPersona_Inactivar(t.tipe_Id, "Persona Editada", 1, DateTime.Now);
-                                        foreach (UDP_RRHH_tbTitulosPersona_Inactivar_Result titu in Titulos)
+                                        break;
+                                    case "H":
+                                        var habV = db.tbHabilidadesPersona.Select(h => new { habi_Id = h.habi_Id, Descripcion = h.tbHabilidades.habi_Descripcion, per_Id = h.per_Id, hape_Id = h.hape_Id }).Where(h => h.per_Id == tbPersonas.per_Id && h.hape_Id == X.Id).ToList();
+                                        if (DatosProfesionalesArray.Habilidades != null)
                                         {
-                                            ResultE = titu.MensajeError + "";
+                                            foreach (var x in DatosProfesionalesArray.Habilidades)
+                                            {
+                                                if (x == X.Id)
+                                                    Nuevo = "1";
+                                                else if (Nuevo != "1")
+                                                    Nuevo = null;
+                                            }
                                         }
-                                    }
-                                }
-                                break;
-                            case "R":
-                                var RepV = db.tbRequerimientosEspecialesPersona.Select(r => new { resp_Id = r.resp_Id, Descripcion = r.tbRequerimientosEspeciales.resp_Descripcion, per_Id = r.per_Id, rep_Id = r.rep_Id }).Where(r => r.per_Id == tbPersonas.per_Id && r.rep_Id == X.Id).ToList();
-                                if (DatosProfesionalesArray.ReqEspeciales != null)
-                                {
-                                    foreach (var x in DatosProfesionalesArray.Titulos)
-                                    {
-                                        if (x == X.Id)
-                                            Nuevo = "1";
-                                        else if (Nuevo != "1")
-                                            Nuevo = null;
-                                    }
-                                }
-                                if (RepV.Count == 0 && Nuevo == "1")
-                                {
-                                    var REspeciales = db.UDP_RRHH_tbRequerimientosEspecialesPersona_Insert(tbPersonas.per_Id, X.Id,1, DateTime.Now);
-                                    foreach (UDP_RRHH_tbRequerimientosEspecialesPersona_Insert_Result resp in REspeciales)
-                                    {
-                                        ResultI = resp.MensajeError + "";
-                                    }
-                                }
-                                if (RepV.Count == 1 && Nuevo == null)
-                                {
-                                    foreach (var r in RepV)
-                                    {
-                                        var ReqEspeciales = db.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar(r.rep_Id, "Persona Editada", 1, DateTime.Now);
-                                        foreach (UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result resp in ReqEspeciales)
+                                        if (habV.Count == 0 && Nuevo == "1")
                                         {
-                                            ResultE = resp.MensajeError + "";
+                                            var Habilidades = db.UDP_RRHH_tbHabilidadesPersona_Insert(tbPersonas.per_Id, X.Id, 1, DateTime.Now);
+                                            foreach (UDP_RRHH_tbHabilidadesPersona_Insert_Result hab in Habilidades)
+                                            {
+                                                ResultI = hab.MensajeError + "";
+                                            }
                                         }
-                                    }
+                                        if (habV.Count == 1 && Nuevo == null)
+                                        {
+                                            foreach (var h in habV)
+                                            {
+                                                var Habilidades = db.UDP_RRHH_tbHabilidadesPersona_Inactivar(h.hape_Id, "Persona Editada", 1, DateTime.Now);
+                                                foreach (UDP_RRHH_tbHabilidadesPersona_Inactivar_Result Com in Habilidades)
+                                                {
+                                                    ResultE = Com.MensajeError + "";
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "I":
+                                        var IdiV = db.tbIdiomaPersona.Select(i => new { idi_Id = i.idi_Id, Descripcion = i.tbIdiomas.idi_Descripcion, per_Id = i.per_Id, idpe_Id = i.idpe_Id }).Where(i => i.per_Id == tbPersonas.per_Id && i.idpe_Id == X.Id).ToList();
+                                        if (DatosProfesionalesArray.Habilidades != null)
+                                        {
+                                            foreach (var x in DatosProfesionalesArray.Idiomas)
+                                            {
+                                                if (x == X.Id)
+                                                    Nuevo = "1";
+                                                else if (Nuevo != "1")
+                                                    Nuevo = null;
+                                            }
+                                        }
+                                        if (IdiV.Count == 0 && Nuevo == "1")
+                                        {
+                                            var Idiomas = db.UDP_RRHH_tbIdiomasPersona_Insert(tbPersonas.per_Id, X.Id, 1, DateTime.Now);
+                                            foreach (UDP_RRHH_tbIdiomasPersona_Insert_Result idi in Idiomas)
+                                            {
+                                                ResultI = idi.MensajeError + "";
+                                            }
+                                        }
+                                        if (IdiV.Count == 1 && Nuevo == null)
+                                        {
+                                            foreach (var i in IdiV)
+                                            {
+                                                var Idiomas = db.UDP_RRHH_tbIdiomasPersona_Inactivar(i.idpe_Id, "Persona Editada", 1, DateTime.Now);
+                                                foreach (UDP_RRHH_tbIdiomasPersona_Inactivar_Result idio in Idiomas)
+                                                {
+                                                    ResultE = idio.MensajeError + "";
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "T":
+                                        var TitV = db.tbTitulosPersona.Select(t => new { titu_Id = t.titu_Id, Descripcion = t.tbTitulos.titu_Descripcion, per_Id = t.per_Id, tipe_Id = t.tipe_Id }).Where(t => t.per_Id == tbPersonas.per_Id && t.tipe_Id == X.Id).ToList();
+                                        if (DatosProfesionalesArray.Habilidades != null)
+                                        {
+                                            foreach (var x in DatosProfesionalesArray.Titulos)
+                                            {
+                                                if (x == X.Id)
+                                                    Nuevo = "1";
+                                                else if (Nuevo != "1")
+                                                    Nuevo = null;
+                                            }
+                                        }
+                                        if (TitV.Count == 0 && Nuevo == "1")
+                                        {
+                                            var Titulos = db.UDP_RRHH_tbTitulosPersona_Insert(tbPersonas.per_Id, X.Id, 2019, 1, DateTime.Now);
+                                            foreach (UDP_RRHH_tbTitulosPersona_Insert_Result titu in Titulos)
+                                            {
+                                                ResultI = titu.MensajeError + "";
+                                            }
+                                        }
+                                        if (TitV.Count == 1 && Nuevo == null)
+                                        {
+                                            foreach (var t in TitV)
+                                            {
+                                                var Titulos = db.UDP_RRHH_tbTitulosPersona_Inactivar(t.tipe_Id, "Persona Editada", 1, DateTime.Now);
+                                                foreach (UDP_RRHH_tbTitulosPersona_Inactivar_Result titu in Titulos)
+                                                {
+                                                    ResultE = titu.MensajeError + "";
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case "R":
+                                        var RepV = db.tbRequerimientosEspecialesPersona.Select(r => new { resp_Id = r.resp_Id, Descripcion = r.tbRequerimientosEspeciales.resp_Descripcion, per_Id = r.per_Id, rep_Id = r.rep_Id }).Where(r => r.per_Id == tbPersonas.per_Id && r.rep_Id == X.Id).ToList();
+                                        if (DatosProfesionalesArray.ReqEspeciales != null)
+                                        {
+                                            foreach (var x in DatosProfesionalesArray.Titulos)
+                                            {
+                                                if (x == X.Id)
+                                                    Nuevo = "1";
+                                                else if (Nuevo != "1")
+                                                    Nuevo = null;
+                                            }
+                                        }
+                                        if (RepV.Count == 0 && Nuevo == "1")
+                                        {
+                                            var REspeciales = db.UDP_RRHH_tbRequerimientosEspecialesPersona_Insert(tbPersonas.per_Id, X.Id, 1, DateTime.Now);
+                                            foreach (UDP_RRHH_tbRequerimientosEspecialesPersona_Insert_Result resp in REspeciales)
+                                            {
+                                                ResultI = resp.MensajeError + "";
+                                            }
+                                        }
+                                        if (RepV.Count == 1 && Nuevo == null)
+                                        {
+                                            foreach (var r in RepV)
+                                            {
+                                                var ReqEspeciales = db.UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar(r.rep_Id, "Persona Editada", 1, DateTime.Now);
+                                                foreach (UDP_RRHH_tbRequerimientosEspecialesPersona_Inactivar_Result resp in ReqEspeciales)
+                                                {
+                                                    ResultE = resp.MensajeError + "";
+                                                }
+                                            }
+                                        }
+                                        break;
                                 }
-                                break;
+                            }
                         }
                     }
+                    
                 }
                 catch(Exception ex)
                 {

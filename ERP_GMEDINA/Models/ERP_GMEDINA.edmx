@@ -6811,7 +6811,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
           <Parameter Name="per_Apellidos" Type="nvarchar" Mode="In" />
           <Parameter Name="per_FechaNacimiento" Type="date" Mode="In" />
           <Parameter Name="per_Sexo" Type="char" Mode="In" />
-          <Parameter Name="per_Edad" Type="int" Mode="In" />
           <Parameter Name="nac_Id" Type="int" Mode="In" />
           <Parameter Name="per_Direccion" Type="nvarchar" Mode="In" />
           <Parameter Name="per_Telefono" Type="nvarchar" Mode="In" />
@@ -6828,7 +6827,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
           <Parameter Name="per_Apellidos" Type="nvarchar" Mode="In" />
           <Parameter Name="per_FechaNacimiento" Type="date" Mode="In" />
           <Parameter Name="per_Sexo" Type="char" Mode="In" />
-          <Parameter Name="per_Edad" Type="int" Mode="In" />
           <Parameter Name="nac_Id" Type="int" Mode="In" />
           <Parameter Name="per_Direccion" Type="nvarchar" Mode="In" />
           <Parameter Name="per_Telefono" Type="nvarchar" Mode="In" />
@@ -11999,6 +11997,43 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
             <Parameter Name="per_FechaNacimiento" Mode="In" Type="DateTime" />
             <Parameter Name="per_Sexo" Mode="In" Type="String" />
             <Parameter Name="per_Edad" Mode="In" Type="Int32" />
+            <Parameter Name="nac_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Direccion" Mode="In" Type="String" />
+            <Parameter Name="per_Telefono" Mode="In" Type="String" />
+            <Parameter Name="per_CorreoElectronico" Mode="In" Type="String" />
+            <Parameter Name="per_EstadoCivil" Mode="In" Type="String" />
+            <Parameter Name="per_TipoSangre" Mode="In" Type="String" />
+            <Parameter Name="per_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="per_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbPermisos_Update1" ReturnType="Collection(Int32)">
+            <Parameter Name="tper_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tper_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tper_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tper_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbPersonas_Insert1" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Insert1_Result)">
+            <Parameter Name="per_Identidad" Mode="In" Type="String" />
+            <Parameter Name="per_Nombres" Mode="In" Type="String" />
+            <Parameter Name="per_Apellidos" Mode="In" Type="String" />
+            <Parameter Name="per_FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="per_Sexo" Mode="In" Type="String" />
+            <Parameter Name="nac_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Direccion" Mode="In" Type="String" />
+            <Parameter Name="per_Telefono" Mode="In" Type="String" />
+            <Parameter Name="per_CorreoElectronico" Mode="In" Type="String" />
+            <Parameter Name="per_EstadoCivil" Mode="In" Type="String" />
+            <Parameter Name="per_TipoSangre" Mode="In" Type="String" />
+            <Parameter Name="per_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="per_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbPersonas_Update1" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Update1_Result)">
+            <Parameter Name="per_Id" Mode="In" Type="Int32" />
+            <Parameter Name="per_Identidad" Mode="In" Type="String" />
+            <Parameter Name="per_Nombres" Mode="In" Type="String" />
+            <Parameter Name="per_Apellidos" Mode="In" Type="String" />
+            <Parameter Name="per_FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="per_Sexo" Mode="In" Type="String" />
             <Parameter Name="nac_Id" Mode="In" Type="Int32" />
             <Parameter Name="per_Direccion" Mode="In" Type="String" />
             <Parameter Name="per_Telefono" Mode="In" Type="String" />
@@ -18753,6 +18788,12 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
         <ComplexType Name="UDP_RRHH_tbPersonas_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbPersonas_Insert1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbPersonas_Update1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -19230,7 +19271,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Restore" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Restore" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbJornadas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbJornadas_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPermisos_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPermisos_Update" />
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspeciales_Delete" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspeciales_Delete" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspeciales_Delete_Result">
@@ -21712,13 +21752,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPersonas_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPersonas_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_RRHH_tbRequerimientosEspecialesPersona_Insert" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbRequerimientosEspecialesPersona_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbRequerimientosEspecialesPersona_Insert_Result">
@@ -21775,9 +21808,17 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_TitulosPersona' does not have a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPersonas_Update" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPersonas_Update" >
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPermisos_Update1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPermisos_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPersonas_Insert1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPersonas_Insert" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Update_Result">
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Insert1_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbPersonas_Update1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbPersonas_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbPersonas_Update1_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

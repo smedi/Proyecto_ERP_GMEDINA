@@ -680,7 +680,13 @@
     <Compile Include="Models\UDP_RRHH_tbPersonas_Inactivar_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbPersonas_Insert1_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbPersonas_Insert_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbPersonas_Update1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbPersonas_Update_Result.cs">

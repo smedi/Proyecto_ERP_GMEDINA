@@ -6038,5 +6038,144 @@ namespace ERP_GMEDINA.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbPersonas_Update_Result>("UDP_RRHH_tbPersonas_Update", per_IdParameter, per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, per_EdadParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbPermisos_Update1(Nullable<int> tper_Id, string tper_Descripcion, Nullable<int> tper_UsuarioModifica, Nullable<System.DateTime> tper_FechaModifica)
+        {
+            var tper_IdParameter = tper_Id.HasValue ?
+                new ObjectParameter("tper_Id", tper_Id) :
+                new ObjectParameter("tper_Id", typeof(int));
+    
+            var tper_DescripcionParameter = tper_Descripcion != null ?
+                new ObjectParameter("tper_Descripcion", tper_Descripcion) :
+                new ObjectParameter("tper_Descripcion", typeof(string));
+    
+            var tper_UsuarioModificaParameter = tper_UsuarioModifica.HasValue ?
+                new ObjectParameter("tper_UsuarioModifica", tper_UsuarioModifica) :
+                new ObjectParameter("tper_UsuarioModifica", typeof(int));
+    
+            var tper_FechaModificaParameter = tper_FechaModifica.HasValue ?
+                new ObjectParameter("tper_FechaModifica", tper_FechaModifica) :
+                new ObjectParameter("tper_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbPermisos_Update1", tper_IdParameter, tper_DescripcionParameter, tper_UsuarioModificaParameter, tper_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbPersonas_Insert1_Result> UDP_RRHH_tbPersonas_Insert1(string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioCrea, Nullable<System.DateTime> per_FechaCrea)
+        {
+            var per_IdentidadParameter = per_Identidad != null ?
+                new ObjectParameter("per_Identidad", per_Identidad) :
+                new ObjectParameter("per_Identidad", typeof(string));
+    
+            var per_NombresParameter = per_Nombres != null ?
+                new ObjectParameter("per_Nombres", per_Nombres) :
+                new ObjectParameter("per_Nombres", typeof(string));
+    
+            var per_ApellidosParameter = per_Apellidos != null ?
+                new ObjectParameter("per_Apellidos", per_Apellidos) :
+                new ObjectParameter("per_Apellidos", typeof(string));
+    
+            var per_FechaNacimientoParameter = per_FechaNacimiento.HasValue ?
+                new ObjectParameter("per_FechaNacimiento", per_FechaNacimiento) :
+                new ObjectParameter("per_FechaNacimiento", typeof(System.DateTime));
+    
+            var per_SexoParameter = per_Sexo != null ?
+                new ObjectParameter("per_Sexo", per_Sexo) :
+                new ObjectParameter("per_Sexo", typeof(string));
+    
+            var nac_IdParameter = nac_Id.HasValue ?
+                new ObjectParameter("nac_Id", nac_Id) :
+                new ObjectParameter("nac_Id", typeof(int));
+    
+            var per_DireccionParameter = per_Direccion != null ?
+                new ObjectParameter("per_Direccion", per_Direccion) :
+                new ObjectParameter("per_Direccion", typeof(string));
+    
+            var per_TelefonoParameter = per_Telefono != null ?
+                new ObjectParameter("per_Telefono", per_Telefono) :
+                new ObjectParameter("per_Telefono", typeof(string));
+    
+            var per_CorreoElectronicoParameter = per_CorreoElectronico != null ?
+                new ObjectParameter("per_CorreoElectronico", per_CorreoElectronico) :
+                new ObjectParameter("per_CorreoElectronico", typeof(string));
+    
+            var per_EstadoCivilParameter = per_EstadoCivil != null ?
+                new ObjectParameter("per_EstadoCivil", per_EstadoCivil) :
+                new ObjectParameter("per_EstadoCivil", typeof(string));
+    
+            var per_TipoSangreParameter = per_TipoSangre != null ?
+                new ObjectParameter("per_TipoSangre", per_TipoSangre) :
+                new ObjectParameter("per_TipoSangre", typeof(string));
+    
+            var per_UsuarioCreaParameter = per_UsuarioCrea.HasValue ?
+                new ObjectParameter("per_UsuarioCrea", per_UsuarioCrea) :
+                new ObjectParameter("per_UsuarioCrea", typeof(int));
+    
+            var per_FechaCreaParameter = per_FechaCrea.HasValue ?
+                new ObjectParameter("per_FechaCrea", per_FechaCrea) :
+                new ObjectParameter("per_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbPersonas_Insert1_Result>("UDP_RRHH_tbPersonas_Insert1", per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioCreaParameter, per_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbPersonas_Update1_Result> UDP_RRHH_tbPersonas_Update1(Nullable<int> per_Id, string per_Identidad, string per_Nombres, string per_Apellidos, Nullable<System.DateTime> per_FechaNacimiento, string per_Sexo, Nullable<int> nac_Id, string per_Direccion, string per_Telefono, string per_CorreoElectronico, string per_EstadoCivil, string per_TipoSangre, Nullable<int> per_UsuarioModifica, Nullable<System.DateTime> per_FechaModifica)
+        {
+            var per_IdParameter = per_Id.HasValue ?
+                new ObjectParameter("per_Id", per_Id) :
+                new ObjectParameter("per_Id", typeof(int));
+    
+            var per_IdentidadParameter = per_Identidad != null ?
+                new ObjectParameter("per_Identidad", per_Identidad) :
+                new ObjectParameter("per_Identidad", typeof(string));
+    
+            var per_NombresParameter = per_Nombres != null ?
+                new ObjectParameter("per_Nombres", per_Nombres) :
+                new ObjectParameter("per_Nombres", typeof(string));
+    
+            var per_ApellidosParameter = per_Apellidos != null ?
+                new ObjectParameter("per_Apellidos", per_Apellidos) :
+                new ObjectParameter("per_Apellidos", typeof(string));
+    
+            var per_FechaNacimientoParameter = per_FechaNacimiento.HasValue ?
+                new ObjectParameter("per_FechaNacimiento", per_FechaNacimiento) :
+                new ObjectParameter("per_FechaNacimiento", typeof(System.DateTime));
+    
+            var per_SexoParameter = per_Sexo != null ?
+                new ObjectParameter("per_Sexo", per_Sexo) :
+                new ObjectParameter("per_Sexo", typeof(string));
+    
+            var nac_IdParameter = nac_Id.HasValue ?
+                new ObjectParameter("nac_Id", nac_Id) :
+                new ObjectParameter("nac_Id", typeof(int));
+    
+            var per_DireccionParameter = per_Direccion != null ?
+                new ObjectParameter("per_Direccion", per_Direccion) :
+                new ObjectParameter("per_Direccion", typeof(string));
+    
+            var per_TelefonoParameter = per_Telefono != null ?
+                new ObjectParameter("per_Telefono", per_Telefono) :
+                new ObjectParameter("per_Telefono", typeof(string));
+    
+            var per_CorreoElectronicoParameter = per_CorreoElectronico != null ?
+                new ObjectParameter("per_CorreoElectronico", per_CorreoElectronico) :
+                new ObjectParameter("per_CorreoElectronico", typeof(string));
+    
+            var per_EstadoCivilParameter = per_EstadoCivil != null ?
+                new ObjectParameter("per_EstadoCivil", per_EstadoCivil) :
+                new ObjectParameter("per_EstadoCivil", typeof(string));
+    
+            var per_TipoSangreParameter = per_TipoSangre != null ?
+                new ObjectParameter("per_TipoSangre", per_TipoSangre) :
+                new ObjectParameter("per_TipoSangre", typeof(string));
+    
+            var per_UsuarioModificaParameter = per_UsuarioModifica.HasValue ?
+                new ObjectParameter("per_UsuarioModifica", per_UsuarioModifica) :
+                new ObjectParameter("per_UsuarioModifica", typeof(int));
+    
+            var per_FechaModificaParameter = per_FechaModifica.HasValue ?
+                new ObjectParameter("per_FechaModifica", per_FechaModifica) :
+                new ObjectParameter("per_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbPersonas_Update1_Result>("UDP_RRHH_tbPersonas_Update1", per_IdParameter, per_IdentidadParameter, per_NombresParameter, per_ApellidosParameter, per_FechaNacimientoParameter, per_SexoParameter, nac_IdParameter, per_DireccionParameter, per_TelefonoParameter, per_CorreoElectronicoParameter, per_EstadoCivilParameter, per_TipoSangreParameter, per_UsuarioModificaParameter, per_FechaModificaParameter);
+        }
     }
 }
