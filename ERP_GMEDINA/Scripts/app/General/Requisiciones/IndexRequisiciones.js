@@ -196,8 +196,6 @@ function tablaDetalles(ID) {
                 $("#ModalDetalles").find("#req_Vacantes")["0"].innerText = obj[0].req_Vacantes;
                 $("#ModalDetalles").find("#req_FechaRequisicion")["0"].innerText = FechaFormato(obj[0].req_FechaRequisicion);
                 $("#ModalDetalles").find("#req_FechaContratacion")["0"].innerText = FechaFormato(obj[0].req_FechaContratacion);
-                $("#ModalDetalles").find("#req_Estado")["0"].innerText = obj[0].req_Estado;
-                $("#ModalDetalles").find("#req_RazonInactivo")["0"].innerText = obj[0].req_RazonInactivo;
                 $("#ModalDetalles").find("#req_FechaCrea")["0"].innerText = FechaFormato(obj[0].req_FechaCrea);
                 $("#ModalDetalles").find("#req_FechaModifica")["0"].innerText = FechaFormato(obj[0].req_FechaModifica);
                 $("#ModalDetalles").find("#req_UsuarioCrea")["0"].innerText = obj[0].req_UsuarioCrea;
@@ -360,7 +358,7 @@ $("#btnActualizar").click(function () {
 function tablaEditar(ID) {
     id = ID;
     sessionStorage.setItem("IdRequisicion", id);
-    window.location.href = "Edit/" + id;
+    window.location.href = "/Requisiciones/Edit";
 };
 
 

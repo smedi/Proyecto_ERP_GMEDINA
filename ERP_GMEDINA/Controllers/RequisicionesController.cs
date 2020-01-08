@@ -403,7 +403,13 @@ namespace ERP_GMEDINA.Controllers
             {
                 using (db = new ERP_GMEDINAEntities())
                 {
-                    var tbPersonas = db.tbRequisiciones
+                    if (id == null)
+                    {
+                        return View("Edit");
+                    }
+                    else
+                    {
+                        var tbPersonas = db.tbRequisiciones
                         .Select(
                         x => new
                         {
@@ -422,7 +428,8 @@ namespace ERP_GMEDINA.Controllers
                             req_FechaContratacion = x.req_FechaContratacion
                         })
                         .Where(x => x.req_Id == id).ToList();
-                    return Json(tbPersonas, JsonRequestBehavior.AllowGet);
+                        return Json(tbPersonas, JsonRequestBehavior.AllowGet);
+                    }
                 }
             }
             catch

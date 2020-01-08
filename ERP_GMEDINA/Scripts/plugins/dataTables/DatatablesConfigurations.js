@@ -35,6 +35,7 @@ $(document).ready(function () {
             columnas.push({
                 data: null,
                 orderable: false,
+                width:'17em',
                 defaultContent: "<div>" +
                                     "<a class='btn btn-primary btn-xs ' onclick='CallDetalles(this)' >Detalles</a>" +
                                     "<a class='btn btn-default btn-xs ' onclick='CallEditar(this)'>Editar</a>" +

@@ -96,11 +96,11 @@ $(document).ready(function () {
                 $("#tbRequisiciones").find("#req_EdadMinima").val(obj[0].req_EdadMinima);
                 $("#tbRequisiciones").find("#req_EdadMaxima").val(obj[0].req_EdadMaxima);
                 $("#tbRequisiciones").find("#req_EstadoCivil").val(obj[0].req_EstadoCivil);
-                $("#tbRequisiciones").find("#req_EducacionSuperior").val(obj[0].req_EducacionSuperior);
-                $("#tbRequisiciones").find("#req_Permanente").val(obj[0].req_Permanente);
+                $("#tbRequisiciones").find("#req_EducacionSuperior").prop("checked", obj[0].req_EducacionSuperior);
+                $("#tbRequisiciones").find("#req_Permanente").prop("checked", obj[0].req_Permanente);
                 $("#tbRequisiciones").find("#req_Duracion").val(obj[0].req_Duracion);
                 $("#tbRequisiciones").find("#req_Vacantes").val(obj[0].req_Vacantes);
-                $("#tbRequisiciones").find("#req_FechaRequisicion").val(FechaFoprmatoSimple(obj[0].req_FechaRequisicion));
+                $("#tbRequisiciones").find("#req_FechaRequisicion").val(FechaFormatoSimple(obj[0].req_FechaRequisicion));
                 $("#tbRequisiciones").find("#req_FechaContratacion").val(FechaFormatoSimple(obj[0].req_FechaContratacion));
 
             }
