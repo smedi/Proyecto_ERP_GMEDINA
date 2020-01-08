@@ -168,6 +168,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
+    <Compile Include="Controllers\HistorialAudienciaDescargosController.cs" />
     <Compile Include="Controllers\HistorialIncapacidadesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -373,13 +374,22 @@
     <Compile Include="Models\UDP_RRHH_tbHistorialAmonestaciones_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Delete1_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Insert1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Update1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbHistorialIncapacidades_Delete_Result.cs">
@@ -416,6 +426,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_HistorialAmonestacion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_HistorialAudienciaDescargo.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_HistorialIncapacidades.cs">
@@ -668,6 +681,7 @@
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialIncapacidades\IndexHistorialIncapacidades.js" />
+    <Content Include="Scripts\app\General\HistorialAudiencias\IndexHistorialAudienciaDescargos.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
     <Content Include="Scripts\app\General\SerializeDate.js" />
     <Content Include="Scripts\app\General\TechosDeducciones.js" />
@@ -1272,6 +1286,19 @@
     <Content Include="Views\HistorialIncapacidades\_Delete.cshtml" />
     <Content Include="Views\HistorialIncapacidades\_Detalles.cshtml" />
     <Content Include="Views\HistorialIncapacidades\_Create.cshtml" />
+    <Content Include="Views\tbHistorialAudienciaDescargos\Create.cshtml" />
+    <Content Include="Views\tbHistorialAudienciaDescargos\Delete.cshtml" />
+    <Content Include="Views\tbHistorialAudienciaDescargos\Details.cshtml" />
+    <Content Include="Views\tbHistorialAudienciaDescargos\Edit.cshtml" />
+    <Content Include="Views\tbHistorialAudienciaDescargos\Index.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\Create.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\Delete.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\Details.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\Edit.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\Index.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\_Detalles.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\_Create.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

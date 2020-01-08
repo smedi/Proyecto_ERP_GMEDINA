@@ -250,6 +250,36 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAmonestacion' does not
           <Property Name="hamo_FechaModifica" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialAudienciaDescargo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_HistorialAudienciaDescargo">
+          <Key>
+            <PropertyRef Name="aude_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_Nombre" />
+            <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="aude_Descripcion" />
+            <PropertyRef Name="aude_FechaAudiencia" />
+            <PropertyRef Name="aude_Testigo" />
+            <PropertyRef Name="aude_Estado" />
+            <PropertyRef Name="aude_UsuarioCrea" />
+            <PropertyRef Name="aude_FechaCrea" />
+          </Key>
+          <Property Name="aude_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="emp_Nombre" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="emp_Estado" Type="bit" Nullable="false" />
+          <Property Name="aude_Descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="aude_FechaAudiencia" Type="datetime" Nullable="false" />
+          <Property Name="aude_Testigo" Type="bit" Nullable="false" />
+          <Property Name="aude_DireccionArchivo" Type="nvarchar" MaxLength="25" />
+          <Property Name="aude_Estado" Type="bit" Nullable="false" />
+          <Property Name="aude_RazonInactivo" Type="nvarchar" MaxLength="100" />
+          <Property Name="aude_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="aude_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="aude_UsuarioModifica" Type="int" />
+          <Property Name="aude_FechaModifica" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_HistorialIncapacidades">
           <Key>
@@ -644,21 +674,6 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="UDP_dbo_tbFasesReclutamiento_DELETE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fare_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="UDP_dbo_tbFasesReclutamiento_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fare_id" Type="int" Mode="In" />
-          <Parameter Name="fare_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="fare_Estado" Type="bit" Mode="In" />
-          <Parameter Name="usuario" Type="int" Mode="In" />
-        </Function>
-        <Function Name="UDP_dbo_tbFasesReclutamiento_SELECT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="UDP_dbo_tbFasesReclutamiento_UPDATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fare_id" Type="int" Mode="In" />
-          <Parameter Name="fare_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="fare_UsuarioModifica" Type="int" Mode="In" />
-        </Function>
         <Function Name="UDP_Plani_CatalogoDeduccionesEdit_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="cpla_IdPlanilla" Type="int" Mode="In" />
         </Function>
@@ -1038,6 +1053,27 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Parameter Name="hamo_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="hamo_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_RRHH_tbHistorialAudienciaDescargo_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="aude_Id" Type="int" Mode="In" />
+          <Parameter Name="aude_RazonInactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="aude_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="aude_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialAudienciaDescargo_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="aude_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="aude_FechaAudiencia" Type="datetime" Mode="In" />
+          <Parameter Name="aude_Testigo" Type="bit" Mode="In" />
+          <Parameter Name="aude_DireccionArchivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="aude_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="aude_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_RRHH_tbHistorialAudienciaDescargo_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
+          <Parameter Name="aude_Id" Type="int" Mode="In" />
+          <Parameter Name="aude_FechaAudiencia" Type="datetime" Mode="In" />
+          <Parameter Name="aude_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="aude_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_RRHH_tbHistorialContrataciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="scan_Id" Type="int" Mode="In" />
           <Parameter Name="depto_Id" Type="int" Mode="In" />
@@ -1069,18 +1105,17 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Parameter Name="hinc_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHorarios_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="hor_Id" Type="int" Mode="In" />
-          <Parameter Name="hor_RazonInactivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="hor_id" Type="int" Mode="In" />
+          <Parameter Name="hor_razonInactivo" Type="nvarchar" Mode="In" />
           <Parameter Name="hor_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="hor_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHorarios_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="jor_Id" Type="int" Mode="In" />
           <Parameter Name="hor_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="hor_HoraInicio" Type="time" Mode="In" />
+          <Parameter Name="hor_HoraIncio" Type="time" Mode="In" />
           <Parameter Name="hor_HoraFin" Type="time" Mode="In" />
-          <Parameter Name="hor_CantidadHoras" Type="time" Mode="In" />
-          <Parameter Name="hor_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="hor_usuarioCrea" Type="int" Mode="In" />
           <Parameter Name="hor_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHorarios_Restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
@@ -1090,11 +1125,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
           <Parameter Name="hor_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_RRHH_tbHorarios_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
-          <Parameter Name="hor_Id" Type="int" Mode="In" />
+          <Parameter Name="hor_id" Type="int" Mode="In" />
           <Parameter Name="hor_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="hor_HoraInicio" Type="time" Mode="In" />
+          <Parameter Name="hor_HoraIncio" Type="time" Mode="In" />
           <Parameter Name="hor_HoraFin" Type="time" Mode="In" />
-          <Parameter Name="hor_CantidadHoras" Type="time" Mode="In" />
           <Parameter Name="hor_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="hor_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -1402,6 +1436,24 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
     [V_HistorialAmonestacion].[hamo_UsuarioModifica] AS [hamo_UsuarioModifica], 
     [V_HistorialAmonestacion].[hamo_FechaModifica] AS [hamo_FechaModifica]
     FROM [rrhh].[V_HistorialAmonestacion] AS [V_HistorialAmonestacion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_HistorialAudienciaDescargo" EntityType="Self.V_HistorialAudienciaDescargo" store:Type="Views" store:Schema="rrhh">
+            <DefiningQuery>SELECT 
+    [V_HistorialAudienciaDescargo].[aude_Id] AS [aude_Id], 
+    [V_HistorialAudienciaDescargo].[emp_Id] AS [emp_Id], 
+    [V_HistorialAudienciaDescargo].[emp_Nombre] AS [emp_Nombre], 
+    [V_HistorialAudienciaDescargo].[emp_Estado] AS [emp_Estado], 
+    [V_HistorialAudienciaDescargo].[aude_Descripcion] AS [aude_Descripcion], 
+    [V_HistorialAudienciaDescargo].[aude_FechaAudiencia] AS [aude_FechaAudiencia], 
+    [V_HistorialAudienciaDescargo].[aude_Testigo] AS [aude_Testigo], 
+    [V_HistorialAudienciaDescargo].[aude_DireccionArchivo] AS [aude_DireccionArchivo], 
+    [V_HistorialAudienciaDescargo].[aude_Estado] AS [aude_Estado], 
+    [V_HistorialAudienciaDescargo].[aude_RazonInactivo] AS [aude_RazonInactivo], 
+    [V_HistorialAudienciaDescargo].[aude_UsuarioCrea] AS [aude_UsuarioCrea], 
+    [V_HistorialAudienciaDescargo].[aude_FechaCrea] AS [aude_FechaCrea], 
+    [V_HistorialAudienciaDescargo].[aude_UsuarioModifica] AS [aude_UsuarioModifica], 
+    [V_HistorialAudienciaDescargo].[aude_FechaModifica] AS [aude_FechaModifica]
+    FROM [rrhh].[V_HistorialAudienciaDescargo] AS [V_HistorialAudienciaDescargo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_HistorialIncapacidades" EntityType="Self.V_HistorialIncapacidades" store:Type="Views" store:Schema="rrhh">
             <DefiningQuery>SELECT 
@@ -2036,18 +2088,17 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
             <Parameter Name="habi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHorarios_Delete" ReturnType="Collection(String)">
-            <Parameter Name="hor_Id" Mode="In" Type="Int32" />
-            <Parameter Name="hor_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="hor_id" Mode="In" Type="Int32" />
+            <Parameter Name="hor_razonInactivo" Mode="In" Type="String" />
             <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHorarios_Insert" ReturnType="Collection(String)">
             <Parameter Name="jor_Id" Mode="In" Type="Int32" />
             <Parameter Name="hor_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="hor_HoraInicio" Mode="In" Type="Time" />
+            <Parameter Name="hor_HoraIncio" Mode="In" Type="Time" />
             <Parameter Name="hor_HoraFin" Mode="In" Type="Time" />
-            <Parameter Name="hor_CantidadHoras" Mode="In" Type="Time" />
-            <Parameter Name="hor_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="hor_usuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="hor_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHorarios_Restore" ReturnType="Collection(String)">
@@ -2057,11 +2108,10 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
             <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_RRHH_tbHorarios_Update" ReturnType="Collection(String)">
-            <Parameter Name="hor_Id" Mode="In" Type="Int32" />
+            <Parameter Name="hor_id" Mode="In" Type="Int32" />
             <Parameter Name="hor_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="hor_HoraInicio" Mode="In" Type="Time" />
+            <Parameter Name="hor_HoraIncio" Mode="In" Type="Time" />
             <Parameter Name="hor_HoraFin" Mode="In" Type="Time" />
-            <Parameter Name="hor_CantidadHoras" Mode="In" Type="Time" />
             <Parameter Name="hor_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hor_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -2515,6 +2565,28 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
             <Parameter Name="hinc_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="hinc_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHistorialAudienciaDescargo_Delete1" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Delete1_Result)">
+            <Parameter Name="aude_Id" Mode="In" Type="Int32" />
+            <Parameter Name="aude_RazonInactivo" Mode="In" Type="String" />
+            <Parameter Name="aude_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="aude_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHistorialAudienciaDescargo_Insert1" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Insert1_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="aude_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="aude_FechaAudiencia" Mode="In" Type="DateTime" />
+            <Parameter Name="aude_Testigo" Mode="In" Type="Boolean" />
+            <Parameter Name="aude_DireccionArchivo" Mode="In" Type="String" />
+            <Parameter Name="aude_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="aude_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RRHH_tbHistorialAudienciaDescargo_Update1" ReturnType="Collection(ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Update1_Result)">
+            <Parameter Name="aude_Id" Mode="In" Type="Int32" />
+            <Parameter Name="aude_FechaAudiencia" Mode="In" Type="DateTime" />
+            <Parameter Name="aude_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="aude_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="V_HistorialAudienciaDescargo" EntityType="ERP_GMEDINAModel.V_HistorialAudienciaDescargo" />
           </EntityContainer>
         <ComplexType Name="UDP_Plani_CatalogoDeduccionesEdit_Select_Result">
           <Property Type="Int32" Name="cde_IdDeducciones" Nullable="false" />
@@ -3383,6 +3455,43 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
         <ComplexType Name="UDP_RRHH_tbHistorialIncapacidades_Restore_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <EntityType Name="V_HistorialAudienciaDescargo">
+          <Key>
+            <PropertyRef Name="aude_Id" />
+            <PropertyRef Name="emp_Id" />
+            <PropertyRef Name="emp_Nombre" />
+            <PropertyRef Name="emp_Estado" />
+            <PropertyRef Name="aude_Descripcion" />
+            <PropertyRef Name="aude_FechaAudiencia" />
+            <PropertyRef Name="aude_Testigo" />
+            <PropertyRef Name="aude_Estado" />
+            <PropertyRef Name="aude_UsuarioCrea" />
+            <PropertyRef Name="aude_FechaCrea" />
+          </Key>
+          <Property Name="aude_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_Nombre" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="aude_Descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="aude_FechaAudiencia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="aude_Testigo" Type="Boolean" Nullable="false" />
+          <Property Name="aude_DireccionArchivo" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="aude_Estado" Type="Boolean" Nullable="false" />
+          <Property Name="aude_RazonInactivo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="aude_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="aude_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="aude_UsuarioModifica" Type="Int32" />
+          <Property Name="aude_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Insert1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Update1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="UDP_RRHH_tbHistorialAudienciaDescargo_Delete1_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="10" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3995,6 +4104,47 @@ warning 6002: The table/view 'ERP_GMEDINA.rrhh.V_HistorialIncapacidades' does no
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Delete1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Delete1_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Insert1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Insert1_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_RRHH_tbHistorialAudienciaDescargo_Update1" FunctionName="ERP_GMEDINAModel.Store.UDP_RRHH_tbHistorialAudienciaDescargo_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ERP_GMEDINAModel.UDP_RRHH_tbHistorialAudienciaDescargo_Update1_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="V_HistorialAudienciaDescargo">
+            <EntityTypeMapping TypeName="ERP_GMEDINAModel.V_HistorialAudienciaDescargo">
+              <MappingFragment StoreEntitySet="V_HistorialAudienciaDescargo">
+                <ScalarProperty Name="aude_FechaModifica" ColumnName="aude_FechaModifica" />
+                <ScalarProperty Name="aude_UsuarioModifica" ColumnName="aude_UsuarioModifica" />
+                <ScalarProperty Name="aude_FechaCrea" ColumnName="aude_FechaCrea" />
+                <ScalarProperty Name="aude_UsuarioCrea" ColumnName="aude_UsuarioCrea" />
+                <ScalarProperty Name="aude_RazonInactivo" ColumnName="aude_RazonInactivo" />
+                <ScalarProperty Name="aude_Estado" ColumnName="aude_Estado" />
+                <ScalarProperty Name="aude_DireccionArchivo" ColumnName="aude_DireccionArchivo" />
+                <ScalarProperty Name="aude_Testigo" ColumnName="aude_Testigo" />
+                <ScalarProperty Name="aude_FechaAudiencia" ColumnName="aude_FechaAudiencia" />
+                <ScalarProperty Name="aude_Descripcion" ColumnName="aude_Descripcion" />
+                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
+                <ScalarProperty Name="emp_Nombre" ColumnName="emp_Nombre" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="aude_Id" ColumnName="aude_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
