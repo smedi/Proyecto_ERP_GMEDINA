@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbCargos" Width="1.5" PointX="3" PointY="14.625" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbEmpleados" Width="1.5" PointX="5.25" PointY="10.25" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialAmonestaciones" Width="1.5" PointX="7.5" PointY="8.25" />
-        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialAudienciaDescargo" Width="1.5" PointX="7.5" PointY="13.5" />
+        <EntityTypeShape EntityType="ERP_GMEDINAModel.tbHistorialAudienciaDescargo" Width="2.375" PointX="7.5" PointY="13.5" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbPersonas" Width="1.5" PointX="3" PointY="8.625" />
         <EntityTypeShape EntityType="ERP_GMEDINAModel.tbTipoAmonestaciones" Width="1.5" PointX="3" PointY="4.75" />
         <AssociationConnector Association="ERP_GMEDINAModel.FK_Acce_tbUsuario_usu_Id_rrhh_tbCargos_car_UsuarioCrea" />
