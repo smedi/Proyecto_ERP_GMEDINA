@@ -37,6 +37,7 @@ namespace ERP_GMEDINA.Models
         public virtual DbSet<V_HistorialAmonestacion> V_HistorialAmonestacion { get; set; }
         public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
         public virtual DbSet<V_EmpleadoAmonestaciones> V_EmpleadoAmonestaciones { get; set; }
+        public virtual DbSet<V_HistorialAudienciaDescargo> V_HistorialAudienciaDescargo { get; set; }
     
         public virtual ObjectResult<UDP_Plani_CatalogoDeduccionesEdit_Select_Result1> UDP_Plani_CatalogoDeduccionesEdit_Select(Nullable<int> cpla_IdPlanilla)
         {
@@ -1780,15 +1781,15 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHabilidades_Update", habi_IdParameter, habi_DescripcionParameter, habi_UsuarioModificaParameter, habi_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHorarios_Delete(Nullable<int> hor_Id, string hor_RazonInactivo, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
+        public virtual ObjectResult<string> UDP_RRHH_tbHorarios_Delete(Nullable<int> hor_id, string hor_razonInactivo, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
         {
-            var hor_IdParameter = hor_Id.HasValue ?
-                new ObjectParameter("hor_Id", hor_Id) :
-                new ObjectParameter("hor_Id", typeof(int));
+            var hor_idParameter = hor_id.HasValue ?
+                new ObjectParameter("hor_id", hor_id) :
+                new ObjectParameter("hor_id", typeof(int));
     
-            var hor_RazonInactivoParameter = hor_RazonInactivo != null ?
-                new ObjectParameter("hor_RazonInactivo", hor_RazonInactivo) :
-                new ObjectParameter("hor_RazonInactivo", typeof(string));
+            var hor_razonInactivoParameter = hor_razonInactivo != null ?
+                new ObjectParameter("hor_razonInactivo", hor_razonInactivo) :
+                new ObjectParameter("hor_razonInactivo", typeof(string));
     
             var hor_UsuarioModificaParameter = hor_UsuarioModifica.HasValue ?
                 new ObjectParameter("hor_UsuarioModifica", hor_UsuarioModifica) :
@@ -1798,10 +1799,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hor_FechaModifica", hor_FechaModifica) :
                 new ObjectParameter("hor_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHorarios_Delete", hor_IdParameter, hor_RazonInactivoParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHorarios_Delete", hor_idParameter, hor_razonInactivoParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHorarios_Insert(Nullable<int> jor_Id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraInicio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<System.TimeSpan> hor_CantidadHoras, Nullable<int> hor_UsuarioCrea, Nullable<System.DateTime> hor_FechaCrea)
+        public virtual ObjectResult<string> UDP_RRHH_tbHorarios_Insert(Nullable<int> jor_Id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraIncio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<int> hor_usuarioCrea, Nullable<System.DateTime> hor_FechaCrea)
         {
             var jor_IdParameter = jor_Id.HasValue ?
                 new ObjectParameter("jor_Id", jor_Id) :
@@ -1811,27 +1812,23 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hor_Descripcion", hor_Descripcion) :
                 new ObjectParameter("hor_Descripcion", typeof(string));
     
-            var hor_HoraInicioParameter = hor_HoraInicio.HasValue ?
-                new ObjectParameter("hor_HoraInicio", hor_HoraInicio) :
-                new ObjectParameter("hor_HoraInicio", typeof(System.TimeSpan));
+            var hor_HoraIncioParameter = hor_HoraIncio.HasValue ?
+                new ObjectParameter("hor_HoraIncio", hor_HoraIncio) :
+                new ObjectParameter("hor_HoraIncio", typeof(System.TimeSpan));
     
             var hor_HoraFinParameter = hor_HoraFin.HasValue ?
                 new ObjectParameter("hor_HoraFin", hor_HoraFin) :
                 new ObjectParameter("hor_HoraFin", typeof(System.TimeSpan));
     
-            var hor_CantidadHorasParameter = hor_CantidadHoras.HasValue ?
-                new ObjectParameter("hor_CantidadHoras", hor_CantidadHoras) :
-                new ObjectParameter("hor_CantidadHoras", typeof(System.TimeSpan));
-    
-            var hor_UsuarioCreaParameter = hor_UsuarioCrea.HasValue ?
-                new ObjectParameter("hor_UsuarioCrea", hor_UsuarioCrea) :
-                new ObjectParameter("hor_UsuarioCrea", typeof(int));
+            var hor_usuarioCreaParameter = hor_usuarioCrea.HasValue ?
+                new ObjectParameter("hor_usuarioCrea", hor_usuarioCrea) :
+                new ObjectParameter("hor_usuarioCrea", typeof(int));
     
             var hor_FechaCreaParameter = hor_FechaCrea.HasValue ?
                 new ObjectParameter("hor_FechaCrea", hor_FechaCrea) :
                 new ObjectParameter("hor_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHorarios_Insert", jor_IdParameter, hor_DescripcionParameter, hor_HoraInicioParameter, hor_HoraFinParameter, hor_CantidadHorasParameter, hor_UsuarioCreaParameter, hor_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHorarios_Insert", jor_IdParameter, hor_DescripcionParameter, hor_HoraIncioParameter, hor_HoraFinParameter, hor_usuarioCreaParameter, hor_FechaCreaParameter);
         }
     
         public virtual ObjectResult<string> UDP_RRHH_tbHorarios_Restore(Nullable<int> hor_Id, string hor_RazonInactivo, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
@@ -1855,27 +1852,23 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHorarios_Restore", hor_IdParameter, hor_RazonInactivoParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbHorarios_Update(Nullable<int> hor_Id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraInicio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<System.TimeSpan> hor_CantidadHoras, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
+        public virtual ObjectResult<string> UDP_RRHH_tbHorarios_Update(Nullable<int> hor_id, string hor_Descripcion, Nullable<System.TimeSpan> hor_HoraIncio, Nullable<System.TimeSpan> hor_HoraFin, Nullable<int> hor_UsuarioModifica, Nullable<System.DateTime> hor_FechaModifica)
         {
-            var hor_IdParameter = hor_Id.HasValue ?
-                new ObjectParameter("hor_Id", hor_Id) :
-                new ObjectParameter("hor_Id", typeof(int));
+            var hor_idParameter = hor_id.HasValue ?
+                new ObjectParameter("hor_id", hor_id) :
+                new ObjectParameter("hor_id", typeof(int));
     
             var hor_DescripcionParameter = hor_Descripcion != null ?
                 new ObjectParameter("hor_Descripcion", hor_Descripcion) :
                 new ObjectParameter("hor_Descripcion", typeof(string));
     
-            var hor_HoraInicioParameter = hor_HoraInicio.HasValue ?
-                new ObjectParameter("hor_HoraInicio", hor_HoraInicio) :
-                new ObjectParameter("hor_HoraInicio", typeof(System.TimeSpan));
+            var hor_HoraIncioParameter = hor_HoraIncio.HasValue ?
+                new ObjectParameter("hor_HoraIncio", hor_HoraIncio) :
+                new ObjectParameter("hor_HoraIncio", typeof(System.TimeSpan));
     
             var hor_HoraFinParameter = hor_HoraFin.HasValue ?
                 new ObjectParameter("hor_HoraFin", hor_HoraFin) :
                 new ObjectParameter("hor_HoraFin", typeof(System.TimeSpan));
-    
-            var hor_CantidadHorasParameter = hor_CantidadHoras.HasValue ?
-                new ObjectParameter("hor_CantidadHoras", hor_CantidadHoras) :
-                new ObjectParameter("hor_CantidadHoras", typeof(System.TimeSpan));
     
             var hor_UsuarioModificaParameter = hor_UsuarioModifica.HasValue ?
                 new ObjectParameter("hor_UsuarioModifica", hor_UsuarioModifica) :
@@ -1885,7 +1878,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("hor_FechaModifica", hor_FechaModifica) :
                 new ObjectParameter("hor_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHorarios_Update", hor_IdParameter, hor_DescripcionParameter, hor_HoraInicioParameter, hor_HoraFinParameter, hor_CantidadHorasParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbHorarios_Update", hor_idParameter, hor_DescripcionParameter, hor_HoraIncioParameter, hor_HoraFinParameter, hor_UsuarioModificaParameter, hor_FechaModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_RRHH_tbIdiomas_Delete(Nullable<int> idi_Id, string idi_razon_Inactivo, Nullable<int> idi_UsuarioModifica, Nullable<System.DateTime> idi_FechaModifica)
@@ -1985,23 +1978,11 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("UDP_RRHH_tbJornadas_Delete", jor_IdParameter, jor_razon_InactivoParameter, jor_UsuarioModificaParameter, jor_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_RRHH_tbJornadas_Insert(Nullable<int> jor_Id, string jor_Descripcion, Nullable<bool> jor_Estado, string jor_RazonInactivo, Nullable<int> jor_UsuarioCrea, Nullable<System.DateTime> jor_FechaCrea)
+        public virtual ObjectResult<string> UDP_RRHH_tbJornadas_Insert(string jor_Descripcion, Nullable<int> jor_UsuarioCrea, Nullable<System.DateTime> jor_FechaCrea)
         {
-            var jor_IdParameter = jor_Id.HasValue ?
-                new ObjectParameter("jor_Id", jor_Id) :
-                new ObjectParameter("jor_Id", typeof(int));
-    
             var jor_DescripcionParameter = jor_Descripcion != null ?
                 new ObjectParameter("jor_Descripcion", jor_Descripcion) :
                 new ObjectParameter("jor_Descripcion", typeof(string));
-    
-            var jor_EstadoParameter = jor_Estado.HasValue ?
-                new ObjectParameter("jor_Estado", jor_Estado) :
-                new ObjectParameter("jor_Estado", typeof(bool));
-    
-            var jor_RazonInactivoParameter = jor_RazonInactivo != null ?
-                new ObjectParameter("jor_RazonInactivo", jor_RazonInactivo) :
-                new ObjectParameter("jor_RazonInactivo", typeof(string));
     
             var jor_UsuarioCreaParameter = jor_UsuarioCrea.HasValue ?
                 new ObjectParameter("jor_UsuarioCrea", jor_UsuarioCrea) :
@@ -2011,7 +1992,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("jor_FechaCrea", jor_FechaCrea) :
                 new ObjectParameter("jor_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbJornadas_Insert", jor_IdParameter, jor_DescripcionParameter, jor_EstadoParameter, jor_RazonInactivoParameter, jor_UsuarioCreaParameter, jor_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_RRHH_tbJornadas_Insert", jor_DescripcionParameter, jor_UsuarioCreaParameter, jor_FechaCreaParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> UDP_RRHH_tbJornadas_Restore(Nullable<int> jor_Id, Nullable<int> jor_UsuarioModifica, Nullable<System.DateTime> jor_FechaModifica)
@@ -2850,7 +2831,7 @@ namespace ERP_GMEDINA.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAmonestaciones_Restore_Result>("UDP_RRHH_tbHistorialAmonestaciones_Restore", hamo_IdParameter, hamo_UsuarioModificaParameter, hamo_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result> UDP_RRHH_tbHistorialAudienciaDescargo_Delete(Nullable<int> aude_Id, string aude_RazonInactivo, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
+        public virtual int UDP_RRHH_tbHistorialAudienciaDescargo_Delete(Nullable<int> aude_Id, string aude_RazonInactivo, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
         {
             var aude_IdParameter = aude_Id.HasValue ?
                 new ObjectParameter("aude_Id", aude_Id) :
@@ -2868,10 +2849,48 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("aude_FechaModifica", aude_FechaModifica) :
                 new ObjectParameter("aude_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Delete", aude_IdParameter, aude_RazonInactivoParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_RRHH_tbHistorialAudienciaDescargo_Delete", aude_IdParameter, aude_RazonInactivoParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result> UDP_RRHH_tbHistorialAudienciaDescargo_Insert(Nullable<int> emp_Id, string aude_Descripcion, Nullable<System.DateTime> aude_FechaAudiencia, Nullable<bool> aude_Testigo, string aude_DireccionArchivo, Nullable<int> aude_UsuarioCrea, Nullable<System.DateTime> aude_FechaCrea)
+        public virtual int UDP_RRHH_tbHistorialAudienciaDescargo_Restore(Nullable<int> aude_Id, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
+        {
+            var aude_IdParameter = aude_Id.HasValue ?
+                new ObjectParameter("aude_Id", aude_Id) :
+                new ObjectParameter("aude_Id", typeof(int));
+    
+            var aude_UsuarioModificaParameter = aude_UsuarioModifica.HasValue ?
+                new ObjectParameter("aude_UsuarioModifica", aude_UsuarioModifica) :
+                new ObjectParameter("aude_UsuarioModifica", typeof(int));
+    
+            var aude_FechaModificaParameter = aude_FechaModifica.HasValue ?
+                new ObjectParameter("aude_FechaModifica", aude_FechaModifica) :
+                new ObjectParameter("aude_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_RRHH_tbHistorialAudienciaDescargo_Restore", aude_IdParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialAudienciaDescargo_Delete1_Result> UDP_RRHH_tbHistorialAudienciaDescargo_Delete1(Nullable<int> aude_Id, string aude_RazonInactivo, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
+        {
+            var aude_IdParameter = aude_Id.HasValue ?
+                new ObjectParameter("aude_Id", aude_Id) :
+                new ObjectParameter("aude_Id", typeof(int));
+    
+            var aude_RazonInactivoParameter = aude_RazonInactivo != null ?
+                new ObjectParameter("aude_RazonInactivo", aude_RazonInactivo) :
+                new ObjectParameter("aude_RazonInactivo", typeof(string));
+    
+            var aude_UsuarioModificaParameter = aude_UsuarioModifica.HasValue ?
+                new ObjectParameter("aude_UsuarioModifica", aude_UsuarioModifica) :
+                new ObjectParameter("aude_UsuarioModifica", typeof(int));
+    
+            var aude_FechaModificaParameter = aude_FechaModifica.HasValue ?
+                new ObjectParameter("aude_FechaModifica", aude_FechaModifica) :
+                new ObjectParameter("aude_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Delete1_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Delete1", aude_IdParameter, aude_RazonInactivoParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_RRHH_tbHistorialAudienciaDescargo_Insert1_Result> UDP_RRHH_tbHistorialAudienciaDescargo_Insert1(Nullable<int> emp_Id, string aude_Descripcion, Nullable<System.DateTime> aude_FechaAudiencia, Nullable<bool> aude_Testigo, string aude_DireccionArchivo, Nullable<int> aude_UsuarioCrea, Nullable<System.DateTime> aude_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -2901,27 +2920,10 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("aude_FechaCrea", aude_FechaCrea) :
                 new ObjectParameter("aude_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Insert", emp_IdParameter, aude_DescripcionParameter, aude_FechaAudienciaParameter, aude_TestigoParameter, aude_DireccionArchivoParameter, aude_UsuarioCreaParameter, aude_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Insert1_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Insert1", emp_IdParameter, aude_DescripcionParameter, aude_FechaAudienciaParameter, aude_TestigoParameter, aude_DireccionArchivoParameter, aude_UsuarioCreaParameter, aude_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result> UDP_RRHH_tbHistorialAudienciaDescargo_Restore(Nullable<int> aude_Id, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
-        {
-            var aude_IdParameter = aude_Id.HasValue ?
-                new ObjectParameter("aude_Id", aude_Id) :
-                new ObjectParameter("aude_Id", typeof(int));
-    
-            var aude_UsuarioModificaParameter = aude_UsuarioModifica.HasValue ?
-                new ObjectParameter("aude_UsuarioModifica", aude_UsuarioModifica) :
-                new ObjectParameter("aude_UsuarioModifica", typeof(int));
-    
-            var aude_FechaModificaParameter = aude_FechaModifica.HasValue ?
-                new ObjectParameter("aude_FechaModifica", aude_FechaModifica) :
-                new ObjectParameter("aude_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Restore", aude_IdParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
-        }
-    
-        public virtual int UDP_RRHH_tbHistorialAudienciaDescargo_Update(Nullable<int> aude_Id, Nullable<System.DateTime> aude_FechaAudiencia, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
+        public virtual ObjectResult<UDP_RRHH_tbHistorialAudienciaDescargo_Update1_Result> UDP_RRHH_tbHistorialAudienciaDescargo_Update1(Nullable<int> aude_Id, Nullable<System.DateTime> aude_FechaAudiencia, Nullable<int> aude_UsuarioModifica, Nullable<System.DateTime> aude_FechaModifica)
         {
             var aude_IdParameter = aude_Id.HasValue ?
                 new ObjectParameter("aude_Id", aude_Id) :
@@ -2939,7 +2941,7 @@ namespace ERP_GMEDINA.Models
                 new ObjectParameter("aude_FechaModifica", aude_FechaModifica) :
                 new ObjectParameter("aude_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_RRHH_tbHistorialAudienciaDescargo_Update", aude_IdParameter, aude_FechaAudienciaParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_RRHH_tbHistorialAudienciaDescargo_Update1_Result>("UDP_RRHH_tbHistorialAudienciaDescargo_Update1", aude_IdParameter, aude_FechaAudienciaParameter, aude_UsuarioModificaParameter, aude_FechaModificaParameter);
         }
     }
 }
