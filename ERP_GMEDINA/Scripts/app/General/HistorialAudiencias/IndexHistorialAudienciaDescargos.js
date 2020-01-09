@@ -1,9 +1,4 @@
-﻿
-
-
-function format(obj) {
-
-
+﻿function format(obj) {
     var div = '<div class="ibox"><div class="ibox-title"><h5>Audiencias de Descargo</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalcreate(' + idEmpleado + ')">Registrar</button> </div> </div><div class="ibox-content"><div class="row">'
         + '<table class="table table-striped table-bordered table-hover dataTables-example" >'
         + '<thead>'
@@ -13,11 +8,16 @@ function format(obj) {
          + '<th>Acciones</th> '
         + '</tr> </thead> ';
     obj.forEach(function (index, value) {
+        var testigo = "";
+        if (index.aude_Testigo == false)
+            testigo = "No";
+        else
+            testigo = "Si";
         div = div +
             '<tbody>' + '<tr>'
                 + '<td>' + index.aude_Descripcion + '</td>'
                 + '<td>' + FechaFormato(index.aude_FechaAudiencia).substring(0,10) + '</td>'
-                + '<td>' + index.aude_Testigo + '</td>'
+                + '<td>' + testigo + '</td>'
                
                 + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
                 + '</tr>' + '</tbody>'
@@ -27,11 +27,6 @@ function format(obj) {
     });
     return div + '</div></div>';
 }
-
-
-
-
-
 function llenarTabla() {
     _ajax(null,
        '/HistorialAudienciaDescargos/llenarTabla',
@@ -82,8 +77,10 @@ $('#IndexTable tbody').on('click', 'td.details-control', function () {
 });
 
 
+var idEditar = 0;
 
-function Llamarmodaldetalle(ID) {
+function Llamarmodaldetalle(ID) {   
+    idEditar = ID;
     debugger
     var modalnuevo = $("#ModalDetalles");
     _ajax({ ID: parseInt(ID) },
@@ -97,10 +94,10 @@ function Llamarmodaldetalle(ID) {
                 $("#ModalDetalles").find("#aude_FechaAudiencia")["0"].innerText = FechaFormato(obj.aude_FechaAudiencia).substring(0,10);
                 $("#ModalDetalles").find("#aude_Testigo")["0"].innerText = obj.aude_Testigo;
                 $("#ModalDetalles").find("#aude_DireccionArchivo")["0"].innerText = obj.aude_DireccionArchivo;
-                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario;
+                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetalles").find("#aude_FechaCrea")["0"].innerText = FechaFormato(obj.aude_FechaCrea).substring(0, 10);
-                //$("#ModalDetalles").find("#hinc_UsuarioCrea")["0"].innerText = obj.hinc_UsuarioCrea;
-                //$("#ModalDetalles").find("#hinc_UsuarioModifica")["0"].innerText = obj.hinc_UsuarioModifica;
+                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario1")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
+                $("#ModalDetalles").find("#aude_FechaModifica")["0"].innerText = FechaFormato(obj.aude_FechaModifica).substring(0, 10);
                 //$("#ModalDetalles").find("#hinc_FechaModifica")["0"].innerText = FechaFormato(obj.hinc_FechaModifica).substring(0, 10);
                 $('#ModalDetalles').modal('show');
 
@@ -122,16 +119,20 @@ $("#btnGuardar").click(function () {
     debugger
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
+    data.aude_Testigo = $("#ModalNuevo").find("#aude_Testigo1").val();
     if (data != null) {
         data = JSON.stringify({ tbHistorialAudienciaDescargo: data });
+        debugger
         _ajax(data,
             '/HistorialAudienciaDescargos/Create',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    debugger
                     CierraPopups();
                     llenarTabla();
-                    LimpiarControles(["emp_Id", "aude_Descripcion", "aude_FechaAudiencia", "aude_Testigo", "aude_DireccionArchivo"]);
+                    LimpiarControles(["aude_Descripcion1", "aude_FechaAudiencia1","aude_DireccionArchivo1", "emp_Id"]);
+                    $("#aude_Testigo1").val("false");
                     MsgSuccess("¡Exito!", "Se agrego el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
@@ -163,8 +164,7 @@ $("#InActivar").click(function () {
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    CierraPopups();
-                    debugger
+                    CierraPopups();                 
                     llenarTabla();
                     LimpiarControles(["aude_Id", "aude_RazonInactivo"]);
                     MsgWarning("¡Exito!", "Se inactivo el registro");
@@ -177,3 +177,42 @@ $("#InActivar").click(function () {
     }
 });
 
+$("#btnEditar").click(function (ID) {
+    CierraPopups();
+    var modalnuevo = $("#ModalEditar");
+    $("#ModalEditar").find("#aude_Id").val(idEditar);
+    debugger
+    _ajax({ ID: parseInt(idEditar) },
+    '/HistorialAudienciaDescargos/Edit/',
+    'GET',
+    function (obj) {
+
+        if (obj != "-1" && obj != "-2" && obj != "-3") {
+            $("#ModalEditar").find("#aude_FechaAudiencia").val(FechaFormatoSimple(obj.aude_FechaAudiencia).substring(0, 10));
+        }
+    });
+        modalnuevo.modal('show');
+});
+
+$("#btnActualizar").click(function () {
+    var data = $("#FormEditar").serializeArray();
+    data = serializar(data);
+    debugger
+    if (data != null) {
+        data = JSON.stringify({ tbHistorialAudienciaDescargo: data });
+        _ajax(data,
+            '/HistorialAudienciaDescargos/Edit2',
+            'POST',
+            function (obj) {
+                if (obj != "-1" && obj != "-2" && obj != "-3") {
+                    CierraPopups();
+                    llenarTabla();
+                    MsgSuccess("¡Exito!", "Se actualizo el registro");
+                } else {
+                    MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                }
+            });
+    } else {
+        MsgError("Error", "por favor llene todas las cajas de texto");
+    }
+});

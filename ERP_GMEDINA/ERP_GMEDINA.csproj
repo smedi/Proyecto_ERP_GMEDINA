@@ -174,6 +174,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
+    <Compile Include="Models\cHistorialAudienciaDescargo.cs" />
     <Compile Include="Models\cHistorialIncapacidades.cs" />
     <Compile Include="Models\cTipoIncapacidad.cs" />
     <Compile Include="Models\ERP_GMEDINA.Context.cs">
@@ -737,6 +738,7 @@
     <Content Include="CodeTemplates\MvcView\_Delete.cs.t4" />
     <Content Include="CodeTemplates\MvcView\_Detalles.cs.t4" />
     <Content Include="CodeTemplates\MvcView\_Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\_Edit.cs.t4" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1299,6 +1301,7 @@
     <Content Include="Views\HistorialAudienciaDescargos\_Detalles.cshtml" />
     <Content Include="Views\HistorialAudienciaDescargos\_Create.cshtml" />
     <Content Include="Views\HistorialAudienciaDescargos\_Delete.cshtml" />
+    <Content Include="Views\HistorialAudienciaDescargos\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

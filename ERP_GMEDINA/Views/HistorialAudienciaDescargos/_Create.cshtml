@@ -4,7 +4,7 @@
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Agregar HistorialAudienciaDescargo</h4>
+                <h4 class="modal-title">Agregar Audiencia de Descargo</h4>
             </div>
             <div class="modal-body">
                 @using (Html.BeginForm(null, null, FormMethod.Post, new {id= "FormNuevo" }))
@@ -15,14 +15,14 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.aude_Descripcion, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.aude_Descripcion, new { htmlAttributes = new { @class = "form-contro required valid" } })
+								@Html.EditorFor(model => model.aude_Descripcion, new { htmlAttributes = new { @class = "form-contro required valid" , @id="aude_Descripcion1" } })
 								@Html.ValidationMessageFor(model => model.aude_Descripcion, "", new { @class = "text-danger", @id = "erroraude_Descripcion" })
                             </div>
                         </div>
                         <div class="form-group">
 							@Html.LabelFor(model => model.aude_FechaAudiencia, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.aude_FechaAudiencia, new { htmlAttributes = new { @class = "form-contro required valid" } })
+                                @Html.TextBoxFor(model => model.aude_FechaAudiencia, new { @class = "form-control datepicker", @type = "date", @id = "aude_FechaAudiencia1" })
 								@Html.ValidationMessageFor(model => model.aude_FechaAudiencia, "", new { @class = "text-danger", @id = "erroraude_FechaAudiencia" })
                             </div>
                         </div>
@@ -30,7 +30,7 @@
 							@Html.LabelFor(model => model.aude_Testigo, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
 								<div class="checkbox">
-    								@Html.EditorFor(model => model.aude_Testigo)
+    								@Html.EditorFor(model => model.aude_Testigo,  new { htmlAttributes = new { @id = "aude_Testigo1" } })
     								@Html.ValidationMessageFor(model => model.aude_Testigo, "", new { @class = "text-danger", @id = "erroraude_Testigo" })
 									</div>
                             </div>
@@ -38,7 +38,7 @@
                         <div class="form-group">
 							@Html.LabelFor(model => model.aude_DireccionArchivo, htmlAttributes: new { @class = "control-label col-md-3" })
 							<div class="col-md-8">
-								@Html.EditorFor(model => model.aude_DireccionArchivo, new { htmlAttributes = new { @class = "form-contro required valid" } })
+								@Html.EditorFor(model => model.aude_DireccionArchivo, new { htmlAttributes = new { @class = "form-contro required valid" , @id = "aude_DireccionArchivo1" } })
 								@Html.ValidationMessageFor(model => model.aude_DireccionArchivo, "", new { @class = "text-danger", @id = "erroraude_DireccionArchivo" })
                             </div>
 

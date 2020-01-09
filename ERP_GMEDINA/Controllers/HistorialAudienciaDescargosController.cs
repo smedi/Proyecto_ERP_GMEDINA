@@ -47,11 +47,6 @@ namespace ERP_GMEDINA.Controllers
             }
         }
 
-
-
-
-
-
         public ActionResult ChildRowData(int? id)
         {
             //declaramos la variable de coneccion solo para recuperar los datos necesarios.
@@ -73,12 +68,6 @@ namespace ERP_GMEDINA.Controllers
 
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
         [HttpPost]
         public JsonResult Create(tbHistorialAudienciaDescargo tbHistorialAudienciaDescargo)
         {
@@ -113,10 +102,6 @@ namespace ERP_GMEDINA.Controllers
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-
         public ActionResult Edit(int? ID)
         {
             if (ID == null)
@@ -145,11 +130,43 @@ namespace ERP_GMEDINA.Controllers
                 aude_FechaAudiencia = tbHistaudiencia.aude_FechaAudiencia,
                 aude_Testigo = tbHistaudiencia.aude_Testigo,
                 aude_DireccionArchivo = tbHistaudiencia.aude_DireccionArchivo,
+                aude_FechaCrea = tbHistaudiencia.aude_FechaCrea,
                 tbUsuario = new tbUsuario { usu_NombreUsuario = IsNull(tbHistaudiencia.tbUsuario).usu_NombreUsuario },
-                aude_FechaCrea = tbHistaudiencia.aude_FechaCrea
+                aude_FechaModifica = tbHistaudiencia.aude_FechaModifica,
+                tbUsuario1 = new tbUsuario { usu_NombreUsuario = IsNull(tbHistaudiencia.tbUsuario1).usu_NombreUsuario },
+          
             };
 
             return Json(Audiencia, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult Edit2(tbHistorialAudienciaDescargo tbHistorialAudienciaDescargo)
+        {
+            string msj = "";
+            if (tbHistorialAudienciaDescargo.aude_Id != 0)
+            {
+                var id = (int)Session["id"];
+                var Usuario = (tbUsuario)Session["Usuario"];
+                try
+                {
+                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Update1(id, tbHistorialAudienciaDescargo.aude_FechaAudiencia, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Update1_Result item in list)
+                    {
+                        msj = item.MensajeError + " ";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    msj = "-2";
+                    ex.Message.ToString();
+                }
+                Session.Remove("id");
+            }
+            else
+            {
+                msj = "-3";
+            }
+            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
 
         private tbUsuario IsNull(tbUsuario valor)
