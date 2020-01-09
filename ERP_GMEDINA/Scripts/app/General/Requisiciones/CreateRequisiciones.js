@@ -53,9 +53,11 @@ $(document).ready(function () {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     ListFill(obj);
                 }
-            })
+            });
 
-    
+    $("#req_Experiencia").focus(function () {
+        console.log('ding');
+    });
 
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,

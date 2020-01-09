@@ -480,7 +480,7 @@ namespace ERP_GMEDINA.Controllers
                                                 ResultI = Com.MensajeError + "";
                                             }
                                         }
-                                        if (CompV.Count == 1 && Nuevo == null)
+                                        if (CompV.Count >= 1 && Nuevo == null)
                                         {
                                             foreach (var c in CompV)
                                             {
@@ -493,7 +493,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         break;
                                     case "H":
-                                        var habV = db.tbHabilidadesRequisicion.Select(h => new { habi_Id = h.habi_Id, Descripcion = h.tbHabilidades.habi_Descripcion, req_Id = h.req_Id, hreq_Id = h.hreq_Id, hreq_Estado = h.hreq_Estado }).Where(h => h.req_Id == tbRequisiciones.req_Id && h.hreq_Id == X.Id && h.hreq_Estado == true).ToList();
+                                        var habV = db.tbHabilidadesRequisicion.Select(h => new { habi_Id = h.habi_Id, req_Id = h.req_Id, hreq_Id = h.hreq_Id, hreq_Estado = h.hreq_Estado }).Where(c => c.req_Id == tbRequisiciones.req_Id && c.habi_Id == X.Id && c.hreq_Estado == true).ToList();
                                         if (DatosProfesionales.Habilidades != null)
                                         {
                                             foreach (var x in DatosProfesionales.Habilidades)
@@ -512,7 +512,7 @@ namespace ERP_GMEDINA.Controllers
                                                 ResultI = hab.MensajeError + "";
                                             }
                                         }
-                                        if (habV.Count == 1 && Nuevo == null)
+                                        if (habV.Count >= 1 && Nuevo == null)
                                         {
                                             foreach (var h in habV)
                                             {
@@ -525,7 +525,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         break;
                                     case "I":
-                                        var IdiV = db.tbIdiomasRequisicion.Select(i => new { idi_Id = i.idi_Id, Descripcion = i.tbIdiomas.idi_Descripcion, req_Id = i.req_Id, idpe_Id = i.ireq_Id, ireq_Estado = i.ireq_Estado }).Where(i => i.req_Id == tbRequisiciones.req_Id && i.idpe_Id == X.Id && i.ireq_Estado == true).ToList();
+                                        var IdiV = db.tbIdiomasRequisicion.Select(i => new { idi_Id = i.idi_Id, Descripcion = i.tbIdiomas.idi_Descripcion, req_Id = i.req_Id, idpe_Id = i.ireq_Id, ireq_Estado = i.ireq_Estado }).Where(i => i.req_Id == tbRequisiciones.req_Id && i.idi_Id == X.Id && i.ireq_Estado == true).ToList();
                                         if (DatosProfesionales.Idiomas != null)
                                         {
                                             foreach (var x in DatosProfesionales.Idiomas)
@@ -544,7 +544,7 @@ namespace ERP_GMEDINA.Controllers
                                                 ResultI = idi.MensajeError + "";
                                             }
                                         }
-                                        if (IdiV.Count == 1 && Nuevo == null)
+                                        if (IdiV.Count >= 1 && Nuevo == null)
                                         {
                                             foreach (var i in IdiV)
                                             {
@@ -557,7 +557,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         break;
                                     case "T":
-                                        var TitV = db.tbTitulosRequisicion.Select(t => new { titu_Id = t.titu_Id, Descripcion = t.tbTitulos.titu_Descripcion, req_Id = t.req_Id, tipe_Id = t.treq_Id, treq_Estado = t.treq_Estado }).Where(t => t.req_Id == tbRequisiciones.req_Id && t.tipe_Id == X.Id && t.treq_Estado == true).ToList();
+                                        var TitV = db.tbTitulosRequisicion.Select(t => new { titu_Id = t.titu_Id, Descripcion = t.tbTitulos.titu_Descripcion, req_Id = t.req_Id, tipe_Id = t.treq_Id, treq_Estado = t.treq_Estado }).Where(t => t.req_Id == tbRequisiciones.req_Id && t.titu_Id == X.Id && t.treq_Estado == true).ToList();
                                         if (DatosProfesionales.Titulos != null)
                                         {
                                             foreach (var x in DatosProfesionales.Titulos)
@@ -576,7 +576,7 @@ namespace ERP_GMEDINA.Controllers
                                                 ResultI = titu.MensajeError + "";
                                             }
                                         }
-                                        if (TitV.Count == 1 && Nuevo == null)
+                                        if (TitV.Count >= 1 && Nuevo == null)
                                         {
                                             foreach (var t in TitV)
                                             {
@@ -589,10 +589,10 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         break;
                                     case "R":
-                                        var RepV = db.tbRequerimientosEspecialesRequisicion.Select(r => new { resp_Id = r.resp_Id, Descripcion = r.tbRequerimientosEspeciales.resp_Descripcion, req_Id = r.req_Id, rer_Id = r.rer_Id, rer_Estado = r.rer_Estado }).Where(r => r.req_Id == tbRequisiciones.req_Id && r.rer_Id == X.Id && r.rer_Estado == true).ToList();
+                                        var RepV = db.tbRequerimientosEspecialesRequisicion.Select(r => new { resp_Id = r.resp_Id, Descripcion = r.tbRequerimientosEspeciales.resp_Descripcion, req_Id = r.req_Id, rer_Id = r.rer_Id, rer_Estado = r.rer_Estado }).Where(r => r.req_Id == tbRequisiciones.req_Id && r.resp_Id == X.Id && r.rer_Estado == true).ToList();
                                         if (DatosProfesionales.ReqEspeciales != null)
                                         {
-                                            foreach (var x in DatosProfesionales.Titulos)
+                                            foreach (var x in DatosProfesionales.ReqEspeciales)
                                             {
                                                 if (x == X.Id)
                                                     Nuevo = "1";
@@ -608,7 +608,7 @@ namespace ERP_GMEDINA.Controllers
                                                 ResultI = resp.MensajeError + "";
                                             }
                                         }
-                                        if (RepV.Count == 1 && Nuevo == null)
+                                        if (RepV.Count >= 1 && Nuevo == null)
                                         {
                                             foreach (var r in RepV)
                                             {
