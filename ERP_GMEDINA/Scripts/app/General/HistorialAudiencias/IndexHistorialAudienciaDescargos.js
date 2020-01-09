@@ -81,7 +81,6 @@ var idEditar = 0;
 
 function Llamarmodaldetalle(ID) {   
     idEditar = ID;
-    debugger
     var modalnuevo = $("#ModalDetalles");
     _ajax({ ID: parseInt(ID) },
         '/HistorialAudienciaDescargos/Edit/',
@@ -116,19 +115,16 @@ function Llamarmodalcreate() {
 
 
 $("#btnGuardar").click(function () {
-    debugger
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
     data.aude_Testigo = $("#ModalNuevo").find("#aude_Testigo1").val();
     if (data != null) {
         data = JSON.stringify({ tbHistorialAudienciaDescargo: data });
-        debugger
         _ajax(data,
             '/HistorialAudienciaDescargos/Create',
             'POST',
             function (obj) {
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
-                    debugger
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["aude_Descripcion1", "aude_FechaAudiencia1","aude_DireccionArchivo1", "emp_Id"]);
@@ -156,7 +152,6 @@ function Llamarmodaldelete(ID) {
 $("#InActivar").click(function () {
     var data = $("#FormInactivar").serializeArray();
     data = serializar(data);
-    debugger
     if (data != null) {
         data = JSON.stringify({ tbHistorialAudienciaDescargo: data });
         _ajax(data,
@@ -181,7 +176,6 @@ $("#btnEditar").click(function (ID) {
     CierraPopups();
     var modalnuevo = $("#ModalEditar");
     $("#ModalEditar").find("#aude_Id").val(idEditar);
-    debugger
     _ajax({ ID: parseInt(idEditar) },
     '/HistorialAudienciaDescargos/Edit/',
     'GET',
@@ -197,7 +191,6 @@ $("#btnEditar").click(function (ID) {
 $("#btnActualizar").click(function () {
     var data = $("#FormEditar").serializeArray();
     data = serializar(data);
-    debugger
     if (data != null) {
         data = JSON.stringify({ tbHistorialAudienciaDescargo: data });
         _ajax(data,
