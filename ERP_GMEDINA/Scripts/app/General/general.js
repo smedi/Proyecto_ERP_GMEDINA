@@ -21,6 +21,35 @@ function _ajax(params, uri, type, callback) {
         MsgError("Error", "Verifique su conexion a internet.(si el problema persistecontacte al administrador.)");
     });
 }
+
+function Mayor18() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear() - 18;
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+    return today = yyyy + '-' + mm + '-' + dd;
+}
+
+function validarEmail(valor) {
+    if (/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(valor)) {
+       return valor;
+    } else {
+        return " ";
+    }
+}
+function validarNombre(Nombre,Apellido) {
+    if (/\b[a-zA-Záéíóú]+/.test(Nombre.replace(" ", "")) && /\b[a-zA-Záéíóú]+/.test(Apellido.replace(" ", ""))) {
+        return Nombre+" "+ Apellido;
+    } else {
+        return " ";
+    }
+}
 function serializar(data) {
     var Data = new Object();
     var verificacion = true;

@@ -34,6 +34,12 @@ namespace ERP_GMEDINA
             // Bootstrap
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js"));
+            //Inputmask
+            bundles.Add(new ScriptBundle("~/Content/InputMask").Include(
+            "~/Content/plugins/jasny/jasny-bootstrap.min.css"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/plugins/jasny").Include(
+            "~/Scripts/plugins/jasny/jasny-bootstrap.min.js"));
 
             // Inspinia script
             bundles.Add(new ScriptBundle("~/bundles/inspinia").Include(

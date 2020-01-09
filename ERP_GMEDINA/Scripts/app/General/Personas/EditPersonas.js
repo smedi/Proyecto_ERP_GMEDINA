@@ -50,15 +50,16 @@ function ListFill(obj) {
         }
     });
 
-    SlctCompetencias.bootstrapDualListbox({ selectorMinimalHeight: 160 });
-    SlctHabilidades.bootstrapDualListbox({ selectorMinimalHeight: 160 });
-    SlctIdiomas.bootstrapDualListbox({ selectorMinimalHeight: 160 });
-    SlctReqEspeciales.bootstrapDualListbox({ selectorMinimalHeight: 160 });
-    SlctTitulos.bootstrapDualListbox({ selectorMinimalHeight: 160 });
+    SlctCompetencias.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacia', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
+    SlctHabilidades.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacia', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
+    SlctIdiomas.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacia', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
+    SlctReqEspeciales.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacia', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
+    SlctTitulos.bootstrapDualListbox({ selectorMinimalHeight: 160, filterPlaceHolder: 'Buscar...', infoText: 'Mostrando {0}', infoTextEmpty: 'Lista vacia', infoTextFiltered: '<span class="label label-warning">Coincidencias</span> {0} de {1}', filterTextClear: 'Mostrar todos', moveAllLabel: 'Mover todos', removeAllLabel: 'Remover todos' });
 };
 $(document).ready(function () {
     llenarDropDownList();
     id = sessionStorage.getItem("IdPersona");
+    $("#per_FechaNacimiento").attr("max", Mayor18());
     _ajax(null,
             '/Personas/DualListBoxData/'+ id,
             'GET',
@@ -100,29 +101,43 @@ $(document).ready(function () {
             var SlctIdiomas = $(".SlctIdiomas");
             var SlctReqEspeciales = $(".SlctReqEspeciales");
             var SlctTitulos = $(".SlctTitulos");
+            var Correo = validarEmail($('#per_CorreoElectronico').val());
+            var Nombre = validarNombre($('#per_Nombres').val(), $('#per_Apellidos').val());
 
             var DatosProfesionalesArray = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
             var Form = $("#tbPersonas").find("select, textarea, input").serializeArray();
-            tbPersonas = serializarPro(Form);
+            tbPersonas = serializar(Form);
             data = JSON.stringify({ tbPersonas, DatosProfesionalesArray });
-            console.log(data);
 
-            if (tbPersonas != null) {
-                _ajax(data,
-                '/Personas/Edit',
-                'POST',
-                function (obj) {
-                    if (obj != "-1" && obj != "-2" && obj != "-3") {
-                        MsgSuccess("¡Exito!", "Se ah editado el registro");
-                        setTimeout(function () { window.location.href = "/Personas/Index"; }, 5000);
-                        //$("#NombreBtn").attr("disabled", "disabled")
-                    } else {
-                        MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+            if (tbPersonas != null)
+            {
+                if (Nombre != " ")
+                {
+                    if (Correo != "") {
+                        _ajax(data,
+                        '/Personas/Edit',
+                        'POST',
+                        function (obj) {
+                            if (obj != "-1" && obj != "-2" && obj != "-3") {
+                                MsgSuccess("¡Exito!", "Se ah editado el registro");
+                                $("#finish").attr("href", " ");
+                                setTimeout(function () { window.location.href = "/Personas/Index"; }, 5000);
+                            } else {
+                                MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
+                            }
+                        });
                     }
-                });
+                    else {
+                        MsgError("Error", "Correo Electronico invalido");
+                    }
+                }
+                else {
+                    MsgError("Error", "Nombres o Apellidos no validos");
+                }
+
             }
             else {
-                MsgError("Error", "por favor llene todos los datos de texto");
+                MsgError("Error", "por favor llene todos los datos");
             }
 
         },

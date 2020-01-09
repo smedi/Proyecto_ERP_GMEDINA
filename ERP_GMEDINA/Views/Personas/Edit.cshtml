@@ -9,10 +9,10 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>Edit</h2>
+        <h2>Editar</h2>
         <ol class="breadcrumb">
             <li class="active">
-                <strong>tbPersonas</strong>
+                <strong>Personas</strong>
             </li>
         </ol>
     </div>
@@ -24,7 +24,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     @Html.ActionLink("Regresar", "Index", null, new { @class = "pull-right" })
-                    <h2>Edit</h2>
+                    <h2>Editar</h2>
                 </div>
                 <div class="ibox-content">
                     <div class="form-horizontal">
@@ -98,7 +98,7 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.per_Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.per_Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                                <input type="text" class="form-control" id="per_Telefono" name="per_Telefono" data-mask="+999 9999 9999" maxlength="14">
                                                 @Html.ValidationMessageFor(model => model.per_Telefono, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -176,6 +176,7 @@
     @Styles.Render("~/plugins/wizardStepsStyles")
     @Styles.Render("~/Content/plugins/izitoast/iziToast")
     @Styles.Render("~/plugins/dataPickerStyles")
+    @Styles.Render("~/Content/InputMask")
 
 }
 
@@ -186,4 +187,5 @@
     @Scripts.Render("~/plugins/wizardSteps")
     @Scripts.Render("~/plugins/dataPicker")
     @Scripts.Render("~/Scripts/app/general/EditPersonas")
+    @Scripts.Render("~/Scripts/plugins/jasny")
 }
