@@ -1,4 +1,7 @@
-﻿//
+﻿//   
+window.onblur = function () {
+    CierraPopups();
+}
 var modal = ["ModalNuevo", "ModalEditar", "ModalInhabilitar", "ModalDetalles"];
 var formularios = ["FormNuevo", "FormEditar", "FormInactivar"];
 function CierraPopups() {
