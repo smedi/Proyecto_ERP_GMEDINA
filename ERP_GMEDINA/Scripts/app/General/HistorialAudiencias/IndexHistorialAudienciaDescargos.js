@@ -4,7 +4,7 @@
 function format(obj) {
 
 
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Audiencias de Descargo</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalcreate(' + idEmpleado + ')" data-id="@item.cin_IdIngreso">Nueva Audiencia</button> </div> </div><div class="ibox-content"><div class="row">'
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Audiencias de Descargo</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalcreate(' + idEmpleado + ')">Registrar</button> </div> </div><div class="ibox-content"><div class="row">'
         + '<table class="table table-striped table-bordered table-hover dataTables-example" >'
         + '<thead>'
         + '<tr> <th>  Motivo  </th>'
@@ -16,7 +16,7 @@ function format(obj) {
         div = div +
             '<tbody>' + '<tr>'
                 + '<td>' + index.aude_Descripcion + '</td>'
-                + '<td>' + index.aude_FechaAudiencia + '</td>'
+                + '<td>' + FechaFormato(index.aude_FechaAudiencia).substring(0,10) + '</td>'
                 + '<td>' + index.aude_Testigo + '</td>'
                
                 + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.aude_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
@@ -94,7 +94,7 @@ function Llamarmodaldetalle(ID) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
                 $("#ModalDetalles").find("#aude_Descripcion")["0"].innerText = obj.aude_Descripcion;
-                $("#ModalDetalles").find("#aude_FechaAudiencia")["0"].innerText = obj.aude_FechaAudiencia;
+                $("#ModalDetalles").find("#aude_FechaAudiencia")["0"].innerText = FechaFormato(obj.aude_FechaAudiencia).substring(0,10);
                 $("#ModalDetalles").find("#aude_Testigo")["0"].innerText = obj.aude_Testigo;
                 $("#ModalDetalles").find("#aude_DireccionArchivo")["0"].innerText = obj.aude_DireccionArchivo;
                 $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario;
@@ -132,7 +132,7 @@ $("#btnGuardar").click(function () {
                     CierraPopups();
                     llenarTabla();
                     LimpiarControles(["emp_Id", "aude_Descripcion", "aude_FechaAudiencia", "aude_Testigo", "aude_DireccionArchivo"]);
-                    MsgSuccess("¡Exito!", "Se ah agregado el registro");
+                    MsgSuccess("¡Exito!", "Se agrego el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                 }
@@ -167,7 +167,7 @@ $("#InActivar").click(function () {
                     debugger
                     llenarTabla();
                     LimpiarControles(["aude_Id", "aude_RazonInactivo"]);
-                    MsgWarning("¡Exito!", "Se ah Inactivado el registro");
+                    MsgWarning("¡Exito!", "Se inactivo el registro");
                 } else {
                     MsgError("Error", "Codigo:" + obj + ". contacte al administrador.");
                 }
