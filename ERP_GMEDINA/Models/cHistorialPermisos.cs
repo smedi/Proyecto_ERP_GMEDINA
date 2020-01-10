@@ -21,13 +21,16 @@ namespace ERP_GMEDINA.Models
         public int emp_Id { get; set; }
         [Display(Name = "Tipo permiso")]
         public int tper_Id { get; set; }
-        [Display(Name = "Fecha salida")]
+        [Display(Name = "Fecha Inicio")]
         public System.DateTime hper_fechaInicio { get; set; }
-        [Display(Name = "Fecha regreso")]
+        [Display(Name = "Fecha Fin")]
         public System.DateTime hper_fechaFin { get; set; }
         [Display(Name = "Duración")]
         public int hper_Duracion { get; set; }
-        [Display(Name = "Observaciónes")]
+
+        [Display(Name = "Observaciones")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es requerido")]
+        [MaxLength(25, ErrorMessage = "Excedió el número máximo de carácteres")]
         public string hper_Observacion { get; set; }
         [Display(Name = "Justificado")]
         public Nullable<bool> hper_Justificado { get; set; }

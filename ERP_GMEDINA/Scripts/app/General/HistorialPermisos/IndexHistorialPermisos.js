@@ -27,7 +27,9 @@ function tablaDetalles(ID) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 $("#ModalDetallesAX").find("#hper_Observacion")["0"].innerText = o;
                 $("#ModalDetallesAX").find("#hper_FechaCrea")["0"].innerText = FechaFormato(obj.hper_FechaCrea);
-                $("#ModalDetallesAX").find("#hper_FechaModifica")["0"].innerText = FechaFormato(obj.hper_FechaModifica);
+                $("#ModalDetallesAX").find("#hper_fechaInicio")["0"].innerText = FechaFormato(obj.hper_fechaInicio);
+                $("#ModalDetallesAX").find("#hper_fechaFin")["0"].innerText = FechaFormato(obj.hper_fechaFin);
+                //$("#ModalDetallesAX").find("#hper_FechaModifica")["0"].innerText = FechaFormato(obj.hper_FechaModifica);
                 $("#ModalDetallesAX").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
                 $("#ModalDetallesAX").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
