@@ -61,7 +61,6 @@ $(document).ready(function () {
             var SlctReqEspeciales = $(".SlctReqEspeciales");
             var SlctTitulos = $(".SlctTitulos");
             var Correo = validarEmail($('#per_CorreoElectronico').val());
-            var Nombre = validarNombre($('#per_Nombres').val(), $('#per_Apellidos').val());
 
             var DatosProfesionalesArray = { Competencias: SlctCompetencias.val(), Habilidades: SlctHabilidades.val(), Idiomas: SlctIdiomas.val(), ReqEspeciales: SlctReqEspeciales.val(), Titulos: SlctTitulos.val() };
             var Form = $("#tbPersonas").find("select, textarea, input").serializeArray();
@@ -71,8 +70,6 @@ $(document).ready(function () {
             //
             if (tbPersonas != null)
             {
-                if (Nombre != " ")
-                {
                     if (Correo != " ") {
                         _ajax(data,
                         '/Personas/Create',
@@ -81,7 +78,7 @@ $(document).ready(function () {
                             if (obj != "-1" && obj != "-2" && obj != "-3") {
                                 MsgSuccess("¡Exito!", "Se ah agregado el registro");
                                 $("#finish").attr("href", " ");
-                                setTimeout(function () { window.location.href = "/Personas/Index"; }, 5000);
+                                setTimeout(function () { window.location.href = "/Personas/Index"; }, 3000);
                             } else {
                                 MsgError("Error", "Codigo:" + obj + ". contacte al administrador.(Verifique si el registro ya existe)");
                             }
@@ -90,10 +87,6 @@ $(document).ready(function () {
                     else {
                         MsgError("Error", "Correo Electronico invalido");
                     }
-                }
-                else {
-                    MsgError("Error", "Nombres o Apellidos no validos");
-                }
             }
             else {
                 MsgError("Error", "por favor llene todos los datos");

@@ -43,13 +43,18 @@ function validarEmail(valor) {
         return " ";
     }
 }
-function validarNombre(Nombre,Apellido) {
-    if (/\b[a-zA-Záéíóú]+/.test(Nombre.replace(" ", "")) && /\b[a-zA-Záéíóú]+/.test(Apellido.replace(" ", ""))) {
-        return Nombre+" "+ Apellido;
-    } else {
-        return " ";
+function alphanumeric(e) {
+    var regex = new RegExp("[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ ]");
+    var key = e.keyCode || e.which;
+    key = String.fromCharCode(key);
+    if (!regex.test(key)) {
+        e.returnValue = false;
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
     }
-}
+};
+
 function serializar(data) {
     var Data = new Object();
     var verificacion = true;

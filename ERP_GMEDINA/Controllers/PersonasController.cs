@@ -43,7 +43,7 @@ namespace ERP_GMEDINA.Controllers
                             per_Telefono = p.per_Telefono,
                             per_CorreoElectronico = p.per_CorreoElectronico,
                             per_FechaCrea = p.per_FechaCrea,
-                            per_FechaModifca = p.per_FechaModifica,
+                            per_FechaModifica = p.per_FechaModifica,
                             per_UsuarioCrea = p.tbUsuario.usu_Nombres,
                             per_UsuarioModifica = p.tbUsuario.usu_Nombres
                         })
@@ -88,65 +88,29 @@ namespace ERP_GMEDINA.Controllers
             Session["Usuario"] = new tbUsuario { usu_Id = 1 };
             //Ddl Sexo
             var Sexo = new List<object> { };
-            Sexo.Add(new
-            {
-                Id = "",
-                Descripcion = "**Seleccione una opción**",
-            });
-            Sexo.Add(new
-            {
-                Id = "F",
-                Descripcion = "Femenino"
-            });
-            Sexo.Add(new
-            {
-                Id = "M",
-                Descripcion = "Masculino"
-            });
+            Sexo.Add(new { Id = "", Descripcion = "**Seleccione una opción**" });
+            Sexo.Add(new { Id = "F", Descripcion = "Femenino" });
+            Sexo.Add(new { Id = "M", Descripcion = "Masculino" });
             //Ddl EstadoCivil
             var EstadoCivil = new List<object> { };
-            EstadoCivil.Add(new
-            {
-                Id = "", 
-                Descripcion = "**Seleccione una opción**",
-            });
-            EstadoCivil.Add(new
-            {
-                Id = "S",
-                Descripcion = "Soltero"
-            });
-            EstadoCivil.Add(new
-            {
-                Id = "C",
-                Descripcion = "Casado"
-            });
+            EstadoCivil.Add(new { Id = "", Descripcion = "**Seleccione una opción**" });
+            EstadoCivil.Add(new { Id = "C", Descripcion = "Casado" });
+            EstadoCivil.Add(new { Id = "D", Descripcion = "Divorciado" });
+            EstadoCivil.Add(new { Id = "S", Descripcion = "Soltero" });
+            EstadoCivil.Add(new { Id = "U", Descripcion = "Union Libres" });
+            EstadoCivil.Add(new { Id = "V", Descripcion = "Viudo" });
             //ddl TipoSangre
             var TipoSangre = new List<object> { };
-            TipoSangre.Add(new
-            {
-                Id = "",
-                Descripcion = "**Seleccione una opción**",
-            });
-            TipoSangre.Add(new
-            {
-                Id = "O+",
-                Descripcion = "O+"
-            });
-            TipoSangre.Add(new
-            {
-                Id = "O-",
-                Descripcion = "O-"
-            });
-            TipoSangre.Add(new
-            {
-                Id = "A+",
-                Descripcion = "A+"
-            });
-            TipoSangre.Add(new
-            {
-                Id = "A-",
-                Descripcion = "A-"
-            });
+            TipoSangre.Add(new { Id = "", Descripcion = "**Seleccione una opción**" });
+            TipoSangre.Add(new { Id = "A+", Descripcion = "A+" });
+            TipoSangre.Add(new { Id = "A-", Descripcion = "A-" });
+            TipoSangre.Add(new { Id = "B+", Descripcion = "B+" });
+            TipoSangre.Add(new { Id = "B-", Descripcion = "B-" });
+            TipoSangre.Add(new { Id = "O+", Descripcion = "O+" });
+            TipoSangre.Add(new { Id = "O-", Descripcion = "O-" });
+            TipoSangre.Add(new { Id = "AB+", Descripcion = "AB+" });
+            TipoSangre.Add(new { Id = "AB-", Descripcion = "AB-" });
+
             ViewBag.per_TipoSangre = new SelectList(TipoSangre, "Id", "Descripcion");
             ViewBag.per_EstadoCivil = new SelectList(EstadoCivil, "Id", "Descripcion");
             ViewBag.per_Sexo = new SelectList(Sexo, "Id", "Descripcion");
@@ -411,65 +375,29 @@ namespace ERP_GMEDINA.Controllers
                 using (db = new ERP_GMEDINAEntities())
                 {
                     var Sexo = new List<object> { };
-                    Sexo.Add(new
-                    {
-                        Id = "",
-                        Descripcion = "**Seleccione una opción**"
-                    });
-                    Sexo.Add(new
-                    {
-                        Id = "F",
-                        Descripcion = "Femenino"
-                    });
-                    Sexo.Add(new
-                    {
-                        Id = "M",
-                        Descripcion = "Masculino"
-                    });
+                    Sexo.Add(new { Id = "", Descripcion = "**Seleccione una opción**"});
+                    Sexo.Add(new { Id = "F", Descripcion = "Femenino"});
+                    Sexo.Add(new { Id = "M", Descripcion = "Masculino"});
                     //Ddl EstadoCivil
                     var EstadoCivil = new List<object> { };
-                    EstadoCivil.Add(new
-                    {
-                        Id = "",
-                        Descripcion = "**Seleccione una opción**",
-                    });
-                    EstadoCivil.Add(new
-                    {
-                        Id = "S",
-                        Descripcion = "Soltero"
-                    });
-                    EstadoCivil.Add(new
-                    {
-                        Id = "C",
-                        Descripcion = "Casado"
-                    });
+                    EstadoCivil.Add(new { Id = "", Descripcion = "**Seleccione una opción**"});
+                    EstadoCivil.Add(new { Id = "C", Descripcion = "Casado" });
+                    EstadoCivil.Add(new { Id = "D", Descripcion = "Divorciado" });
+                    EstadoCivil.Add(new { Id = "S", Descripcion = "Soltero" });
+                    EstadoCivil.Add(new { Id = "U", Descripcion = "Union Libres" });
+                    EstadoCivil.Add(new { Id = "V", Descripcion = "Viudo" });
                     //ddl TipoSangre
                     var TipoSangre = new List<object> { };
-                    TipoSangre.Add(new
-                    {
-                        Id = "",
-                        Descripcion = "**Seleccione una opción**",
-                    });
-                    TipoSangre.Add(new
-                    {
-                        Id = "O+",
-                        Descripcion = "O+"
-                    });
-                    TipoSangre.Add(new
-                    {
-                        Id = "O-",
-                        Descripcion = "O-"
-                    });
-                    TipoSangre.Add(new
-                    {
-                        Id = "A+",
-                        Descripcion = "A+"
-                    });
-                    TipoSangre.Add(new
-                    {
-                        Id = "A-",
-                        Descripcion = "A-"
-                    });
+                    TipoSangre.Add(new { Id = "", Descripcion = "**Seleccione una opción**"});
+                    TipoSangre.Add(new { Id = "A+", Descripcion = "A+" });
+                    TipoSangre.Add(new { Id = "A-", Descripcion = "A-" });
+                    TipoSangre.Add(new { Id = "B+", Descripcion = "B+" });
+                    TipoSangre.Add(new { Id = "B-", Descripcion = "B-" });
+                    TipoSangre.Add(new { Id = "O+", Descripcion = "O+" });
+                    TipoSangre.Add(new { Id = "O-", Descripcion = "O-" });
+                    TipoSangre.Add(new { Id = "AB+", Descripcion = "AB+" });
+                    TipoSangre.Add(new { Id = "AB-", Descripcion = "AB-" });
+
                     ViewBag.per_TipoSangre = new SelectList(TipoSangre, "Id", "Descripcion");
                     ViewBag.per_EstadoCivil = new SelectList(EstadoCivil, "Id", "Descripcion");
                     ViewBag.per_Sexo = new SelectList(Sexo, "Id", "Descripcion");
@@ -537,7 +465,7 @@ namespace ERP_GMEDINA.Controllers
                                 switch (X.TipoDato)
                                 {
                                     case "C":
-                                        var CompV = db.tbCompetenciasPersona.Select(c => new { comp_Id = c.comp_Id, Descripcion = c.tbCompetencias.comp_Descripcion, per_Id = c.per_Id, cope_Id = c.cope_Id }).Where(c => c.per_Id == tbPersonas.per_Id && c.comp_Id == X.Id).ToList();
+                                        var CompV = db.tbCompetenciasPersona.Select(c => new { comp_Id = c.comp_Id, Descripcion = c.tbCompetencias.comp_Descripcion, per_Id = c.per_Id, cope_Id = c.cope_Id ,Estado = c.cope_Estado }).Where(c => c.per_Id == tbPersonas.per_Id && c.Estado == true && c.comp_Id == X.Id).ToList();
                                         if (DatosProfesionalesArray.Competencias != null)
                                         {
                                             foreach (var x in DatosProfesionalesArray.Competencias)
@@ -556,7 +484,7 @@ namespace ERP_GMEDINA.Controllers
                                                 ResultI = Com.MensajeError + "";
                                             }
                                         }
-                                        if (CompV.Count == 1 && Nuevo == null)
+                                        if (CompV.Count >= 1 && Nuevo == null)
                                         {
                                             foreach (var c in CompV)
                                             {
@@ -569,7 +497,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         break;
                                     case "H":
-                                        var habV = db.tbHabilidadesPersona.Select(h => new { habi_Id = h.habi_Id, Descripcion = h.tbHabilidades.habi_Descripcion, per_Id = h.per_Id, hape_Id = h.hape_Id }).Where(h => h.per_Id == tbPersonas.per_Id && h.hape_Id == X.Id).ToList();
+                                        var habV = db.tbHabilidadesPersona.Select(h => new { habi_Id = h.habi_Id, Descripcion = h.tbHabilidades.habi_Descripcion, per_Id = h.per_Id, hape_Id = h.hape_Id , Estado = h.hape_Estado}).Where(h => h.per_Id == tbPersonas.per_Id && h.Estado == true && h.habi_Id == X.Id).ToList();
                                         if (DatosProfesionalesArray.Habilidades != null)
                                         {
                                             foreach (var x in DatosProfesionalesArray.Habilidades)
@@ -588,7 +516,7 @@ namespace ERP_GMEDINA.Controllers
                                                 ResultI = hab.MensajeError + "";
                                             }
                                         }
-                                        if (habV.Count == 1 && Nuevo == null)
+                                        if (habV.Count >= 1 && Nuevo == null)
                                         {
                                             foreach (var h in habV)
                                             {
@@ -601,8 +529,8 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         break;
                                     case "I":
-                                        var IdiV = db.tbIdiomaPersona.Select(i => new { idi_Id = i.idi_Id, Descripcion = i.tbIdiomas.idi_Descripcion, per_Id = i.per_Id, idpe_Id = i.idpe_Id }).Where(i => i.per_Id == tbPersonas.per_Id && i.idpe_Id == X.Id).ToList();
-                                        if (DatosProfesionalesArray.Habilidades != null)
+                                        var IdiV = db.tbIdiomaPersona.Select(i => new { idi_Id = i.idi_Id, Descripcion = i.tbIdiomas.idi_Descripcion, per_Id = i.per_Id, idpe_Id = i.idpe_Id , Estado = i.idpe_Estado }).Where(i => i.per_Id == tbPersonas.per_Id && i.Estado == true && i.idi_Id == X.Id).ToList();
+                                        if (DatosProfesionalesArray.Idiomas != null)
                                         {
                                             foreach (var x in DatosProfesionalesArray.Idiomas)
                                             {
@@ -620,7 +548,7 @@ namespace ERP_GMEDINA.Controllers
                                                 ResultI = idi.MensajeError + "";
                                             }
                                         }
-                                        if (IdiV.Count == 1 && Nuevo == null)
+                                        if (IdiV.Count >= 1 && Nuevo == null)
                                         {
                                             foreach (var i in IdiV)
                                             {
@@ -633,8 +561,8 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         break;
                                     case "T":
-                                        var TitV = db.tbTitulosPersona.Select(t => new { titu_Id = t.titu_Id, Descripcion = t.tbTitulos.titu_Descripcion, per_Id = t.per_Id, tipe_Id = t.tipe_Id }).Where(t => t.per_Id == tbPersonas.per_Id && t.tipe_Id == X.Id).ToList();
-                                        if (DatosProfesionalesArray.Habilidades != null)
+                                        var TitV = db.tbTitulosPersona.Select(t => new { titu_Id = t.titu_Id, Descripcion = t.tbTitulos.titu_Descripcion, per_Id = t.per_Id, tipe_Id = t.tipe_Id , Estado = t.tipe_Estado}).Where(t => t.per_Id == tbPersonas.per_Id && t.Estado == true && t.titu_Id == X.Id).ToList();
+                                        if (DatosProfesionalesArray.Titulos != null)
                                         {
                                             foreach (var x in DatosProfesionalesArray.Titulos)
                                             {
@@ -652,7 +580,7 @@ namespace ERP_GMEDINA.Controllers
                                                 ResultI = titu.MensajeError + "";
                                             }
                                         }
-                                        if (TitV.Count == 1 && Nuevo == null)
+                                        if (TitV.Count >= 1 && Nuevo == null)
                                         {
                                             foreach (var t in TitV)
                                             {
@@ -665,7 +593,7 @@ namespace ERP_GMEDINA.Controllers
                                         }
                                         break;
                                     case "R":
-                                        var RepV = db.tbRequerimientosEspecialesPersona.Select(r => new { resp_Id = r.resp_Id, Descripcion = r.tbRequerimientosEspeciales.resp_Descripcion, per_Id = r.per_Id, rep_Id = r.rep_Id }).Where(r => r.per_Id == tbPersonas.per_Id && r.rep_Id == X.Id).ToList();
+                                        var RepV = db.tbRequerimientosEspecialesPersona.Select(r => new { resp_Id = r.resp_Id, Descripcion = r.tbRequerimientosEspeciales.resp_Descripcion, per_Id = r.per_Id, rep_Id = r.rep_Id , Estado = r.rep_Estado }).Where(r => r.per_Id == tbPersonas.per_Id && r.Estado == true && r.resp_Id == X.Id).ToList();
                                         if (DatosProfesionalesArray.ReqEspeciales != null)
                                         {
                                             foreach (var x in DatosProfesionalesArray.Titulos)
@@ -684,7 +612,7 @@ namespace ERP_GMEDINA.Controllers
                                                 ResultI = resp.MensajeError + "";
                                             }
                                         }
-                                        if (RepV.Count == 1 && Nuevo == null)
+                                        if (RepV.Count >= 1 && Nuevo == null)
                                         {
                                             foreach (var r in RepV)
                                             {
@@ -720,7 +648,7 @@ namespace ERP_GMEDINA.Controllers
             {
                 try
                 {
-                    var _list = db.UDP_RRHH_tbPersonas_Inactivar(tbPersonas.per_Id,tbPersonas.per_RazonInactivo,1,DateTime.Now);
+                    var _list = db.UDP_RRHH_tbPersonas_Inactivar(tbPersonas.per_Id,"",1,DateTime.Now);
                     foreach(UDP_RRHH_tbPersonas_Inactivar_Result item in _list)
                     {
                         msj = item.MensajeError + "";
