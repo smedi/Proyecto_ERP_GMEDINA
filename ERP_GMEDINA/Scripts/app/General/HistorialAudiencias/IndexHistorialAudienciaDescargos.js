@@ -108,6 +108,7 @@ function Llamarmodaldetalle(ID) {
 function Llamarmodalcreate() {
 
     var modalnuevo = $("#ModalNuevo");
+    $("#aude_FechaAudiencia1").attr("min", Fecha());
     $("#ModalNuevo").find("#emp_Id").val(idEmpleado);
     modalnuevo.modal('show');
 }
@@ -175,6 +176,7 @@ $("#InActivar").click(function () {
 $("#btnEditar").click(function (ID) {
     CierraPopups();
     var modalnuevo = $("#ModalEditar");
+    $("#aude_FechaAudiencia2").attr("min", Fecha());
     $("#ModalEditar").find("#aude_Id").val(idEditar);
     _ajax({ ID: parseInt(idEditar) },
     '/HistorialAudienciaDescargos/Edit/',
@@ -182,7 +184,7 @@ $("#btnEditar").click(function (ID) {
     function (obj) {
 
         if (obj != "-1" && obj != "-2" && obj != "-3") {
-            $("#ModalEditar").find("#aude_FechaAudiencia").val(FechaFormatoSimple(obj.aude_FechaAudiencia).substring(0, 10));
+            $("#ModalEditar").find("#aude_FechaAudiencia2").val(FechaFormatoSimple(obj.aude_FechaAudiencia).substring(0, 10));
         }
     });
         modalnuevo.modal('show');
@@ -209,3 +211,17 @@ $("#btnActualizar").click(function () {
         MsgError("Error", "por favor llene todas las cajas de texto");
     }
 });
+
+function Fecha() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+    return today = yyyy + '-' + mm + '-' + dd;
+}

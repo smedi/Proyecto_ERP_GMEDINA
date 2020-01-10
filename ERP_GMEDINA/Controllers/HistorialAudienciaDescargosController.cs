@@ -77,14 +77,14 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Insert(tbHistorialAudienciaDescargo.emp_Id,
+                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Insert1(tbHistorialAudienciaDescargo.emp_Id,
                                                                             tbHistorialAudienciaDescargo.aude_Descripcion,
                                                                             tbHistorialAudienciaDescargo.aude_FechaAudiencia,
                                                                             tbHistorialAudienciaDescargo.aude_Testigo,
                                                                             tbHistorialAudienciaDescargo.aude_DireccionArchivo,
                                                                             1,
                                                                             DateTime.Now);
-                    foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result item in list)
+                    foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Insert1_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
@@ -149,8 +149,8 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Update(id, tbHistorialAudienciaDescargo.aude_FechaAudiencia, 1, DateTime.Now);
-                    foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Update_Result item in list)
+                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Update1(id, tbHistorialAudienciaDescargo.aude_FechaAudiencia, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Update1_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
@@ -228,8 +228,8 @@ namespace ERP_GMEDINA.Controllers
                 var Usuario = (tbUsuario)Session["Usuario"];
                 try
                 {
-                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Delete(tbHistorialAudienciaDescargo.aude_Id, tbHistorialAudienciaDescargo.aude_RazonInactivo, 1, DateTime.Now);
-                    foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result item in list)
+                    var list = db.UDP_RRHH_tbHistorialAudienciaDescargo_Delete1(tbHistorialAudienciaDescargo.aude_Id, tbHistorialAudienciaDescargo.aude_RazonInactivo, 1, DateTime.Now);
+                    foreach (UDP_RRHH_tbHistorialAudienciaDescargo_Delete1_Result item in list)
                     {
                         msj = item.MensajeError + " ";
                     }
