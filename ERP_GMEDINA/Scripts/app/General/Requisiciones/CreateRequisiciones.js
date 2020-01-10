@@ -55,10 +55,7 @@ $(document).ready(function () {
                 }
             });
 
-    $("#req_Experiencia").focus(function () {
-        console.log('ding');
-    });
-
+    
     var wizard = $("#Wizard").steps({
         enableCancelButton: false,
         onFinished: function () {

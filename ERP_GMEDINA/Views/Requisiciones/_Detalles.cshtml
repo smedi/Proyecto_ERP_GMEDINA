@@ -7,8 +7,7 @@
                 <h4 class="modal-title">Editar habilidad</h4>
             </div>
             <div class="modal-body">
-                <div class="ibox-content">
-<div class="ibox-content">
+                <div class="">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.req_Experiencia)
@@ -93,37 +92,38 @@
 
         <dd id="req_FechaContratacion">
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.req_FechaCrea)
-        </dt>
-
-        <dd id="req_FechaCrea">
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.req_FechaModifica)
-        </dt>
-
-        <dd id="req_FechaModifica">
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)
-        </dt>
-
-        <dd id="req_UsuarioCrea">
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)
-        </dt>
-
-        <dd id="req_UsuarioModifica">
-        </dd>
-
+        
     </dl>
-</div>
+
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="form-horizontal">
+                                <table class="table table-striped table-bordered dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Acción</th>
+                                            <th>Usuario</th>
+                                            <th>Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Creado</td>
+                                            @Html.HiddenFor(model => model.req_UsuarioCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                            <td><span id="tbUsuario_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                            <td><span id="req_FechaCrea">@Html.DisplayFor(model => model.req_FechaCrea, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Modificado</td>
+                                            @Html.HiddenFor(model => model.req_UsuarioModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })
+                                            <td><span id="tbUsuario1_usu_NombreUsuario">@Html.DisplayFor(model => model.tbUsuario1.usu_NombreUsuario, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                            <td><span id="req_FechaModifica">@Html.DisplayFor(model => model.req_FechaModifica, new { htmlAttributes = new { @class = "", @disabled = "disabled" } })</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 </div>
 </div>
             <div class="modal-footer">

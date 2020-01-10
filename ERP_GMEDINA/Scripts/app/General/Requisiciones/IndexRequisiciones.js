@@ -198,8 +198,8 @@ function tablaDetalles(ID) {
                 $("#ModalDetalles").find("#req_FechaContratacion")["0"].innerText = FechaFormato(obj[0].req_FechaContratacion);
                 $("#ModalDetalles").find("#req_FechaCrea")["0"].innerText = FechaFormato(obj[0].req_FechaCrea);
                 $("#ModalDetalles").find("#req_FechaModifica")["0"].innerText = FechaFormato(obj[0].req_FechaModifica);
-                $("#ModalDetalles").find("#req_UsuarioCrea")["0"].innerText = obj[0].req_UsuarioCrea;
-                $("#ModalDetalles").find("#req_UsuarioModifica")["0"].innerText = obj[0].req_UsuarioModifica;
+                $("#ModalDetalles").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj[0].req_UsuarioCrea;
+                $("#ModalDetalles").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj[0].req_UsuarioModifica;
 
                 $('#ModalDetalles').modal('show');
             }
