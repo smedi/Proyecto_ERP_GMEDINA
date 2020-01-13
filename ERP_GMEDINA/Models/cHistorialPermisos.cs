@@ -33,8 +33,8 @@ namespace ERP_GMEDINA.Models
         [MaxLength(25, ErrorMessage = "Excedió el número máximo de carácteres")]
         public string hper_Observacion { get; set; }
         [Display(Name = "Justificado")]
-        public Nullable<bool> hper_Justificado { get; set; }
-        [Display(Name = "Porcentaje derecho indemnización")]
+        public bool hper_Justificado { get; set; }
+        [Display(Name = "Porcentaje indemnización")]
         public int hper_PorcentajeIndemnizado { get; set; }
         [Display(Name = "Estado")]
         public bool hper_Estado { get; set; }
