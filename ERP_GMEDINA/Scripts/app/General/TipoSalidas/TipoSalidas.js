@@ -1,4 +1,7 @@
 ﻿var id = 0;
+$(document).ready(function () {
+    llenarTabla();
+});
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
@@ -49,9 +52,6 @@ function llenarTabla() {
             });
         });
 }
-$(document).ready(function () {
- llenarTabla();
-});
 //Botones GET
 $("#btnAgregar").click(function () {
     var modalnuevo = $('#ModalNuevo');

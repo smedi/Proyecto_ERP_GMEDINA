@@ -46,7 +46,7 @@ function llenarTabla() {
             $.each(Lista, function (index, value) {
                 tabla.row.add({
                     ID:value.tamo_Id,
-                    Descripcion:value.tamo_Descripcion
+                    Descripcion: value.tamo_Descripcion
                    }).draw();
             });
         });
