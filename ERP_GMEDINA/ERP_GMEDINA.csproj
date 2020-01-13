@@ -1949,7 +1949,7 @@
     <Content Include="Views\HistorialPermisos\_EditHistorialPermisos.cshtml" />
     <Content Include="Views\HistorialPermisos\_InhabilitarHistorialPermisos.cshtml" />
     <Content Include="Views\SeleccionCandidatos\_Contratar.cshtml" />
-    <Content Include="Views\SeleccionCandidatos\_Create.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\Contratar.cshtml" />
     <Content Include="Views\SeleccionCandidatos\_Detalles.cshtml" />
     <Content Include="Views\SeleccionCandidatos\_Edit.cshtml" />
     <Content Include="Views\SeleccionCandidatos\Index.cshtml" />
@@ -1991,6 +1991,7 @@
     <Content Include="Views\EquipoTrabajo\_Delete.cshtml" />
     <Content Include="Views\EquipoTrabajo\_Detalles.cshtml" />
     <Content Include="Views\EquipoTrabajo\_Edit.cshtml" />
+    <Content Include="Views\SeleccionCandidatos\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

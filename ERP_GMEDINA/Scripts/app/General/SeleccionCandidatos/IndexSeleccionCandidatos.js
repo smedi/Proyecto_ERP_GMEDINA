@@ -245,20 +245,7 @@ $("#btnEditar").click(function () {
 function CallContratar(btn) {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
-    var id = row.data().ID;
-    ;
-    _ajax(null,
-        '/SeleccionCandidatos/Contratar/' + id,
-        'GET',
-        function (obj) {
-            $("#ModalContratar").find("#Candidato").val(obj.tbPersonas.per_Identidad + " - " + obj.tbPersonas.per_Nombres + " " + obj.tbPersonas.per_Apellidos);
-
-        });
-
-    $('#ModalContratar').modal('show');
-
-
-
+    $(location).attr('href', "/SeleccionCandidatos/Contratar/" + row.data().ID);
 }
 
 

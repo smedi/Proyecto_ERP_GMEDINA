@@ -12,7 +12,7 @@
                 <div class="ibox-title">
                     <h5>Listado de Selección de Candidatos</h5>
                     <div class="ibox-tools">
-                        <input type="button" id="btnAgregar" onclick="btnAgregar()"  class="btn btn-primary btn-xs" value="Registrar Selección de Candidato" />
+                        <input type="button" id="btnAgregar" onclick="btnAgregar()"  class="btn btn-primary btn-xs" value="Registrar Candidato" />
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -40,7 +40,6 @@
 @Html.Partial("_Delete", new ERP_GMEDINA.Models.tbSeleccionCandidatos())
 @Html.Partial("_Edit", new ERP_GMEDINA.Models.tbSeleccionCandidatos())
 @Html.Partial("_Detalles", new ERP_GMEDINA.Models.tbSeleccionCandidatos())
-@Html.Partial("_Contratar", new ERP_GMEDINA.Models.tbEmpleados())
     
 @section Styles {
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")

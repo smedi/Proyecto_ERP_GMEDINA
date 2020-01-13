@@ -291,10 +291,6 @@ namespace ERP_GMEDINA.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbSeleccionCandidatos tbSeleccionCandidatos = null;
-
-
-
-
             try
             {
                 tbSeleccionCandidatos = db.tbSeleccionCandidatos.Find(id);
@@ -315,7 +311,7 @@ namespace ERP_GMEDINA.Controllers
                 tbPersonas = new tbPersonas { per_Identidad = IsNull(tbSeleccionCandidatos.tbPersonas).per_Identidad, per_Nombres = IsNull(tbSeleccionCandidatos.tbPersonas).per_Nombres, per_Apellidos = IsNull(tbSeleccionCandidatos.tbPersonas).per_Apellidos },
             };
             Session["per_id"] = SeleccionCandidatos.per_Id;
-            return Json(SeleccionCandidatos, JsonRequestBehavior.AllowGet);
+            return View(SeleccionCandidatos);
         }
 
 
