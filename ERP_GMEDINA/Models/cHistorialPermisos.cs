@@ -20,10 +20,14 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Empleado")]
         public int emp_Id { get; set; }
         [Display(Name = "Tipo permiso")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es requerido")]
+
         public int tper_Id { get; set; }
         [Display(Name = "Fecha Inicio")]
+
         public System.DateTime hper_fechaInicio { get; set; }
         [Display(Name = "Fecha Fin")]
+
         public System.DateTime hper_fechaFin { get; set; }
         [Display(Name = "Duración")]
         public int hper_Duracion { get; set; }
@@ -35,6 +39,8 @@ namespace ERP_GMEDINA.Models
         [Display(Name = "Justificado")]
         public bool hper_Justificado { get; set; }
         [Display(Name = "Porcentaje indemnización")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es requerido")]
+
         public int hper_PorcentajeIndemnizado { get; set; }
         [Display(Name = "Estado")]
         public bool hper_Estado { get; set; }
