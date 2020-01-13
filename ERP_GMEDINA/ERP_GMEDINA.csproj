@@ -1237,6 +1237,10 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
       <LastGenOutput>ERP_GMEDINA.cs</LastGenOutput>
     </Content>
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\app\General\Cargos\Cargos.js" />
     <Content Include="Scripts\app\General\Areas\CreateArea.js" />
     <Content Include="Scripts\app\General\Areas\EditArea.js" />
@@ -1332,6 +1336,7 @@
       <DependentUpon>ERP_GMEDINA.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\api\spanish.json" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
