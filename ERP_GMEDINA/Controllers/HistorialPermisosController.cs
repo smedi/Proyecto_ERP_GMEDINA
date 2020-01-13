@@ -231,6 +231,7 @@ namespace ERP_GMEDINA.Controllers
                 hper_RazonInactivo = tbHistorialPermisos.hper_RazonInactivo,
                 hper_fechaInicio = tbHistorialPermisos.hper_fechaInicio,
                 hper_fechaFin = tbHistorialPermisos.hper_fechaFin,
+                hper_Duracion=tbHistorialPermisos.hper_Duracion,
 
                 hper_UsuarioCrea = tbHistorialPermisos.hper_UsuarioCrea,
                 hper_FechaCrea = tbHistorialPermisos.hper_FechaCrea,
