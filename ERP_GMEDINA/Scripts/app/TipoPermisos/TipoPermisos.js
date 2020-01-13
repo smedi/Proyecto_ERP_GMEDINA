@@ -2,6 +2,7 @@
 //Funciones GET
 function tablaEditar(ID) {
     id = ID;
+    alert(id);
     _ajax(null,
         '/TipoPermisos/Edit/' + ID,
         'GET',
