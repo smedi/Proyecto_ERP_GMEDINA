@@ -23,7 +23,7 @@ function format(obj) {
                 + '<td>' + index.hinc_Diagnostico + '</td>'
                 + '<td>' + FechaFormato(index.hinc_FechaInicio).substring(0, 10) + '</td>'
                 + '<td>' + FechaFormato(index.hinc_FechaFin).substring(0, 10) + '</td>'
-                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inactivar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
+                + '<td>' + '<button type="button" class="btn btn-danger btn-xs" onclick="Llamarmodaldelete(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Inhabilitar</button> <button type="button" class="btn btn-default btn-xs" onclick="Llamarmodaldetalle(' + index.hinc_Id + ')" data-id="@item.cin_IdIngreso">Detalle</button>' + '</td>'
                 + '</tr>' + '</tbody>'
         '</table>'
 
@@ -39,7 +39,7 @@ function format(obj) {
 
 
 
-var empleado =""; 
+
 function llenarTabla() {
     _ajax(null,
        '/HistorialIncapacidades/llenarTabla',
@@ -102,6 +102,8 @@ function Llamarmodaldelete(ID) {
 
 }
 
+
+
 function Llamarmodaldetalle(ID) {
     debugger
     var modalnuevo = $("#ModalDetalles");
@@ -109,7 +111,7 @@ function Llamarmodaldetalle(ID) {
         '/HistorialIncapacidades/Edit/',
         'GET',
         function (obj) {
-
+            
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
                 $("#ModalDetalles").find("#hinc_Dias")["0"].innerText = obj.hinc_Dias;
@@ -166,10 +168,8 @@ function Llamarmodaldetalle(ID) {
 
 function tablaEditar(ID) {
     id = ID;
-    
     debugger
-    sessionStorage.setItem("IdPersona", id);
-    sessionStorage.setItem("Nombrepersona", empleado);
+    sessionStorage.setItem("IdPersona", ID);
     window.location.href = "Create";
 
     //_ajax(null,

@@ -26,12 +26,14 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
+       
         public ActionResult Create()
         {
             ViewBag.hinc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.hinc_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
             ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
             ViewBag.ticn_Id = new SelectList(db.tbTipoIncapacidades, "ticn_Id", "ticn_Descripcion");
+
             return View();
         }
 
@@ -166,6 +168,44 @@ namespace ERP_GMEDINA.Controllers
         }
 
 
+
+        // GET: HistorialIncapacidades/Details/5
+        public ActionResult Detallesempleados(int? id)
+        {
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                tbEmpleados tbEmpleados1 = null;
+
+                try
+                {
+                    tbEmpleados1 = db.tbEmpleados.Find(id);
+                    if (tbEmpleados1 == null || !tbEmpleados1.emp_Estado)
+                    {
+                        return HttpNotFound();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    return HttpNotFound();
+                }
+                Session["id"] = id;
+                var empleados = new tbEmpleados
+
+                {
+                    tbPersonas = new tbPersonas { per_Identidad = IsNull(tbEmpleados1.tbPersonas).per_Identidad, per_Nombres = IsNull(tbEmpleados1.tbPersonas).per_Nombres + " " + IsNull(tbEmpleados1.tbPersonas).per_Apellidos }
+                 
+                
+                };
+                return Json(empleados, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
         // GET: HistorialIncapacidades/Create
         //public ActionResult Create()
         //{
@@ -218,8 +258,8 @@ namespace ERP_GMEDINA.Controllers
 
 
         // GET: HistorialIncapacidades/Edit/5
-      
-         public ActionResult Edit(int? ID)
+
+        public ActionResult Edit(int? ID)
         {
             if (ID == null)
             {
@@ -254,6 +294,31 @@ namespace ERP_GMEDINA.Controllers
             };
 
             return Json(Incapacidades, JsonRequestBehavior.AllowGet);
+        }
+
+
+        private tbPersonas IsNull(tbPersonas valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbPersonas { per_Identidad = "" };
+            }
+        }
+
+        private tbPersonas IsNullnombre(tbPersonas valor)
+        {
+            if (valor != null)
+            {
+                return valor;
+            }
+            else
+            {
+                return new tbPersonas { per_Nombres = "" };
+            }
         }
 
         private tbTipoIncapacidades IsNull(tbTipoIncapacidades valor)
