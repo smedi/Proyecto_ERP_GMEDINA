@@ -1,0 +1,114 @@
+﻿@model IEnumerable<ERP_GMEDINA.Models.tbHistorialIncapacidades>
+
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>tbHistorialIncapacidades</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h5>Listado de tbHistorialIncapacidades</h5>
+                    <div class="ibox-tools">
+                       @Html.ActionLink("Registrar tbHistorialIncapacidades", "Create", null, new { @class = "btn btn-primary btn-xs"})
+                    </div>
+                </div>
+                <div class="ibox-content">
+                  <table class="table table-striped table-bordered table-hover dataTables-example" id="IndexTable">
+                    <thead>
+                        <tr role="row">
+                            <th>@Html.DisplayNameFor(model => model.hinc_Dias)</th>
+                            <th>@Html.DisplayNameFor(model => model.hinc_CentroMedico)</th>
+                            <th>@Html.DisplayNameFor(model => model.hinc_Doctor)</th>
+                            <th>@Html.DisplayNameFor(model => model.hinc_Diagnostico)</th>
+                            <th>@Html.DisplayNameFor(model => model.hinc_FechaInicio)</th>
+                            <th>@Html.DisplayNameFor(model => model.hinc_FechaFin)</th>
+                            <th>@Html.DisplayNameFor(model => model.hinc_Estado)</th>
+                            <th>@Html.DisplayNameFor(model => model.hinc_RazonInactivo)</th>
+                            <th>@Html.DisplayNameFor(model => model.hinc_FechaCrea)</th>
+                            <th>@Html.DisplayNameFor(model => model.hinc_FechaModifica)</th>
+                            <th>@Html.DisplayNameFor(model => model.tbUsuario.usu_NombreUsuario)</th>
+                            <th>@Html.DisplayNameFor(model => model.tbUsuario1.usu_NombreUsuario)</th>
+                            <th>@Html.DisplayNameFor(model => model.tbEmpleados.emp_CuentaBancaria)</th>
+                            <th>@Html.DisplayNameFor(model => model.tbTipoIncapacidades.ticn_Descripcion)</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @foreach (var item in Model) {
+                        <tr class="gradeA odd" role="row" data-id="@item.hinc_Id">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hinc_Dias)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hinc_CentroMedico)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hinc_Doctor)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hinc_Diagnostico)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hinc_FechaInicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hinc_FechaFin)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hinc_Estado)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hinc_RazonInactivo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hinc_FechaCrea)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hinc_FechaModifica)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbUsuario.usu_NombreUsuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbUsuario1.usu_NombreUsuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbEmpleados.emp_CuentaBancaria)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbTipoIncapacidades.ticn_Descripcion)
+                            </td>
+                            <td>
+                              @Html.ActionLink("Detalles", "Details", new { id=item.hinc_Id },  new {@class = "btn btn-primary btn-xs" })
+                              @Html.ActionLink("Editar", "Edit", new { id=item.hinc_Id }, new {@class = "btn btn-default btn-xs" })
+                            </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+    
+@section Styles {
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+}
+
+@section Scripts {
+  @Scripts.Render("~/plugins/dataTables")
+}

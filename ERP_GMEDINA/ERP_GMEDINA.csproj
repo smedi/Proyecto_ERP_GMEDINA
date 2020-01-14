@@ -170,6 +170,7 @@
     <Compile Include="Controllers\HistorialAmonestacionesController.cs" />
     <Compile Include="Controllers\HistorialAudienciaDescargosController.cs" />
     <Compile Include="Controllers\HistorialIncapacidadesController.cs" />
+    <Compile Include="Controllers\tbHistorialIncapacidadesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1302,6 +1303,12 @@
     <Content Include="Views\HistorialAudienciaDescargos\_Create.cshtml" />
     <Content Include="Views\HistorialAudienciaDescargos\_Delete.cshtml" />
     <Content Include="Views\HistorialAudienciaDescargos\_Edit.cshtml" />
+    <Content Include="Views\tbHistorialIncapacidades\Create.cshtml" />
+    <Content Include="Views\tbHistorialIncapacidades\Delete.cshtml" />
+    <Content Include="Views\tbHistorialIncapacidades\Details.cshtml" />
+    <Content Include="Views\tbHistorialIncapacidades\Edit.cshtml" />
+    <Content Include="Views\tbHistorialIncapacidades\Index.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

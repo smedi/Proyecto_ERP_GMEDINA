@@ -3,7 +3,7 @@
 function format(obj) {
 
 
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button type="button" class="btn btn-primary btn-xs" onclick="Llamarmodalcreate(' + idEmpleado + ')" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button href="Create" type="button" class="btn btn-primary btn-xs" onclick="Meterid()" id="nuevo" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
         + '<table class="table table-striped table-bordered table-hover dataTables-example" >'
         + '<thead>'
         + '<tr> <th>  Incapacidad  </th>'
@@ -161,9 +161,10 @@ function Llamarmodalcreate() {
 }
 
 
-
-
-
+function Meterid() {
+    debugger
+    window.location.href = "Create/idEmpleado";
+}
 
 
 

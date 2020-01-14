@@ -22,9 +22,39 @@ namespace ERP_GMEDINA.Controllers
 
         var tbHistorialIncapacidades = db.tbHistorialIncapacidades.Include(t => t.tbUsuario).Include(t => t.tbUsuario1).Include(t => t.tbEmpleados).Include(t => t.tbTipoIncapacidades);
             return View(tbHistorialIncapacidades.ToList());
+          
         }
 
 
+        public ActionResult Create()
+        {
+            ViewBag.hinc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            ViewBag.hinc_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario");
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria");
+            ViewBag.ticn_Id = new SelectList(db.tbTipoIncapacidades, "ticn_Id", "ticn_Descripcion");
+            return View();
+        }
+
+        // POST: tbHistorialIncapacidades/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "hinc_Id,emp_Id,ticn_Id,hinc_Dias,hinc_CentroMedico,hinc_Doctor,hinc_Diagnostico,hinc_FechaInicio,hinc_FechaFin,hinc_Estado,hinc_RazonInactivo,hinc_UsuarioCrea,hinc_FechaCrea,hinc_UsuarioModifica,hinc_FechaModifica")] tbHistorialIncapacidades tbHistorialIncapacidades)
+        {
+            if (ModelState.IsValid)
+            {
+                db.tbHistorialIncapacidades.Add(tbHistorialIncapacidades);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.hinc_UsuarioCrea = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialIncapacidades.hinc_UsuarioCrea);
+            ViewBag.hinc_UsuarioModifica = new SelectList(db.tbUsuario, "usu_Id", "usu_NombreUsuario", tbHistorialIncapacidades.hinc_UsuarioModifica);
+            ViewBag.emp_Id = new SelectList(db.tbEmpleados, "emp_Id", "emp_CuentaBancaria", tbHistorialIncapacidades.emp_Id);
+            ViewBag.ticn_Id = new SelectList(db.tbTipoIncapacidades, "ticn_Id", "ticn_Descripcion", tbHistorialIncapacidades.ticn_Id);
+            return View(tbHistorialIncapacidades);
+        }
 
 
         public ActionResult llenarTabla()
@@ -139,42 +169,42 @@ namespace ERP_GMEDINA.Controllers
         // POST: HistorialIncapacidades/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        public JsonResult Create(tbHistorialIncapacidades tbHistorialIncapacidades)
-        {
-            string msj = "";
-            if (tbHistorialIncapacidades.hinc_Diagnostico != "")
-            {
-                var Usuario = (tbUsuario)Session["Usuario"];
-                try
-                {
-                    var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id,
-                                                                            tbHistorialIncapacidades.ticn_Id,
-                                                                            tbHistorialIncapacidades.hinc_Dias,
-                                                                            tbHistorialIncapacidades.hinc_CentroMedico,
-                                                                            tbHistorialIncapacidades.hinc_Doctor,
-                                                                            tbHistorialIncapacidades.hinc_Diagnostico,
-                                                                            tbHistorialIncapacidades.hinc_FechaInicio,
-                                                                            tbHistorialIncapacidades.hinc_FechaFin,
-                                                                            1,
-                                                                            DateTime.Now);
-                    foreach (UDP_RRHH_tbHistorialIncapacidades_Insert_Result item in list)
-                    {
-                        msj = item.MensajeError + " ";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    msj = "-2";
-                    ex.Message.ToString();
-                }
-            }
-            else
-            {
-                msj = "-3";
-            }
-            return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //public JsonResult Create(tbHistorialIncapacidades tbHistorialIncapacidades)
+        //{
+        //    string msj = "";
+        //    if (tbHistorialIncapacidades.hinc_Diagnostico != "")
+        //    {
+        //        var Usuario = (tbUsuario)Session["Usuario"];
+        //        try
+        //        {
+        //            var list = db.UDP_RRHH_tbHistorialIncapacidades_Insert(tbHistorialIncapacidades.emp_Id,
+        //                                                                    tbHistorialIncapacidades.ticn_Id,
+        //                                                                    tbHistorialIncapacidades.hinc_Dias,
+        //                                                                    tbHistorialIncapacidades.hinc_CentroMedico,
+        //                                                                    tbHistorialIncapacidades.hinc_Doctor,
+        //                                                                    tbHistorialIncapacidades.hinc_Diagnostico,
+        //                                                                    tbHistorialIncapacidades.hinc_FechaInicio,
+        //                                                                    tbHistorialIncapacidades.hinc_FechaFin,
+        //                                                                    1,
+        //                                                                    DateTime.Now);
+        //            foreach (UDP_RRHH_tbHistorialIncapacidades_Insert_Result item in list)
+        //            {
+        //                msj = item.MensajeError + " ";
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            msj = "-2";
+        //            ex.Message.ToString();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        msj = "-3";
+        //    }
+        //    return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
+        //}
 
 
         // GET: HistorialIncapacidades/Edit/5
