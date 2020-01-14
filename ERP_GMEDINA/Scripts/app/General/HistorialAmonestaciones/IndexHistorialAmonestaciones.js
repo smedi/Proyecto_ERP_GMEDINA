@@ -125,12 +125,14 @@ $("#InActivar").click(function () {
 $("#btnGuardar").click(function () {
     var data = $("#FormNuevo").serializeArray();
     data = serializar(data);
+    debugger
     if (data != null) {
         data = JSON.stringify({ tbHistorialAmonestaciones: data });
         _ajax(data,
             '/HistorialAmonestaciones/Create',
             'POST',
             function (obj) {
+                debugger
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     CierraPopups();
                     llenarTabla();

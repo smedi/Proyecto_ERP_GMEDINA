@@ -366,13 +366,13 @@
     <Compile Include="Models\UDP_RRHH_tbHistorialAmonestaciones_Restore_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Delete_Result.cs">
+    <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Delete1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Insert_Result.cs">
+    <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Insert1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Restore_Result.cs">
+    <Compile Include="Models\UDP_RRHH_tbHistorialAudienciaDescargo_Update1_Result.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_RRHH_tbTipoHoras_Select_Result.cs">
@@ -397,6 +397,9 @@
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\V_HistorialAmonestacion.cs">
+      <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\V_HistorialAudienciaDescargo.cs">
       <DependentUpon>ERP_GMEDINA.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
