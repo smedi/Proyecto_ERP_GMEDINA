@@ -16,6 +16,7 @@ namespace ERP_GMEDINA.Controllers
 
         public ActionResult Index()
         {
+
             var candidatosddl = db.V_SeleccionCandidatos.Where(x => x.Estado)
             .Select(
             t => new
@@ -305,16 +306,49 @@ namespace ERP_GMEDINA.Controllers
                 return HttpNotFound();
             }
             Session["scan_id"] = id;
-            var SeleccionCandidatos = new tbSeleccionCandidatos
+
+
+
+
+
+            var Empleado = new tbEmpleados
             {
                 per_Id = tbSeleccionCandidatos.per_Id,
                 tbPersonas = new tbPersonas { per_Identidad = IsNull(tbSeleccionCandidatos.tbPersonas).per_Identidad, per_Nombres = IsNull(tbSeleccionCandidatos.tbPersonas).per_Nombres, per_Apellidos = IsNull(tbSeleccionCandidatos.tbPersonas).per_Apellidos },
             };
-            Session["per_id"] = SeleccionCandidatos.per_Id;
-            return View(SeleccionCandidatos);
+
+            Session["per_id"] = Empleado.per_Id;
+
+
+            var empleadosddl = db.tbEmpleados.Where(x => x.emp_Estado).Include(t => t.tbPersonas)
+                .Select(
+                t => new
+                {
+                    per_Id = t.per_Id,
+                    per_descripcion = t.tbPersonas.per_Identidad + " - " + t.tbPersonas.per_Nombres + " " + t.tbPersonas.per_Apellidos
+                }).ToList();
+
+
+
+            //CARGAR DDL DE SELECCION CANDIDATOS
+            ViewBag.fare_Id = new SelectList(db.tbFasesReclutamiento, "fare_Id", "fare_Descripcion");
+            ViewBag.req_Id = new SelectList(db.tbRequisiciones, "req_Id", "req_Descripcion");
+
+            //CARGAR DDL DE EMPLEADOS
+            ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion");
+            ViewBag.area_Id = new SelectList(db.tbAreas, "area_Id", "area_Descripcion");
+            ViewBag.depto_Id = new SelectList(db.tbDepartamentos, "depto_Id", "depto_Descripcion");
+            ViewBag.jor_Id = new SelectList(db.tbJornadas, "jor_Id", "jor_Descripcion");
+            ViewBag.cpla_IdPlanilla = new SelectList(db.tbCatalogoDePlanillas, "cpla_IdPlanilla", "cpla_DescripcionPlanilla");
+            ViewBag.fpa_IdFormaPago = new SelectList(db.tbFormaPago, "fpa_IdFormaPago", "fpa_Descripcion");
+
+            return View(Empleado);
         }
 
-
+        private static tbSeleccionCandidatos GetTbSeleccionCandidatos(tbSeleccionCandidatos tbSeleccionCandidatos)
+        {
+            return tbSeleccionCandidatos;
+        }
 
         [HttpPost]
         public JsonResult Contratar(tbEmpleados tbEmpleados)
