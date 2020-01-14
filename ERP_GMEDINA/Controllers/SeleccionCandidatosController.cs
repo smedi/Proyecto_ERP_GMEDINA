@@ -77,6 +77,7 @@ namespace ERP_GMEDINA.Controllers
                         .Select(
                         t => new
                         {
+                            per_Id = t.IdPersona,
                             Id = t.Id,
                             Identidad = t.Identidad,
                             Nombre = t.Nombre,
@@ -392,6 +393,33 @@ namespace ERP_GMEDINA.Controllers
             }
             return Json(msj.Substring(0, 2), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult llenarDropDowlist()
+        {
+            var Monedas = new List<object> { };
+            using (db = new ERP_GMEDINAEntities())
+            {
+                try
+                {
+                    Monedas.Add(new
+                    {
+                        Id = 0,
+                        Descripcion = "**Seleccione una opción**"
+                    });
+                    Monedas.AddRange(db.tbTipoMonedas
+                    .Select(tabla => new { Id = tabla.tmon_Id, Descripcion = tabla.tmon_Descripcion })
+                    .ToList());
+                }
+                catch
+                {
+                    return Json("-2", 0);
+                }
+
+            }
+            var result = new Dictionary<string, object>();
+            result.Add("Monedas", Monedas);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

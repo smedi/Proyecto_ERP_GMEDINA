@@ -14,8 +14,11 @@ function llenarTabla() {
                    Nombre: value.Nombre,
                    Fase: value.Fase,
                    Plaza_Solicitada: value.Plaza_Solicitada,
-                   Fecha: FechaFormato(value.Fecha).substring(0, FechaFormato(value.Fecha).length - 8)
+                   Fecha: FechaFormato(value.Fecha).substring(0, FechaFormato(value.Fecha).length - 8),
+                   per_Id: value.per_Id
                });
+               debugger
+
            });
            tabla.draw();
        });
@@ -245,6 +248,12 @@ $("#btnEditar").click(function () {
 function CallContratar(btn) {
     var tr = $(btn).closest('tr');
     var row = tabla.row(tr);
+    var per_id = row.data().per_Id;
+    var idenditar = row.data().Identidad;
+    var h = row.data().Nombre;
+    sessionStorage.setItem("per_Id", per_id);
+    sessionStorage.setItem("per_Descripcion", row.data().Identidad + " - " + row.data().Nombre);
+    debugger
     $(location).attr('href', "/SeleccionCandidatos/Contratar/" + row.data().ID);
 }
 
