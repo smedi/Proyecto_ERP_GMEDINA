@@ -10,8 +10,10 @@ function tablaEditar(ID) {
         function (obj) {
             if (obj != "-1" && obj != "-2" && obj != "-3") {
                 // $("#FormEditar").find("#tiho_Id").val(obj.habi_Descripcion);
-                $("#FormEditar").find("#hper_Observacion").val(obj.hper_Observacion);
-                $('#ModalEditar').modal('show');
+                //$("#FormEditar").find("#hper_Observacion").val(obj.hper_Observacion);
+                $('#ModalInhabilitar').modal('show');
+                $("#ModalInhabilitar").find("#hper_RazonInactivo").val("");
+                $("#ModalInhabilitar").find("#hper_RazonInactivo").focus();
             }
         });
 }
@@ -34,7 +36,7 @@ function tablaDetalles(ID) {
 
                 //$("#ModalDetallesAX").find("#hper_FechaModifica")["0"].innerText = FechaFormato(obj.hper_FechaModifica);
                 $("#ModalDetallesAX").find("#tbUsuario_usu_NombreUsuario")["0"].innerText = obj.tbUsuario.usu_NombreUsuario;
-                $("#ModalDetallesAX").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
+                //$("#ModalDetallesAX").find("#tbUsuario1_usu_NombreUsuario")["0"].innerText = obj.tbUsuario1.usu_NombreUsuario;
                 //$("#ModalDetalles").find("#btnEditar")["0"].dataset.id = id;
                 $('#ModalDetalles').modal('show');
             }
@@ -110,7 +112,7 @@ function llenarTabla() {
                     per_EstadoCivil: value.per_EstadoCivil,
                     hper_Observacion: value.hper_Observacion,
                     FechaInicio: value.FechaInicio,
-                    Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-default btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Editar</a>"
+                    Accion: "<a class='btn btn-primary btn-xs ' onclick='tablaDetalles(" + value.hper_Id + ")'>Detalles</a><a class='btn btn-danger btn-xs ' onclick='tablaEditar(" + value.hper_Id + ")'>Inhabilitar</a>"
                 });
             });
             tabla.draw();
@@ -157,7 +159,7 @@ $("#InActivar").click(function () {
         //data.tiho_Id = id;
         // data = JSON.stringify({ tbTipoHoras: data });
         $.post("/HistorialPermisos/Delete", data).done(function (obj) {
-            if (obj != "-1" && obj != "-2" && obj != "-3") {
+            if (obj != "-1") {
                 CierraPopups();
                 llenarTabla();
                 LimpiarControles(["hper_Observacion", "hper_RazonInactivo"]);
