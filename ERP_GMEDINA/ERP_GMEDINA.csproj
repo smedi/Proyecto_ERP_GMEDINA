@@ -682,6 +682,7 @@
     <Content Include="Scripts\app\General\FormaPago.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\CreateHistorialAmonestaciones.js" />
     <Content Include="Scripts\app\General\HistorialAmonestaciones\IndexHistorialAmonestaciones.js" />
+    <Content Include="Scripts\app\General\HistorialIncapacidades\CreateIncapacidades.js" />
     <Content Include="Scripts\app\General\HistorialIncapacidades\IndexHistorialIncapacidades.js" />
     <Content Include="Scripts\app\General\HistorialAudiencias\IndexHistorialAudienciaDescargos.js" />
     <Content Include="Scripts\app\General\Planilla.js" />
@@ -1309,6 +1310,7 @@
     <Content Include="Views\tbHistorialIncapacidades\Edit.cshtml" />
     <Content Include="Views\tbHistorialIncapacidades\Index.cshtml" />
     <Content Include="Views\HistorialIncapacidades\Index2.cshtml" />
+    <Content Include="Views\HistorialIncapacidades\Create2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

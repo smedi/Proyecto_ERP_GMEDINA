@@ -3,7 +3,7 @@
 function format(obj) {
 
 
-    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button href="Create" type="button" class="btn btn-primary btn-xs" onclick="Meterid()" id="nuevo" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
+    var div = '<div class="ibox"><div class="ibox-title"><h5>Incapacidades</h5> <div align=right><button href="Create" type="button" class="btn btn-primary btn-xs" onclick="tablaEditar('+idEmpleado+')" id="nuevo" data-id="@item.cin_IdIngreso">Nueva Incapacidad</button> </div> </div><div class="ibox-content"><div class="row">'
         + '<table class="table table-striped table-bordered table-hover dataTables-example" >'
         + '<thead>'
         + '<tr> <th>  Incapacidad  </th>'
@@ -39,6 +39,7 @@ function format(obj) {
 
 
 
+var empleado =""; 
 function llenarTabla() {
     _ajax(null,
        '/HistorialIncapacidades/llenarTabla',
@@ -47,7 +48,9 @@ function llenarTabla() {
            tabla.clear();
            tabla.draw();
            $.each(Lista, function (index, value) {
+               empleado = value.Empleado
                tabla.row.add({
+                   
                    Id: value.emp_Id,
                    Empleado: value.Empleado,
                    Cargo: value.Cargo,
@@ -161,11 +164,22 @@ function Llamarmodalcreate() {
 }
 
 
-function Meterid() {
+function tablaEditar(ID) {
+    id = ID;
+    
     debugger
-    window.location.href = "Create/idEmpleado";
-}
+    sessionStorage.setItem("IdPersona", id);
+    sessionStorage.setItem("Nombrepersona", empleado);
+    window.location.href = "Create";
 
+    //_ajax(null,
+    //    '/Personas/Edit/',
+    //    'GET',
+    //    function (obj) {
+    //        if (obj != "-1" && obj != "-2" && obj != "-3") {
+    //        }
+    //    });
+}
 
 
 
