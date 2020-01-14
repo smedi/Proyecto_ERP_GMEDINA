@@ -35,7 +35,7 @@
                 if (obj != "-1" && obj != "-2" && obj != "-3") {
                     //$("#ModalDetalles").find("#emp_Id")["0"].innerText = obj.NombreCompleto;
                     $("#llamardata").find("#nombre")["0"].innerText = obj.tbPersonas.per_Nombres;
-                    $("#llamardata").find("#identidad")["0"].innerText = obj.tbPersonas.per_Identidad;
+                    $("#llamardataa").find("#identidad")["0"].innerText = obj.tbPersonas.per_Identidad;
                     //$("#ModalDetalles").find("#hinc_CentroMedico")["0"].innerText = obj.hinc_CentroMedico;
 
                  
