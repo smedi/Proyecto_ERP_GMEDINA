@@ -307,33 +307,20 @@ namespace ERP_GMEDINA.Controllers
             }
             Session["scan_id"] = id;
 
-
-
-
+            var candidatos = db.V_SeleccionCandidatos.Where(x => x.Estado)
+            .Select(
+            t => new
+            {
+                per_Id = t.IdPersona,
+            }).ToList().
+            First();
 
             var Empleado = new tbEmpleados
             {
                 per_Id = tbSeleccionCandidatos.per_Id,
-                tbPersonas = new tbPersonas { per_Identidad = IsNull(tbSeleccionCandidatos.tbPersonas).per_Identidad, per_Nombres = IsNull(tbSeleccionCandidatos.tbPersonas).per_Nombres, per_Apellidos = IsNull(tbSeleccionCandidatos.tbPersonas).per_Apellidos },
             };
 
-            Session["per_id"] = Empleado.per_Id;
-
-
-            var empleadosddl = db.tbEmpleados.Where(x => x.emp_Estado).Include(t => t.tbPersonas)
-                .Select(
-                t => new
-                {
-                    per_Id = t.per_Id,
-                    per_descripcion = t.tbPersonas.per_Identidad + " - " + t.tbPersonas.per_Nombres + " " + t.tbPersonas.per_Apellidos
-                }).ToList();
-
-
-
-            //CARGAR DDL DE SELECCION CANDIDATOS
-            ViewBag.fare_Id = new SelectList(db.tbFasesReclutamiento, "fare_Id", "fare_Descripcion");
-            ViewBag.req_Id = new SelectList(db.tbRequisiciones, "req_Id", "req_Descripcion");
-
+            Empleado.per_Id = candidatos.per_Id;
             //CARGAR DDL DE EMPLEADOS
             ViewBag.car_Id = new SelectList(db.tbCargos, "car_Id", "car_Descripcion");
             ViewBag.area_Id = new SelectList(db.tbAreas, "area_Id", "area_Descripcion");
